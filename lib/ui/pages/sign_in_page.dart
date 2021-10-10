@@ -7,6 +7,8 @@ import 'package:sibaba/ui/pages/superadmin/dasboard_superadmin.dart';
 import 'package:sibaba/ui/widgets/custom_login_textfield.dart';
 
 class SignInPage extends StatelessWidget {
+  const SignInPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

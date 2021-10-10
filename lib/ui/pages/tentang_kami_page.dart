@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:sibaba/core/style.dart';
 
 class TentangKamiPage extends StatelessWidget {
+  const TentangKamiPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +33,7 @@ class TentangKamiPage extends StatelessWidget {
                     margin: EdgeInsets.only(bottom: 20.h),
                     height: 200.h,
                     width: 200.w,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage('assets/logo.png'),
                       ),
@@ -45,7 +47,7 @@ class TentangKamiPage extends StatelessWidget {
                       indicatorColor: Colors.yellow,
                       labelColor: Colors.black,
                       labelStyle: darkRegular.copyWith(fontSize: 13.sp),
-                      tabs: [
+                      tabs: const [
                         Tab(
                           text: 'Sejarah',
                         ),
@@ -75,8 +77,8 @@ class TentangKamiPage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Text('data'),
-                      Text('data'),
+                      const Text('data'),
+                      const Text('data'),
                     ],
                   ),
                 ),

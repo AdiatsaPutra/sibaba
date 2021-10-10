@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:sibaba/core/constants.dart';
 import 'package:sibaba/core/core.dart';
 import 'package:sibaba/core/style.dart';
 import 'package:sibaba/ui/widgets/custom_login_textfield.dart';
 
 class KapanewonPage extends StatefulWidget {
+  const KapanewonPage({Key? key}) : super(key: key);
+
   @override
   _KapanewonPageState createState() => _KapanewonPageState();
 }

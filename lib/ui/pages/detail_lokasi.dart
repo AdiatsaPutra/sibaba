@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:sibaba/core/style.dart';
 
 class DetailLokasiPage extends StatelessWidget {
+  const DetailLokasiPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +31,7 @@ class DetailLokasiPage extends StatelessWidget {
                 Container(
                   height: 140.h,
                   width: Get.width.w,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     image: DecorationImage(
                       image: NetworkImage(
                           'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg'),
@@ -37,7 +39,7 @@ class DetailLokasiPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 Table(

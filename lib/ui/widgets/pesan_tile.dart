@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sibaba/core/style.dart';
 
 class PesanTile extends StatelessWidget {
+  const PesanTile({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(

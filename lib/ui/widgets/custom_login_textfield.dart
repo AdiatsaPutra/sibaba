@@ -28,7 +28,7 @@ class CustomTextField extends StatelessWidget {
           label!,
           style: darkRegular.copyWith(fontSize: 16.sp),
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         Container(
@@ -43,12 +43,12 @@ class CustomTextField extends StatelessWidget {
             decoration: InputDecoration(
               hintText: hintText,
               hintStyle: darkRegular,
-              contentPadding: EdgeInsets.all(defaultMargin),
+              contentPadding: const EdgeInsets.all(defaultMargin),
               border: InputBorder.none,
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
       ],

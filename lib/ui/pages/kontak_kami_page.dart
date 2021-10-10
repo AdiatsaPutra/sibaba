@@ -5,6 +5,8 @@ import 'package:sibaba/core/style.dart';
 import 'package:sibaba/ui/widgets/custom_login_textfield.dart';
 
 class KontakKamiPage extends StatelessWidget {
+  const KontakKamiPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +29,7 @@ class KontakKamiPage extends StatelessWidget {
                 Container(
                   height: 140.h,
                   width: Get.width.w,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     image: DecorationImage(
                       image:
                           NetworkImage('https://i.stack.imgur.com/VSI2u.png'),
@@ -47,7 +49,7 @@ class KontakKamiPage extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.place,
                         ),
                         Text(
@@ -58,7 +60,7 @@ class KontakKamiPage extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        Icon(Icons.phone),
+                        const Icon(Icons.phone),
                         Text(
                           '1187618364734',
                           style: darkRegular.copyWith(fontSize: 16.sp),
@@ -67,7 +69,7 @@ class KontakKamiPage extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        Icon(Icons.mail),
+                        const Icon(Icons.mail),
                         Text(
                           'rrardian@hotmail.com',
                           style: darkRegular.copyWith(fontSize: 16.sp),
@@ -80,7 +82,7 @@ class KontakKamiPage extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        Icon(Icons.date_range_rounded),
+                        const Icon(Icons.date_range_rounded),
                         Row(
                           children: [
                             Text(
@@ -120,10 +122,10 @@ class KontakKamiPage extends StatelessWidget {
                   label: 'Pesan',
                   hintText: '',
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                Container(
+                SizedBox(
                   width: Get.width,
                   height: 40.h,
                   child: ElevatedButton(
@@ -134,7 +136,7 @@ class KontakKamiPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
               ],

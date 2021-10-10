@@ -5,15 +5,17 @@ import 'package:sibaba/core/style.dart';
 import 'package:sibaba/ui/pages/detail_lokasi.dart';
 
 class LokasiCard extends StatelessWidget {
+  const LokasiCard({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(() => DetailLokasiPage());
+        Get.to(() => const DetailLokasiPage());
       },
       child: Container(
-        padding: EdgeInsets.all(defaultMargin),
-        margin: EdgeInsets.only(bottom: 10),
+        padding: const EdgeInsets.all(defaultMargin),
+        margin: const EdgeInsets.only(bottom: 10),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
@@ -33,7 +35,7 @@ class LokasiCard extends StatelessWidget {
                 Container(
                   height: 120.h,
                   width: 100.w,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     image: DecorationImage(
                       image: NetworkImage(
                           'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg'),
@@ -67,7 +69,7 @@ class LokasiCard extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.place,
                     ),
                     Text(
@@ -78,7 +80,7 @@ class LokasiCard extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    Icon(Icons.phone),
+                    const Icon(Icons.phone),
                     Text(
                       '1187618364734',
                       style: darkRegular.copyWith(fontSize: 12.sp),
@@ -87,7 +89,7 @@ class LokasiCard extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    Icon(Icons.mail),
+                    const Icon(Icons.mail),
                     Text(
                       'rrardian@hotmail.com',
                       style: darkRegular.copyWith(fontSize: 12.sp),

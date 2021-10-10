@@ -21,7 +21,7 @@ class CategoryMenu extends StatelessWidget {
       children: [
         InkWell(
           onTap: onTap,
-          child: Container(
+          child: SizedBox(
             height: 140.h,
             width: 140.w,
             child: Icon(

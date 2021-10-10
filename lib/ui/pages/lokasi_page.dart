@@ -5,6 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class LokasiPage extends StatelessWidget {
+  const LokasiPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +26,7 @@ class LokasiPage extends StatelessWidget {
                     size: 25.sp,
                   ),
                 ),
-                LokasiCard(),
+                const LokasiCard(),
               ],
             ),
           ),

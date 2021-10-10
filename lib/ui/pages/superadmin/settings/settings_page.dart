@@ -9,6 +9,8 @@ import 'package:sibaba/ui/pages/superadmin/settings/profil_website_page.dart.dar
 import 'package:sibaba/ui/widgets/setting_card.dart';
 
 class SettingsPage extends StatelessWidget {
+  const SettingsPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +23,7 @@ class SettingsPage extends StatelessWidget {
                 width: Get.width.w,
                 padding: const EdgeInsets.all(13),
                 margin: const EdgeInsets.only(bottom: 10),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.deepPurple,
                 ),
               ),

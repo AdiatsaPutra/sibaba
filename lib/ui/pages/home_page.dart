@@ -12,6 +12,8 @@ import 'package:sibaba/ui/pages/sign_in_page.dart';
 import 'package:sibaba/ui/widgets/category_menu.dart';
 
 class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,13 +29,13 @@ class HomePage extends StatelessWidget {
                   onPressed: () {
                     Get.back();
                   },
-                  child: Text('Tidak'),
+                  child: const Text('Tidak'),
                 ),
                 ElevatedButton(
                   onPressed: () {
                     exit(0);
                   },
-                  child: Text('Ya'),
+                  child: const Text('Ya'),
                 ),
               ],
             ),
@@ -46,7 +48,7 @@ class HomePage extends StatelessWidget {
               width: Get.width.w,
               padding: const EdgeInsets.all(13),
               margin: const EdgeInsets.only(bottom: 10),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.deepPurple,
               ),
             ),
@@ -96,7 +98,7 @@ class HomePage extends StatelessWidget {
                           CategoryMenu(
                             title: 'Info Lokasi',
                             onTap: () {
-                              Get.to(() => LokasiPage());
+                              Get.to(() => const LokasiPage());
                             },
                             iconData: Icons.place,
                             color: Colors.red,
@@ -120,7 +122,7 @@ class HomePage extends StatelessWidget {
                           CategoryMenu(
                             title: 'Kontak Kami',
                             onTap: () {
-                              Get.to(() => KontakKamiPage());
+                              Get.to(() => const KontakKamiPage());
                             },
                             iconData: Icons.mail,
                             color: Colors.purple,

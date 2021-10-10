@@ -4,15 +4,17 @@ import 'package:get/get.dart';
 import 'package:sibaba/ui/pages/home_page.dart';
 
 void main() {
-  runApp(Sibaba());
+  runApp(const Sibaba());
 }
 
 class Sibaba extends StatelessWidget {
+  const Sibaba({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       builder: () {
-        return GetMaterialApp(
+        return const GetMaterialApp(
           home: HomePage(),
         );
       },
