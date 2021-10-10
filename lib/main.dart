@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:sibaba/ui/pages/home_page.dart';
 
 void main() {
-  runApp(const Sibaba());
+  runApp(Sibaba());
 }
 
 class Sibaba extends StatelessWidget {
