@@ -5,7 +5,24 @@ import 'package:sibaba/core/style.dart';
 import 'package:sibaba/ui/pages/detail_lokasi.dart';
 
 class LokasiCard extends StatelessWidget {
-  const LokasiCard({Key? key}) : super(key: key);
+  final String nama;
+  final String alamat;
+  final String akreditasi;
+  final String telpUnit;
+  final String email;
+  final String status;
+  final String? fotoPath;
+
+  const LokasiCard(
+      {Key? key,
+      required this.nama,
+      required this.alamat,
+      required this.akreditasi,
+      required this.telpUnit,
+      required this.email,
+      required this.status,
+      this.fotoPath})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,23 +44,18 @@ class LokasiCard extends StatelessWidget {
             ),
           ],
         ),
-        child: Row(
+        child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  height: 120.h,
-                  width: 100.w,
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: NetworkImage(
-                          'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg'),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+            Container(
+              height: 120.h,
+              width: Get.width,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: NetworkImage(
+                      'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg'),
+                  fit: BoxFit.cover,
                 ),
-              ],
+              ),
             ),
             SizedBox(
               width: 10.w,
@@ -51,9 +63,15 @@ class LokasiCard extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                SizedBox(
+                  height: 10.h,
+                ),
                 Text(
-                  'TPA AN-NUUR',
+                  nama,
                   style: darkRegular,
+                ),
+                SizedBox(
+                  height: 10.h,
                 ),
                 Row(
                   children: [
@@ -62,39 +80,58 @@ class LokasiCard extends StatelessWidget {
                       style: darkRegular.copyWith(fontSize: 12.sp),
                     ),
                     Text(
-                      'Belum Terakreditasi',
+                      akreditasi,
                       style: darkRegular.copyWith(fontSize: 12.sp),
                     ),
                   ],
+                ),
+                SizedBox(
+                  height: 10.h,
                 ),
                 Row(
                   children: [
                     const Icon(
                       Icons.place,
                     ),
-                    Text(
-                      'PENI, PALBAPANG',
-                      style: darkRegular.copyWith(fontSize: 12.sp),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            alamat,
+                            style: darkRegular.copyWith(fontSize: 12.sp),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
+                ),
+                SizedBox(
+                  height: 10.h,
                 ),
                 Row(
                   children: [
                     const Icon(Icons.phone),
                     Text(
-                      '1187618364734',
+                      telpUnit,
                       style: darkRegular.copyWith(fontSize: 12.sp),
                     ),
                   ],
+                ),
+                SizedBox(
+                  height: 10.h,
                 ),
                 Row(
                   children: [
                     const Icon(Icons.mail),
                     Text(
-                      'rrardian@hotmail.com',
+                      email,
                       style: darkRegular.copyWith(fontSize: 12.sp),
                     ),
                   ],
+                ),
+                SizedBox(
+                  height: 10.h,
                 ),
                 Row(
                   children: [
@@ -103,7 +140,7 @@ class LokasiCard extends StatelessWidget {
                       style: darkRegular.copyWith(fontSize: 12.sp),
                     ),
                     Text(
-                      'Aktif',
+                      status,
                       style: darkRegular.copyWith(
                         fontSize: 12.sp,
                         fontWeight: FontWeight.bold,
