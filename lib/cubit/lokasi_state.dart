@@ -1,6 +1,10 @@
 part of 'lokasi_cubit.dart';
 
-@immutable
-abstract class LokasiState {}
+abstract class LokasiState extends Equatable {
+  const LokasiState();
+
+  @override
+  List<Object> get props => [];
+}
 
 class LokasiInitial extends LokasiState {}

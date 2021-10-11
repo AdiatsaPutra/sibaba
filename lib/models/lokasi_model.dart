@@ -1,7 +1,9 @@
 import 'dart:convert';
 
-class LokasiModel {
-  LokasiModel({
+import 'package:equatable/equatable.dart';
+
+class LokasiModel extends Equatable {
+  const LokasiModel({
     required this.locationId,
     required this.userId,
     required this.nspq,
@@ -99,10 +101,33 @@ class LokasiModel {
         "updated_at": updatedAt!.toIso8601String(),
         "photo": photo == null ? null : photo!.toMap(),
       };
+
+  @override
+  List<Object?> get props => [
+        locationId,
+        userId,
+        nspq,
+        areaUnit,
+        districtUnit,
+        nama,
+        locSlug,
+        alamat,
+        telpUnit,
+        skPendirian,
+        tmpBelajar,
+        email,
+        akreditasi,
+        tglAkreditasi,
+        direktur,
+        tglAkreditasi,
+        status,
+        deskripsi,
+        photo,
+      ];
 }
 
-class Photo {
-  Photo({
+class Photo extends Equatable {
+  const Photo({
     required this.id,
     required this.locId,
     required this.fileLoc,
@@ -135,4 +160,11 @@ class Photo {
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
       };
+
+  @override
+  List<Object?> get props => [
+        id,
+        locId,
+        fileLoc,
+      ];
 }
