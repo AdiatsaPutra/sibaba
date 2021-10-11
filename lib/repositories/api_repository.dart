@@ -5,12 +5,12 @@ import 'package:sibaba/models/lokasi_model.dart';
 import 'package:http/http.dart' as http;
 
 abstract class ApiRepository {
-  Future<List<LokasiModel>> getLokasi();
+  Future<List<LokasiModel>> getAllLokasi();
 }
 
 class ApiRepositoryImpl extends ApiRepository {
   @override
-  Future<List<LokasiModel>> getLokasi() async {
+  Future<List<LokasiModel>> getAllLokasi() async {
     var response = await http.get(
       Uri.parse(baseUrl + "lokasi"),
     );
