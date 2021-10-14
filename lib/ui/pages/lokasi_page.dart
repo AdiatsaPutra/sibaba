@@ -50,13 +50,16 @@ class LokasiPage extends StatelessWidget {
                             email: lokasi[index].email ?? '-',
                             status: lokasi[index].status ?? '-',
                             // fotoPath: lokasi[index].photo!.fileLoc,
+                            slug: lokasi[index].locSlug!,
                           );
                         },
                       );
                     } else if (state is LokasiError) {
                       return const Text('Error');
                     } else {
-                      return const CircularProgressIndicator();
+                      return Container(
+                          child:
+                              Center(child: const CircularProgressIndicator()));
                     }
                   },
                 ),

@@ -11,6 +11,7 @@ class LokasiCard extends StatelessWidget {
   final String telpUnit;
   final String email;
   final String status;
+  final String slug;
   final String? fotoPath;
 
   const LokasiCard(
@@ -20,6 +21,7 @@ class LokasiCard extends StatelessWidget {
       required this.akreditasi,
       required this.telpUnit,
       required this.email,
+      required this.slug,
       required this.status,
       this.fotoPath})
       : super(key: key);
@@ -28,7 +30,9 @@ class LokasiCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(() => const DetailLokasiPage());
+        Get.to(() => DetailLokasiPage(
+              slug: slug,
+            ));
       },
       child: Container(
         padding: const EdgeInsets.all(defaultMargin),
