@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sibaba/core/style.dart';
 
 class CustomTextField extends StatelessWidget {
+  final TextEditingController? textEditingController;
   final String? label;
   final String? value;
   final String? hintText;
@@ -12,6 +13,7 @@ class CustomTextField extends StatelessWidget {
 
   const CustomTextField({
     Key? key,
+    this.textEditingController,
     this.label,
     this.value,
     this.hintText,

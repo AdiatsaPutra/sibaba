@@ -4,6 +4,8 @@ import 'package:shimmer/shimmer.dart';
 import 'package:sibaba/core/style.dart';
 import 'package:sibaba/cubit/lokasi_cubit.dart';
 import 'package:sibaba/models/lokasi_model.dart';
+import 'package:sibaba/ui/widgets/custom_textfield.dart';
+import 'package:sibaba/ui/widgets/loader.dart';
 import 'package:sibaba/ui/widgets/lokasi_card.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -21,14 +23,18 @@ class LokasiPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                IconButton(
-                  onPressed: () {
+                InkWell(
+                  onTap: () {
                     Get.back();
                   },
-                  icon: Icon(
+                  child: Icon(
                     Icons.arrow_back,
                     size: 25.sp,
                   ),
+                ),
+                CustomTextField(
+                  label: '',
+                  hintText: 'Cari Lokasi',
                 ),
                 BlocConsumer<LokasiCubit, LokasiState>(
                   listener: (context, state) {
@@ -68,35 +74,6 @@ class LokasiPage extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class Loader extends StatelessWidget {
-  final int height;
-
-  const Loader({Key? key, required this.height}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      itemCount: 10,
-      itemBuilder: (context, index) {
-        return Shimmer.fromColors(
-            child: Padding(
-              padding: const EdgeInsets.all(defaultMargin),
-              child: Container(
-                height: height.h,
-                decoration: BoxDecoration(
-                  color: Colors.grey[300],
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-            ),
-            baseColor: Colors.grey.withOpacity(0.3),
-            highlightColor: Colors.white);
-      },
     );
   }
 }

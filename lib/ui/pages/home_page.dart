@@ -98,7 +98,7 @@ class HomePage extends StatelessWidget {
                           CategoryMenu(
                             title: 'Info Lokasi',
                             onTap: () {
-                              Get.to(() => const LokasiPage());
+                              Get.to(() => LokasiPage());
                             },
                             iconData: Icons.place,
                             color: Colors.red,
