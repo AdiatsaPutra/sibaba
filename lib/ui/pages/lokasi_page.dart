@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:sibaba/core/style.dart';
 import 'package:sibaba/cubit/lokasi_cubit.dart';
 import 'package:sibaba/models/lokasi_model.dart';
@@ -36,7 +37,6 @@ class LokasiPage extends StatelessWidget {
                   builder: (context, state) {
                     if (state is LokasiFetched) {
                       List<LokasiModel> lokasi = state.lokasi;
-                      print(lokasi);
                       return ListView.builder(
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
@@ -57,9 +57,9 @@ class LokasiPage extends StatelessWidget {
                     } else if (state is LokasiError) {
                       return const Text('Error');
                     } else {
-                      return Container(
-                          child:
-                              Center(child: const CircularProgressIndicator()));
+                      return const Loader(
+                        height: 200,
+                      );
                     }
                   },
                 ),
@@ -68,6 +68,35 @@ class LokasiPage extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class Loader extends StatelessWidget {
+  final int height;
+
+  const Loader({Key? key, required this.height}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemCount: 10,
+      itemBuilder: (context, index) {
+        return Shimmer.fromColors(
+            child: Padding(
+              padding: const EdgeInsets.all(defaultMargin),
+              child: Container(
+                height: height.h,
+                decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            ),
+            baseColor: Colors.grey.withOpacity(0.3),
+            highlightColor: Colors.white);
+      },
     );
   }
 }
