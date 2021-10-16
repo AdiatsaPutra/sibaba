@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -80,9 +83,15 @@ class KontakKamiPage extends StatelessWidget {
                               ),
                             ],
                           ),
+                          SizedBox(
+                            height: 10.h,
+                          ),
                           Text(
                             'Waktu Operasional',
-                            style: darkRegular.copyWith(fontSize: 14.sp),
+                            style: darkRegular.copyWith(
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                           Row(
                             children: [
@@ -120,10 +129,12 @@ class KontakKamiPage extends StatelessWidget {
                       CustomTextField(
                         label: 'Nomor Telpon',
                         hintText: 'Nomor Telpon',
+                        textInputType: TextInputType.phone,
                       ),
                       CustomTextField(
                         label: 'Email',
                         hintText: 'Masukkan Email',
+                        textInputType: TextInputType.emailAddress,
                       ),
                       CustomTextField(
                         label: 'Pesan',
@@ -138,7 +149,7 @@ class KontakKamiPage extends StatelessWidget {
                         child: ElevatedButton(
                           onPressed: () {},
                           child: Text(
-                            'Daftar',
+                            'Kirim',
                             style: whiteRegular,
                           ),
                         ),
