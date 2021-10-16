@@ -1,4 +1,33 @@
+import 'dart:convert';
+
 import 'package:equatable/equatable.dart';
+
+class TentangModel extends Equatable {
+  const TentangModel({
+    required this.profiles,
+    // required this.gallery,
+  });
+
+  final Profiles profiles;
+  // final List<Gallery> gallery;
+
+  factory TentangModel.fromJson(Map<String, dynamic> json) => TentangModel(
+        profiles: Profiles.fromMap(json["profiles"]),
+        // gallery:
+        //     List<Gallery>.from(json["gallery"].map((x) => Gallery.fromMap(x))),
+      );
+
+  Map<String, dynamic> toMap() => {
+        "profiles": profiles.toMap(),
+        // "gallery": List<dynamic>.from(gallery.map((x) => x.toMap())),
+      };
+
+  @override
+  List<Object?> get props => [
+        profiles,
+        // gallery,
+      ];
+}
 
 class Gallery extends Equatable {
   const Gallery({
@@ -9,11 +38,15 @@ class Gallery extends Equatable {
     required this.updatedAt,
   });
 
-  final int? galleryId;
-  final int? userId;
-  final String? file;
-  final DateTime? createdAt;
-  final DateTime? updatedAt;
+  final int galleryId;
+  final int userId;
+  final String file;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+
+  factory Gallery.fromJson(String str) => Gallery.fromMap(json.decode(str));
+
+  String toJson() => json.encode(toMap());
 
   factory Gallery.fromMap(Map<String, dynamic> json) => Gallery(
         galleryId: json["Gallery_id"],
@@ -27,20 +60,20 @@ class Gallery extends Equatable {
         "Gallery_id": galleryId,
         "User_id": userId,
         "File": file,
-        "created_at": createdAt!.toIso8601String(),
-        "updated_at": updatedAt!.toIso8601String(),
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
       };
 
   @override
   List<Object?> get props => [
-        galleryId,
         userId,
+        galleryId,
         file,
       ];
 }
 
-class Tentang extends Equatable {
-  const Tentang({
+class Profiles extends Equatable {
+  const Profiles({
     required this.id,
     required this.sejarah,
     required this.struktur,
@@ -49,14 +82,18 @@ class Tentang extends Equatable {
     required this.updatedAt,
   });
 
-  final int? id;
-  final String? sejarah;
-  final String? struktur;
-  final String? visimisi;
-  final DateTime? createdAt;
-  final DateTime? updatedAt;
+  final int id;
+  final String sejarah;
+  final String struktur;
+  final String visimisi;
+  final DateTime createdAt;
+  final DateTime updatedAt;
 
-  factory Tentang.fromMap(Map<String, dynamic> json) => Tentang(
+  factory Profiles.fromJson(String str) => Profiles.fromMap(json.decode(str));
+
+  String toJson() => json.encode(toMap());
+
+  factory Profiles.fromMap(Map<String, dynamic> json) => Profiles(
         id: json["id"],
         sejarah: json["Sejarah"],
         struktur: json["Struktur"],
@@ -70,8 +107,8 @@ class Tentang extends Equatable {
         "Sejarah": sejarah,
         "Struktur": struktur,
         "Visimisi": visimisi,
-        "created_at": createdAt!.toIso8601String(),
-        "updated_at": updatedAt!.toIso8601String(),
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
       };
 
   @override

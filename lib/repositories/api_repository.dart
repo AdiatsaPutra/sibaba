@@ -4,17 +4,25 @@ import 'package:sibaba/core/constants.dart';
 import 'package:sibaba/models/lokasi_detail_model.dart';
 import 'package:sibaba/models/lokasi_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:sibaba/models/tentang_model.dart';
 
 abstract class ApiRepository {
   Future<List<LokasiModel>> getAllLokasi();
   Future<LokasiDetailModel> getDetailLokasi(String? slug);
+  Future<TentangModel> getTentang();
 }
 
 class ApiRepositoryImpl extends ApiRepository {
+  Map<String, String> headers = {
+    'Content-Type': 'application/json;charset=UTF-8',
+    'Charset': 'utf-8'
+  };
+
   @override
   Future<List<LokasiModel>> getAllLokasi() async {
     var response = await http.get(
       Uri.parse(baseUrl + "lokasi"),
+      headers: headers,
     );
     if (response.statusCode == 200) {
       var json = jsonDecode(response.body);
@@ -27,9 +35,29 @@ class ApiRepositoryImpl extends ApiRepository {
 
   @override
   Future<LokasiDetailModel> getDetailLokasi(String? slug) async {
-    var response = await http.get(Uri.parse(baseUrl + 'lokasi/$slug'));
-    var json = response.body;
-    print(json);
-    return LokasiDetailModel.fromJson(json);
+    var response = await http.get(
+      Uri.parse(baseUrl + 'lokasi/$slug'),
+      headers: headers,
+    );
+    if (response.statusCode == 200) {
+      var json = response.body;
+      return LokasiDetailModel.fromJson(json);
+    } else {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<TentangModel> getTentang() async {
+    var response = await http.get(
+      Uri.parse(baseUrl + 'tentang'),
+      headers: headers,
+    );
+    if (response.statusCode == 200) {
+      var json = jsonDecode(response.body);
+      return TentangModel.fromJson(json);
+    } else {
+      throw Exception();
+    }
   }
 }
