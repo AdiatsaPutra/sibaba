@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:sibaba/cubit/kontak_cubit.dart';
 import 'package:sibaba/cubit/lokasi_cubit.dart';
 import 'package:sibaba/cubit/tentang_cubit.dart';
 import 'package:sibaba/repositories/api_repository.dart';
@@ -25,6 +26,9 @@ class Sibaba extends StatelessWidget {
             ),
             BlocProvider(
               create: (_) => TentangCubit(ApiRepositoryImpl())..getTentang(),
+            ),
+            BlocProvider(
+              create: (_) => KontakCubit(ApiRepositoryImpl())..getKontak(),
             ),
           ],
           child: const GetMaterialApp(

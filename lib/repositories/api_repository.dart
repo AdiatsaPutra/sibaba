@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:sibaba/core/constants.dart';
+import 'package:sibaba/models/kontak_model.dart';
 import 'package:sibaba/models/lokasi_detail_model.dart';
 import 'package:sibaba/models/lokasi_model.dart';
 import 'package:http/http.dart' as http;
@@ -10,11 +11,12 @@ abstract class ApiRepository {
   Future<List<LokasiModel>> getAllLokasi();
   Future<LokasiDetailModel> getDetailLokasi(String? slug);
   Future<TentangModel> getTentang();
+  Future<KontakModel> getKontak();
 }
 
 class ApiRepositoryImpl extends ApiRepository {
   Map<String, String> headers = {
-    'Content-Type': 'application/json;charset=UTF-8',
+    'Content-Type': 'application/json',
     'Charset': 'utf-8'
   };
 
@@ -56,6 +58,21 @@ class ApiRepositoryImpl extends ApiRepository {
     if (response.statusCode == 200) {
       var json = jsonDecode(response.body);
       return TentangModel.fromJson(json);
+    } else {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<KontakModel> getKontak() async {
+    var response = await http.get(
+      Uri.parse(baseUrl + 'kontak'),
+      headers: headers,
+    );
+    if (response.statusCode == 200) {
+      var json = jsonDecode(response.body);
+      var data = json['data'];
+      return KontakModel.fromJson(data);
     } else {
       throw Exception();
     }
