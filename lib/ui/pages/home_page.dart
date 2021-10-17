@@ -98,7 +98,7 @@ class HomePage extends StatelessWidget {
                           CategoryMenu(
                             title: 'Info Lokasi',
                             onTap: () {
-                              Get.to(() => LokasiPage());
+                              Get.to(() => const LokasiPage());
                             },
                             iconData: Icons.place,
                             color: Colors.red,
@@ -106,7 +106,7 @@ class HomePage extends StatelessWidget {
                           CategoryMenu(
                             title: 'Tentang Kami',
                             onTap: () {
-                              Get.to(() => TentangKamiPage());
+                              Get.to(() => const TentangKamiPage());
                             },
                             iconData: Icons.account_box,
                             color: Colors.blue,
@@ -130,7 +130,7 @@ class HomePage extends StatelessWidget {
                           CategoryMenu(
                             title: 'Masuk',
                             onTap: () {
-                              Get.to(() => SignInPage());
+                              Get.to(() => const SignInPage());
                             },
                             iconData: Icons.lock,
                             color: Colors.green,

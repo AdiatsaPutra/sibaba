@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:sibaba/core/style.dart';
 import 'package:sibaba/cubit/tentang_cubit.dart';
 import 'package:sibaba/models/tentang_model.dart';
+import 'package:sibaba/ui/widgets/formatted_text.dart';
 
 class TentangKamiPage extends StatelessWidget {
   const TentangKamiPage({Key? key}) : super(key: key);
@@ -76,9 +77,8 @@ class TentangKamiPage extends StatelessWidget {
                                 padding: const EdgeInsets.all(defaultMargin),
                                 child: Column(
                                   children: [
-                                    Text(
-                                      tentangModel.profiles.sejarah,
-                                      style: darkRegular,
+                                    FormattedText(
+                                      text: tentangModel.profiles.sejarah,
                                     ),
                                   ],
                                 ),
@@ -89,9 +89,8 @@ class TentangKamiPage extends StatelessWidget {
                                 padding: const EdgeInsets.all(defaultMargin),
                                 child: Column(
                                   children: [
-                                    Text(
-                                      tentangModel.profiles.struktur,
-                                      style: darkRegular,
+                                    FormattedText(
+                                      text: tentangModel.profiles.struktur,
                                     ),
                                   ],
                                 ),
@@ -102,9 +101,8 @@ class TentangKamiPage extends StatelessWidget {
                                 padding: const EdgeInsets.all(defaultMargin),
                                 child: Column(
                                   children: [
-                                    Text(
-                                      tentangModel.profiles.visimisi,
-                                      style: darkRegular,
+                                    FormattedText(
+                                      text: tentangModel.profiles.visimisi,
                                     ),
                                   ],
                                 ),

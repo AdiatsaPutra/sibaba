@@ -6,6 +6,7 @@ import 'package:sibaba/core/style.dart';
 import 'package:sibaba/cubit/detail_lokasi_cubit.dart';
 import 'package:sibaba/models/lokasi_detail_model.dart';
 import 'package:sibaba/repositories/api_repository.dart';
+import 'package:sibaba/ui/widgets/formatted_text.dart';
 
 class DetailLokasiPage extends StatelessWidget {
   final String? slug;
@@ -227,11 +228,8 @@ class DetailLokasiPage extends StatelessWidget {
                                 fontSize: 14.sp,
                               ),
                             ),
-                            Text(
-                              lokasiDetail.detailLokasi.deskripsi,
-                              style: darkRegular.copyWith(
-                                fontSize: 14.sp,
-                              ),
+                            FormattedText(
+                              text: lokasiDetail.detailLokasi.deskripsi,
                             ),
                           ],
                         );
