@@ -20,38 +20,45 @@ class DetailLokasiPage extends StatelessWidget {
       child: Scaffold(
         body: SafeArea(
           child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(defaultMargin),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: Icon(
-                      Icons.arrow_back,
-                      size: 25.sp,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  Container(
-                    height: 140.h,
-                    width: Get.width.w,
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image: NetworkImage(
-                            'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg'),
-                        fit: BoxFit.cover,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Stack(
+                  children: [
+                    Container(
+                      height: 200.h,
+                      width: Get.width.w,
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                          image: NetworkImage(
+                              'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg'),
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: InkWell(
+                        onTap: () {
+                          Get.back();
+                        },
+                        child: Icon(
+                          Icons.arrow_back,
+                          size: 25.sp,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 10,
+                    horizontal: defaultMargin,
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  BlocBuilder<DetailLokasiCubit, DetailLokasiState>(
+                  child: BlocBuilder<DetailLokasiCubit, DetailLokasiState>(
                     builder: (context, state) {
                       if (state is DetailLokasiFetched) {
                         LokasiDetailModel lokasiDetail = state.lokasiDetail;
@@ -60,6 +67,20 @@ class DetailLokasiPage extends StatelessWidget {
                           children: [
                             Table(
                               children: [
+                                TableRow(
+                                  children: [
+                                    Text(
+                                      'Nama',
+                                      style:
+                                          darkRegular.copyWith(fontSize: 14.sp),
+                                    ),
+                                    Text(
+                                      lokasiDetail.detailLokasi.nama,
+                                      style:
+                                          darkRegular.copyWith(fontSize: 14.sp),
+                                    ),
+                                  ],
+                                ),
                                 TableRow(
                                   children: [
                                     Text(
@@ -82,7 +103,7 @@ class DetailLokasiPage extends StatelessWidget {
                                           darkRegular.copyWith(fontSize: 14.sp),
                                     ),
                                     Text(
-                                      lokasiDetail.detailLokasi.nama,
+                                      lokasiDetail.detailLokasi.direktur,
                                       style:
                                           darkRegular.copyWith(fontSize: 14.sp),
                                     ),
@@ -240,8 +261,8 @@ class DetailLokasiPage extends StatelessWidget {
                       }
                     },
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
