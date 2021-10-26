@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:sibaba/core/style.dart';
 import 'package:sibaba/cubit/lokasi_cubit.dart';
 import 'package:sibaba/models/lokasi_model.dart';
-import 'package:sibaba/ui/widgets/custom_textfield.dart';
+import 'package:sibaba/ui/widgets/custom_appbar.dart';
 import 'package:sibaba/ui/widgets/loader.dart';
 import 'package:sibaba/ui/widgets/lokasi_card.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 
 class LokasiPage extends StatelessWidget {
   const LokasiPage({Key? key}) : super(key: key);
@@ -16,25 +14,36 @@ class LokasiPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: const CustomAppbar(
+        title: 'Lokasi Badko',
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(defaultMargin),
+            padding: const EdgeInsets.symmetric(
+              vertical: 10,
+              horizontal: defaultMargin,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                InkWell(
-                  onTap: () {
-                    Get.back();
-                  },
-                  child: Icon(
-                    Icons.arrow_back,
-                    size: 25.sp,
+                Container(
+                  margin: EdgeInsets.symmetric(
+                    vertical: 10.h,
                   ),
-                ),
-                CustomTextField(
-                  label: '',
-                  hintText: 'Cari Lokasi',
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: TextField(
+                    maxLines: null,
+                    decoration: InputDecoration(
+                      hintText: "Cari Lokasi",
+                      hintStyle: darkRegular,
+                      contentPadding: const EdgeInsets.all(defaultMargin),
+                      border: InputBorder.none,
+                    ),
+                  ),
                 ),
                 BlocConsumer<LokasiCubit, LokasiState>(
                   listener: (context, state) {

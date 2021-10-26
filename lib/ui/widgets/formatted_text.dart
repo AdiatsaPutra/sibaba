@@ -10,8 +10,12 @@ class FormattedText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      text!.replaceAll("<p>", "").replaceAll("</p>", ""),
-      // .replaceAll("&nbsp;", ),
+      text!
+          .replaceAll("<p>", "")
+          .replaceAll("</p>", "")
+          .replaceAll("&rsquo;", "'")
+          .replaceAll("&nbsp;&nbsp;&nbsp;&nbsp;", " "),
+      textAlign: TextAlign.justify,
       style: darkRegular.copyWith(
         fontSize: 14.sp,
       ),

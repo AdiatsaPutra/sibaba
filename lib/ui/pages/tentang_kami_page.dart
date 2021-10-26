@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:sibaba/core/style.dart';
 import 'package:sibaba/cubit/tentang_cubit.dart';
 import 'package:sibaba/models/tentang_model.dart';
+import 'package:sibaba/ui/widgets/custom_appbar.dart';
 import 'package:sibaba/ui/widgets/formatted_text.dart';
 
 class TentangKamiPage extends StatelessWidget {
@@ -13,6 +14,9 @@ class TentangKamiPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: const CustomAppbar(
+        title: 'Tentang kami',
+      ),
       body: DefaultTabController(
         length: 3,
         child: SafeArea(
@@ -20,21 +24,9 @@ class TentangKamiPage extends StatelessWidget {
             body: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(defaultMargin),
-                  child: InkWell(
-                    onTap: () {
-                      Get.back();
-                    },
-                    child: Icon(
-                      Icons.arrow_back,
-                      size: 25.sp,
-                    ),
-                  ),
-                ),
                 Center(
                   child: Container(
-                    margin: EdgeInsets.only(bottom: 20.h),
+                    margin: EdgeInsets.symmetric(vertical: 20.h),
                     height: 200.h,
                     width: 200.w,
                     decoration: const BoxDecoration(
@@ -76,6 +68,7 @@ class TentangKamiPage extends StatelessWidget {
                               child: Padding(
                                 padding: const EdgeInsets.all(defaultMargin),
                                 child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     FormattedText(
                                       text: tentangModel.profiles.sejarah,
@@ -88,6 +81,7 @@ class TentangKamiPage extends StatelessWidget {
                               child: Padding(
                                 padding: const EdgeInsets.all(defaultMargin),
                                 child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     FormattedText(
                                       text: tentangModel.profiles.struktur,
@@ -100,6 +94,7 @@ class TentangKamiPage extends StatelessWidget {
                               child: Padding(
                                 padding: const EdgeInsets.all(defaultMargin),
                                 child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     FormattedText(
                                       text: tentangModel.profiles.visimisi,

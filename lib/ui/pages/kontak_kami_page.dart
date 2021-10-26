@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:sibaba/core/style.dart';
 import 'package:sibaba/cubit/kontak_cubit.dart';
 import 'package:sibaba/models/kontak_model.dart';
+import 'package:sibaba/ui/widgets/custom_appbar.dart';
 import 'package:sibaba/ui/widgets/custom_textfield.dart';
 
 class KontakKamiPage extends StatelessWidget {
@@ -16,6 +18,9 @@ class KontakKamiPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: const CustomAppbar(
+        title: 'Kontak Kami',
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -27,15 +32,6 @@ class KontakKamiPage extends StatelessWidget {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      IconButton(
-                        onPressed: () {
-                          Get.back();
-                        },
-                        icon: Icon(
-                          Icons.arrow_back,
-                          size: 25.sp,
-                        ),
-                      ),
                       SizedBox(
                         height: 20.h,
                       ),
@@ -44,7 +40,12 @@ class KontakKamiPage extends StatelessWidget {
                         children: [
                           Text(
                             'Detail Kontak',
-                            style: darkRegular,
+                            style: darkRegular.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10.h,
                           ),
                           Row(
                             children: [
@@ -65,6 +66,9 @@ class KontakKamiPage extends StatelessWidget {
                               ),
                             ],
                           ),
+                          SizedBox(
+                            height: 10.h,
+                          ),
                           Row(
                             children: [
                               const Icon(Icons.phone),
@@ -73,6 +77,9 @@ class KontakKamiPage extends StatelessWidget {
                                 style: darkRegular.copyWith(fontSize: 14.sp),
                               ),
                             ],
+                          ),
+                          SizedBox(
+                            height: 10.h,
                           ),
                           Row(
                             children: [
@@ -99,7 +106,10 @@ class KontakKamiPage extends StatelessWidget {
                               Row(
                                 children: [
                                   Text(
-                                    kontakModel.masukJam,
+                                    kontakModel.masukJam.substring(
+                                      0,
+                                      kontakModel.masukJam.lastIndexOf(':'),
+                                    ),
                                     style:
                                         darkRegular.copyWith(fontSize: 14.sp),
                                   ),
@@ -109,7 +119,10 @@ class KontakKamiPage extends StatelessWidget {
                                         darkRegular.copyWith(fontSize: 14.sp),
                                   ),
                                   Text(
-                                    kontakModel.selesaiJam,
+                                    kontakModel.selesaiJam.substring(
+                                      0,
+                                      kontakModel.selesaiJam.lastIndexOf(':'),
+                                    ),
                                     style:
                                         darkRegular.copyWith(fontSize: 14.sp),
                                   ),

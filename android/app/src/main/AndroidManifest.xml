@@ -4,6 +4,8 @@
         android:label="sibaba"
         android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyD4YZtE7jpU2i4qi0pImnvdQyPhhbgVk1Q"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
