@@ -39,6 +39,7 @@ class CustomTextField extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
           child: TextField(
+            controller: textEditingController,
             maxLines: null,
             enabled: isEnabled,
             keyboardType: textInputType,

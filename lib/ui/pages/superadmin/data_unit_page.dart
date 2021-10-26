@@ -3,10 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sibaba/core/style.dart';
 import 'package:sibaba/ui/pages/superadmin/data_unit/kapanewon_page.dart';
+import 'package:sibaba/ui/pages/superadmin/data_unit/lokasi_unit_page.dart';
 import 'package:sibaba/ui/pages/superadmin/settings/galery_setting_page.dart';
 import 'package:sibaba/ui/pages/superadmin/settings/kontak_page.dart';
 import 'package:sibaba/ui/pages/superadmin/settings/pesan_page.dart';
-import 'package:sibaba/ui/pages/superadmin/settings/profil_website_page.dart.dart';
+import 'package:sibaba/ui/pages/superadmin/settings/profil_website_page.dart';
 import 'package:sibaba/ui/widgets/setting_card.dart';
 
 class DataUnitPage extends StatelessWidget {
@@ -60,9 +61,9 @@ class DataUnitPage extends StatelessWidget {
                     CategoryTile(
                       color: Colors.red,
                       icon: Icons.message,
-                      title: 'Data Unit',
+                      title: 'Lokasi Unit',
                       onTap: () {
-                        Get.to(() => PesanPage());
+                        Get.to(() => const LokasiUnitPage());
                       },
                     ),
                     CategoryTile(

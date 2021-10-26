@@ -15,23 +15,6 @@ class ProfilSuperadminPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        Get.back();
-                      },
-                      child: Icon(Icons.arrow_back),
-                    ),
-                    SizedBox(
-                      width: 10.w,
-                    ),
-                    Text(
-                      'Profil',
-                      style: darkRegular.copyWith(fontSize: 18.sp),
-                    ),
-                  ],
-                ),
                 SizedBox(
                   height: 20.h,
                 ),

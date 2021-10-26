@@ -5,7 +5,7 @@ import 'package:sibaba/core/style.dart';
 import 'package:sibaba/ui/pages/superadmin/settings/galery_setting_page.dart';
 import 'package:sibaba/ui/pages/superadmin/settings/kontak_page.dart';
 import 'package:sibaba/ui/pages/superadmin/settings/pesan_page.dart';
-import 'package:sibaba/ui/pages/superadmin/settings/profil_website_page.dart.dart';
+import 'package:sibaba/ui/pages/superadmin/settings/profil_website_page.dart';
 import 'package:sibaba/ui/widgets/setting_card.dart';
 
 class SettingsPage extends StatelessWidget {
