@@ -17,6 +17,7 @@ class PesanPage extends StatelessWidget {
       appBar: const CustomAppbar(
         title: 'Pesan',
       ),
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -31,6 +32,37 @@ class PesanPage extends StatelessWidget {
                   builder: (context, state) {
                     if (state is MessageFetched) {
                       List<MessageModel> message = state.messageModel;
+                      if (message.isEmpty) {
+                        return Center(
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 300.h,
+                                width: 300.w,
+                                decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage('assets/empty.png'),
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                'Belum ada pesan',
+                                style: darkRegular,
+                              ),
+                              ElevatedButton(
+                                onPressed: () {
+                                  BlocProvider.of<MessageCubit>(context)
+                                      .getMessage();
+                                },
+                                child: Text(
+                                  'Refresh',
+                                  style: darkRegular,
+                                ),
+                              )
+                            ],
+                          ),
+                        );
+                      }
                       return ListView.builder(
                         shrinkWrap: true,
                         itemCount: message.length,
@@ -48,7 +80,7 @@ class PesanPage extends StatelessWidget {
                     } else if (state is MessageError) {
                       return Text(state.message.toString());
                     } else {
-                      return const CircularProgressIndicator();
+                      return const Center(child: CircularProgressIndicator());
                     }
                   },
                 ),

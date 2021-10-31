@@ -9,6 +9,11 @@ class MessageInitial extends MessageState {
   List<Object?> get props => [];
 }
 
+class MessageLoading extends MessageState {
+  @override
+  List<Object?> get props => [];
+}
+
 class MessageFetched extends MessageState {
   final List<MessageModel> messageModel;
 
