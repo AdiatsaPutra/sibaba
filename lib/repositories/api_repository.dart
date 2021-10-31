@@ -14,6 +14,7 @@ abstract class ApiRepository {
   Future<TentangModel> getTentang();
   Future<KontakModel> getKontak();
   Future<List<MessageModel>> getMessages();
+  Future deleteMessage(int id);
 }
 
 class ApiRepositoryImpl extends ApiRepository {
@@ -91,6 +92,19 @@ class ApiRepositoryImpl extends ApiRepository {
       List data = json['data'];
       print(data);
       return data.map((e) => MessageModel.fromMap(e)).toList();
+    } else {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<bool> deleteMessage(int id) async {
+    var response = await http.delete(
+      Uri.parse(baseUrl + 'message/$id'),
+      headers: headers,
+    );
+    if (response.statusCode == 200) {
+      return true;
     } else {
       throw Exception();
     }

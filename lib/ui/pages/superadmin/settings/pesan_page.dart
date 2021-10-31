@@ -38,6 +38,7 @@ class PesanPage extends StatelessWidget {
                         itemBuilder: (context, index) {
                           return PesanTile(
                             fullName: message[index].fullname,
+                            id: message[index].messageId,
                             email: message[index].email,
                             noHP: message[index].phone,
                             pesan: message[index].message,

@@ -17,4 +17,14 @@ class MessageCubit extends Cubit<MessageState> {
       emit(MessageError(e.toString()));
     }
   }
+
+  Future<void> deleteMessage(int id) async {
+    try {
+      await apiRepository.deleteMessage(id);
+      List<MessageModel> messageModel = await apiRepository.getMessages();
+      emit(MessageFetched(messageModel));
+    } catch (e) {
+      emit(MessageError(e.toString()));
+    }
+  }
 }

@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sibaba/core/core.dart';
 import 'package:sibaba/core/style.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sibaba/cubit/message_cubit.dart';
 
 class PesanTile extends StatelessWidget {
+  final int? id;
   final String? fullName;
   final String? email;
   final String? noHP;
   final String? pesan;
 
-  const PesanTile({Key? key, this.fullName, this.email, this.noHP, this.pesan})
+  const PesanTile(
+      {Key? key, this.id, this.fullName, this.email, this.noHP, this.pesan})
       : super(key: key);
 
   @override
@@ -51,7 +56,17 @@ class PesanTile extends StatelessWidget {
                   style: darkRegular,
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Core.confirmPopup(
+                        'Hapus Data', 'Anda yakin akan menghapus data ini?',
+                        () {
+                      BlocProvider.of<MessageCubit>(context, listen: false)
+                          .deleteMessage(id!);
+                      Navigator.of(context, rootNavigator: true).pop();
+                    }, () {
+                      Navigator.of(context, rootNavigator: true).pop();
+                    });
+                  },
                   child: Text(
                     'Hapus',
                     style: darkRegular.copyWith(color: Colors.red),
