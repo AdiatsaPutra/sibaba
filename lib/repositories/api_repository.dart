@@ -5,6 +5,7 @@ import 'package:sibaba/models/kontak_model.dart';
 import 'package:sibaba/models/lokasi_detail_model.dart';
 import 'package:sibaba/models/lokasi_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:sibaba/models/message_model.dart';
 import 'package:sibaba/models/tentang_model.dart';
 
 abstract class ApiRepository {
@@ -12,6 +13,7 @@ abstract class ApiRepository {
   Future<LokasiDetailModel> getDetailLokasi(String? slug);
   Future<TentangModel> getTentang();
   Future<KontakModel> getKontak();
+  Future<List<MessageModel>> getMessages();
 }
 
 class ApiRepositoryImpl extends ApiRepository {
@@ -73,6 +75,22 @@ class ApiRepositoryImpl extends ApiRepository {
       var json = jsonDecode(response.body);
       var data = json['data'];
       return KontakModel.fromJson(data);
+    } else {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<List<MessageModel>> getMessages() async {
+    var response = await http.get(
+      Uri.parse(baseUrl + 'message'),
+      headers: headers,
+    );
+    if (response.statusCode == 200) {
+      var json = jsonDecode(response.body);
+      List data = json['data'];
+      print(data);
+      return data.map((e) => MessageModel.fromMap(e)).toList();
     } else {
       throw Exception();
     }

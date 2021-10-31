@@ -3,7 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sibaba/core/style.dart';
 
 class PesanTile extends StatelessWidget {
-  const PesanTile({Key? key}) : super(key: key);
+  final String? fullName;
+  final String? email;
+  final String? noHP;
+  final String? pesan;
+
+  const PesanTile({Key? key, this.fullName, this.email, this.noHP, this.pesan})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +27,7 @@ class PesanTile extends StatelessWidget {
       ),
       child: ExpansionTile(
         title: Text(
-          'kjhsiahs',
+          fullName!,
           style: darkRegular,
         ),
         children: <Widget>[
@@ -30,18 +36,18 @@ class PesanTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'kahsaishiahsiu@yahgsha.ahs',
+                  email!,
                   style: darkRegular,
                 ),
                 Text(
-                  '89878676',
+                  noHP!,
                   style: darkRegular,
                 ),
                 SizedBox(
                   height: 10.h,
                 ),
                 Text(
-                  'kahsaishiahsiuasas as as as as asasas as asasasas asasasasas asasasasas asas',
+                  pesan!,
                   style: darkRegular,
                 ),
                 TextButton(

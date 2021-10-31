@@ -10,8 +10,8 @@ class LokasiCubit extends Cubit<LokasiState> {
   LokasiCubit(this.apiRepository) : super(LokasiInitial());
 
   Future<void> getLokasi() async {
-    List<LokasiModel> lokasi = await apiRepository.getAllLokasi();
     try {
+      List<LokasiModel> lokasi = await apiRepository.getAllLokasi();
       emit(LokasiFetched(lokasi));
     } catch (e) {
       emit(LokasiError(e.toString()));

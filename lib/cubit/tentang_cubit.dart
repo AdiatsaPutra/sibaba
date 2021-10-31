@@ -10,8 +10,8 @@ class TentangCubit extends Cubit<TentangState> {
   TentangCubit(this.apiRepository) : super(TentangInitial());
 
   Future<void> getTentang() async {
-    TentangModel tentangModel = await apiRepository.getTentang();
     try {
+      TentangModel tentangModel = await apiRepository.getTentang();
       emit(TentangFetched(tentangModel));
     } catch (e) {
       emit(TentangError(e.toString()));

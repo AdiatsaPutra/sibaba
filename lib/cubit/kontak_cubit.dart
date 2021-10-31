@@ -10,8 +10,8 @@ class KontakCubit extends Cubit<KontakState> {
   KontakCubit(this.apiRepository) : super(KontakInitial());
 
   Future<void> getKontak() async {
-    KontakModel kontakModel = await apiRepository.getKontak();
     try {
+      KontakModel kontakModel = await apiRepository.getKontak();
       emit(KontakFetched(kontakModel));
     } catch (e) {
       emit(KontakError(e.toString()));

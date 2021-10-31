@@ -61,10 +61,10 @@ class ProfilWebsitePage extends StatelessWidget {
                         hintText: 'Visi Misi',
                         isPassword: false,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      Container(
+                      SizedBox(
                         width: Get.width,
                         height: 40.h,
                         child: ElevatedButton(
@@ -75,20 +75,16 @@ class ProfilWebsitePage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      Container(
+                      SizedBox(
                         width: Get.width,
                         height: 40.h,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(primary: Colors.red),
                           onPressed: () {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (BuildContext context) => this),
-                            );
+                            Get.back();
                           },
                           child: Text(
                             'Batal',

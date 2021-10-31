@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sibaba/core/style.dart';
+import 'package:sibaba/cubit/message_cubit.dart';
+import 'package:sibaba/models/message_model.dart';
+import 'package:sibaba/ui/widgets/custom_appbar.dart';
 import 'package:sibaba/ui/widgets/pesan_tile.dart';
 
 class PesanPage extends StatelessWidget {
+  const PesanPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: const CustomAppbar(
+        title: 'Pesan',
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -15,36 +24,33 @@ class PesanPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        Get.back();
-                      },
-                      child: Icon(Icons.arrow_back),
-                    ),
-                    SizedBox(
-                      width: 10.w,
-                    ),
-                    Text(
-                      'Pesan',
-                      style: darkRegular.copyWith(fontSize: 18.sp),
-                    ),
-                  ],
-                ),
                 SizedBox(
-                  height: 20.h,
+                  height: 10.h,
                 ),
-                PesanTile(),
-                PesanTile(),
-                PesanTile(),
-                PesanTile(),
-                PesanTile(),
-                PesanTile(),
-                PesanTile(),
-                PesanTile(),
-                PesanTile(),
-                PesanTile(),
+                BlocBuilder<MessageCubit, MessageState>(
+                  builder: (context, state) {
+                    if (state is MessageFetched) {
+                      List<MessageModel> message = state.messageModel;
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: message.length,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return PesanTile(
+                            fullName: message[index].fullname,
+                            email: message[index].email,
+                            noHP: message[index].phone,
+                            pesan: message[index].message,
+                          );
+                        },
+                      );
+                    } else if (state is MessageError) {
+                      return Text(state.message.toString());
+                    } else {
+                      return const CircularProgressIndicator();
+                    }
+                  },
+                ),
               ],
             ),
           ),
