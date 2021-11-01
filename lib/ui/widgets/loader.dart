@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:sibaba/core/style.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Loader extends StatelessWidget {
@@ -16,7 +15,7 @@ class Loader extends StatelessWidget {
       itemBuilder: (context, index) {
         return Shimmer.fromColors(
             child: Padding(
-              padding: const EdgeInsets.all(defaultMargin),
+              padding: EdgeInsets.only(bottom: 20.h),
               child: Container(
                 height: height.h,
                 decoration: BoxDecoration(
