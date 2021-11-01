@@ -2,19 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:sibaba/core/style.dart';
 import 'package:sibaba/cubit/tentang_cubit.dart';
 import 'package:sibaba/models/tentang_model.dart';
 import 'package:sibaba/ui/widgets/custom_appbar.dart';
 import 'package:sibaba/ui/widgets/custom_textfield.dart';
 
-class ProfilWebsitePage extends StatelessWidget {
-  final TextEditingController sejarahContoller = TextEditingController();
-  final TextEditingController strukturOrganisasiContoller =
-      TextEditingController();
-  final TextEditingController visimisihContoller = TextEditingController();
+class ProfilWebsitePage extends StatefulWidget {
+  final String? text;
+  const ProfilWebsitePage({Key? key, this.text}) : super(key: key);
+  @override
+  State<ProfilWebsitePage> createState() => _ProfilWebsitePageState();
+}
 
-  ProfilWebsitePage({Key? key}) : super(key: key);
+class _ProfilWebsitePageState extends State<ProfilWebsitePage> {
+  final HtmlEditorController sejarahController = HtmlEditorController();
+  final HtmlEditorController strukturController = HtmlEditorController();
+  final HtmlEditorController visimisiController = HtmlEditorController();
 
   @override
   Widget build(BuildContext context) {
@@ -30,36 +35,54 @@ class ProfilWebsitePage extends StatelessWidget {
               builder: (context, state) {
                 if (state is TentangFetched) {
                   TentangModel tentangModel = state.tentangModel;
+                  Future.delayed(const Duration(milliseconds: 3000), () {
+                    setState(() {
+                      sejarahController.setText(tentangModel.profiles.sejarah);
+                      strukturController
+                          .setText(tentangModel.profiles.struktur);
+                      visimisiController
+                          .setText(tentangModel.profiles.visimisi);
+                    });
+                  });
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CustomTextField(
-                        textEditingController: sejarahContoller
-                          ..text = tentangModel.profiles.sejarah
-                              .replaceAll('<p>', '')
-                              .replaceAll('</p>', ''),
-                        label: 'Sejarah Berdiri',
-                        hintText: 'Sejarah Berdiri',
-                        isPassword: false,
-                        value: tentangModel.profiles.sejarah,
+                      Text(
+                        'Sejarah',
+                        style: darkRegular,
                       ),
-                      CustomTextField(
-                        textEditingController: strukturOrganisasiContoller
-                          ..text = tentangModel.profiles.struktur
-                              .replaceAll('<p>', '')
-                              .replaceAll('</p>', ''),
-                        label: 'Struktur Organisasi',
-                        hintText: 'Struktur Organisasi',
-                        isPassword: false,
+                      SizedBox(
+                        height: 10.h,
                       ),
-                      CustomTextField(
-                        textEditingController: visimisihContoller
-                          ..text = tentangModel.profiles.visimisi
-                              .replaceAll('<p>', '')
-                              .replaceAll('</p>', ''),
-                        label: 'Visi Misi',
-                        hintText: 'Visi Misi',
-                        isPassword: false,
+                      HtmlEditor(
+                        controller: sejarahController,
+                        htmlEditorOptions: const HtmlEditorOptions(
+                            hint: "Alamat", initialText: 'Loading...'),
+                      ),
+                      Text(
+                        'Struktur Organisasi',
+                        style: darkRegular,
+                      ),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      HtmlEditor(
+                        controller: strukturController,
+                        htmlEditorOptions: const HtmlEditorOptions(
+                            hint: "Struktur Organisasi",
+                            initialText: 'Loading...'),
+                      ),
+                      Text(
+                        'Visi Misi',
+                        style: darkRegular,
+                      ),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      HtmlEditor(
+                        controller: visimisiController,
+                        htmlEditorOptions: const HtmlEditorOptions(
+                            hint: "Visi Misi", initialText: 'Loading...'),
                       ),
                       const SizedBox(
                         height: 10,
