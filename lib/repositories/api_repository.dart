@@ -14,7 +14,12 @@ abstract class ApiRepository {
   Future<TentangModel> getTentang();
   Future<KontakModel> getKontak();
   Future<List<MessageModel>> getMessages();
-  Future deleteMessage(int id);
+  Future<bool> sendMessage(
+      {required String name,
+      required String noHp,
+      required String email,
+      required String pesan});
+  Future<bool> deleteMessage(int id);
 }
 
 class ApiRepositoryImpl extends ApiRepository {
@@ -90,8 +95,30 @@ class ApiRepositoryImpl extends ApiRepository {
     if (response.statusCode == 200) {
       var json = jsonDecode(response.body);
       List data = json['data'];
-      print(data);
       return data.map((e) => MessageModel.fromMap(e)).toList();
+    } else {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<bool> sendMessage(
+      {required String name,
+      required String noHp,
+      required String email,
+      required String pesan}) async {
+    var response = await http.post(
+      Uri.parse(baseUrl + 'message'),
+      headers: headers,
+      body: jsonEncode(<String, String>{
+        'Fullname': name,
+        'Phone': noHp,
+        'Email': email,
+        'Message': pesan,
+      }),
+    );
+    if (response.statusCode == 201) {
+      return true;
     } else {
       throw Exception();
     }

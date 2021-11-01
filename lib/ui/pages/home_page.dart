@@ -122,7 +122,7 @@ class HomePage extends StatelessWidget {
                           CategoryMenu(
                             title: 'Kontak Kami',
                             onTap: () {
-                              Get.to(() => const KontakKamiPage());
+                              Get.to(() => KontakKamiPage());
                             },
                             iconData: Icons.mail,
                             color: Colors.purple,

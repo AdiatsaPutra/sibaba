@@ -85,20 +85,20 @@ class HomeSuperadminPage extends StatelessWidget {
                     SizedBox(
                       height: 10.h,
                     ),
-                    Container(
-                      height: 200.h,
-                      width: Get.width.w,
-                      padding: const EdgeInsets.all(13),
-                      margin: const EdgeInsets.only(bottom: 10),
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(
-                              'https://i.stack.imgur.com/VSI2u.png'),
-                          fit: BoxFit.cover,
-                        ),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
+                    // Container(
+                    //   height: 200.h,
+                    //   width: Get.width.w,
+                    //   padding: const EdgeInsets.all(13),
+                    //   margin: const EdgeInsets.only(bottom: 10),
+                    //   decoration: BoxDecoration(
+                    //     image: DecorationImage(
+                    //       image: NetworkImage(
+                    //           'https://i.stack.imgur.com/VSI2u.png'),
+                    //       fit: BoxFit.cover,
+                    //     ),
+                    //     borderRadius: BorderRadius.circular(20),
+                    //   ),
+                    // ),
                     Text(
                       'Event',
                       style: darkRegular,

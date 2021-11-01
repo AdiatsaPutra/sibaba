@@ -8,12 +8,27 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sibaba/core/style.dart';
 import 'package:sibaba/cubit/kontak_cubit.dart';
+import 'package:sibaba/cubit/message_cubit.dart';
 import 'package:sibaba/models/kontak_model.dart';
 import 'package:sibaba/ui/widgets/custom_appbar.dart';
 import 'package:sibaba/ui/widgets/custom_textfield.dart';
 
-class KontakKamiPage extends StatelessWidget {
+class KontakKamiPage extends StatefulWidget {
   const KontakKamiPage({Key? key}) : super(key: key);
+
+  @override
+  State<KontakKamiPage> createState() => _KontakKamiPageState();
+}
+
+class _KontakKamiPageState extends State<KontakKamiPage> {
+  final TextEditingController namaController = TextEditingController();
+
+  final TextEditingController noHPController = TextEditingController();
+
+  final TextEditingController emailController = TextEditingController();
+
+  final TextEditingController pesanController = TextEditingController();
+  bool isSending = false;
 
   @override
   Widget build(BuildContext context) {
@@ -136,22 +151,26 @@ class KontakKamiPage extends StatelessWidget {
                         height: 20.h,
                       ),
                       CustomTextField(
+                        textEditingController: namaController,
                         label: 'Nama',
                         hintText: 'Masukkan Nama Anda',
                       ),
                       CustomTextField(
+                        textEditingController: noHPController,
                         label: 'Nomor Telpon',
                         hintText: 'Nomor Telpon',
                         textInputType: TextInputType.phone,
                       ),
                       CustomTextField(
+                        textEditingController: emailController,
                         label: 'Email',
                         hintText: 'Masukkan Email',
                         textInputType: TextInputType.emailAddress,
                       ),
                       CustomTextField(
+                        textEditingController: pesanController,
                         label: 'Pesan',
-                        hintText: '',
+                        hintText: 'Masukkan Pesan',
                       ),
                       const SizedBox(
                         height: 10,
@@ -159,13 +178,36 @@ class KontakKamiPage extends StatelessWidget {
                       SizedBox(
                         width: Get.width,
                         height: 40.h,
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          child: Text(
-                            'Kirim',
-                            style: whiteRegular,
-                          ),
-                        ),
+                        child: isSending
+                            ? const Center(child: CircularProgressIndicator())
+                            : ElevatedButton(
+                                onPressed: () {
+                                  setState(() {
+                                    isSending = true;
+                                  });
+                                  BlocProvider.of<MessageCubit>(context,
+                                          listen: false)
+                                      .sendMessage(
+                                          name: namaController.text,
+                                          noHp: noHPController.text,
+                                          email: emailController.text,
+                                          pesan: pesanController.text);
+                                  Get.snackbar(
+                                    'Berhasil',
+                                    'Berhasil mengirimkan pesan',
+                                    snackPosition: SnackPosition.BOTTOM,
+                                    backgroundColor: Colors.green,
+                                    margin: EdgeInsets.all(20.h),
+                                  );
+                                  setState(() {
+                                    isSending = false;
+                                  });
+                                },
+                                child: Text(
+                                  'Kirim',
+                                  style: whiteRegular,
+                                ),
+                              ),
                       ),
                       const SizedBox(
                         height: 10,
