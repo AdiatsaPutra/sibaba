@@ -7,12 +7,14 @@ import 'package:sibaba/models/lokasi_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:sibaba/models/message_model.dart';
 import 'package:sibaba/models/tentang_model.dart';
+import 'package:sibaba/models/user_model.dart';
 
 abstract class ApiRepository {
   Future<List<LokasiModel>> getAllLokasi();
   Future<LokasiDetailModel> getDetailLokasi(String? slug);
   Future<TentangModel> getTentang();
   Future<KontakModel> getKontak();
+  Future<List<UserModel>> getUsers();
   Future<List<MessageModel>> getMessages();
   Future<bool> sendMessage(
       {required String name,
@@ -132,6 +134,21 @@ class ApiRepositoryImpl extends ApiRepository {
     );
     if (response.statusCode == 200) {
       return true;
+    } else {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<List<UserModel>> getUsers() async {
+    var response = await http.get(
+      Uri.parse(baseUrl + "users"),
+      headers: headers,
+    );
+    if (response.statusCode == 200) {
+      var json = jsonDecode(response.body);
+      List data = json['data'];
+      return data.map((e) => UserModel.fromMap(e)).toList();
     } else {
       throw Exception();
     }

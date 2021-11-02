@@ -1,11 +1,14 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sibaba/core/constants.dart';
 import 'package:sibaba/core/core.dart';
 import 'package:sibaba/core/style.dart';
+import 'package:sibaba/cubit/user_cubit.dart';
+import 'package:sibaba/models/user_model.dart';
 import 'package:sibaba/ui/widgets/custom_textfield.dart';
 
 class PenggunaPage extends StatefulWidget {
@@ -16,16 +19,6 @@ class PenggunaPage extends StatefulWidget {
 class _PenggunaPageState extends State<PenggunaPage> {
   int _currentSortColumn = 0;
   bool _isAscending = true;
-  final List<Map> pengguna = List.generate(30, (i) {
-    return {
-      "no": i + 1,
-      "id": Random().nextInt(8),
-      "nama": "Pengguna $i",
-      "email": "faysfasffa",
-      "role": "auhsdhsdh",
-    };
-  });
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +31,7 @@ class _PenggunaPageState extends State<PenggunaPage> {
                 width: Get.width.w,
                 padding: const EdgeInsets.all(13),
                 margin: const EdgeInsets.only(bottom: 10),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.deepPurple,
                 ),
               ),
@@ -147,104 +140,120 @@ class _PenggunaPageState extends State<PenggunaPage> {
                   SizedBox(
                     height: 20.h,
                   ),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Container(
-                      color: Colors.white,
-                      child: DataTable(
-                        showBottomBorder: true,
-                        columns: <DataColumn>[
-                          DataColumn(
-                              label: Text(
-                                'No',
-                                style: TextStyle(
-                                    color: Colors.blue,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              onSort: (columnIndex, _) {
-                                setState(() {
-                                  _currentSortColumn = columnIndex;
-                                  if (_isAscending == true) {
-                                    _isAscending = false;
-                                    pengguna.sort((penggunaA, penggunaB) =>
-                                        penggunaB['no']
-                                            .compareTo(penggunaA['no']));
-                                  } else {
-                                    _isAscending = true;
-                                    pengguna.sort((penggunaA, penggunaB) =>
-                                        penggunaA['no']
-                                            .compareTo(penggunaB['no']));
-                                  }
-                                });
-                              }),
-                          DataColumn(
-                            label: Text(
-                              'ID',
-                            ),
-                          ),
-                          DataColumn(
-                            label: Text(
-                              'Nama',
-                            ),
-                          ),
-                          DataColumn(
-                            label: Text(
-                              'Email',
-                            ),
-                          ),
-                          DataColumn(
-                            label: Text(
-                              'Roles',
-                            ),
-                          ),
-                          DataColumn(
-                            label: Text(
-                              'Action',
-                            ),
-                          ),
-                        ],
-                        rows: pengguna
-                            .map(
-                              (e) => DataRow(
-                                cells: [
-                                  DataCell(Text(e['no'].toString())),
-                                  DataCell(Text(e['id'].toString())),
-                                  DataCell(Text('addadwdefe')),
-                                  DataCell(Text('tyfytafsftasf')),
-                                  DataCell(Text('fastfgaysg')),
-                                  DataCell(
-                                    Row(
-                                      children: [
-                                        ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                              primary: Colors.yellow),
-                                          onPressed: () {
-                                            Core.showPopupDialog(
-                                              context,
-                                              'Edit Data',
-                                              Text('data'),
-                                            );
-                                          },
-                                          child: Text('Edit'),
-                                        ),
-                                        SizedBox(
-                                          width: 10.w,
-                                        ),
-                                        ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                              primary: Colors.red),
-                                          onPressed: () {},
-                                          child: Text('Delete'),
+                  BlocBuilder<UserCubit, UserState>(
+                    builder: (context, state) {
+                      if (state is UserFetched) {
+                        List<UserModel> users = state.userModel;
+                        return SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Container(
+                            color: Colors.white,
+                            child: DataTable(
+                              showBottomBorder: true,
+                              columns: <DataColumn>[
+                                DataColumn(
+                                    label: const Text(
+                                      'No',
+                                      style: TextStyle(
+                                          color: Colors.blue,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    onSort: (columnIndex, _) {
+                                      setState(() {
+                                        _currentSortColumn = columnIndex;
+                                        if (_isAscending == true) {
+                                          _isAscending = false;
+                                          users.sort((penggunaA, penggunaB) =>
+                                              penggunaB.id!
+                                                  .compareTo(penggunaA.id!));
+                                        } else {
+                                          _isAscending = true;
+                                          users.sort((penggunaA, penggunaB) =>
+                                              penggunaA.id!
+                                                  .compareTo(penggunaB.id!));
+                                        }
+                                      });
+                                    }),
+                                const DataColumn(
+                                  label: Text(
+                                    'ID',
+                                  ),
+                                ),
+                                const DataColumn(
+                                  label: Text(
+                                    'Nama',
+                                  ),
+                                ),
+                                const DataColumn(
+                                  label: Text(
+                                    'Email',
+                                  ),
+                                ),
+                                const DataColumn(
+                                  label: Text(
+                                    'Roles',
+                                  ),
+                                ),
+                                const DataColumn(
+                                  label: Text(
+                                    'Action',
+                                  ),
+                                ),
+                              ],
+                              rows: users
+                                  .map(
+                                    (e) => DataRow(
+                                      cells: [
+                                        DataCell(Text(e.id.toString())),
+                                        DataCell(Text(e.id.toString())),
+                                        DataCell(Text(e.name.toString())),
+                                        DataCell(Text(e.email.toString())),
+                                        DataCell(Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: e.roles!
+                                                .map((e) => Text(e.name!))
+                                                .toList())),
+                                        DataCell(
+                                          Row(
+                                            children: [
+                                              ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                    primary: Colors.yellow),
+                                                onPressed: () {
+                                                  Core.showPopupDialog(
+                                                    context,
+                                                    'Edit Data',
+                                                    Text('data'),
+                                                  );
+                                                },
+                                                child: Text('Edit'),
+                                              ),
+                                              SizedBox(
+                                                width: 10.w,
+                                              ),
+                                              ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                    primary: Colors.red),
+                                                onPressed: () {},
+                                                child: Text('Delete'),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ],
                                     ),
-                                  ),
-                                ],
-                              ),
-                            )
-                            .toList(),
-                      ),
-                    ),
+                                  )
+                                  .toList(),
+                            ),
+                          ),
+                        );
+                      } else if (state is UserError) {
+                        return Text(state.message.toString());
+                      } else {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+                    },
                   ),
                 ],
               ),

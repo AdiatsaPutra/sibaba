@@ -7,11 +7,9 @@ import 'package:sibaba/core/style.dart';
 import 'package:sibaba/cubit/tentang_cubit.dart';
 import 'package:sibaba/models/tentang_model.dart';
 import 'package:sibaba/ui/widgets/custom_appbar.dart';
-import 'package:sibaba/ui/widgets/custom_textfield.dart';
 
 class ProfilWebsitePage extends StatefulWidget {
-  final String? text;
-  const ProfilWebsitePage({Key? key, this.text}) : super(key: key);
+  const ProfilWebsitePage({Key? key}) : super(key: key);
   @override
   State<ProfilWebsitePage> createState() => _ProfilWebsitePageState();
 }
