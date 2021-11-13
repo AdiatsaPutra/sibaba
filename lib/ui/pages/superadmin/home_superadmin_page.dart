@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sibaba/core/style.dart';
+import 'package:sibaba/cubit/lokasi_cubit.dart';
+import 'package:sibaba/cubit/user_cubit.dart';
+import 'package:sibaba/ui/pages/superadmin/pengguna_page.dart.dart';
 import 'package:sibaba/ui/pages/superadmin/profil_superadmin_page.dart.dart';
 import 'package:sibaba/ui/widgets/dashboard_card.dart';
+import 'package:sibaba/ui/widgets/dashboard_card_loading.dart';
 
 class HomeSuperadminPage extends StatelessWidget {
+  const HomeSuperadminPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +25,7 @@ class HomeSuperadminPage extends StatelessWidget {
                 width: Get.width.w,
                 padding: const EdgeInsets.all(13),
                 margin: const EdgeInsets.only(bottom: 10),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.deepPurple,
                 ),
               ),
@@ -58,17 +65,39 @@ class HomeSuperadminPage extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        DashboardCard(
-                          total: '30',
-                          title: 'Pengguna',
-                          color: Colors.blue,
-                          onTap: () {},
+                        BlocBuilder<UserCubit, UserState>(
+                          builder: (context, state) {
+                            if (state is UserFetched) {
+                              return DashboardCard(
+                                total: state.userModel.length.toString(),
+                                title: 'Pengguna',
+                                color: Colors.blue,
+                                onTap: () {
+                                  Get.to(() => PenggunaPage());
+                                },
+                              );
+                            } else {
+                              return const DashboardCardLoading(
+                                  color: Colors.blue);
+                            }
+                          },
                         ),
-                        DashboardCard(
-                          total: '300',
-                          title: 'Lokasi',
-                          color: Colors.orange,
-                          onTap: () {},
+                        BlocBuilder<LokasiCubit, LokasiState>(
+                          builder: (context, state) {
+                            if (state is LokasiFetched) {
+                              return DashboardCard(
+                                total: state.lokasi.length.toString(),
+                                title: 'Lokasi',
+                                color: Colors.amber,
+                                onTap: () {
+                                  Get.to(() => PenggunaPage());
+                                },
+                              );
+                            } else {
+                              return const DashboardCardLoading(
+                                  color: Colors.amber);
+                            }
+                          },
                         ),
                         DashboardCard(
                           total: '30',

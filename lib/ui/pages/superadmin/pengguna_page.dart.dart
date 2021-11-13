@@ -17,6 +17,11 @@ class PenggunaPage extends StatefulWidget {
 }
 
 class _PenggunaPageState extends State<PenggunaPage> {
+  final TextEditingController namaController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
   int _currentSortColumn = 0;
   bool _isAscending = true;
   @override
@@ -59,18 +64,24 @@ class _PenggunaPageState extends State<PenggunaPage> {
                                   child: Column(
                                     children: [
                                       CustomTextField(
+                                        textEditingController: namaController,
                                         label: 'Nama',
                                         hintText: 'Masukkan Nama',
                                       ),
                                       CustomTextField(
+                                        textEditingController: emailController,
                                         label: 'Email',
                                         hintText: 'Masukkan Email',
                                       ),
                                       CustomTextField(
+                                        textEditingController:
+                                            passwordController,
                                         label: 'Password',
                                         hintText: 'Minimal 8 Karakter',
                                       ),
                                       CustomTextField(
+                                        textEditingController:
+                                            confirmPasswordController,
                                         label: 'Konfirmasi Password',
                                         hintText: 'Konfirmasi Password',
                                       ),
@@ -86,22 +97,30 @@ class _PenggunaPageState extends State<PenggunaPage> {
                                         onChanged: (value) {
                                           setState(() {
                                             role = value.toString();
-                                            print(role);
                                           });
                                         },
                                       ),
-                                      Container(
+                                      SizedBox(
                                         width: Get.width,
                                         height: 40.h,
                                         child: ElevatedButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            context.read<UserCubit>().register(
+                                                name: namaController.text,
+                                                email: emailController.text,
+                                                password:
+                                                    passwordController.text,
+                                                confirmPassword:
+                                                    confirmPasswordController
+                                                        .text);
+                                          },
                                           child: Text(
                                             'Simpan',
                                             style: whiteRegular,
                                           ),
                                         ),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 10,
                                       ),
                                     ],
@@ -201,17 +220,21 @@ class _PenggunaPageState extends State<PenggunaPage> {
                                 ),
                               ],
                               rows: users
+                                  .asMap()
+                                  .entries
                                   .map(
                                     (e) => DataRow(
                                       cells: [
-                                        DataCell(Text(e.id.toString())),
-                                        DataCell(Text(e.id.toString())),
-                                        DataCell(Text(e.name.toString())),
-                                        DataCell(Text(e.email.toString())),
+                                        DataCell(Text(
+                                            (e.key.toInt() + 1).toString())),
+                                        DataCell(Text(e.value.id.toString())),
+                                        DataCell(Text(e.value.name.toString())),
+                                        DataCell(
+                                            Text(e.value.email.toString())),
                                         DataCell(Column(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
-                                            children: e.roles!
+                                            children: e.value.roles!
                                                 .map((e) => Text(e.name!))
                                                 .toList())),
                                         DataCell(

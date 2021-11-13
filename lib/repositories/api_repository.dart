@@ -16,6 +16,12 @@ abstract class ApiRepository {
   Future<KontakModel> getKontak();
   Future<List<UserModel>> getUsers();
   Future<List<MessageModel>> getMessages();
+  Future<bool> register({
+    required String name,
+    required String email,
+    required String password,
+    required String confirmPassword,
+  });
   Future<bool> sendMessage(
       {required String name,
       required String noHp,
@@ -149,6 +155,29 @@ class ApiRepositoryImpl extends ApiRepository {
       var json = jsonDecode(response.body);
       List data = json['data'];
       return data.map((e) => UserModel.fromMap(e)).toList();
+    } else {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<bool> register(
+      {required String name,
+      required String email,
+      required String password,
+      required String confirmPassword}) async {
+    var response = await http.post(
+      Uri.parse(baseUrl + 'register'),
+      headers: headers,
+      body: jsonEncode(<String, String>{
+        'name': name,
+        'email': email,
+        'password': password,
+        'confirm-password': confirmPassword,
+      }),
+    );
+    if (response.statusCode == 201) {
+      return true;
     } else {
       throw Exception();
     }

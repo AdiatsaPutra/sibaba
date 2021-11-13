@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sibaba/core/style.dart';
+import 'package:sibaba/cubit/user_cubit.dart';
 import 'package:sibaba/ui/pages/sign_up_page.dart';
 import 'package:sibaba/ui/pages/superadmin/dasboard_superadmin.dart';
 import 'package:sibaba/ui/widgets/custom_textfield.dart';
@@ -58,6 +60,12 @@ class SignInPage extends StatelessWidget {
                   height: 40.h,
                   child: ElevatedButton(
                     onPressed: () {
+                      // UserState state = context.read<UserCubit>().state;
+                      // if (state is UserFetched) {
+                      context.read<UserCubit>().getUsers();
+                      // } else {
+                      // Get.snackbar('Error', 'Terjadi Kesalahan');
+                      // }
                       Get.to(() => DashboardSuperadmin());
                     },
                     child: Text(
