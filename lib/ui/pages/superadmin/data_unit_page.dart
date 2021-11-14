@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:sibaba/core/style.dart';
 import 'package:sibaba/ui/pages/superadmin/data_unit/kapanewon_page.dart';
+import 'package:sibaba/ui/pages/superadmin/data_unit/kelurahan_page.dart';
 import 'package:sibaba/ui/pages/superadmin/data_unit/lokasi_unit_page.dart';
 import 'package:sibaba/ui/pages/superadmin/settings/galery_setting_page.dart';
 import 'package:sibaba/ui/pages/superadmin/settings/kontak_page.dart';
@@ -55,7 +56,7 @@ class DataUnitPage extends StatelessWidget {
                       icon: Icons.image,
                       title: 'Kelurahan',
                       onTap: () {
-                        Get.to(() => GalerySettingPage());
+                        Get.to(() => KelurahanPage());
                       },
                     ),
                     CategoryTile(

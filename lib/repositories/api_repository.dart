@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:sibaba/core/constants.dart';
+import 'package:sibaba/models/kapanewon_model.dart';
 import 'package:sibaba/models/kontak_model.dart';
 import 'package:sibaba/models/lokasi_detail_model.dart';
 import 'package:sibaba/models/lokasi_model.dart';
@@ -16,6 +17,7 @@ abstract class ApiRepository {
   Future<KontakModel> getKontak();
   Future<List<UserModel>> getUsers();
   Future<List<MessageModel>> getMessages();
+  Future<List<KapanewonModel>> getKapanewon();
   Future<bool> register({
     required String name,
     required String email,
@@ -27,7 +29,12 @@ abstract class ApiRepository {
       required String noHp,
       required String email,
       required String pesan});
+  Future<bool> addKapanewon({
+    required String areaName,
+    required String kodeArea,
+  });
   Future<bool> deleteMessage(int id);
+  Future<bool> deleteKapanewon(int id);
 }
 
 class ApiRepositoryImpl extends ApiRepository {
@@ -177,6 +184,52 @@ class ApiRepositoryImpl extends ApiRepository {
       }),
     );
     if (response.statusCode == 201) {
+      return true;
+    } else {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<List<KapanewonModel>> getKapanewon() async {
+    var response = await http.get(
+      Uri.parse(baseUrl + 'kapanewon'),
+      headers: headers,
+    );
+    if (response.statusCode == 200) {
+      var json = jsonDecode(response.body);
+      List data = json['data'];
+      return data.map((e) => KapanewonModel.fromMap(e)).toList();
+    } else {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<bool> addKapanewon(
+      {required String areaName, required String kodeArea}) async {
+    var response = await http.post(
+      Uri.parse(baseUrl + 'kapanewon'),
+      headers: headers,
+      body: jsonEncode(<String, String>{
+        'area_name': areaName,
+        'kode_area': kodeArea,
+      }),
+    );
+    if (response.statusCode == 201) {
+      return true;
+    } else {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<bool> deleteKapanewon(int id) async {
+    var response = await http.delete(
+      Uri.parse(baseUrl + 'kapanewon/$id'),
+      headers: headers,
+    );
+    if (response.statusCode == 200) {
       return true;
     } else {
       throw Exception();

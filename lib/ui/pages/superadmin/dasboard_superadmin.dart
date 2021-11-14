@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sibaba/ui/pages/superadmin/data_unit_page.dart';
 import 'package:sibaba/ui/pages/superadmin/home_superadmin_page.dart';
-import 'package:sibaba/ui/pages/superadmin/pengguna_page.dart.dart';
+import 'package:sibaba/ui/pages/superadmin/pengguna_page.dart';
 import 'package:sibaba/ui/pages/superadmin/settings/settings_page.dart';
 
 class DashboardSuperadmin extends StatefulWidget {

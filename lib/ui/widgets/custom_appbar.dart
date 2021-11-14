@@ -4,11 +4,16 @@ import 'package:sibaba/core/style.dart';
 
 class CustomAppbar extends StatelessWidget with PreferredSizeWidget {
   final String? title;
+  final Color? color;
+  final double elevation;
 
-  const CustomAppbar({Key? key, this.title}) : super(key: key);
+  const CustomAppbar({Key? key, this.title, this.color, this.elevation = 1})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      backgroundColor: color ?? Colors.blue,
+      elevation: elevation,
       leading: InkWell(
         onTap: () {
           Get.back();

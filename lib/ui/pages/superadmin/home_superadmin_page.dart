@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:sibaba/core/style.dart';
 import 'package:sibaba/cubit/lokasi_cubit.dart';
 import 'package:sibaba/cubit/user_cubit.dart';
-import 'package:sibaba/ui/pages/superadmin/pengguna_page.dart.dart';
+import 'package:sibaba/ui/pages/superadmin/pengguna_page.dart';
 import 'package:sibaba/ui/pages/superadmin/profil_superadmin_page.dart.dart';
 import 'package:sibaba/ui/widgets/dashboard_card.dart';
 import 'package:sibaba/ui/widgets/dashboard_card_loading.dart';

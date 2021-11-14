@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:sibaba/cubit/kapanewon_cubit.dart';
 import 'package:sibaba/cubit/kontak_cubit.dart';
 import 'package:sibaba/cubit/lokasi_cubit.dart';
 import 'package:sibaba/cubit/message_cubit.dart';
@@ -29,6 +30,9 @@ class Wrapper extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => MessageCubit(ApiRepositoryImpl())..getMessage(),
+        ),
+        BlocProvider(
+          create: (_) => KapanewonCubit(ApiRepositoryImpl())..getKapanewon(),
         ),
         BlocProvider(
           create: (_) => UserCubit(ApiRepositoryImpl()),

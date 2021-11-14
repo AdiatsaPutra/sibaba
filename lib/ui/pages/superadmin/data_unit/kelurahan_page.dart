@@ -9,23 +9,23 @@ import 'package:sibaba/models/kapanewon_model.dart';
 import 'package:sibaba/ui/widgets/custom_appbar.dart';
 import 'package:sibaba/ui/widgets/custom_textfield.dart';
 
-class KapanewonPage extends StatefulWidget {
+class KelurahanPage extends StatefulWidget {
   final TextEditingController areaNameController = TextEditingController();
   final TextEditingController kodeAreaController = TextEditingController();
-  KapanewonPage({Key? key}) : super(key: key);
+  KelurahanPage({Key? key}) : super(key: key);
 
   @override
-  _KapanewonPageState createState() => _KapanewonPageState();
+  _KelurahanPageState createState() => _KelurahanPageState();
 }
 
-class _KapanewonPageState extends State<KapanewonPage> {
+class _KelurahanPageState extends State<KelurahanPage> {
   int _currentSortColumn = 0;
   bool _isAscending = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppbar(
-        title: "Kapanewon",
+        title: "Kelurahan",
         color: Colors.deepPurple,
         elevation: 0,
       ),
@@ -57,12 +57,12 @@ class _KapanewonPageState extends State<KapanewonPage> {
                           onPressed: () {
                             Core.showPopupDialog(
                                 context,
-                                'Tambah Kapanewon',
-                                buildAddKapanewon(widget.areaNameController,
+                                'Tambah Kelurahan',
+                                buildAddKelurahan(widget.areaNameController,
                                     widget.kodeAreaController));
                           },
                           child: Text(
-                            'Tambah Kapanewon',
+                            'Tambah Kelurahan',
                             style: whiteSmall,
                           ),
                         ),
@@ -221,7 +221,7 @@ class _KapanewonPageState extends State<KapanewonPage> {
     );
   }
 
-  SingleChildScrollView buildAddKapanewon(
+  SingleChildScrollView buildAddKelurahan(
     TextEditingController areaNameController,
     TextEditingController kodeAreaController,
   ) {
