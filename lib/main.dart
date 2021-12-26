@@ -5,7 +5,7 @@ import 'package:sibaba/injection.dart';
 import 'package:sibaba/presentation/theme.dart';
 
 void main() {
-  configureInjection();
+  configureInjection('http://10.0.2.2:8000/api/');
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const Sibaba());
 }

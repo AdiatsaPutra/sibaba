@@ -5,10 +5,12 @@ import 'package:sibaba/applications/info_lokasi/model/location.dart';
 import 'package:sibaba/applications/info_lokasi/exception/location_exception.dart';
 import 'package:dartz/dartz.dart';
 import 'package:sibaba/applications/info_lokasi/repository/location_repo.dart';
-import 'package:sibaba/presentation/constants.dart';
+
+import '../../../injection.dart';
 
 @Injectable(as: LocationRepo)
 class LocationRepoImpl extends LocationRepo {
+  String baseUrl = getIt.get(instanceName: 'baseUrl');
   final dio = Dio();
   @override
   Future<Either<LocationException, List<Location>>> getLocations() async {

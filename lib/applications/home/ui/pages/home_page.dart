@@ -42,7 +42,7 @@ class HomePage extends StatelessWidget {
           child: ZStack([
             VxBox()
                 .width(Get.width)
-                .height(300)
+                .height(230)
                 .color(Theme.of(context).primaryColor)
                 .bottomRounded(value: 30)
                 .make(),
@@ -60,7 +60,7 @@ class HomePage extends StatelessWidget {
                   .base
                   .color(Colors.white)
                   .make(),
-              const SizedBox(height: 20),
+              const SizedBox(height: 30),
               HomeMenu(
                 imagePath: 'assets/locations.png',
                 title: 'Info Lokasi',
