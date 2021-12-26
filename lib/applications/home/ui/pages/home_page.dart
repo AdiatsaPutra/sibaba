@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:sibaba/applications/applications.dart';
 import 'package:sibaba/applications/home/ui/widgets/home_menu.dart';
 import 'package:sibaba/applications/info_lokasi/ui/pages/info_lokasi_page.dart';
+import 'package:sibaba/applications/kontak_kami/pages/kontak_kami_page.dart';
 import 'package:sibaba/applications/tentang_kami/pages/tentang_kami_page.dart';
 import 'package:sibaba/presentation/core.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -44,7 +45,7 @@ class HomePage extends StatelessWidget {
                 .width(Get.width)
                 .height(230)
                 .color(Theme.of(context).primaryColor)
-                .bottomRounded(value: 30)
+                .bottomRounded(value: 15)
                 .make(),
             VStack([
               const SizedBox(height: 30),
@@ -78,7 +79,9 @@ class HomePage extends StatelessWidget {
               HomeMenu(
                 imagePath: 'assets/contact_us.png',
                 title: 'Kontak Kami',
-                onTap: () {},
+                onTap: () {
+                  Get.to(() => const KontakKamiPage());
+                },
               ),
               HomeMenu(
                 imagePath: 'assets/sign_in.png',

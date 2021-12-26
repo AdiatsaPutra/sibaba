@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
-class KontakModel extends Equatable {
-  const KontakModel({
+class InfoKontak extends Equatable {
+  const InfoKontak({
     required this.id,
     required this.alamat,
     required this.linkmaps,
@@ -23,7 +23,7 @@ class KontakModel extends Equatable {
   final String masukJam;
   final String selesaiJam;
 
-  factory KontakModel.fromJson(Map<String, dynamic> json) => KontakModel(
+  factory InfoKontak.fromJson(Map<String, dynamic> json) => InfoKontak(
         id: json["id"],
         alamat: json["Alamat"],
         linkmaps: json["Linkmaps"],

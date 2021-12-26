@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 const Color primaryColor = Color(0xFF36B7FF);
 const double defaultMargin = 16;

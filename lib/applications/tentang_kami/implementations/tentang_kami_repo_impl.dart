@@ -19,13 +19,11 @@ class TentangKamiRepoImpl extends TentangKamirepo {
       final response = await dio.get(
         baseUrl + "tentang",
       );
-      Logger().wtf(response);
       if (response.statusCode != 200) {
         throw LocationException(response.data);
       }
       final data = response.data;
       final tentang = Tentang.fromJson(data);
-      Logger().wtf(tentang);
       return right(tentang);
     } catch (e) {
       return left(TentangKamiException(e.toString()));

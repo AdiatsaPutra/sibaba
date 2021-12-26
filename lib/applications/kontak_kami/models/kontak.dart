@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
-class MessageModel extends Equatable {
-  const MessageModel({
+class Kontak extends Equatable {
+  const Kontak({
     required this.messageId,
     required this.fullname,
     required this.phone,
@@ -21,12 +21,11 @@ class MessageModel extends Equatable {
   final DateTime createdAt;
   final DateTime updatedAt;
 
-  factory MessageModel.fromJson(String str) =>
-      MessageModel.fromMap(json.decode(str));
+  factory Kontak.fromJson(String str) => Kontak.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory MessageModel.fromMap(Map<String, dynamic> json) => MessageModel(
+  factory Kontak.fromMap(Map<String, dynamic> json) => Kontak(
         messageId: json["Message_id"],
         fullname: json["Fullname"],
         phone: json["Phone"],

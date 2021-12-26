@@ -23,7 +23,6 @@ class LocationRepoImpl extends LocationRepo {
       }
       List data = response.data['lokasi'];
       final locations = data.map((e) => Location.fromMap(e)).toList();
-      Logger().wtf(locations);
       return right(locations);
     } catch (e) {
       return left(LocationException(e.toString()));
