@@ -22,5 +22,15 @@ ThemeData theme() {
         borderRadius: BorderRadius.circular(10),
       ),
     ),
+    tabBarTheme: const TabBarTheme(
+      labelColor: Color(0xFF6C63FF),
+      unselectedLabelColor: Colors.grey,
+      indicator: UnderlineTabIndicator(
+        borderSide: BorderSide(
+          color: Color(0xFF6C63FF),
+          width: 2,
+        ),
+      ),
+    ),
   );
 }

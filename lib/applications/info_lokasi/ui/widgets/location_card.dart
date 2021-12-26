@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sibaba/applications/info_lokasi/model/location.dart';
+import 'package:sibaba/infrastructures/extensions.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class LocationCard extends StatelessWidget {
@@ -10,7 +11,7 @@ class LocationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: () {
         // Get.to(() => DetailLokasiPage(
         //       slug: slug,
@@ -48,7 +49,7 @@ class LocationCard extends StatelessWidget {
                 HStack(
                   [
                     const Icon(Icons.place),
-                    location.alamat!.text.make(),
+                    location.alamat!.compact().text.make(),
                   ],
                 ),
                 const SizedBox(height: 10),
@@ -107,7 +108,7 @@ class LocationCard extends StatelessWidget {
           .color(Colors.white)
           .p16
           .margin(const EdgeInsets.only(bottom: 10))
-          .shadow
+          .outerShadowXl
           .make(),
     );
   }

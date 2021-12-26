@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
-class TentangModel extends Equatable {
-  const TentangModel({
+class Tentang extends Equatable {
+  const Tentang({
     required this.profiles,
     // required this.gallery,
   });
@@ -11,7 +11,7 @@ class TentangModel extends Equatable {
   final Profiles profiles;
   // final List<Gallery> gallery;
 
-  factory TentangModel.fromJson(Map<String, dynamic> json) => TentangModel(
+  factory Tentang.fromJson(Map<String, dynamic> json) => Tentang(
         profiles: Profiles.fromMap(json["profiles"]),
         // gallery:
         //     List<Gallery>.from(json["gallery"].map((x) => Gallery.fromMap(x))),
