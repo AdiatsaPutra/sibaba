@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:sibaba/core/core.dart';
-import 'package:sibaba/core/style.dart';
 import 'package:sibaba/cubit/kapanewon_cubit.dart';
 import 'package:sibaba/models/kapanewon_model.dart';
-import 'package:sibaba/ui/widgets/custom_appbar.dart';
+import 'package:sibaba/presentation/core.dart';
+import 'package:sibaba/presentation/style.dart';
+import 'package:sibaba/presentation/widgets/custom_appbar.dart';
 import 'package:sibaba/ui/widgets/custom_textfield.dart';
 
 class KelurahanPage extends StatefulWidget {
@@ -26,7 +26,6 @@ class _KelurahanPageState extends State<KelurahanPage> {
     return Scaffold(
       appBar: const CustomAppbar(
         title: "Kelurahan",
-        color: Colors.deepPurple,
         elevation: 0,
       ),
       body: SafeArea(

@@ -1,17 +1,17 @@
 import 'dart:convert';
 
-import 'package:sibaba/core/constants.dart';
 import 'package:sibaba/models/kapanewon_model.dart';
 import 'package:sibaba/models/kontak_model.dart';
 import 'package:sibaba/models/lokasi_detail_model.dart';
-import 'package:sibaba/models/lokasi_model.dart';
+import 'package:sibaba/applications/info_lokasi/model/location.dart';
 import 'package:http/http.dart' as http;
 import 'package:sibaba/models/message_model.dart';
 import 'package:sibaba/models/tentang_model.dart';
 import 'package:sibaba/models/user_model.dart';
+import 'package:sibaba/presentation/constants.dart';
 
 abstract class ApiRepository {
-  Future<List<LokasiModel>> getAllLokasi();
+  Future<List<Location>> getAllLokasi();
   Future<LokasiDetailModel> getDetailLokasi(String? slug);
   Future<TentangModel> getTentang();
   Future<KontakModel> getKontak();
@@ -44,7 +44,7 @@ class ApiRepositoryImpl extends ApiRepository {
   };
 
   @override
-  Future<List<LokasiModel>> getAllLokasi() async {
+  Future<List<Location>> getAllLokasi() async {
     var response = await http.get(
       Uri.parse(baseUrl + "lokasi"),
       headers: headers,
@@ -52,7 +52,7 @@ class ApiRepositoryImpl extends ApiRepository {
     if (response.statusCode == 200) {
       var json = jsonDecode(response.body);
       List data = json['lokasi'];
-      return data.map((e) => LokasiModel.fromMap(e)).toList();
+      return data.map((e) => Location.fromMap(e)).toList();
     } else {
       throw Exception();
     }

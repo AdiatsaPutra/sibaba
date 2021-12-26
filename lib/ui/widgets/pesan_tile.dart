@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sibaba/core/core.dart';
-import 'package:sibaba/core/style.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sibaba/cubit/message_cubit.dart';
+import 'package:sibaba/presentation/core.dart';
+import 'package:sibaba/presentation/style.dart';
 
 class PesanTile extends StatelessWidget {
   final int? id;

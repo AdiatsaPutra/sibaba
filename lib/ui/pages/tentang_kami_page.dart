@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:sibaba/core/style.dart';
 import 'package:sibaba/cubit/tentang_cubit.dart';
 import 'package:sibaba/models/tentang_model.dart';
-import 'package:sibaba/ui/widgets/custom_appbar.dart';
+import 'package:sibaba/presentation/style.dart';
+import 'package:sibaba/presentation/widgets/custom_appbar.dart';
 import 'package:sibaba/ui/widgets/formatted_text.dart';
 
 class TentangKamiPage extends StatelessWidget {

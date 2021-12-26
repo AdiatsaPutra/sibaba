@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sibaba/ui/pages/wrapper.dart';
+import 'package:get/get.dart';
+import 'package:sibaba/applications/applications.dart';
+import 'package:sibaba/injection.dart';
+import 'package:sibaba/presentation/theme.dart';
 
 void main() {
+  configureInjection();
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const Sibaba());
 }
 
@@ -11,10 +15,6 @@ class Sibaba extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      builder: () {
-        return const Wrapper();
-      },
-    );
+    return GetMaterialApp(theme: theme(), home: const HomePage());
   }
 }

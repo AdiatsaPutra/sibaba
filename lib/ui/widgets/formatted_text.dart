@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sibaba/core/style.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sibaba/presentation/style.dart';
 
 class FormattedText extends StatelessWidget {
   final String? text;

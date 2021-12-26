@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:sibaba/core/style.dart';
 import 'package:sibaba/cubit/detail_lokasi_cubit.dart';
 import 'package:sibaba/models/lokasi_detail_model.dart';
+import 'package:sibaba/presentation/style.dart';
 import 'package:sibaba/repositories/api_repository.dart';
 import 'package:sibaba/ui/widgets/formatted_text.dart';
 

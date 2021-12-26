@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:sibaba/core/style.dart';
+import 'package:sibaba/presentation/style.dart';
 import 'package:sibaba/ui/pages/superadmin/data_unit/kapanewon_page.dart';
 import 'package:sibaba/ui/pages/superadmin/data_unit/kelurahan_page.dart';
 import 'package:sibaba/ui/pages/superadmin/data_unit/lokasi_unit_page.dart';

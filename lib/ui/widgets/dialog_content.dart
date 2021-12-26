@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sibaba/core/style.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sibaba/presentation/style.dart';
 
 class DialogContent extends StatelessWidget {
   final String? title;
@@ -13,7 +13,7 @@ class DialogContent extends StatelessWidget {
       title: Center(
         child: Text(
           title!,
-          style: darkRegular.copyWith(fontSize: 18.sp),
+          style: darkRegular.copyWith(fontSize: 18),
         ),
       ),
       content: content,

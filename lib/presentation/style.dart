@@ -7,17 +7,15 @@ const double defaultMargin = 16;
 
 // Dark TextStyle
 TextStyle darkHeadings1 = GoogleFonts.poppins(
-  fontSize: 24.sp,
+  fontSize: 24,
   fontWeight: FontWeight.bold,
 );
 TextStyle darkHeadings2 = GoogleFonts.poppins(
-  fontSize: 22.sp,
+  fontSize: 22,
   fontWeight: FontWeight.bold,
 );
-TextStyle darkRegular = GoogleFonts.poppins(fontSize: 16.sp);
+TextStyle darkRegular = GoogleFonts.poppins(fontSize: 16);
 
 // White TextStyle
-TextStyle whiteRegular =
-    GoogleFonts.poppins(fontSize: 18.sp, color: Colors.white);
-TextStyle whiteSmall =
-    GoogleFonts.poppins(fontSize: 12.sp, color: Colors.white);
+TextStyle whiteRegular = GoogleFonts.poppins(fontSize: 18, color: Colors.white);
+TextStyle whiteSmall = GoogleFonts.poppins(fontSize: 12, color: Colors.white);

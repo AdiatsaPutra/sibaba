@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
-class LokasiModel extends Equatable {
-  const LokasiModel({
+class Location extends Equatable {
+  const Location({
     required this.locationId,
     required this.userId,
     required this.nspq,
@@ -49,7 +49,7 @@ class LokasiModel extends Equatable {
   final DateTime? updatedAt;
   final Photo? photo;
 
-  factory LokasiModel.fromMap(Map<String, dynamic> json) => LokasiModel(
+  factory Location.fromMap(Map<String, dynamic> json) => Location(
         locationId: json["Location_id"],
         userId: json["User_id"],
         nspq: json["Nspq"] == null ? null : json["Nspq"],

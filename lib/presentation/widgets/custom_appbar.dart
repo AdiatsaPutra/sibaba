@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sibaba/core/style.dart';
+import 'package:sibaba/presentation/style.dart';
 
 class CustomAppbar extends StatelessWidget with PreferredSizeWidget {
-  final String? title;
-  final Color? color;
+  final String title;
   final double elevation;
 
-  const CustomAppbar({Key? key, this.title, this.color, this.elevation = 1})
+  const CustomAppbar({Key? key, required this.title, this.elevation = 1})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: color ?? Colors.blue,
       elevation: elevation,
       leading: InkWell(
         onTap: () {
@@ -25,7 +23,7 @@ class CustomAppbar extends StatelessWidget with PreferredSizeWidget {
         ),
       ),
       title: Text(
-        title!,
+        title,
         style: whiteRegular,
       ),
     );

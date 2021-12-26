@@ -13,7 +13,7 @@ class LokasiInitial extends LokasiState {
 }
 
 class LokasiFetched extends LokasiState {
-  final List<LokasiModel> lokasi;
+  final List<Location> lokasi;
 
   const LokasiFetched(this.lokasi);
   @override

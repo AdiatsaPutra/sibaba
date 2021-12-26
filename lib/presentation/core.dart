@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sibaba/core/style.dart';
+import 'package:sibaba/presentation/style.dart';
 import 'package:sibaba/ui/widgets/dialog_content.dart';
 
 class Core {
