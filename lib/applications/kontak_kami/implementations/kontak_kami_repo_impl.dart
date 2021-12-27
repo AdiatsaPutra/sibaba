@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
@@ -25,6 +27,29 @@ class KontakKamiRepoImpl extends KontakKamiRepo {
       final data = response.data['data'];
       final kontak = InfoKontak.fromJson(data);
       return right(kontak);
+    } catch (e) {
+      return left(KontakException(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<KontakException, void>> sendMessage(
+      String fullName, String phone, String email, String message) async {
+    try {
+      final params = {
+        "Fullname": fullName,
+        "Phone": phone,
+        "Email": email,
+        "Message": message,
+      };
+      final response = await dio.post(
+        baseUrl + "message",
+        data: jsonEncode(params),
+      );
+      if (response.statusCode != 200) {
+        throw KontakException(response.data);
+      }
+      return right(null);
     } catch (e) {
       return left(KontakException(e.toString()));
     }

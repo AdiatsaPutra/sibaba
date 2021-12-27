@@ -18,6 +18,9 @@ class Sibaba extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(theme: theme(), home: const HomePage());
+    return GetMaterialApp(
+      theme: theme(),
+      home: const HomePage(),
+    );
   }
 }

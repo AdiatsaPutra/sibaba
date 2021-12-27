@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:get/get.dart';
 import 'package:sibaba/applications/kontak_kami/bloc/cubit/kontak_kami_cubit.dart';
 import 'package:sibaba/injection.dart';
@@ -26,22 +27,121 @@ class KontakKamiPage extends StatelessWidget {
                 top: Radius.circular(30),
               ),
             ),
+            isScrollControlled: true,
             builder: (context) {
-              return VStack([
-                VxBox()
-                    .width(100)
-                    .height(3)
-                    .color(Colors.grey)
-                    .rounded
-                    .makeCentered()
-                    .p16(),
-                'Kontak Kami'
-                    .text
-                    .xl
-                    .bold
-                    .color(Theme.of(context).primaryColor)
-                    .makeCentered(),
-              ]).box.height(Get.height).make();
+              return VxBox(
+                child: BlocProvider(
+                  create: (context) => getIt<KontakKamiCubit>(),
+                  child: Builder(
+                    builder: (context) {
+                      return Form(
+                        key: context.read<KontakKamiCubit>().formKey,
+                        child: VStack([
+                          VxBox()
+                              .width(100)
+                              .height(3)
+                              .color(Colors.grey)
+                              .rounded
+                              .makeCentered()
+                              .p16(),
+                          'Kontak Kami'
+                              .text
+                              .xl
+                              .bold
+                              .color(Theme.of(context).primaryColor)
+                              .make(),
+                          const SizedBox(height: 10),
+                          'Nama Lengkap'.text.base.bold.make(),
+                          TextFormField(
+                            controller:
+                                context.read<KontakKamiCubit>().fullName,
+                            decoration: const InputDecoration(
+                                hintText: 'Masukkan Nama Lengkap'),
+                            validator: (value) {
+                              if (value == "") {
+                                return 'Masukkan Nama Lengkap';
+                              }
+                            },
+                          ),
+                          const SizedBox(height: 10),
+                          'Nomor Telepon'.text.base.bold.make(),
+                          TextFormField(
+                            controller: context.read<KontakKamiCubit>().phone,
+                            decoration: const InputDecoration(
+                                hintText: 'Masukkan Nomor Telepon'),
+                            validator: (value) {
+                              if (value == "") {
+                                return 'Masukkan Nomor Telepon';
+                              }
+                            },
+                          ),
+                          const SizedBox(height: 10),
+                          'Email'.text.base.bold.make(),
+                          TextFormField(
+                            controller: context.read<KontakKamiCubit>().email,
+                            decoration: const InputDecoration(
+                                hintText: 'Masukkan Email'),
+                            validator: (value) {
+                              if (value == "") {
+                                return 'Masukkan Email';
+                              }
+                            },
+                          ),
+                          const SizedBox(height: 10),
+                          'Pesan'.text.base.bold.make(),
+                          TextFormField(
+                            controller: context.read<KontakKamiCubit>().message,
+                            decoration: const InputDecoration(
+                                hintText: 'Masukkan Pesan'),
+                            validator: (value) {
+                              if (value == "") {
+                                return 'Masukkan Pesan';
+                              }
+                            },
+                            minLines: 2,
+                            maxLines: 4,
+                          ),
+                          const SizedBox(height: 10),
+                          BlocBuilder<KontakKamiCubit, KontakKamiState>(
+                            builder: (context, state) => state.maybeWhen(
+                              loading: () => ElevatedButton(
+                                onPressed: null,
+                                child: const CircularProgressIndicator()
+                                    .centered()
+                                    .h24(context),
+                              ),
+                              orElse: () => ElevatedButton(
+                                onPressed: () {
+                                  if (context
+                                      .read<KontakKamiCubit>()
+                                      .formKey
+                                      .currentState!
+                                      .validate()) {
+                                    context
+                                        .read<KontakKamiCubit>()
+                                        .formKey
+                                        .currentState!
+                                        .save();
+                                    FocusScope.of(context).unfocus();
+                                    context
+                                        .read<KontakKamiCubit>()
+                                        .sendMessage();
+                                  }
+                                },
+                                child: 'Kirim'
+                                    .text
+                                    .color(Colors.white)
+                                    .base
+                                    .make(),
+                              ),
+                            ),
+                          )
+                        ]).p16(),
+                      );
+                    },
+                  ),
+                ).box.height(Get.height).make(),
+              ).height(Get.height / 1.1).make();
             },
           );
         },
@@ -65,12 +165,57 @@ class _KontakKamiLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final kontakKami = context.read<KontakKamiCubit>();
     return VStack([
-      VxBox()
+      VxBox(
+              child: OSMFlutter(
+        controller: kontakKami.mapController,
+        trackMyPosition: false,
+        initZoom: 12,
+        minZoomLevel: 8,
+        maxZoomLevel: 14,
+        stepZoom: 1.0,
+        mapIsLoading: const CircularProgressIndicator().centered(),
+        userLocationMarker: UserLocationMaker(
+          personMarker: MarkerIcon(
+            icon: Icon(
+              Icons.location_history_rounded,
+              color: Colors.red,
+              size: 48,
+            ),
+          ),
+          directionArrowMarker: MarkerIcon(
+            icon: Icon(
+              Icons.double_arrow,
+              size: 48,
+            ),
+          ),
+        ),
+        road: Road(
+          startIcon: MarkerIcon(
+            icon: Icon(
+              Icons.person,
+              size: 64,
+              color: Colors.brown,
+            ),
+          ),
+          roadColor: Colors.yellowAccent,
+        ),
+        markerOption: MarkerOption(
+            defaultMarker: MarkerIcon(
+          icon: Icon(
+            Icons.person_pin_circle,
+            color: Colors.blue,
+            size: 56,
+          ),
+        )),
+      ))
           .width(Get.width)
           .height(Get.height / 2.5)
-          .color(Colors.red)
-          .make(),
+          .color(Theme.of(context).primaryColor)
+          .outerShadowXl
+          .make()
+          .p16(),
       VxBox(
         child: BlocBuilder<KontakKamiCubit, KontakKamiState>(
           builder: (context, state) => state.maybeWhen(
@@ -93,7 +238,14 @@ class _KontakKamiLayout extends StatelessWidget {
             orElse: () => const SizedBox(),
           ),
         ),
-      ).width(Get.width).p16.make(),
+      )
+          .width(Get.width)
+          .color(Colors.white)
+          .rounded
+          .outerShadowXl
+          .p16
+          .make()
+          .p16(),
     ]);
   }
 }

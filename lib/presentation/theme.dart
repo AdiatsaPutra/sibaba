@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 ThemeData theme() {
@@ -19,10 +20,19 @@ ThemeData theme() {
         onBackground: Color(0xFF6C63FF),
         onError: Colors.red,
         brightness: Brightness.light),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        fixedSize: Size(Get.width, 50),
+      ),
+    ),
     inputDecorationTheme: InputDecorationTheme(
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
       ),
+      contentPadding: const EdgeInsets.all(10),
     ),
     tabBarTheme: const TabBarTheme(
       labelColor: Color(0xFF6C63FF),

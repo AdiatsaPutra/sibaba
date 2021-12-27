@@ -41,6 +41,7 @@ class InfoLokasiScreen extends StatelessWidget {
             BlocBuilder<InfoLokasiCubit, InfoLokasiState>(
               builder: (context, state) => state.maybeWhen(
                 loading: () => const CircularProgressIndicator().centered(),
+                error: (message) => message.text.base.makeCentered(),
                 loaded: (locations) => VStack(locations
                     .map((e) => LocationCard(location: e).p16())
                     .toList()),

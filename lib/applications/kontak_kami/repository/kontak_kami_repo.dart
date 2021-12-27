@@ -4,4 +4,10 @@ import 'package:sibaba/applications/kontak_kami/models/info_kontak.dart';
 
 abstract class KontakKamiRepo {
   Future<Either<KontakException, InfoKontak>> getKontakKami();
+  Future<Either<KontakException, void>> sendMessage(
+    String fullName,
+    String phone,
+    String email,
+    String message,
+  );
 }

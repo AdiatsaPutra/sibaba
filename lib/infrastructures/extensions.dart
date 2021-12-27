@@ -13,7 +13,8 @@ extension StringExt on String {
   String removeHTMLTag() {
     final n = replaceAll('<p>', '')
         .replaceAll('</p>', '')
-        .replaceAll('&rsquo;', '\'');
+        .replaceAll('&rsquo;', '\'')
+        .replaceAll('&nbsp;&nbsp;&nbsp;&nbsp;', '');
     return n;
   }
 }
