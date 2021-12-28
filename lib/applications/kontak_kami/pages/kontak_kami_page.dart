@@ -4,6 +4,7 @@ import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:get/get.dart';
 import 'package:sibaba/applications/kontak_kami/bloc/cubit/kontak_kami_cubit.dart';
 import 'package:sibaba/injection.dart';
+import 'package:sibaba/presentation/success_dialog.dart';
 import 'package:sibaba/presentation/widgets/custom_appbar.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -69,6 +70,7 @@ class KontakKamiPage extends StatelessWidget {
                             controller: context.read<KontakKamiCubit>().phone,
                             decoration: const InputDecoration(
                                 hintText: 'Masukkan Nomor Telepon'),
+                            keyboardType: TextInputType.number,
                             validator: (value) {
                               if (value == "") {
                                 return 'Masukkan Nomor Telepon';
@@ -81,6 +83,7 @@ class KontakKamiPage extends StatelessWidget {
                             controller: context.read<KontakKamiCubit>().email,
                             decoration: const InputDecoration(
                                 hintText: 'Masukkan Email'),
+                            keyboardType: TextInputType.emailAddress,
                             validator: (value) {
                               if (value == "") {
                                 return 'Masukkan Email';
@@ -102,7 +105,17 @@ class KontakKamiPage extends StatelessWidget {
                             maxLines: 4,
                           ),
                           const SizedBox(height: 10),
-                          BlocBuilder<KontakKamiCubit, KontakKamiState>(
+                          BlocConsumer<KontakKamiCubit, KontakKamiState>(
+                            listener: (context, state) => state.maybeWhen(
+                              messageSend: () => VxDialog.showCustom(
+                                context,
+                                child: const SuccessDialog(
+                                  image: 'assets/sent.png',
+                                  message: 'Pesan berhasil dikirim',
+                                ),
+                              ),
+                              orElse: () {},
+                            ),
                             builder: (context, state) => state.maybeWhen(
                               loading: () => ElevatedButton(
                                 onPressed: null,
