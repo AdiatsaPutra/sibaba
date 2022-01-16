@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sibaba/applications/admin/dashboard/dashboard.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class LoginPage extends StatelessWidget {
@@ -46,7 +47,9 @@ class LoginPage extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Get.to(() => const DashboardPage());
+              },
               child: 'Masuk'.text.color(Colors.white).base.make(),
             )
           ]).p16(),

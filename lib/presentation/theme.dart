@@ -34,6 +34,7 @@ ThemeData theme() {
       ),
       contentPadding: const EdgeInsets.all(10),
     ),
+    iconTheme: const IconThemeData(color: Color(0xFF6C63FF)),
     tabBarTheme: const TabBarTheme(
       labelColor: Color(0xFF6C63FF),
       unselectedLabelColor: Colors.grey,
