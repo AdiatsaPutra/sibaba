@@ -19,18 +19,18 @@ class HomeMenu extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: VxBox(
-        child: HStack([
+        child: VStack([
           Image.asset(
             imagePath,
             height: 100,
             width: 100,
-          ).p12(),
-          title.text.xl.bold.make()
+          ).p12().box.makeCentered(),
+          title.text.xl.bold.makeCentered()
         ]),
       )
           .color(Colors.white)
-          .height(120)
-          .width(Get.width)
+          .width(180)
+          .height(Get.width / 2.5)
           .rounded
           .outerShadowXl
           .margin(const EdgeInsets.only(bottom: 20))

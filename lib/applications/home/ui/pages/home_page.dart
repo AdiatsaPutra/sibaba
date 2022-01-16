@@ -6,6 +6,7 @@ import 'package:sibaba/applications/applications.dart';
 import 'package:sibaba/applications/home/ui/widgets/home_menu.dart';
 import 'package:sibaba/applications/info_lokasi/ui/pages/info_lokasi_page.dart';
 import 'package:sibaba/applications/kontak_kami/pages/kontak_kami_page.dart';
+import 'package:sibaba/applications/login/pages/login_page.dart';
 import 'package:sibaba/applications/tentang_kami/pages/tentang_kami_page.dart';
 import 'package:sibaba/presentation/core.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -62,32 +63,38 @@ class HomePage extends StatelessWidget {
                   .color(Colors.white)
                   .make(),
               const SizedBox(height: 30),
-              HomeMenu(
-                imagePath: 'assets/locations.png',
-                title: 'Info Lokasi',
-                onTap: () {
-                  Get.to(const InfoLokasiPage());
-                },
-              ),
-              HomeMenu(
-                imagePath: 'assets/about.png',
-                title: 'Tentang Kami',
-                onTap: () {
-                  Get.to(() => const TentangKamiPage());
-                },
-              ),
-              HomeMenu(
-                imagePath: 'assets/contact_us.png',
-                title: 'Kontak Kami',
-                onTap: () {
-                  // Get.to(() => const KontakKamiPage());
-                },
-              ),
-              HomeMenu(
-                imagePath: 'assets/sign_in.png',
-                title: 'Sign In',
-                onTap: () {},
-              ),
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                HomeMenu(
+                  imagePath: 'assets/locations.png',
+                  title: 'Info Lokasi',
+                  onTap: () {
+                    Get.to(const InfoLokasiPage());
+                  },
+                ),
+                HomeMenu(
+                  imagePath: 'assets/about.png',
+                  title: 'Tentang Kami',
+                  onTap: () {
+                    Get.to(() => const TentangKamiPage());
+                  },
+                ),
+              ]),
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                HomeMenu(
+                  imagePath: 'assets/contact_us.png',
+                  title: 'Kontak Kami',
+                  onTap: () {
+                    Get.to(() => const KontakKamiPage());
+                  },
+                ),
+                HomeMenu(
+                  imagePath: 'assets/sign_in.png',
+                  title: 'Sign In',
+                  onTap: () {
+                    Get.to(() => const LoginPage());
+                  },
+                ),
+              ])
             ]).p16().scrollVertical(),
           ])),
     );
