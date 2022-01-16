@@ -9,7 +9,7 @@ import 'package:sibaba/presentation/theme.dart';
 void main() {
   configureInjection('http://10.0.2.2:8000/api/');
   WidgetsFlutterBinding.ensureInitialized();
-  Bloc.observer = AppBlocObserver();
+  // Bloc.observer = AppBlocObserver();
   runApp(const Sibaba());
 }
 

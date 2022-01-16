@@ -80,7 +80,7 @@ class HomePage extends StatelessWidget {
                 imagePath: 'assets/contact_us.png',
                 title: 'Kontak Kami',
                 onTap: () {
-                  Get.to(() => const KontakKamiPage());
+                  // Get.to(() => const KontakKamiPage());
                 },
               ),
               HomeMenu(
