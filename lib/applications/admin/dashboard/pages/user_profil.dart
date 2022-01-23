@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class UserProfil extends StatelessWidget {
@@ -10,6 +11,16 @@ class UserProfil extends StatelessWidget {
       appBar: AppBar(
         title: 'Edit Profil'.text.base.color(Colors.white).make(),
         iconTheme: const IconThemeData(color: Colors.white),
+        elevation: 0,
+        actions: [
+          GestureDetector(
+            onTap: () {
+              Get.back();
+              Get.back();
+            },
+            child: const Icon(Icons.logout, color: Colors.red),
+          ).pOnly(right: 20),
+        ],
       ),
       body: VStack([
         const SizedBox(height: 10),

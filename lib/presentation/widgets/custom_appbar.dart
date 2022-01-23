@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sibaba/presentation/style.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class CustomAppbar extends StatelessWidget with PreferredSizeWidget {
   final String title;
@@ -22,10 +22,7 @@ class CustomAppbar extends StatelessWidget with PreferredSizeWidget {
           color: Colors.white,
         ),
       ),
-      title: Text(
-        title,
-        style: whiteRegular,
-      ),
+      title: title.text.lg.bold.color(Colors.white).make(),
     );
   }
 

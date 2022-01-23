@@ -29,8 +29,8 @@ class HomeMenu extends StatelessWidget {
         ]),
       )
           .color(Colors.white)
-          .width(180)
-          .height(Get.width / 2.5)
+          .width(Get.width / 2.3)
+          .height(180)
           .rounded
           .outerShadowXl
           .margin(const EdgeInsets.only(bottom: 20))

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sibaba/presentation/style.dart';
 
 class Core {
   static showPopupDialog(BuildContext context, String title, Widget content) {
@@ -25,13 +24,11 @@ class Core {
         child: Center(
           child: Text(
             message!,
-            style: darkRegular,
           ),
         ),
       ),
       textConfirm: 'OK',
       textCancel: 'Batal',
-      buttonColor: primaryColor,
       cancelTextColor: Colors.black87,
       confirmTextColor: Colors.white,
       onConfirm: confirm,
