@@ -26,7 +26,7 @@ class KategoriItem extends StatelessWidget {
               .rounded
               .make(),
           const SizedBox(height: 10),
-          title.text.base.bold.make(),
+          title.text.base.bold.center.make(),
         ],
         crossAlignment: CrossAxisAlignment.center,
       ),

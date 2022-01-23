@@ -7,7 +7,8 @@ ThemeData theme() {
   return ThemeData(
     appBarTheme: const AppBarTheme(backgroundColor: primaryColor),
     textTheme: GoogleFonts.poppinsTextTheme(),
-    primaryColor: const Color(0xFF6C63FF),
+    primaryColor: primaryColor,
+    primaryIconTheme: IconThemeData(color: primaryColor),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         primary: primaryColor,
@@ -31,6 +32,12 @@ ThemeData theme() {
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
       ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: const BorderSide(color: primaryColor),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      suffixIconColor: primaryColor,
+      focusColor: primaryColor,
       contentPadding: const EdgeInsets.all(10),
     ),
     iconTheme: const IconThemeData(color: Color(0xFF6C63FF)),

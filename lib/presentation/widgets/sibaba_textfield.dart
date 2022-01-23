@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sibaba/presentation/constants.dart';
+import 'package:sibaba/presentation/color_constant.dart';
 
 extension SibabaTextField on Widget {
   Widget stylized({String? hint}) {
@@ -11,7 +11,7 @@ extension SibabaTextField on Widget {
             borderRadius: BorderRadius.circular(10),
             borderSide: const BorderSide(color: primaryColor),
           ),
-          contentPadding: EdgeInsets.all(10)),
+          contentPadding: const EdgeInsets.all(10)),
     );
   }
 }

@@ -2,7 +2,14 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sibaba/applications/admin/dashboard/pages/event_page.dart';
+import 'package:sibaba/applications/admin/dashboard/pages/gallery_page.dart';
+import 'package:sibaba/applications/admin/dashboard/pages/kapanewon_page.dart';
+import 'package:sibaba/applications/admin/dashboard/pages/kelurahan_page.dart';
+import 'package:sibaba/applications/admin/dashboard/pages/kontak_page.dart';
+import 'package:sibaba/applications/admin/dashboard/pages/pesan_page.dart';
 import 'package:sibaba/applications/admin/dashboard/widgets/kategori_item.dart';
+import 'package:sibaba/applications/tentang_kami/models/tentang.dart';
 import 'package:sibaba/presentation/core.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -68,41 +75,47 @@ class DashboardPage extends StatelessWidget {
               children: [
                 KategoriItem(
                   icon: Icons.map,
-                  title: 'Lokasi Unit',
+                  title: 'Lokasi Unit\n',
                   onTap: () {
                     Get.to(() => LokasiUnitPage());
                   },
                 ),
                 KategoriItem(
                   icon: Icons.event,
-                  title: 'Event',
-                  onTap: () {},
+                  title: 'Event\n',
+                  onTap: () {
+                    Get.to(() => const EventPage());
+                  },
                 ),
                 KategoriItem(
                   icon: Icons.person,
-                  title: 'Profil',
+                  title: 'Profil\nWebsite',
                   onTap: () {},
                 ),
                 KategoriItem(
                   icon: Icons.people,
-                  title: 'Pengguna',
+                  title: 'Pengguna\n',
                   onTap: () {},
                 ),
               ],
             ),
-            const SizedBox(height: 50),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 KategoriItem(
                   icon: Icons.place,
                   title: 'Kapanewon',
-                  onTap: () {},
+                  onTap: () {
+                    Get.to(() => KapanewonPage());
+                  },
                 ),
                 KategoriItem(
                   icon: Icons.place_outlined,
                   title: 'Kelurahan',
-                  onTap: () {},
+                  onTap: () {
+                    Get.to(() => KelurahanPage());
+                  },
                 ),
                 KategoriItem(
                   icon: Icons.school_outlined,
@@ -123,24 +136,25 @@ class DashboardPage extends StatelessWidget {
                 KategoriItem(
                   icon: Icons.image,
                   title: 'Galeri',
-                  onTap: () {},
+                  onTap: () {
+                    Get.to(() => const GalleryPage());
+                  },
                 ),
                 KategoriItem(
                   icon: Icons.message,
                   title: 'Pesan',
-                  onTap: () {},
+                  onTap: () {
+                    Get.to(() => const PesanPage());
+                  },
                 ),
                 KategoriItem(
                   icon: Icons.phone,
                   title: 'Kontak',
-                  onTap: () {},
+                  onTap: () {
+                    Get.to(() => const KontakPage());
+                  },
                 ),
                 const SizedBox(width: 50)
-                // KategoriItem(
-                //   icon: Icons.school,
-                //   title: 'Data Santri',
-                //   onTap: () {},
-                // ),
               ],
             ),
             const SizedBox(height: 20),
