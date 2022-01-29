@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:sibaba/applications/kontak_kami/bloc/cubit/kontak_kami_cubit.dart';
 import 'package:sibaba/injection.dart';
+import 'package:sibaba/presentation/color_constant.dart';
 import 'package:sibaba/presentation/success_dialog.dart';
 import 'package:sibaba/presentation/widgets/custom_appbar.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -20,6 +21,7 @@ class KontakKamiPage extends StatelessWidget {
         child: const _KontakKamiLayout(),
       ),
       floatingActionButton: FloatingActionButton.extended(
+        backgroundColor: primaryColor,
         onPressed: () {
           showModalBottomSheet(
             context: context,

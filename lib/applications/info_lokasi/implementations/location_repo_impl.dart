@@ -21,6 +21,7 @@ class LocationRepoImpl extends LocationRepo {
       if (response.statusCode != 200) {
         throw LocationException(response.data);
       }
+      Logger().i(response);
       List data = response.data['lokasi'];
       final locations = data.map((e) => Location.fromMap(e)).toList();
       return right(locations);

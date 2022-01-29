@@ -2,12 +2,16 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sibaba/applications/admin/dashboard/pages/data_santri_page.dart';
+import 'package:sibaba/applications/admin/dashboard/pages/data_ustadz_page.dart';
 import 'package:sibaba/applications/admin/dashboard/pages/event_page.dart';
 import 'package:sibaba/applications/admin/dashboard/pages/gallery_page.dart';
 import 'package:sibaba/applications/admin/dashboard/pages/kapanewon_page.dart';
 import 'package:sibaba/applications/admin/dashboard/pages/kelurahan_page.dart';
 import 'package:sibaba/applications/admin/dashboard/pages/kontak_page.dart';
+import 'package:sibaba/applications/admin/dashboard/pages/pengguna_page.dart';
 import 'package:sibaba/applications/admin/dashboard/pages/pesan_page.dart';
+import 'package:sibaba/applications/admin/dashboard/pages/profil_website_page.dart';
 import 'package:sibaba/applications/admin/dashboard/widgets/kategori_item.dart';
 import 'package:sibaba/applications/tentang_kami/models/tentang.dart';
 import 'package:sibaba/presentation/core.dart';
@@ -90,12 +94,16 @@ class DashboardPage extends StatelessWidget {
                 KategoriItem(
                   icon: Icons.person,
                   title: 'Profil\nWebsite',
-                  onTap: () {},
+                  onTap: () {
+                    Get.to(() => const ProfilWebsitePage());
+                  },
                 ),
                 KategoriItem(
                   icon: Icons.people,
                   title: 'Pengguna\n',
-                  onTap: () {},
+                  onTap: () {
+                    Get.to(() => PenggunaPage());
+                  },
                 ),
               ],
             ),
@@ -120,12 +128,16 @@ class DashboardPage extends StatelessWidget {
                 KategoriItem(
                   icon: Icons.school_outlined,
                   title: 'Data Ustadz',
-                  onTap: () {},
+                  onTap: () {
+                    Get.to(() => DataUstadzPage());
+                  },
                 ),
                 KategoriItem(
                   icon: Icons.school,
                   title: 'Data Santri',
-                  onTap: () {},
+                  onTap: () {
+                    Get.to(() => DataSantriPage());
+                  },
                 ),
               ],
             ),
