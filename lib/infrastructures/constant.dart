@@ -2,12 +2,12 @@ const List<String> akreditasi = ['A', 'B', 'C', 'Belum Terakreditasi'];
 const List<String> status = ['Aktif', 'Tidak Aktif'];
 
 const List<String> listHari = [
-  'Senin',
-  'Selasa',
-  'Rabu',
-  'Kamis',
-  'Jumat',
-  'Sabtu',
+  'senin',
+  'selasa',
+  'rabu',
+  'kamis',
+  'jumat',
+  'sabtu',
 ];
 const List<String> roles = [
   'Superadmin',

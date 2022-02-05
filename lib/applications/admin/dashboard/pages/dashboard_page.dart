@@ -13,7 +13,6 @@ import 'package:sibaba/applications/admin/dashboard/pages/pengguna_page.dart';
 import 'package:sibaba/applications/admin/dashboard/pages/pesan_page.dart';
 import 'package:sibaba/applications/admin/dashboard/pages/profil_website_page.dart';
 import 'package:sibaba/applications/admin/dashboard/widgets/kategori_item.dart';
-import 'package:sibaba/applications/tentang_kami/models/tentang.dart';
 import 'package:sibaba/presentation/core.dart';
 import 'package:velocity_x/velocity_x.dart';
 

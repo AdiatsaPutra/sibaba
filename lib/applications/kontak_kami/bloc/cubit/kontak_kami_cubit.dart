@@ -19,6 +19,14 @@ class KontakKamiCubit extends Cubit<KontakKamiState> {
 
   final formKey = GlobalKey<FormState>();
 
+  final alamat = TextEditingController();
+  final linkMaps = TextEditingController();
+  final telepon = TextEditingController();
+  final hariMasuk1 = TextEditingController();
+  final hariMasuk2 = TextEditingController();
+  final jamMasuk = TextEditingController();
+  final jamKeluar = TextEditingController();
+
   final fullName = TextEditingController();
   final phone = TextEditingController();
   final email = TextEditingController();

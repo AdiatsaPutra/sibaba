@@ -7,8 +7,8 @@ class InfoKontak extends Equatable {
     required this.linkmaps,
     required this.telpon,
     required this.email,
-    required this.hari1,
-    required this.hari2,
+    this.hari1 = '-',
+    this.hari2 = '-',
     required this.masukJam,
     required this.selesaiJam,
   });
@@ -59,4 +59,10 @@ class InfoKontak extends Equatable {
         masukJam,
         selesaiJam,
       ];
+
+  String get formattedJamMasuk =>
+      masukJam.substring(0, (masukJam.indexOf(':') + 3));
+
+  String get formattedJamKeluar =>
+      selesaiJam.substring(0, (selesaiJam.indexOf(':') + 3));
 }

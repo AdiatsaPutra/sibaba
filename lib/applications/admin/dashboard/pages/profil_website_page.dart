@@ -36,20 +36,27 @@ class _ProfilWebsiteLayout extends StatelessWidget {
       BlocBuilder<TentangKamiCubit, TentangKamiState>(
         builder: (context, state) => state.maybeWhen(
           loading: () => const CircularProgressIndicator().centered(),
-          loaded: (tentang) => VStack([
-            const SizedBox(height: 10),
-            'Sejarah Berdiri'.text.lg.make(),
-            const SizedBox(height: 10),
-            HtmlEditor(controller: cubit.sejarah),
-            const SizedBox(height: 10),
-            'Struktur Organisasi'.text.lg.make(),
-            const SizedBox(height: 10),
-            HtmlEditor(controller: cubit.struktur),
-            const SizedBox(height: 10),
-            'Visi Misi'.text.lg.make(),
-            const SizedBox(height: 10),
-            HtmlEditor(controller: cubit.visiMisi),
-          ]),
+          loaded: (tentang) {
+            Future.delayed(const Duration(seconds: 1)).then((value) {
+              cubit.sejarah.setText(tentang.profiles.sejarah);
+              cubit.struktur.setText(tentang.profiles.struktur);
+              cubit.visiMisi.setText(tentang.profiles.visimisi);
+            });
+            return VStack([
+              const SizedBox(height: 10),
+              'Sejarah Berdiri'.text.lg.make(),
+              const SizedBox(height: 10),
+              HtmlEditor(controller: cubit.sejarah),
+              const SizedBox(height: 10),
+              'Struktur Organisasi'.text.lg.make(),
+              const SizedBox(height: 10),
+              HtmlEditor(controller: cubit.struktur),
+              const SizedBox(height: 10),
+              'Visi Misi'.text.lg.make(),
+              const SizedBox(height: 10),
+              HtmlEditor(controller: cubit.visiMisi),
+            ]);
+          },
           orElse: () => const SizedBox(),
         ),
       ).p16().scrollVertical().expand(),
