@@ -109,13 +109,15 @@ class KontakKamiPage extends StatelessWidget {
                           const SizedBox(height: 10),
                           BlocConsumer<KontakKamiCubit, KontakKamiState>(
                             listener: (context, state) => state.maybeWhen(
-                              messageSend: () => VxDialog.showCustom(
-                                context,
-                                child: const SuccessDialog(
-                                  image: 'assets/sent.png',
-                                  message: 'Pesan berhasil dikirim',
-                                ),
-                              ),
+                              messageSend: () {
+                                VxDialog.showCustom(
+                                  context,
+                                  child: const SuccessDialog(
+                                    image: 'assets/sent.png',
+                                    message: 'Pesan berhasil dikirim',
+                                  ),
+                                );
+                              },
                               orElse: () {},
                             ),
                             builder: (context, state) => state.maybeWhen(

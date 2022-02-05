@@ -22,6 +22,7 @@ class SuccessDialog extends StatelessWidget {
         ElevatedButton(
           onPressed: () {
             Navigator.of(context).pop();
+            Navigator.of(context).pop();
           },
           child: 'Ok'.text.base.color(Colors.white).make(),
         )

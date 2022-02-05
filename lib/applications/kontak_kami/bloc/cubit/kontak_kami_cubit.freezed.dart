@@ -31,6 +31,12 @@ class _$KontakKamiStateTearOff {
     );
   }
 
+  _MessageLoaded messageLoaded(List<Message> message) {
+    return _MessageLoaded(
+      message,
+    );
+  }
+
   _MessageSend messageSend() {
     return const _MessageSend();
   }
@@ -52,6 +58,7 @@ mixin _$KontakKamiState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(InfoKontak infoKontak) loaded,
+    required TResult Function(List<Message> message) messageLoaded,
     required TResult Function() messageSend,
     required TResult Function(String error) error,
   }) =>
@@ -61,6 +68,7 @@ mixin _$KontakKamiState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(InfoKontak infoKontak)? loaded,
+    TResult Function(List<Message> message)? messageLoaded,
     TResult Function()? messageSend,
     TResult Function(String error)? error,
   }) =>
@@ -70,6 +78,7 @@ mixin _$KontakKamiState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(InfoKontak infoKontak)? loaded,
+    TResult Function(List<Message> message)? messageLoaded,
     TResult Function()? messageSend,
     TResult Function(String error)? error,
     required TResult orElse(),
@@ -80,6 +89,7 @@ mixin _$KontakKamiState {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_MessageLoaded value) messageLoaded,
     required TResult Function(_MessageSend value) messageSend,
     required TResult Function(_Error value) error,
   }) =>
@@ -89,6 +99,7 @@ mixin _$KontakKamiState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_MessageLoaded value)? messageLoaded,
     TResult Function(_MessageSend value)? messageSend,
     TResult Function(_Error value)? error,
   }) =>
@@ -98,6 +109,7 @@ mixin _$KontakKamiState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_MessageLoaded value)? messageLoaded,
     TResult Function(_MessageSend value)? messageSend,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -163,6 +175,7 @@ class _$_Initial implements _Initial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(InfoKontak infoKontak) loaded,
+    required TResult Function(List<Message> message) messageLoaded,
     required TResult Function() messageSend,
     required TResult Function(String error) error,
   }) {
@@ -175,6 +188,7 @@ class _$_Initial implements _Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(InfoKontak infoKontak)? loaded,
+    TResult Function(List<Message> message)? messageLoaded,
     TResult Function()? messageSend,
     TResult Function(String error)? error,
   }) {
@@ -187,6 +201,7 @@ class _$_Initial implements _Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(InfoKontak infoKontak)? loaded,
+    TResult Function(List<Message> message)? messageLoaded,
     TResult Function()? messageSend,
     TResult Function(String error)? error,
     required TResult orElse(),
@@ -203,6 +218,7 @@ class _$_Initial implements _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_MessageLoaded value) messageLoaded,
     required TResult Function(_MessageSend value) messageSend,
     required TResult Function(_Error value) error,
   }) {
@@ -215,6 +231,7 @@ class _$_Initial implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_MessageLoaded value)? messageLoaded,
     TResult Function(_MessageSend value)? messageSend,
     TResult Function(_Error value)? error,
   }) {
@@ -227,6 +244,7 @@ class _$_Initial implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_MessageLoaded value)? messageLoaded,
     TResult Function(_MessageSend value)? messageSend,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -283,6 +301,7 @@ class _$_Loading implements _Loading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(InfoKontak infoKontak) loaded,
+    required TResult Function(List<Message> message) messageLoaded,
     required TResult Function() messageSend,
     required TResult Function(String error) error,
   }) {
@@ -295,6 +314,7 @@ class _$_Loading implements _Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(InfoKontak infoKontak)? loaded,
+    TResult Function(List<Message> message)? messageLoaded,
     TResult Function()? messageSend,
     TResult Function(String error)? error,
   }) {
@@ -307,6 +327,7 @@ class _$_Loading implements _Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(InfoKontak infoKontak)? loaded,
+    TResult Function(List<Message> message)? messageLoaded,
     TResult Function()? messageSend,
     TResult Function(String error)? error,
     required TResult orElse(),
@@ -323,6 +344,7 @@ class _$_Loading implements _Loading {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_MessageLoaded value) messageLoaded,
     required TResult Function(_MessageSend value) messageSend,
     required TResult Function(_Error value) error,
   }) {
@@ -335,6 +357,7 @@ class _$_Loading implements _Loading {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_MessageLoaded value)? messageLoaded,
     TResult Function(_MessageSend value)? messageSend,
     TResult Function(_Error value)? error,
   }) {
@@ -347,6 +370,7 @@ class _$_Loading implements _Loading {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_MessageLoaded value)? messageLoaded,
     TResult Function(_MessageSend value)? messageSend,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -428,6 +452,7 @@ class _$_Loaded implements _Loaded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(InfoKontak infoKontak) loaded,
+    required TResult Function(List<Message> message) messageLoaded,
     required TResult Function() messageSend,
     required TResult Function(String error) error,
   }) {
@@ -440,6 +465,7 @@ class _$_Loaded implements _Loaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(InfoKontak infoKontak)? loaded,
+    TResult Function(List<Message> message)? messageLoaded,
     TResult Function()? messageSend,
     TResult Function(String error)? error,
   }) {
@@ -452,6 +478,7 @@ class _$_Loaded implements _Loaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(InfoKontak infoKontak)? loaded,
+    TResult Function(List<Message> message)? messageLoaded,
     TResult Function()? messageSend,
     TResult Function(String error)? error,
     required TResult orElse(),
@@ -468,6 +495,7 @@ class _$_Loaded implements _Loaded {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_MessageLoaded value) messageLoaded,
     required TResult Function(_MessageSend value) messageSend,
     required TResult Function(_Error value) error,
   }) {
@@ -480,6 +508,7 @@ class _$_Loaded implements _Loaded {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_MessageLoaded value)? messageLoaded,
     TResult Function(_MessageSend value)? messageSend,
     TResult Function(_Error value)? error,
   }) {
@@ -492,6 +521,7 @@ class _$_Loaded implements _Loaded {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_MessageLoaded value)? messageLoaded,
     TResult Function(_MessageSend value)? messageSend,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -509,6 +539,164 @@ abstract class _Loaded implements KontakKamiState {
   InfoKontak get infoKontak;
   @JsonKey(ignore: true)
   _$LoadedCopyWith<_Loaded> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$MessageLoadedCopyWith<$Res> {
+  factory _$MessageLoadedCopyWith(
+          _MessageLoaded value, $Res Function(_MessageLoaded) then) =
+      __$MessageLoadedCopyWithImpl<$Res>;
+  $Res call({List<Message> message});
+}
+
+/// @nodoc
+class __$MessageLoadedCopyWithImpl<$Res>
+    extends _$KontakKamiStateCopyWithImpl<$Res>
+    implements _$MessageLoadedCopyWith<$Res> {
+  __$MessageLoadedCopyWithImpl(
+      _MessageLoaded _value, $Res Function(_MessageLoaded) _then)
+      : super(_value, (v) => _then(v as _MessageLoaded));
+
+  @override
+  _MessageLoaded get _value => super._value as _MessageLoaded;
+
+  @override
+  $Res call({
+    Object? message = freezed,
+  }) {
+    return _then(_MessageLoaded(
+      message == freezed
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as List<Message>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_MessageLoaded implements _MessageLoaded {
+  const _$_MessageLoaded(this.message);
+
+  @override
+  final List<Message> message;
+
+  @override
+  String toString() {
+    return 'KontakKamiState.messageLoaded(message: $message)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _MessageLoaded &&
+            const DeepCollectionEquality().equals(other.message, message));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(message));
+
+  @JsonKey(ignore: true)
+  @override
+  _$MessageLoadedCopyWith<_MessageLoaded> get copyWith =>
+      __$MessageLoadedCopyWithImpl<_MessageLoaded>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(InfoKontak infoKontak) loaded,
+    required TResult Function(List<Message> message) messageLoaded,
+    required TResult Function() messageSend,
+    required TResult Function(String error) error,
+  }) {
+    return messageLoaded(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(InfoKontak infoKontak)? loaded,
+    TResult Function(List<Message> message)? messageLoaded,
+    TResult Function()? messageSend,
+    TResult Function(String error)? error,
+  }) {
+    return messageLoaded?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(InfoKontak infoKontak)? loaded,
+    TResult Function(List<Message> message)? messageLoaded,
+    TResult Function()? messageSend,
+    TResult Function(String error)? error,
+    required TResult orElse(),
+  }) {
+    if (messageLoaded != null) {
+      return messageLoaded(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_MessageLoaded value) messageLoaded,
+    required TResult Function(_MessageSend value) messageSend,
+    required TResult Function(_Error value) error,
+  }) {
+    return messageLoaded(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_MessageLoaded value)? messageLoaded,
+    TResult Function(_MessageSend value)? messageSend,
+    TResult Function(_Error value)? error,
+  }) {
+    return messageLoaded?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_MessageLoaded value)? messageLoaded,
+    TResult Function(_MessageSend value)? messageSend,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (messageLoaded != null) {
+      return messageLoaded(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _MessageLoaded implements KontakKamiState {
+  const factory _MessageLoaded(List<Message> message) = _$_MessageLoaded;
+
+  List<Message> get message;
+  @JsonKey(ignore: true)
+  _$MessageLoadedCopyWith<_MessageLoaded> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -555,6 +743,7 @@ class _$_MessageSend implements _MessageSend {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(InfoKontak infoKontak) loaded,
+    required TResult Function(List<Message> message) messageLoaded,
     required TResult Function() messageSend,
     required TResult Function(String error) error,
   }) {
@@ -567,6 +756,7 @@ class _$_MessageSend implements _MessageSend {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(InfoKontak infoKontak)? loaded,
+    TResult Function(List<Message> message)? messageLoaded,
     TResult Function()? messageSend,
     TResult Function(String error)? error,
   }) {
@@ -579,6 +769,7 @@ class _$_MessageSend implements _MessageSend {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(InfoKontak infoKontak)? loaded,
+    TResult Function(List<Message> message)? messageLoaded,
     TResult Function()? messageSend,
     TResult Function(String error)? error,
     required TResult orElse(),
@@ -595,6 +786,7 @@ class _$_MessageSend implements _MessageSend {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_MessageLoaded value) messageLoaded,
     required TResult Function(_MessageSend value) messageSend,
     required TResult Function(_Error value) error,
   }) {
@@ -607,6 +799,7 @@ class _$_MessageSend implements _MessageSend {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_MessageLoaded value)? messageLoaded,
     TResult Function(_MessageSend value)? messageSend,
     TResult Function(_Error value)? error,
   }) {
@@ -619,6 +812,7 @@ class _$_MessageSend implements _MessageSend {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_MessageLoaded value)? messageLoaded,
     TResult Function(_MessageSend value)? messageSend,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -699,6 +893,7 @@ class _$_Error implements _Error {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(InfoKontak infoKontak) loaded,
+    required TResult Function(List<Message> message) messageLoaded,
     required TResult Function() messageSend,
     required TResult Function(String error) error,
   }) {
@@ -711,6 +906,7 @@ class _$_Error implements _Error {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(InfoKontak infoKontak)? loaded,
+    TResult Function(List<Message> message)? messageLoaded,
     TResult Function()? messageSend,
     TResult Function(String error)? error,
   }) {
@@ -723,6 +919,7 @@ class _$_Error implements _Error {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(InfoKontak infoKontak)? loaded,
+    TResult Function(List<Message> message)? messageLoaded,
     TResult Function()? messageSend,
     TResult Function(String error)? error,
     required TResult orElse(),
@@ -739,6 +936,7 @@ class _$_Error implements _Error {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_MessageLoaded value) messageLoaded,
     required TResult Function(_MessageSend value) messageSend,
     required TResult Function(_Error value) error,
   }) {
@@ -751,6 +949,7 @@ class _$_Error implements _Error {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_MessageLoaded value)? messageLoaded,
     TResult Function(_MessageSend value)? messageSend,
     TResult Function(_Error value)? error,
   }) {
@@ -763,6 +962,7 @@ class _$_Error implements _Error {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_MessageLoaded value)? messageLoaded,
     TResult Function(_MessageSend value)? messageSend,
     TResult Function(_Error value)? error,
     required TResult orElse(),

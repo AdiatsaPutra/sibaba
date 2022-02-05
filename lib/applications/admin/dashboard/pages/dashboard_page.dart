@@ -31,21 +31,28 @@ class DashboardPage extends StatelessWidget {
         title: 'Selamat Datang di Dashboard Superadmin TKA-TPA Kabupaten Bantul'
             .text
             .color(Colors.white)
-            .base
+            .xl
             .make(),
         titleTextStyle: const TextStyle(fontWeight: FontWeight.bold),
         elevation: 0,
-        leading: GestureDetector(
-          onTap: () {
-            Get.to(() => const UserProfil());
-          },
-          child: VxBox(
-            child: const Icon(
-              Icons.person,
-              color: Colors.white,
-            ),
-          ).color(Colors.white.withOpacity(0.5)).roundedFull.make(),
-        ).pOnly(left: 16),
+        actions: [
+          GestureDetector(
+            onTap: () {
+              Get.to(() => const UserProfil());
+            },
+            child: VxBox(
+              child: const Icon(
+                Icons.person,
+                color: Colors.white,
+              ),
+            )
+                .color(Colors.white.withOpacity(0.5))
+                .width(30)
+                .height(30)
+                .roundedFull
+                .make(),
+          ).pOnly(right: 16),
+        ],
       ),
       body: WillPopScope(
         onWillPop: () {
@@ -73,7 +80,7 @@ class DashboardPage extends StatelessWidget {
         },
         child: ZStack([
           VStack([
-            SizedBox(height: Get.height / 5.5),
+            SizedBox(height: Get.height / 5.7),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [

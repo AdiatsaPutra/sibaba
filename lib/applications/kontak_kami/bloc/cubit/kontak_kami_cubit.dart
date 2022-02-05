@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sibaba/applications/kontak_kami/models/info_kontak.dart';
+import 'package:sibaba/applications/kontak_kami/models/message.dart';
 import 'package:sibaba/applications/kontak_kami/repository/kontak_kami_repo.dart';
 
 part 'kontak_kami_state.dart';
@@ -51,6 +52,15 @@ class KontakKamiCubit extends Cubit<KontakKamiState> {
     kontakKami.fold(
       (l) => emit(KontakKamiState.error(l.message)),
       (_) => emit(const KontakKamiState.messageSend()),
+    );
+  }
+
+  void getMessage() async {
+    emit(const KontakKamiState.loading());
+    final kontakKami = await _kontakKamiRepo.getMessage();
+    kontakKami.fold(
+      (l) => emit(KontakKamiState.error(l.message)),
+      (r) => emit(KontakKamiState.messageLoaded(r)),
     );
   }
 }
