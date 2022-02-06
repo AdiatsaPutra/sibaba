@@ -37,7 +37,7 @@ class _ProfilWebsiteLayout extends StatelessWidget {
         builder: (context, state) => state.maybeWhen(
           loading: () => const CircularProgressIndicator().centered(),
           loaded: (tentang) {
-            Future.delayed(const Duration(seconds: 1)).then((value) {
+            Future.delayed(const Duration(seconds: 3)).then((value) {
               cubit.sejarah.setText(tentang.profiles.sejarah);
               cubit.struktur.setText(tentang.profiles.struktur);
               cubit.visiMisi.setText(tentang.profiles.visimisi);

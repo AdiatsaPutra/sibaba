@@ -2,21 +2,22 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sibaba/applications/admin/dashboard/pages/data_santri_page.dart';
-import 'package:sibaba/applications/admin/dashboard/pages/data_ustadz_page.dart';
-import 'package:sibaba/applications/admin/dashboard/pages/event_page.dart';
-import 'package:sibaba/applications/admin/dashboard/pages/gallery_page.dart';
-import 'package:sibaba/applications/admin/dashboard/pages/kapanewon_page.dart';
-import 'package:sibaba/applications/admin/dashboard/pages/kelurahan_page.dart';
-import 'package:sibaba/applications/admin/dashboard/pages/kontak_page.dart';
-import 'package:sibaba/applications/admin/dashboard/pages/pengguna_page.dart';
-import 'package:sibaba/applications/admin/dashboard/pages/pesan_page.dart';
-import 'package:sibaba/applications/admin/dashboard/pages/profil_website_page.dart';
-import 'package:sibaba/applications/admin/dashboard/widgets/kategori_item.dart';
+import 'package:sibaba/applications/admin/widgets/kategori_item.dart';
+
 import 'package:sibaba/presentation/core.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import 'data_santri_page.dart';
 import 'data_unit_page.dart';
+import 'data_ustadz_page.dart';
+import 'event_page.dart';
+import 'gallery_page.dart';
+import 'kapanewon_page.dart';
+import 'kelurahan_page.dart';
+import 'kontak_page.dart';
+import 'pengguna_page.dart';
+import 'pesan_page.dart';
+import 'profil_website_page.dart';
 import 'user_profil.dart';
 
 class DashboardPage extends StatelessWidget {

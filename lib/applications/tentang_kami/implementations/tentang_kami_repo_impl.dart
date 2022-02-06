@@ -6,13 +6,14 @@ import 'package:dartz/dartz.dart';
 import 'package:sibaba/applications/tentang_kami/models/tentang.dart';
 import 'package:sibaba/applications/tentang_kami/exception/tentang_kami_exception.dart';
 import 'package:sibaba/applications/tentang_kami/repository/tentang_kami_repo.dart';
+import 'package:sibaba/infrastructures/api.dart';
 
 import '../../../injection.dart';
 
 @Injectable(as: TentangKamirepo)
 class TentangKamiRepoImpl extends TentangKamirepo {
   String baseUrl = getIt.get(instanceName: 'baseUrl');
-  final dio = Dio();
+  final dio = Api.createDio();
   @override
   Future<Either<TentangKamiException, Tentang>> getTentangKami() async {
     try {

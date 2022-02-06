@@ -23,6 +23,8 @@ dependencies:
   injectable: ^1.5.0
   json_annotation: ^4.4.0
   logger: ^1.1.0
+  logging: ^1.0.2
+  pretty_dio_logger: ^1.1.1
   shimmer: ^2.0.0
   velocity_x: ^3.3.0
 

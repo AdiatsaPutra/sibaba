@@ -1,25 +1,47 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:sibaba/applications/admin/bloc/user/user_cubit.dart';
+import 'package:sibaba/applications/admin/models/user.dart';
+import 'package:sibaba/injection.dart';
 import 'package:sibaba/presentation/color_constant.dart';
 import 'package:sibaba/presentation/widgets/sibaba_textfield.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class PenggunaPage extends StatelessWidget {
-  final DataTableSource _data = MyData();
+  const PenggunaPage({Key? key}) : super(key: key);
 
-  PenggunaPage({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => getIt<UserCubit>()..getUsers(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: 'Data Pengguna'.text.xl.color(Colors.white).make(),
+          iconTheme: const IconThemeData(color: Colors.white),
+          elevation: 0,
+        ),
+        resizeToAvoidBottomInset: false,
+        body: BlocBuilder<UserCubit, UserState>(
+          builder: (context, state) => state.maybeWhen(
+            loading: () => const CircularProgressIndicator().centered(),
+            loaded: (users) => _PenggunaLayout(users: users),
+            orElse: () => const SizedBox(),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _PenggunaLayout extends StatelessWidget {
+  final List<User> users;
+
+  const _PenggunaLayout({Key? key, required this.users}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: 'Data Kelurahan'.text.xl.color(Colors.white).make(),
-        iconTheme: const IconThemeData(color: Colors.white),
-        elevation: 0,
-      ),
-      resizeToAvoidBottomInset: false,
       body: VStack(
         [
           TextFormField(
@@ -32,8 +54,8 @@ class PenggunaPage extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           PaginatedDataTable(
-            source: _data,
-            header: 'Data Kelurahan'.text.xl.make(),
+            source: UsersData(users),
+            header: 'Data Pengguna'.text.xl.make(),
             columns: const [
               DataColumn(label: Text('No')),
               DataColumn(label: Text('ID')),
@@ -44,9 +66,10 @@ class PenggunaPage extends StatelessWidget {
             ],
             columnSpacing: 50,
             horizontalMargin: 20,
-            rowsPerPage: 5,
+            rowsPerPage: 20,
             showCheckboxColumn: false,
           ),
+          const SizedBox(height: 100),
         ],
       ).centered().p16().scrollVertical(),
       floatingActionButton: FloatingActionButton.extended(
@@ -93,41 +116,35 @@ class PenggunaPage extends StatelessWidget {
         },
         label: HStack([
           const Icon(Icons.add),
-          'Tambah Kelurahan'.text.base.make(),
+          'Tambah Pengguna'.text.base.make(),
         ]),
       ),
     );
   }
 }
 
-// The "soruce" of the table
-class MyData extends DataTableSource {
-  // Generate some made-up data
-  final List<Map<String, dynamic>> _data = List.generate(
-      200,
-      (index) => {
-            "id": index + 1,
-            "title": "Item $index",
-            "price": Random().nextInt(10000),
-            "a": Random().nextInt(10000),
-            "b": Random().nextInt(10000),
-            "c": Random().nextInt(10000),
-          });
+class UsersData extends DataTableSource {
+  final List<User> users;
+
+  UsersData(this.users);
 
   @override
   bool get isRowCountApproximate => false;
   @override
-  int get rowCount => _data.length;
+  int get rowCount => users.length;
   @override
   int get selectedRowCount => 0;
   @override
   DataRow getRow(int index) {
     return DataRow(cells: [
-      DataCell(Text(_data[index]['id'].toString())),
-      DataCell(Text(_data[index]["title"])),
-      DataCell(Text(_data[index]["price"].toString())),
-      DataCell(Text(_data[index]["a"].toString())),
-      DataCell(Text(_data[index]["b"].toString())),
+      DataCell((index + 1).toString().text.isIntrinsic.make()),
+      DataCell(users[index].id.toString().text.isIntrinsic.make()),
+      DataCell(users[index].name.text.isIntrinsic.make()),
+      DataCell(users[index].email.text.isIntrinsic.make()),
+      DataCell(
+        VStack(
+            [...users[index].roles.map((e) => e.name.text.isIntrinsic.make())]),
+      ),
       DataCell(
         HStack([
           VxCapsule(
