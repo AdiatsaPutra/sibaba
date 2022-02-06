@@ -7,11 +7,15 @@ class FormFields {
     String? hint,
     bool isObscure = false,
     String? Function(String?)? validator,
+    int minLines = 1,
+    int maxLines = 1,
   }) {
     return TextFormField(
       controller: controller,
       obscureText: isObscure,
       validator: validator,
+      minLines: minLines,
+      maxLines: maxLines,
       decoration: InputDecoration(
         hintText: hint,
         border: OutlineInputBorder(

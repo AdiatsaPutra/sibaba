@@ -1,46 +1,45 @@
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
+import 'package:sibaba/applications/admin/models/kapanewon.dart';
 import 'package:sibaba/applications/admin/models/user.dart';
 import 'package:sibaba/applications/admin/exception/admin_exception.dart';
 import 'package:dartz/dartz.dart';
 import 'package:sibaba/applications/admin/repositories/admin_user_repo.dart';
+import 'package:sibaba/applications/admin/repositories/kapanewon_repo.dart';
 import 'package:sibaba/infrastructures/api.dart';
 
 import '../../../injection.dart';
 
-@Injectable(as: AdminUserRepo)
-class AdminUserImpl extends AdminUserRepo {
+@Injectable(as: KapanewonRepo)
+class KapanewonRepoImpl extends KapanewonRepo {
   String baseUrl = getIt.get(instanceName: 'baseUrl');
   final dio = Api.createDio();
   @override
-  Future<Either<AdminException, List<User>>> getUsers() async {
+  Future<Either<AdminException, List<Kapanewon>>> getKapanewon() async {
     try {
       final response = await dio.get(
-        baseUrl + "users",
+        baseUrl + "kapanewon",
       );
       if (response.statusCode != 200) {
         throw AdminException(response.data);
       }
       List data = response.data['data'];
-      final users = data.map((e) => User.fromMap(e)).toList();
-      Logger().i(users);
-      return right(users);
+      final kapanewon = data.map((e) => Kapanewon.fromMap(e)).toList();
+      return right(kapanewon);
     } catch (e) {
       return left(AdminException(e.toString()));
     }
   }
 
   @override
-  Future<Either<AdminException, void>> addUser(
-      String name, String email, String password, String role) async {
+  Future<Either<AdminException, void>> addKapanewon(
+      String name, String kode) async {
     try {
       final data = {
-        'name': name,
-        'email': email,
-        'password': password,
-        'roles': role
+        'area_name': name,
+        'kode_area': kode,
       };
-      final response = await dio.post(baseUrl + "users", data: data);
+      final response = await dio.post(baseUrl + "kapanewon", data: data);
       if (response.statusCode != 200) {
         throw AdminException(response.data);
       }
@@ -51,10 +50,31 @@ class AdminUserImpl extends AdminUserRepo {
   }
 
   @override
-  Future<Either<AdminException, void>> deleteUser(int id) async {
+  Future<Either<AdminException, void>> updateKapanewon(
+      String name, String kode, int id) async {
+    try {
+      final data = {
+        'area_name': name,
+        'kode_area': kode,
+      };
+      final response = await dio.put(
+        baseUrl + "kapanewon" + '/$id',
+        data: data,
+      );
+      if (response.statusCode != 200) {
+        throw AdminException(response.data);
+      }
+      return right(null);
+    } catch (e) {
+      return left(AdminException(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<AdminException, void>> deleteKapanewon(int id) async {
     try {
       final response = await dio.delete(
-        baseUrl + "users" + "/$id",
+        baseUrl + "kapanewon" + "/$id",
       );
       if (response.statusCode != 200) {
         throw AdminException(response.data);

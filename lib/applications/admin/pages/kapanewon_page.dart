@@ -1,86 +1,113 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:sibaba/applications/admin/bloc/kapanewon/kapanewon_cubit.dart';
+import 'package:sibaba/applications/admin/bloc/user/user_cubit.dart';
+import 'package:sibaba/applications/admin/models/kapanewon.dart';
+import 'package:sibaba/applications/admin/models/user.dart';
+import 'package:sibaba/applications/admin/widgets/kapanewon/add_kapanewon_dialog.dart';
+import 'package:sibaba/applications/admin/widgets/kapanewon/edit_kapanewon_dialog.dart';
+import 'package:sibaba/applications/admin/widgets/user/add_user_dialog.dart';
+import 'package:sibaba/applications/admin/widgets/user/edit_user_dialog.dart';
+import 'package:sibaba/injection.dart';
 import 'package:sibaba/presentation/color_constant.dart';
-import 'package:sibaba/presentation/widgets/sibaba_textfield.dart';
+import 'package:sibaba/presentation/popup_messages.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class KapanewonPage extends StatelessWidget {
-  final DataTableSource _data = MyData();
-
-  KapanewonPage({Key? key}) : super(key: key);
+  const KapanewonPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: 'Data Kapanewon'.text.xl.color(Colors.white).make(),
-        iconTheme: const IconThemeData(color: Colors.white),
-        elevation: 0,
+    return BlocProvider(
+      create: (context) => getIt<KapanewonCubit>()..getKapanewon(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: 'Data Kapanewon'.text.xl.color(Colors.white).make(),
+          iconTheme: const IconThemeData(color: Colors.white),
+          elevation: 0,
+        ),
+        resizeToAvoidBottomInset: false,
+        body: BlocConsumer<KapanewonCubit, KapanewonState>(
+          listener: (context, state) => state.maybeWhen(
+            added: () {
+              context.read<KapanewonCubit>().getKapanewon();
+              PopupMessages.successPopup('Data Kapanewon Berhasil Ditambahkan');
+            },
+            updated: () async {
+              context.read<KapanewonCubit>().getKapanewon();
+              PopupMessages.successPopup('Data Kapanewon Berhasil Diubah');
+            },
+            deleted: () async {
+              context.read<KapanewonCubit>().getKapanewon();
+              PopupMessages.successPopup('Data Kapanewon Berhasil Dihapus');
+            },
+            orElse: () {},
+          ),
+          builder: (context, state) => state.maybeWhen(
+            loading: () => const CircularProgressIndicator().centered(),
+            loaded: (kapanewon) => _KapanewonLayout(kapanewon: kapanewon),
+            orElse: () => const SizedBox(),
+          ),
+        ),
       ),
-      resizeToAvoidBottomInset: false,
-      body: VStack(
-        [
-          TextFormField(
-            controller: TextEditingController(),
-            decoration: const InputDecoration(
-              prefixIcon: Icon(Icons.search),
-              hintText: 'Search',
+    );
+  }
+}
+
+class _KapanewonLayout extends StatelessWidget {
+  final List<Kapanewon> kapanewon;
+
+  const _KapanewonLayout({Key? key, required this.kapanewon}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final cubit = context.read<KapanewonCubit>();
+    return Scaffold(
+      body: RefreshIndicator(
+        onRefresh: () async {
+          context.read<KapanewonCubit>().getKapanewon();
+        },
+        child: VStack(
+          [
+            TextFormField(
+              controller: cubit.searchKeyword,
+              decoration: const InputDecoration(
+                prefixIcon: Icon(Icons.search),
+                hintText: 'Cari Kapanewon (Nama, Kode Area)',
+                hintStyle: TextStyle(fontSize: 14),
+              ),
+              onChanged: (value) {
+                cubit.searchKapanewon();
+              },
             ),
-            onChanged: (value) {},
-          ),
-          const SizedBox(height: 10),
-          PaginatedDataTable(
-            source: _data,
-            header: 'Data Kapanewon'.text.xl.make(),
-            columns: const [
-              DataColumn(label: Text('ID')),
-              DataColumn(label: Text('Name')),
-              DataColumn(label: Text('Price'))
-            ],
-            columnSpacing: 100,
-            horizontalMargin: 10,
-            rowsPerPage: 5,
-            showCheckboxColumn: false,
-          ),
-        ],
-      ).centered().p16().scrollVertical(),
+            const SizedBox(height: 10),
+            PaginatedDataTable(
+              source: KapanewonData(context, kapanewon, cubit),
+              header: 'Data Kapanewon'.text.xl.make(),
+              columns: const [
+                DataColumn(label: Text('No')),
+                DataColumn(label: Text('Nama')),
+                DataColumn(label: Text('Kode Area')),
+                DataColumn(label: Text('Action')),
+              ],
+              columnSpacing: 50,
+              horizontalMargin: 20,
+              rowsPerPage: 5,
+              showCheckboxColumn: false,
+            ),
+            const SizedBox(height: 100),
+          ],
+        ).centered().p16().scrollVertical(),
+      ),
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: primaryColor,
         onPressed: () {
-          final res = VxDialog.showCustom(context,
-              child: Dialog(
-                insetPadding: const EdgeInsets.all(10),
-                backgroundColor: Colors.white,
-                child: VStack([
-                  'Input Kapanewon'.text.xl.bold.make().pOnly(bottom: 10),
-                  VStack([
-                    'Nama Kapanewon'.text.base.bold.make(),
-                    TextFormField()
-                        .stylized(hint: 'Masukkan Nama Kapanewon')
-                        .pOnly(bottom: 10),
-                    'Kode Kapanewon'.text.base.bold.make(),
-                    TextFormField()
-                        .stylized(hint: 'Kode Pos Kapanewon')
-                        .pOnly(bottom: 10),
-                  ]),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        OutlinedButton(
-                          onPressed: () {
-                            Navigator.pop(context, true);
-                          },
-                          child: 'Batal'.text.base.color(Colors.grey).make(),
-                        ).box.width(Get.width / 3).make(),
-                        ElevatedButton(
-                          onPressed: () {},
-                          child: 'Simpan'.text.base.make(),
-                        ).box.width(Get.width / 3).make(),
-                      ])
-                ]).p16(),
-              ));
+          cubit.clear();
+          VxDialog.showCustom(
+            context,
+            child: AddKapanewonDialog(cubit: cubit),
+          );
         },
         label: HStack([
           const Icon(Icons.add),
@@ -91,29 +118,62 @@ class KapanewonPage extends StatelessWidget {
   }
 }
 
-// The "soruce" of the table
-class MyData extends DataTableSource {
-  // Generate some made-up data
-  final List<Map<String, dynamic>> _data = List.generate(
-      200,
-      (index) => {
-            "id": index + 1,
-            "title": "Item $index",
-            "price": Random().nextInt(10000)
-          });
+class KapanewonData extends DataTableSource {
+  final BuildContext context;
+  final List<Kapanewon> kapanewon;
+  final KapanewonCubit cubit;
+  String role = '';
+
+  KapanewonData(this.context, this.kapanewon, this.cubit);
 
   @override
   bool get isRowCountApproximate => false;
   @override
-  int get rowCount => _data.length;
+  int get rowCount => kapanewon.length;
   @override
   int get selectedRowCount => 0;
   @override
   DataRow getRow(int index) {
     return DataRow(cells: [
-      DataCell(Text(_data[index]['id'].toString())),
-      DataCell(Text(_data[index]["title"])),
-      DataCell(Text(_data[index]["price"].toString())),
+      DataCell((index + 1).toString().text.isIntrinsic.make()),
+      DataCell(kapanewon[index].areaName.text.isIntrinsic.make()),
+      DataCell(kapanewon[index].kodeArea.text.isIntrinsic.make()),
+      DataCell(
+        HStack([
+          GestureDetector(
+            onTap: () {
+              VxDialog.showCustom(
+                context,
+                child: EditKapanewonDialog(
+                  cubit: cubit,
+                  kapanewon: kapanewon[index],
+                ),
+              );
+            },
+            child: VxCapsule(
+              width: 50,
+              height: 20,
+              backgroundColor: Colors.yellow,
+              child: 'Edit'.text.sm.makeCentered(),
+            ),
+          ),
+          const SizedBox(width: 10),
+          GestureDetector(
+            onTap: () {
+              PopupMessages.confirmPopup(context, () {
+                cubit.deleteKapanewon(kapanewon[index].areaId);
+                Get.back();
+              });
+            },
+            child: VxCapsule(
+              width: 50,
+              height: 20,
+              backgroundColor: Colors.red,
+              child: 'Delete'.text.sm.color(Colors.white).makeCentered(),
+            ),
+          ),
+        ]),
+      ),
     ]);
   }
 }

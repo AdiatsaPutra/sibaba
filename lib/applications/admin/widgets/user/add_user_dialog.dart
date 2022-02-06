@@ -99,6 +99,7 @@ class AddUserDialog extends StatelessWidget {
               if (cubit.key.currentState!.validate()) {
                 cubit.key.currentState!.save();
                 cubit.addUser();
+                Get.back();
               }
             },
             child: 'Simpan'.text.base.make(),

@@ -47,11 +47,15 @@ class _KontakLayout extends StatelessWidget {
                     'Alamat'.text.base.bold.make(),
                     FormFields.textFormField(
                       controller: cubit.alamat..text = infoKontak.alamat,
+                      minLines: 2,
+                      maxLines: 5,
                     ),
                     const SizedBox(height: 12),
                     'Link Maps'.text.base.bold.make(),
                     FormFields.textFormField(
                       controller: cubit.linkMaps..text = infoKontak.linkmaps,
+                      minLines: 2,
+                      maxLines: 5,
                     ),
                     const SizedBox(height: 12),
                     'Telepon'.text.base.bold.make(),

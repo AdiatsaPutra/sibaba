@@ -53,7 +53,7 @@ class UserCubit extends Cubit<UserState> {
     if (searchKeyword.text.isEmpty) {
       emit(UserState.loaded(userList));
     } else {
-      final filteredLokasi = userList
+      final filteredUser = userList
           .where((element) =>
               element.name
                   .toLowerCase()
@@ -62,7 +62,7 @@ class UserCubit extends Cubit<UserState> {
                   .toLowerCase()
                   .contains(searchKeyword.text.toLowerCase()))
           .toList();
-      emit(UserState.loaded(filteredLokasi));
+      emit(UserState.loaded(filteredUser));
     }
   }
 

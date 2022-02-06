@@ -7,6 +7,7 @@ import 'package:sibaba/applications/admin/widgets/user/add_user_dialog.dart';
 import 'package:sibaba/applications/admin/widgets/user/edit_user_dialog.dart';
 import 'package:sibaba/injection.dart';
 import 'package:sibaba/presentation/color_constant.dart';
+import 'package:sibaba/presentation/popup_messages.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class PenggunaPage extends StatelessWidget {
@@ -26,30 +27,12 @@ class PenggunaPage extends StatelessWidget {
         body: BlocConsumer<UserCubit, UserState>(
           listener: (context, state) => state.maybeWhen(
             added: () {
-              Navigator.pop(context);
               context.read<UserCubit>().getUsers();
-              Get.snackbar('Berhasil', 'Data Berhasil Pengguna Ditambahkan',
-                  backgroundColor: Colors.white,
-                  colorText: Colors.black,
-                  margin: const EdgeInsets.all(16),
-                  padding: const EdgeInsets.all(16),
-                  snackPosition: SnackPosition.BOTTOM,
-                  boxShadows: [
-                    const BoxShadow(),
-                  ]);
+              PopupMessages.successPopup('Data Pengguna Berhasil Ditambahkan');
             },
             deleted: () async {
-              Navigator.pop(context);
               context.read<UserCubit>().getUsers();
-              Get.snackbar('Berhasil', 'Data Pengguna Terhapus',
-                  backgroundColor: Colors.white,
-                  colorText: Colors.black,
-                  margin: const EdgeInsets.all(16),
-                  padding: const EdgeInsets.all(16),
-                  snackPosition: SnackPosition.BOTTOM,
-                  boxShadows: [
-                    const BoxShadow(),
-                  ]);
+              PopupMessages.successPopup('Data Pengguna Berhasil Dihapus');
             },
             orElse: () {},
           ),
@@ -83,7 +66,8 @@ class _PenggunaLayout extends StatelessWidget {
               controller: cubit.searchKeyword,
               decoration: const InputDecoration(
                 prefixIcon: Icon(Icons.search),
-                hintText: 'Search',
+                hintText: 'Cari Pengguna (Nama atau Email)',
+                hintStyle: TextStyle(fontSize: 14),
               ),
               onChanged: (value) {
                 cubit.searchUser();
@@ -175,39 +159,10 @@ class UsersData extends DataTableSource {
           const SizedBox(width: 10),
           GestureDetector(
             onTap: () {
-              showDialog(
-                context: context,
-                builder: (context) => Dialog(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: VStack([
-                    'Anda yakin akan menghapus data ini?'
-                        .text
-                        .base
-                        .isIntrinsic
-                        .makeCentered(),
-                    const SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        OutlinedButton(
-                          onPressed: () {
-                            Get.back();
-                          },
-                          child: 'Batal'.text.base.make(),
-                        ).box.width(100).make(),
-                        ElevatedButton(
-                          onPressed: () {
-                            cubit.deleteUser(users[index].id);
-                          },
-                          child: 'Hapus'.text.base.make(),
-                        ).box.width(100).make(),
-                      ],
-                    )
-                  ]).p16(),
-                ),
-              );
+              PopupMessages.confirmPopup(context, () {
+                cubit.deleteUser(users[index].id);
+                Get.back();
+              });
             },
             child: VxCapsule(
               width: 50,
