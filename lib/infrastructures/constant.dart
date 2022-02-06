@@ -10,7 +10,7 @@ const List<String> listHari = [
   'sabtu',
 ];
 const List<String> roles = [
-  'Superadmin',
-  'Admin',
-  'Guest',
+  'superadmin',
+  'admin',
+  'guest',
 ];

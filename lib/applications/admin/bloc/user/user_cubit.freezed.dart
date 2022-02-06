@@ -31,6 +31,14 @@ class _$UserStateTearOff {
     );
   }
 
+  _Added added() {
+    return const _Added();
+  }
+
+  _Deleted deleted() {
+    return const _Deleted();
+  }
+
   _Error error(String message) {
     return _Error(
       message,
@@ -48,6 +56,8 @@ mixin _$UserState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<User> users) loaded,
+    required TResult Function() added,
+    required TResult Function() deleted,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -56,6 +66,8 @@ mixin _$UserState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<User> users)? loaded,
+    TResult Function()? added,
+    TResult Function()? deleted,
     TResult Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -64,6 +76,8 @@ mixin _$UserState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<User> users)? loaded,
+    TResult Function()? added,
+    TResult Function()? deleted,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -73,6 +87,8 @@ mixin _$UserState {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Added value) added,
+    required TResult Function(_Deleted value) deleted,
     required TResult Function(_Error value) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -81,6 +97,8 @@ mixin _$UserState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Added value)? added,
+    TResult Function(_Deleted value)? deleted,
     TResult Function(_Error value)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -89,6 +107,8 @@ mixin _$UserState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Added value)? added,
+    TResult Function(_Deleted value)? deleted,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) =>
@@ -151,6 +171,8 @@ class _$_Initial implements _Initial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<User> users) loaded,
+    required TResult Function() added,
+    required TResult Function() deleted,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -162,6 +184,8 @@ class _$_Initial implements _Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<User> users)? loaded,
+    TResult Function()? added,
+    TResult Function()? deleted,
     TResult Function(String message)? error,
   }) {
     return initial?.call();
@@ -173,6 +197,8 @@ class _$_Initial implements _Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<User> users)? loaded,
+    TResult Function()? added,
+    TResult Function()? deleted,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -188,6 +214,8 @@ class _$_Initial implements _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Added value) added,
+    required TResult Function(_Deleted value) deleted,
     required TResult Function(_Error value) error,
   }) {
     return initial(this);
@@ -199,6 +227,8 @@ class _$_Initial implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Added value)? added,
+    TResult Function(_Deleted value)? deleted,
     TResult Function(_Error value)? error,
   }) {
     return initial?.call(this);
@@ -210,6 +240,8 @@ class _$_Initial implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Added value)? added,
+    TResult Function(_Deleted value)? deleted,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -265,6 +297,8 @@ class _$_Loading implements _Loading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<User> users) loaded,
+    required TResult Function() added,
+    required TResult Function() deleted,
     required TResult Function(String message) error,
   }) {
     return loading();
@@ -276,6 +310,8 @@ class _$_Loading implements _Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<User> users)? loaded,
+    TResult Function()? added,
+    TResult Function()? deleted,
     TResult Function(String message)? error,
   }) {
     return loading?.call();
@@ -287,6 +323,8 @@ class _$_Loading implements _Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<User> users)? loaded,
+    TResult Function()? added,
+    TResult Function()? deleted,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -302,6 +340,8 @@ class _$_Loading implements _Loading {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Added value) added,
+    required TResult Function(_Deleted value) deleted,
     required TResult Function(_Error value) error,
   }) {
     return loading(this);
@@ -313,6 +353,8 @@ class _$_Loading implements _Loading {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Added value)? added,
+    TResult Function(_Deleted value)? deleted,
     TResult Function(_Error value)? error,
   }) {
     return loading?.call(this);
@@ -324,6 +366,8 @@ class _$_Loading implements _Loading {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Added value)? added,
+    TResult Function(_Deleted value)? deleted,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -403,6 +447,8 @@ class _$_Loaded implements _Loaded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<User> users) loaded,
+    required TResult Function() added,
+    required TResult Function() deleted,
     required TResult Function(String message) error,
   }) {
     return loaded(users);
@@ -414,6 +460,8 @@ class _$_Loaded implements _Loaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<User> users)? loaded,
+    TResult Function()? added,
+    TResult Function()? deleted,
     TResult Function(String message)? error,
   }) {
     return loaded?.call(users);
@@ -425,6 +473,8 @@ class _$_Loaded implements _Loaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<User> users)? loaded,
+    TResult Function()? added,
+    TResult Function()? deleted,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -440,6 +490,8 @@ class _$_Loaded implements _Loaded {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Added value) added,
+    required TResult Function(_Deleted value) deleted,
     required TResult Function(_Error value) error,
   }) {
     return loaded(this);
@@ -451,6 +503,8 @@ class _$_Loaded implements _Loaded {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Added value)? added,
+    TResult Function(_Deleted value)? deleted,
     TResult Function(_Error value)? error,
   }) {
     return loaded?.call(this);
@@ -462,6 +516,8 @@ class _$_Loaded implements _Loaded {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Added value)? added,
+    TResult Function(_Deleted value)? deleted,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -478,6 +534,258 @@ abstract class _Loaded implements UserState {
   List<User> get users;
   @JsonKey(ignore: true)
   _$LoadedCopyWith<_Loaded> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$AddedCopyWith<$Res> {
+  factory _$AddedCopyWith(_Added value, $Res Function(_Added) then) =
+      __$AddedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$AddedCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
+    implements _$AddedCopyWith<$Res> {
+  __$AddedCopyWithImpl(_Added _value, $Res Function(_Added) _then)
+      : super(_value, (v) => _then(v as _Added));
+
+  @override
+  _Added get _value => super._value as _Added;
+}
+
+/// @nodoc
+
+class _$_Added implements _Added {
+  const _$_Added();
+
+  @override
+  String toString() {
+    return 'UserState.added()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _Added);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<User> users) loaded,
+    required TResult Function() added,
+    required TResult Function() deleted,
+    required TResult Function(String message) error,
+  }) {
+    return added();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<User> users)? loaded,
+    TResult Function()? added,
+    TResult Function()? deleted,
+    TResult Function(String message)? error,
+  }) {
+    return added?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<User> users)? loaded,
+    TResult Function()? added,
+    TResult Function()? deleted,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (added != null) {
+      return added();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Added value) added,
+    required TResult Function(_Deleted value) deleted,
+    required TResult Function(_Error value) error,
+  }) {
+    return added(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_Added value)? added,
+    TResult Function(_Deleted value)? deleted,
+    TResult Function(_Error value)? error,
+  }) {
+    return added?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_Added value)? added,
+    TResult Function(_Deleted value)? deleted,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (added != null) {
+      return added(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Added implements UserState {
+  const factory _Added() = _$_Added;
+}
+
+/// @nodoc
+abstract class _$DeletedCopyWith<$Res> {
+  factory _$DeletedCopyWith(_Deleted value, $Res Function(_Deleted) then) =
+      __$DeletedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$DeletedCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
+    implements _$DeletedCopyWith<$Res> {
+  __$DeletedCopyWithImpl(_Deleted _value, $Res Function(_Deleted) _then)
+      : super(_value, (v) => _then(v as _Deleted));
+
+  @override
+  _Deleted get _value => super._value as _Deleted;
+}
+
+/// @nodoc
+
+class _$_Deleted implements _Deleted {
+  const _$_Deleted();
+
+  @override
+  String toString() {
+    return 'UserState.deleted()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _Deleted);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<User> users) loaded,
+    required TResult Function() added,
+    required TResult Function() deleted,
+    required TResult Function(String message) error,
+  }) {
+    return deleted();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<User> users)? loaded,
+    TResult Function()? added,
+    TResult Function()? deleted,
+    TResult Function(String message)? error,
+  }) {
+    return deleted?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<User> users)? loaded,
+    TResult Function()? added,
+    TResult Function()? deleted,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (deleted != null) {
+      return deleted();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Added value) added,
+    required TResult Function(_Deleted value) deleted,
+    required TResult Function(_Error value) error,
+  }) {
+    return deleted(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_Added value)? added,
+    TResult Function(_Deleted value)? deleted,
+    TResult Function(_Error value)? error,
+  }) {
+    return deleted?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_Added value)? added,
+    TResult Function(_Deleted value)? deleted,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (deleted != null) {
+      return deleted(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Deleted implements UserState {
+  const factory _Deleted() = _$_Deleted;
 }
 
 /// @nodoc
@@ -545,6 +853,8 @@ class _$_Error implements _Error {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<User> users) loaded,
+    required TResult Function() added,
+    required TResult Function() deleted,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -556,6 +866,8 @@ class _$_Error implements _Error {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<User> users)? loaded,
+    TResult Function()? added,
+    TResult Function()? deleted,
     TResult Function(String message)? error,
   }) {
     return error?.call(message);
@@ -567,6 +879,8 @@ class _$_Error implements _Error {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<User> users)? loaded,
+    TResult Function()? added,
+    TResult Function()? deleted,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -582,6 +896,8 @@ class _$_Error implements _Error {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Added value) added,
+    required TResult Function(_Deleted value) deleted,
     required TResult Function(_Error value) error,
   }) {
     return error(this);
@@ -593,6 +909,8 @@ class _$_Error implements _Error {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Added value)? added,
+    TResult Function(_Deleted value)? deleted,
     TResult Function(_Error value)? error,
   }) {
     return error?.call(this);
@@ -604,6 +922,8 @@ class _$_Error implements _Error {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Added value)? added,
+    TResult Function(_Deleted value)? deleted,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {

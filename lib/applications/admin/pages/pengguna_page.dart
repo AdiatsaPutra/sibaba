@@ -3,9 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:sibaba/applications/admin/bloc/user/user_cubit.dart';
 import 'package:sibaba/applications/admin/models/user.dart';
+import 'package:sibaba/applications/admin/widgets/user/add_user_dialog.dart';
+import 'package:sibaba/applications/admin/widgets/user/edit_user_dialog.dart';
 import 'package:sibaba/injection.dart';
 import 'package:sibaba/presentation/color_constant.dart';
-import 'package:sibaba/presentation/widgets/sibaba_textfield.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class PenggunaPage extends StatelessWidget {
@@ -22,7 +23,36 @@ class PenggunaPage extends StatelessWidget {
           elevation: 0,
         ),
         resizeToAvoidBottomInset: false,
-        body: BlocBuilder<UserCubit, UserState>(
+        body: BlocConsumer<UserCubit, UserState>(
+          listener: (context, state) => state.maybeWhen(
+            added: () {
+              Navigator.pop(context);
+              context.read<UserCubit>().getUsers();
+              Get.snackbar('Berhasil', 'Data Berhasil Pengguna Ditambahkan',
+                  backgroundColor: Colors.white,
+                  colorText: Colors.black,
+                  margin: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(16),
+                  snackPosition: SnackPosition.BOTTOM,
+                  boxShadows: [
+                    const BoxShadow(),
+                  ]);
+            },
+            deleted: () async {
+              Navigator.pop(context);
+              context.read<UserCubit>().getUsers();
+              Get.snackbar('Berhasil', 'Data Pengguna Terhapus',
+                  backgroundColor: Colors.white,
+                  colorText: Colors.black,
+                  margin: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(16),
+                  snackPosition: SnackPosition.BOTTOM,
+                  boxShadows: [
+                    const BoxShadow(),
+                  ]);
+            },
+            orElse: () {},
+          ),
           builder: (context, state) => state.maybeWhen(
             loading: () => const CircularProgressIndicator().centered(),
             loaded: (users) => _PenggunaLayout(users: users),
@@ -41,78 +71,53 @@ class _PenggunaLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<UserCubit>();
     return Scaffold(
-      body: VStack(
-        [
-          TextFormField(
-            controller: TextEditingController(),
-            decoration: const InputDecoration(
-              prefixIcon: Icon(Icons.search),
-              hintText: 'Search',
+      body: RefreshIndicator(
+        onRefresh: () async {
+          context.read<UserCubit>().getUsers();
+        },
+        child: VStack(
+          [
+            TextFormField(
+              controller: cubit.searchKeyword,
+              decoration: const InputDecoration(
+                prefixIcon: Icon(Icons.search),
+                hintText: 'Search',
+              ),
+              onChanged: (value) {
+                cubit.searchUser();
+              },
             ),
-            onChanged: (value) {},
-          ),
-          const SizedBox(height: 10),
-          PaginatedDataTable(
-            source: UsersData(users),
-            header: 'Data Pengguna'.text.xl.make(),
-            columns: const [
-              DataColumn(label: Text('No')),
-              DataColumn(label: Text('ID')),
-              DataColumn(label: Text('Name')),
-              DataColumn(label: Text('Email')),
-              DataColumn(label: Text('Role')),
-              DataColumn(label: Text('Action')),
-            ],
-            columnSpacing: 50,
-            horizontalMargin: 20,
-            rowsPerPage: 20,
-            showCheckboxColumn: false,
-          ),
-          const SizedBox(height: 100),
-        ],
-      ).centered().p16().scrollVertical(),
+            const SizedBox(height: 10),
+            PaginatedDataTable(
+              source: UsersData(context, users, cubit),
+              header: 'Data Pengguna'.text.xl.make(),
+              columns: const [
+                DataColumn(label: Text('No')),
+                DataColumn(label: Text('ID')),
+                DataColumn(label: Text('Name')),
+                DataColumn(label: Text('Email')),
+                DataColumn(label: Text('Role')),
+                DataColumn(label: Text('Action')),
+              ],
+              columnSpacing: 50,
+              horizontalMargin: 20,
+              rowsPerPage: 5,
+              showCheckboxColumn: false,
+            ),
+            const SizedBox(height: 100),
+          ],
+        ).centered().p16().scrollVertical(),
+      ),
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: primaryColor,
         onPressed: () {
-          final res = VxDialog.showCustom(context,
-              child: Dialog(
-                insetPadding: const EdgeInsets.all(10),
-                backgroundColor: Colors.white,
-                child: VStack([
-                  'Input Data Unit'.text.xl.bold.make().pOnly(bottom: 10),
-                  VStack([
-                    const SizedBox(height: 10),
-                    'Pilih Kapanawon'.text.base.bold.make(),
-                    DropdownButtonFormField<String>(
-                      hint:
-                          'Pilih Kapanewon'.text.base.color(Colors.grey).make(),
-                      items: [],
-                      onChanged: (e) {},
-                    ),
-                    const SizedBox(height: 10),
-                    'Nama Kelurahan'.text.base.bold.make(),
-                    TextFormField()
-                        .stylized(hint: 'Masukkan Nama Kelurahan')
-                        .pOnly(bottom: 10),
-                  ]),
-                  const SizedBox(height: 10),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        OutlinedButton(
-                          onPressed: () {
-                            Navigator.pop(context, true);
-                          },
-                          child: 'Batal'.text.base.color(Colors.grey).make(),
-                        ).box.width(Get.width / 3).make(),
-                        ElevatedButton(
-                          onPressed: () {},
-                          child: 'Simpan'.text.base.make(),
-                        ).box.width(Get.width / 3).make(),
-                      ])
-                ]).p16(),
-              ));
+          cubit.clear();
+          VxDialog.showCustom(
+            context,
+            child: AddUserDialog(cubit: cubit),
+          );
         },
         label: HStack([
           const Icon(Icons.add),
@@ -124,9 +129,12 @@ class _PenggunaLayout extends StatelessWidget {
 }
 
 class UsersData extends DataTableSource {
+  final BuildContext context;
   final List<User> users;
+  final UserCubit cubit;
+  String role = '';
 
-  UsersData(this.users);
+  UsersData(this.context, this.users, this.cubit);
 
   @override
   bool get isRowCountApproximate => false;
@@ -147,18 +155,66 @@ class UsersData extends DataTableSource {
       ),
       DataCell(
         HStack([
-          VxCapsule(
-            width: 50,
-            height: 20,
-            backgroundColor: Colors.yellow,
-            child: 'Edit'.text.sm.makeCentered(),
+          GestureDetector(
+            onTap: () {
+              VxDialog.showCustom(
+                context,
+                child: EditUserDialog(
+                  cubit: cubit,
+                  user: users[index],
+                ),
+              );
+            },
+            child: VxCapsule(
+              width: 50,
+              height: 20,
+              backgroundColor: Colors.yellow,
+              child: 'Edit'.text.sm.makeCentered(),
+            ),
           ),
           const SizedBox(width: 10),
-          VxCapsule(
-            width: 50,
-            height: 20,
-            backgroundColor: Colors.red,
-            child: 'Delete'.text.sm.color(Colors.white).makeCentered(),
+          GestureDetector(
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (context) => Dialog(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: VStack([
+                    'Anda yakin akan menghapus data ini?'
+                        .text
+                        .base
+                        .isIntrinsic
+                        .makeCentered(),
+                    const SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        OutlinedButton(
+                          onPressed: () {
+                            Get.back();
+                          },
+                          child: 'Batal'.text.base.make(),
+                        ).box.width(100).make(),
+                        ElevatedButton(
+                          onPressed: () {
+                            cubit.deleteUser(users[index].id);
+                          },
+                          child: 'Hapus'.text.base.make(),
+                        ).box.width(100).make(),
+                      ],
+                    )
+                  ]).p16(),
+                ),
+              );
+            },
+            child: VxCapsule(
+              width: 50,
+              height: 20,
+              backgroundColor: Colors.red,
+              child: 'Delete'.text.sm.color(Colors.white).makeCentered(),
+            ),
           ),
         ]),
       ),

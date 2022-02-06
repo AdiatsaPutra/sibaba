@@ -22,7 +22,7 @@ class KategoriItem extends StatelessWidget {
           VxBox(child: Icon(icon, size: 35))
               .width(50)
               .height(50)
-              .color(const Color(0xFF6C63FF).withOpacity(0.1))
+              .color(Colors.grey.withOpacity(0.1))
               .rounded
               .make(),
           const SizedBox(height: 10),
