@@ -159,7 +159,7 @@ class UsersData extends DataTableSource {
           const SizedBox(width: 10),
           GestureDetector(
             onTap: () {
-              PopupMessages.confirmPopup(context, () {
+              PopupMessages.confirmDeletePopup(context, () {
                 cubit.deleteUser(users[index].id);
                 Get.back();
               });

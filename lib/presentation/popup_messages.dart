@@ -15,7 +15,19 @@ class PopupMessages {
         ]);
   }
 
-  static confirmPopup(BuildContext context, VoidCallback onTap) {
+  static errorPopup(String message) {
+    Get.snackbar('Gagal', message,
+        backgroundColor: Colors.red,
+        colorText: Colors.black,
+        margin: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
+        snackPosition: SnackPosition.BOTTOM,
+        boxShadows: [
+          const BoxShadow(),
+        ]);
+  }
+
+  static confirmDeletePopup(BuildContext context, VoidCallback onTap) {
     showDialog(
       context: context,
       builder: (context) => Dialog(

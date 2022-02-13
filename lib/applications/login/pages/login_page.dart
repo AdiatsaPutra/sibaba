@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:sibaba/applications/admin/pages/dashboard_page.dart';
+import 'package:sibaba/applications/login/bloc/login/login_cubit.dart';
+import 'package:sibaba/presentation/popup_messages.dart';
+import 'package:sibaba/presentation/widgets/custom_appbar.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class LoginPage extends StatelessWidget {
@@ -8,11 +12,11 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<LoginCubit>();
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
+      appBar: const CustomAppbar(
+        title: 'Login',
         elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: VStack([
         Image.asset('assets/logo.png')
@@ -21,12 +25,12 @@ class LoginPage extends StatelessWidget {
             .height(Get.height / 3)
             .makeCentered(),
         Form(
-          key: GlobalKey<FormState>(),
+          key: cubit.key,
           child: VStack([
             const SizedBox(height: 10),
             'Email'.text.base.bold.make(),
             TextFormField(
-              controller: TextEditingController(),
+              controller: cubit.email,
               decoration: const InputDecoration(hintText: 'Masukkan Email'),
               keyboardType: TextInputType.emailAddress,
               validator: (value) {
@@ -38,20 +42,45 @@ class LoginPage extends StatelessWidget {
             const SizedBox(height: 10),
             'Password'.text.base.bold.make(),
             TextFormField(
-              controller: TextEditingController(),
-              decoration: const InputDecoration(hintText: 'Masukkan Pesan'),
+              controller: cubit.password,
+              decoration: const InputDecoration(hintText: 'Masukkan Password'),
               validator: (value) {
                 if (value == "") {
-                  return 'Masukkan Pesan';
+                  return 'Masukkan Password';
                 }
               },
             ),
             const SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: () {
-                Get.to(() => const DashboardPage());
-              },
-              child: 'Masuk'.text.color(Colors.white).base.make(),
+            BlocConsumer<LoginCubit, LoginState>(
+              listener: (context, state) => state.maybeWhen(
+                loaded: (user) {
+                  cubit.setUser(user);
+                  Get.to(() => const DashboardPage());
+                },
+                error: (message) =>
+                    PopupMessages.errorPopup('Periksa data anda'),
+                orElse: () {},
+              ),
+              builder: (context, state) => state.maybeWhen(
+                loading: () => ElevatedButton(
+                  onPressed: null,
+                  child: const CircularProgressIndicator()
+                      .centered()
+                      .box
+                      .width(20)
+                      .height(20)
+                      .make(),
+                ),
+                orElse: () => ElevatedButton(
+                  onPressed: () {
+                    if (cubit.key.currentState!.validate()) {
+                      cubit.key.currentState!.save();
+                      cubit.login();
+                    }
+                  },
+                  child: 'Masuk'.text.color(Colors.white).base.make(),
+                ),
+              ),
             )
           ]).p16(),
         )

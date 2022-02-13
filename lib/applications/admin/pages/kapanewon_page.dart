@@ -160,7 +160,7 @@ class KapanewonData extends DataTableSource {
           const SizedBox(width: 10),
           GestureDetector(
             onTap: () {
-              PopupMessages.confirmPopup(context, () {
+              PopupMessages.confirmDeletePopup(context, () {
                 cubit.deleteKapanewon(kapanewon[index].areaId);
                 Get.back();
               });

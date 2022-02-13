@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:sibaba/applications/login/bloc/login/login_cubit.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class UserProfil extends StatelessWidget {
@@ -7,6 +9,7 @@ class UserProfil extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<LoginCubit>();
     return Scaffold(
       appBar: AppBar(
         title: 'Edit Profil'.text.base.color(Colors.white).make(),
