@@ -1,12 +1,8 @@
-import 'dart:io';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:logger/logger.dart';
 import 'package:sibaba/applications/login/exceptions/login_exceptions.dart';
 import 'package:sibaba/applications/admin/models/user.dart';
-import 'package:sibaba/applications/login/models/user_sibaba.dart';
 import 'package:sibaba/applications/login/repositories/login_repo.dart';
 import 'package:sibaba/infrastructures/api.dart';
 
@@ -17,7 +13,7 @@ class LoginRepoImpl extends LoginRepo {
   String baseUrl = getIt.get(instanceName: 'baseUrl');
   final dio = Api.createDio();
   @override
-  Future<Either<LoginException, UserSibaba>> login(
+  Future<Either<LoginException, User>> login(
       String email, String password) async {
     try {
       final parameters = {"email": email, "password": password};
@@ -36,7 +32,7 @@ class LoginRepoImpl extends LoginRepo {
         throw LoginException(response.data['message']);
       }
       final data = response.data['data'];
-      final user = UserSibaba.fromMap(data);
+      final user = User.fromMap(data);
       return right(user);
     } catch (e) {
       return left(LoginException(e.toString()));

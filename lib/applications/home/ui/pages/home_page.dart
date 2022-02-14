@@ -91,7 +91,7 @@ class HomePage extends StatelessWidget {
                   imagePath: 'assets/sign_in.png',
                   title: 'Sign In',
                   onTap: () {
-                    Get.to(() => const LoginPage());
+                    Get.to(() => LoginPage());
                   },
                 ),
               ])

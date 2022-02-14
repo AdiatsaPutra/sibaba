@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sibaba/applications/admin/models/user.dart';
-import 'package:sibaba/applications/login/models/user_sibaba.dart';
 import 'package:sibaba/applications/login/repositories/login_repo.dart';
 
 part 'login_state.dart';
@@ -19,7 +18,7 @@ class LoginCubit extends Cubit<LoginState> {
 
   final searchKeyword = TextEditingController();
 
-  UserSibaba user = UserSibaba(
+  User user = User(
     id: 0,
     name: '',
     userSlug: '',
@@ -27,12 +26,11 @@ class LoginCubit extends Cubit<LoginState> {
     emailVerifiedAt: '',
     createdAt: DateTime.now(),
     updatedAt: DateTime.now(),
+    roles: [],
   );
 
   final email = TextEditingController();
   final password = TextEditingController();
-
-  String role = '';
 
   void login() async {
     emit(const LoginState.loading());
@@ -46,7 +44,7 @@ class LoginCubit extends Cubit<LoginState> {
     );
   }
 
-  void setUser(UserSibaba u) {
+  void setUser(User u) {
     user = u;
   }
 
