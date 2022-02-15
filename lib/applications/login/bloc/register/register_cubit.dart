@@ -5,18 +5,16 @@ import 'package:injectable/injectable.dart';
 import 'package:sibaba/applications/admin/models/user.dart';
 import 'package:sibaba/applications/login/repositories/login_repo.dart';
 
-part 'login_state.dart';
-part 'login_cubit.freezed.dart';
+part 'register_state.dart';
+part 'register_cubit.freezed.dart';
 
 @injectable
-class LoginCubit extends Cubit<LoginState> {
-  LoginCubit(this._loginRepo) : super(const LoginState.initial());
+class RegisterCubit extends Cubit<RegisterState> {
+  RegisterCubit(this._loginRepo) : super(const RegisterState.initial());
 
   final LoginRepo _loginRepo;
 
   final key = GlobalKey<FormState>();
-
-  final searchKeyword = TextEditingController();
 
   User user = User(
     id: 0,
@@ -29,29 +27,34 @@ class LoginCubit extends Cubit<LoginState> {
     roles: [],
   );
 
+  final name = TextEditingController();
   final email = TextEditingController();
   final password = TextEditingController();
+  final confirmPassword = TextEditingController();
 
-  void login() async {
-    emit(const LoginState.loading());
-    final login = await _loginRepo.login(email.text, password.text);
+  void register() async {
+    emit(const RegisterState.loading());
+    final login =
+        await _loginRepo.register(name.text, email.text, password.text);
     login.fold(
-      (l) => emit(LoginState.error(l.message)),
+      (l) => emit(RegisterState.error(l.message)),
       (r) {
         user = r;
-        emit(LoginState.loaded(user));
+        emit(RegisterState.loaded(user));
       },
     );
   }
 
   void clear() {
+    name.clear();
     email.clear();
     password.clear();
+    confirmPassword.clear();
   }
 
   @override
   void onError(Object error, StackTrace stackTrace) {
-    LoginState.error(error.toString());
+    RegisterState.error(error.toString());
     super.onError(error, stackTrace);
   }
 }

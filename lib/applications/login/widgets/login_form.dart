@@ -47,8 +47,8 @@ class LoginForm extends StatelessWidget {
         BlocConsumer<LoginCubit, LoginState>(
           listener: (context, state) => state.maybeWhen(
             loaded: (user) {
-              cubit.setUser(user);
-              Get.to(() => const DashboardPage());
+              cubit.clear();
+              Get.to(() => DashboardPage(user: user));
             },
             error: (message) => PopupMessages.errorPopup('Periksa data anda'),
             orElse: () {},

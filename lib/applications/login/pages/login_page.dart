@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:sibaba/applications/admin/pages/dashboard_page.dart';
 import 'package:sibaba/applications/login/bloc/login/login_cubit.dart';
+import 'package:sibaba/applications/login/bloc/register/register_cubit.dart';
 import 'package:sibaba/applications/login/widgets/login_form.dart';
 import 'package:sibaba/applications/login/widgets/register_form.dart';
-import 'package:sibaba/presentation/color_constant.dart';
-import 'package:sibaba/presentation/popup_messages.dart';
 import 'package:sibaba/presentation/widgets/custom_appbar.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -15,7 +13,8 @@ class LoginPage extends StatelessWidget {
   final PageController pageController = PageController();
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<LoginCubit>();
+    final login = context.read<LoginCubit>();
+    final register = context.read<RegisterCubit>();
     return Scaffold(
       appBar: const CustomAppbar(
         title: 'Login',
@@ -31,7 +30,7 @@ class LoginPage extends StatelessWidget {
           controller: pageController,
           children: [
             LoginForm(
-              cubit: cubit,
+              cubit: login,
               onTap: () {
                 if (pageController.hasClients) {
                   pageController.animateToPage(
@@ -43,7 +42,7 @@ class LoginPage extends StatelessWidget {
               },
             ),
             RegisterForm(
-              cubit: cubit,
+              cubit: register,
               onTap: () {
                 if (pageController.hasClients) {
                   pageController.animateToPage(
@@ -55,7 +54,7 @@ class LoginPage extends StatelessWidget {
               },
             )
           ],
-        ).box.height(Get.height / 2).make()
+        ).box.height(Get.height / 1.5).make()
       ]).scrollVertical(),
     );
   }

@@ -1,29 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:sibaba/applications/admin/models/user.dart';
 import 'package:sibaba/applications/admin/pages/user_profil.dart';
 import 'package:sibaba/applications/admin/widgets/admin_dashboard_info.dart';
 import 'package:sibaba/applications/admin/widgets/admin_menu.dart';
 import 'package:sibaba/applications/admin/widgets/guest_menu.dart';
 import 'package:sibaba/applications/admin/widgets/superadmin_menu.dart';
-import 'package:sibaba/applications/login/bloc/login/login_cubit.dart';
 
 import 'package:velocity_x/velocity_x.dart';
 
 class DashboardPage extends StatelessWidget {
-  const DashboardPage({Key? key}) : super(key: key);
+  final User user;
+
+  const DashboardPage({Key? key, required this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final user = context.read<LoginCubit>();
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: 'Selamat Datang, ${user.user.name}'
-            .text
-            .color(Colors.white)
-            .xl
-            .make(),
+        title:
+            'Selamat Datang, ${user.name}'.text.color(Colors.white).xl.make(),
         titleTextStyle: const TextStyle(fontWeight: FontWeight.bold),
         elevation: 0,
         actions: [
@@ -48,20 +45,20 @@ class DashboardPage extends StatelessWidget {
       body: ZStack([
         VStack([
           VStack([
-            ...context.read<LoginCubit>().user.roles.map(
-                  (e) => e.name == 'superadmin'
-                      ? SizedBox(height: Get.height / 5.7)
-                      : const SizedBox(),
-                ),
+            ...user.roles.map(
+              (e) => e.name == 'superadmin'
+                  ? SizedBox(height: Get.height / 5.7)
+                  : const SizedBox(),
+            ),
           ]),
           VStack([
-            ...context.read<LoginCubit>().user.roles.map(
-                  (e) => e.name == 'superadmin'
-                      ? const SuperadminMenu()
-                      : e.name == 'admin'
-                          ? const AdminMenu()
-                          : const GuestMenu(),
-                ),
+            ...user.roles.map(
+              (e) => e.name == 'superadmin'
+                  ? const SuperadminMenu()
+                  : e.name == 'admin'
+                      ? const AdminMenu()
+                      : const GuestMenu(),
+            ),
           ]),
           // 'Lokasi Unit'.text.xl.bold.make(),
           // const SizedBox(height: 20),
@@ -78,23 +75,23 @@ class DashboardPage extends StatelessWidget {
           //     .make(),
         ]).p20().scrollVertical(),
         VStack([
-          ...context.read<LoginCubit>().user.roles.map(
-                (e) => e.name == 'superadmin'
-                    ? VxBox()
-                        .width(Get.width)
-                        .height(60)
-                        .color(Theme.of(context).primaryColor)
-                        .bottomRounded(value: 15)
-                        .make()
-                    : const SizedBox(),
-              ),
+          ...user.roles.map(
+            (e) => e.name == 'superadmin'
+                ? VxBox()
+                    .width(Get.width)
+                    .height(60)
+                    .color(Theme.of(context).primaryColor)
+                    .bottomRounded(value: 15)
+                    .make()
+                : const SizedBox(),
+          ),
         ]),
         VStack([
-          ...context.read<LoginCubit>().user.roles.map(
-                (e) => e.name == 'superadmin'
-                    ? const AdminDashboardInfo()
-                    : const SizedBox(),
-              ),
+          ...user.roles.map(
+            (e) => e.name == 'superadmin'
+                ? const AdminDashboardInfo()
+                : const SizedBox(),
+          ),
         ]),
       ]),
     );

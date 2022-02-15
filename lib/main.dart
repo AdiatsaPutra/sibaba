@@ -9,6 +9,7 @@ import 'package:sibaba/injection.dart';
 import 'package:sibaba/presentation/theme.dart';
 
 import 'applications/login/bloc/login/login_cubit.dart';
+import 'applications/login/bloc/register/register_cubit.dart';
 
 void main() {
   setupLogging();
@@ -31,8 +32,15 @@ class Sibaba extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<LoginCubit>(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => getIt<LoginCubit>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<RegisterCubit>(),
+        ),
+      ],
       child: GetMaterialApp(
         theme: theme(),
         home: const HomePage(),

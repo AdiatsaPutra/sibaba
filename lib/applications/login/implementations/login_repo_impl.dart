@@ -38,4 +38,31 @@ class LoginRepoImpl extends LoginRepo {
       return left(LoginException(e.toString()));
     }
   }
+
+  @override
+  Future<Either<LoginException, User>> register(
+      String name, String email, String password) async {
+    try {
+      final parameters = {"name": name, "email": email, "password": password};
+      final response = await dio.post(
+        baseUrl + "register",
+        data: parameters,
+        options: Options(
+          headers: {'Content-Type': 'application/json'},
+          followRedirects: false,
+          validateStatus: (status) {
+            return status! < 500;
+          },
+        ),
+      );
+      if (response.statusCode != 200) {
+        throw LoginException(response.data['message']);
+      }
+      final data = response.data['data'];
+      final user = User.fromMap(data);
+      return right(user);
+    } catch (e) {
+      return left(LoginException(e.toString()));
+    }
+  }
 }
