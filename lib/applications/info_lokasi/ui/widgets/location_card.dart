@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sibaba/applications/info_lokasi/model/location.dart';
+import 'package:sibaba/applications/info_lokasi/ui/pages/location_detail_page.dart';
 import 'package:sibaba/infrastructures/extensions.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -13,9 +14,7 @@ class LocationCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Get.to(() => DetailLokasiPage(
-        //       slug: slug,
-        //     ));
+        Get.to(() => LocationDetailPage(slug: location.locSlug!));
       },
       child: VxBox(
         child: VStack(

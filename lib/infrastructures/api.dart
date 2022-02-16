@@ -9,9 +9,6 @@ class Api {
   static Dio createDio() {
     var dio = Dio(BaseOptions(
       baseUrl: getIt.get(instanceName: 'baseUrl'),
-      receiveTimeout: 15000,
-      connectTimeout: 15000,
-      sendTimeout: 15000,
     ));
 
     dio.interceptors.add(PrettyDioLogger(

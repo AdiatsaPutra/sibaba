@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sibaba/applications/info_lokasi/model/location.dart';
+import 'package:sibaba/applications/info_lokasi/model/location_detail.dart';
 import 'package:sibaba/applications/info_lokasi/repository/location_repo.dart';
 
 part 'info_lokasi_state.dart';
@@ -18,6 +19,7 @@ class InfoLokasiCubit extends Cubit<InfoLokasiState> {
   final searchKeyword = TextEditingController();
 
   void getLocations() async {
+    emit(const InfoLokasiState.loading());
     final locations = await _locationRepo.getLocations();
     locations.fold(
       (l) => locationList.clear(),
@@ -40,6 +42,15 @@ class InfoLokasiCubit extends Cubit<InfoLokasiState> {
           .toList();
       emit(InfoLokasiState.loaded(filteredLokasi));
     }
+  }
+
+  void getLocationDetail(String slug) async {
+    emit(const InfoLokasiState.loading());
+    final locationDetail = await _locationRepo.getLocationDetail(slug);
+    locationDetail.fold(
+      (l) => emit(InfoLokasiState.error(l.message)),
+      (r) => emit(InfoLokasiState.detailLoaded(r)),
+    );
   }
 
   @override

@@ -26,7 +26,7 @@ class DashboardPage extends StatelessWidget {
         actions: [
           GestureDetector(
             onTap: () {
-              Get.to(() => const UserProfil());
+              Get.to(() => UserProfilPage(user: user));
             },
             child: VxBox(
               child: const Icon(

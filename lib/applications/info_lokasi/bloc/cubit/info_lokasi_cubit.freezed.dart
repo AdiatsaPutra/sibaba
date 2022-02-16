@@ -31,6 +31,12 @@ class _$InfoLokasiStateTearOff {
     );
   }
 
+  _DetailLoaded detailLoaded(LocationDetail location) {
+    return _DetailLoaded(
+      location,
+    );
+  }
+
   _Error error(String message) {
     return _Error(
       message,
@@ -48,6 +54,7 @@ mixin _$InfoLokasiState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<Location> locations) loaded,
+    required TResult Function(LocationDetail location) detailLoaded,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -56,6 +63,7 @@ mixin _$InfoLokasiState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Location> locations)? loaded,
+    TResult Function(LocationDetail location)? detailLoaded,
     TResult Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -64,6 +72,7 @@ mixin _$InfoLokasiState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Location> locations)? loaded,
+    TResult Function(LocationDetail location)? detailLoaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -73,6 +82,7 @@ mixin _$InfoLokasiState {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_DetailLoaded value) detailLoaded,
     required TResult Function(_Error value) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -81,6 +91,7 @@ mixin _$InfoLokasiState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_DetailLoaded value)? detailLoaded,
     TResult Function(_Error value)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -89,6 +100,7 @@ mixin _$InfoLokasiState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_DetailLoaded value)? detailLoaded,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) =>
@@ -153,6 +165,7 @@ class _$_Initial implements _Initial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<Location> locations) loaded,
+    required TResult Function(LocationDetail location) detailLoaded,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -164,6 +177,7 @@ class _$_Initial implements _Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Location> locations)? loaded,
+    TResult Function(LocationDetail location)? detailLoaded,
     TResult Function(String message)? error,
   }) {
     return initial?.call();
@@ -175,6 +189,7 @@ class _$_Initial implements _Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Location> locations)? loaded,
+    TResult Function(LocationDetail location)? detailLoaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -190,6 +205,7 @@ class _$_Initial implements _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_DetailLoaded value) detailLoaded,
     required TResult Function(_Error value) error,
   }) {
     return initial(this);
@@ -201,6 +217,7 @@ class _$_Initial implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_DetailLoaded value)? detailLoaded,
     TResult Function(_Error value)? error,
   }) {
     return initial?.call(this);
@@ -212,6 +229,7 @@ class _$_Initial implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_DetailLoaded value)? detailLoaded,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -267,6 +285,7 @@ class _$_Loading implements _Loading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<Location> locations) loaded,
+    required TResult Function(LocationDetail location) detailLoaded,
     required TResult Function(String message) error,
   }) {
     return loading();
@@ -278,6 +297,7 @@ class _$_Loading implements _Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Location> locations)? loaded,
+    TResult Function(LocationDetail location)? detailLoaded,
     TResult Function(String message)? error,
   }) {
     return loading?.call();
@@ -289,6 +309,7 @@ class _$_Loading implements _Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Location> locations)? loaded,
+    TResult Function(LocationDetail location)? detailLoaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -304,6 +325,7 @@ class _$_Loading implements _Loading {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_DetailLoaded value) detailLoaded,
     required TResult Function(_Error value) error,
   }) {
     return loading(this);
@@ -315,6 +337,7 @@ class _$_Loading implements _Loading {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_DetailLoaded value)? detailLoaded,
     TResult Function(_Error value)? error,
   }) {
     return loading?.call(this);
@@ -326,6 +349,7 @@ class _$_Loading implements _Loading {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_DetailLoaded value)? detailLoaded,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -405,6 +429,7 @@ class _$_Loaded implements _Loaded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<Location> locations) loaded,
+    required TResult Function(LocationDetail location) detailLoaded,
     required TResult Function(String message) error,
   }) {
     return loaded(locations);
@@ -416,6 +441,7 @@ class _$_Loaded implements _Loaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Location> locations)? loaded,
+    TResult Function(LocationDetail location)? detailLoaded,
     TResult Function(String message)? error,
   }) {
     return loaded?.call(locations);
@@ -427,6 +453,7 @@ class _$_Loaded implements _Loaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Location> locations)? loaded,
+    TResult Function(LocationDetail location)? detailLoaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -442,6 +469,7 @@ class _$_Loaded implements _Loaded {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_DetailLoaded value) detailLoaded,
     required TResult Function(_Error value) error,
   }) {
     return loaded(this);
@@ -453,6 +481,7 @@ class _$_Loaded implements _Loaded {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_DetailLoaded value)? detailLoaded,
     TResult Function(_Error value)? error,
   }) {
     return loaded?.call(this);
@@ -464,6 +493,7 @@ class _$_Loaded implements _Loaded {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_DetailLoaded value)? detailLoaded,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -480,6 +510,158 @@ abstract class _Loaded implements InfoLokasiState {
   List<Location> get locations;
   @JsonKey(ignore: true)
   _$LoadedCopyWith<_Loaded> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$DetailLoadedCopyWith<$Res> {
+  factory _$DetailLoadedCopyWith(
+          _DetailLoaded value, $Res Function(_DetailLoaded) then) =
+      __$DetailLoadedCopyWithImpl<$Res>;
+  $Res call({LocationDetail location});
+}
+
+/// @nodoc
+class __$DetailLoadedCopyWithImpl<$Res>
+    extends _$InfoLokasiStateCopyWithImpl<$Res>
+    implements _$DetailLoadedCopyWith<$Res> {
+  __$DetailLoadedCopyWithImpl(
+      _DetailLoaded _value, $Res Function(_DetailLoaded) _then)
+      : super(_value, (v) => _then(v as _DetailLoaded));
+
+  @override
+  _DetailLoaded get _value => super._value as _DetailLoaded;
+
+  @override
+  $Res call({
+    Object? location = freezed,
+  }) {
+    return _then(_DetailLoaded(
+      location == freezed
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as LocationDetail,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_DetailLoaded implements _DetailLoaded {
+  const _$_DetailLoaded(this.location);
+
+  @override
+  final LocationDetail location;
+
+  @override
+  String toString() {
+    return 'InfoLokasiState.detailLoaded(location: $location)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _DetailLoaded &&
+            const DeepCollectionEquality().equals(other.location, location));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(location));
+
+  @JsonKey(ignore: true)
+  @override
+  _$DetailLoadedCopyWith<_DetailLoaded> get copyWith =>
+      __$DetailLoadedCopyWithImpl<_DetailLoaded>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<Location> locations) loaded,
+    required TResult Function(LocationDetail location) detailLoaded,
+    required TResult Function(String message) error,
+  }) {
+    return detailLoaded(location);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<Location> locations)? loaded,
+    TResult Function(LocationDetail location)? detailLoaded,
+    TResult Function(String message)? error,
+  }) {
+    return detailLoaded?.call(location);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<Location> locations)? loaded,
+    TResult Function(LocationDetail location)? detailLoaded,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (detailLoaded != null) {
+      return detailLoaded(location);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_DetailLoaded value) detailLoaded,
+    required TResult Function(_Error value) error,
+  }) {
+    return detailLoaded(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_DetailLoaded value)? detailLoaded,
+    TResult Function(_Error value)? error,
+  }) {
+    return detailLoaded?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_DetailLoaded value)? detailLoaded,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (detailLoaded != null) {
+      return detailLoaded(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _DetailLoaded implements InfoLokasiState {
+  const factory _DetailLoaded(LocationDetail location) = _$_DetailLoaded;
+
+  LocationDetail get location;
+  @JsonKey(ignore: true)
+  _$DetailLoadedCopyWith<_DetailLoaded> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -547,6 +729,7 @@ class _$_Error implements _Error {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(List<Location> locations) loaded,
+    required TResult Function(LocationDetail location) detailLoaded,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -558,6 +741,7 @@ class _$_Error implements _Error {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Location> locations)? loaded,
+    TResult Function(LocationDetail location)? detailLoaded,
     TResult Function(String message)? error,
   }) {
     return error?.call(message);
@@ -569,6 +753,7 @@ class _$_Error implements _Error {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(List<Location> locations)? loaded,
+    TResult Function(LocationDetail location)? detailLoaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -584,6 +769,7 @@ class _$_Error implements _Error {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_DetailLoaded value) detailLoaded,
     required TResult Function(_Error value) error,
   }) {
     return error(this);
@@ -595,6 +781,7 @@ class _$_Error implements _Error {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_DetailLoaded value)? detailLoaded,
     TResult Function(_Error value)? error,
   }) {
     return error?.call(this);
@@ -606,6 +793,7 @@ class _$_Error implements _Error {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_DetailLoaded value)? detailLoaded,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {

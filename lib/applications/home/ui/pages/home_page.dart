@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sibaba/applications/applications.dart';
 import 'package:sibaba/applications/home/ui/widgets/home_menu.dart';
-import 'package:sibaba/applications/info_lokasi/ui/pages/info_lokasi_page.dart';
+import 'package:sibaba/applications/info_lokasi/ui/pages/location_info_list_page.dart';
 import 'package:sibaba/applications/kontak_kami/pages/kontak_kami_page.dart';
 import 'package:sibaba/applications/login/pages/login_page.dart';
 import 'package:sibaba/applications/tentang_kami/pages/tentang_kami_page.dart';
