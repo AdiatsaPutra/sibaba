@@ -60,19 +60,6 @@ class DashboardPage extends StatelessWidget {
                       : const GuestMenu(),
             ),
           ]),
-          // 'Lokasi Unit'.text.xl.bold.make(),
-          // const SizedBox(height: 20),
-          // VxBox()
-          //     .width(Get.width)
-          //     .height(200)
-          //     .bgImage(
-          //       const DecorationImage(
-          //         image: AssetImage('assets/map.jpeg'),
-          //         fit: BoxFit.cover,
-          //       ),
-          //     )
-          //     .rounded
-          //     .make(),
         ]).p20().scrollVertical(),
         VStack([
           ...user.roles.map(

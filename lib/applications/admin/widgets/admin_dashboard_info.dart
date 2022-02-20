@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:sibaba/applications/admin/bloc/user/user_cubit.dart';
+import 'package:sibaba/applications/info_lokasi/bloc/cubit/info_lokasi_cubit.dart';
+import 'package:sibaba/injection.dart';
+import 'package:sibaba/presentation/loading_indicator.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class AdminDashboardInfo extends StatelessWidget {
@@ -7,23 +12,44 @@ class AdminDashboardInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => getIt<UserCubit>()..getUsers(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<InfoLokasiCubit>()..getLocations(),
+        ),
+      ],
+      child: const _AdminDashboardLayout(),
+    );
+  }
+}
+
+class _AdminDashboardLayout extends StatelessWidget {
+  const _AdminDashboardLayout({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return VStack([
       VxBox(
         child: HStack(
           [
-            VStack(
-              [
-                '15'.text.xl3.bold.make(),
-                'Pengguna'.text.base.make(),
-              ],
-              crossAlignment: CrossAxisAlignment.center,
+            BlocBuilder<UserCubit, UserState>(
+              builder: (context, state) => state.maybeWhen(
+                loading: () => _buildAdminInfo('0', 'Loading'),
+                loaded: (users) =>
+                    _buildAdminInfo('${users.length}', 'Pengguna'),
+                orElse: () => const SizedBox(),
+              ),
             ),
-            VStack(
-              [
-                '8'.text.xl3.bold.make(),
-                'Lokasi'.text.base.make(),
-              ],
-              crossAlignment: CrossAxisAlignment.center,
+            BlocBuilder<InfoLokasiCubit, InfoLokasiState>(
+              builder: (context, state) => state.maybeWhen(
+                loading: () => _buildAdminInfo('0', 'Loading'),
+                loaded: (locations) =>
+                    _buildAdminInfo('${locations.length}', 'Lokasi'),
+                orElse: () => const SizedBox(),
+              ),
             ),
             VStack(
               [
@@ -44,5 +70,15 @@ class AdminDashboardInfo extends StatelessWidget {
           .make(),
       VxBox().width(Get.width).height(20).make(),
     ]).p16().scrollVertical();
+  }
+
+  _buildAdminInfo(String title, String description) {
+    return VStack(
+      [
+        title.text.xl3.bold.make(),
+        description.text.base.make(),
+      ],
+      crossAlignment: CrossAxisAlignment.center,
+    );
   }
 }
