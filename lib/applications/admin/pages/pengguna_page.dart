@@ -7,6 +7,7 @@ import 'package:sibaba/applications/admin/widgets/user/add_user_dialog.dart';
 import 'package:sibaba/applications/admin/widgets/user/edit_user_dialog.dart';
 import 'package:sibaba/injection.dart';
 import 'package:sibaba/presentation/color_constant.dart';
+import 'package:sibaba/presentation/loading_indicator.dart';
 import 'package:sibaba/presentation/popup_messages.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -37,7 +38,7 @@ class PenggunaPage extends StatelessWidget {
             orElse: () {},
           ),
           builder: (context, state) => state.maybeWhen(
-            loading: () => const CircularProgressIndicator().centered(),
+            loading: () => const LoadingIndicator(isScrollable: true),
             loaded: (users) => _PenggunaLayout(users: users),
             orElse: () => const SizedBox(),
           ),

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:sibaba/applications/tentang_kami/bloc/cubit/tentang_kami_cubit.dart';
 import 'package:sibaba/injection.dart';
+import 'package:sibaba/presentation/loading_indicator.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class ProfilWebsitePage extends StatelessWidget {
@@ -35,9 +36,9 @@ class _ProfilWebsiteLayout extends StatelessWidget {
     return VStack([
       BlocBuilder<TentangKamiCubit, TentangKamiState>(
         builder: (context, state) => state.maybeWhen(
-          loading: () => const CircularProgressIndicator().centered(),
+          loading: () => const LoadingIndicator(isScrollable: true),
           loaded: (tentang) {
-            Future.delayed(const Duration(seconds: 3)).then((value) {
+            Future.delayed(const Duration(seconds: 5)).then((value) {
               cubit.sejarah.setText(tentang.profiles.sejarah);
               cubit.struktur.setText(tentang.profiles.struktur);
               cubit.visiMisi.setText(tentang.profiles.visimisi);

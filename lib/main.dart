@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:logging/logging.dart';
 import 'package:sibaba/applications/applications.dart';
+import 'package:sibaba/applications/login/bloc/login_password/login_password_cubit.dart';
 import 'package:sibaba/infrastructures/bloc_observer.dart';
 import 'package:sibaba/injection.dart';
 import 'package:sibaba/presentation/theme.dart';
@@ -39,6 +40,9 @@ class Sibaba extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => getIt<RegisterCubit>(),
+        ),
+        BlocProvider(
+          create: (context) => LoginPasswordCubit(),
         ),
       ],
       child: GetMaterialApp(

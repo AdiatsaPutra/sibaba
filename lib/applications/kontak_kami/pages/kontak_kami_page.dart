@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:sibaba/applications/kontak_kami/bloc/cubit/kontak_kami_cubit.dart';
 import 'package:sibaba/injection.dart';
 import 'package:sibaba/presentation/color_constant.dart';
+import 'package:sibaba/presentation/loading_indicator.dart';
 import 'package:sibaba/presentation/success_dialog.dart';
 import 'package:sibaba/presentation/widgets/custom_appbar.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -236,7 +237,7 @@ class _KontakKamiLayout extends StatelessWidget {
       VxBox(
         child: BlocBuilder<KontakKamiCubit, KontakKamiState>(
           builder: (context, state) => state.maybeWhen(
-            loading: () => const CircularProgressIndicator().centered(),
+            loading: () => const LoadingIndicator(),
             loaded: (infoKontak) => VStack([
               'Kontak Kami'.text.xl.bold.make(),
               const SizedBox(height: 10),

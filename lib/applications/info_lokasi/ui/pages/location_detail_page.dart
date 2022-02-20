@@ -33,7 +33,20 @@ class _LocationDetailLayout extends StatelessWidget {
       builder: (context, state) => state.maybeWhen(
         loading: () => const CircularProgressIndicator().centered(),
         detailLoaded: (location) => VStack([
-          VxBox()
+          VxBox(
+                  child: Align(
+            alignment: Alignment.topLeft,
+            child: IconButton(
+              onPressed: () {
+                Get.back();
+              },
+              icon: const Icon(
+                Icons.arrow_back,
+                size: 20,
+                color: Colors.black,
+              ),
+            ).box.p4.rounded.color(Colors.grey[200]!).make(),
+          ).marginOnly(top: MediaQuery.of(context).viewPadding.top, left: 20))
               .width(Get.width)
               .height(350)
               .bgImage(
@@ -44,19 +57,21 @@ class _LocationDetailLayout extends StatelessWidget {
               )
               .make(),
           VStack([
-            location.detailLokasi.nama.text.xl.bold.make(),
-            Builder(builder: (context) {
-              if (location.detailLokasi.status.toLowerCase() == 'aktif') {
-                return location.detailLokasi.status.text.lg.white
-                    .make()
-                    .box
-                    .color(Colors.green)
-                    .p8
-                    .rounded
-                    .make();
-              }
-              return location.detailLokasi.status.text.base.make();
-            }),
+            HStack([
+              location.detailLokasi.nama.text.xl.bold.make().expand(),
+              Builder(builder: (context) {
+                if (location.detailLokasi.status.toLowerCase() == 'aktif') {
+                  return location.detailLokasi.status.text.lg.white
+                      .make()
+                      .box
+                      .color(Colors.red)
+                      .p8
+                      .rounded
+                      .make();
+                }
+                return location.detailLokasi.status.text.base.make();
+              }),
+            ]),
             'Akreditasi: ${location.detailLokasi.akreditasi}'
                 .text
                 .xl

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:sibaba/applications/admin/pages/dashboard_page.dart';
 import 'package:sibaba/applications/login/bloc/login/login_cubit.dart';
+import 'package:sibaba/applications/login/bloc/login_password/login_password_cubit.dart';
 import 'package:sibaba/presentation/color_constant.dart';
 import 'package:sibaba/presentation/popup_messages.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -34,13 +35,30 @@ class LoginForm extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         'Password'.text.base.bold.make(),
-        TextFormField(
-          controller: cubit.password,
-          decoration: const InputDecoration(hintText: 'Masukkan Password'),
-          validator: (value) {
-            if (value == "") {
-              return 'Masukkan Password';
-            }
+        BlocBuilder<LoginPasswordCubit, LoginPasswordState>(
+          builder: (context, state) {
+            return TextFormField(
+              controller: cubit.password,
+              obscureText: context.read<LoginPasswordCubit>().isObscure,
+              decoration: InputDecoration(
+                hintText: 'Masukkan Password',
+                suffixIcon: GestureDetector(
+                  onTap: () {
+                    context.read<LoginPasswordCubit>().setObscure();
+                  },
+                  child: Icon(
+                    context.read<LoginPasswordCubit>().isObscure == false
+                        ? Icons.visibility_off
+                        : Icons.visibility,
+                  ),
+                ),
+              ),
+              validator: (value) {
+                if (value == "") {
+                  return 'Masukkan Password';
+                }
+              },
+            );
           },
         ),
         const SizedBox(height: 10),

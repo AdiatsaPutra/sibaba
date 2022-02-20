@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:sibaba/applications/info_lokasi/bloc/cubit/info_lokasi_cubit.dart';
+import 'package:sibaba/presentation/loading_indicator.dart';
 import 'package:sibaba/presentation/widgets/custom_appbar.dart';
 import 'package:sibaba/applications/info_lokasi/ui/widgets/location_card.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -40,7 +41,10 @@ class InfoLokasiScreen extends StatelessWidget {
             const SizedBox(height: 100),
             BlocBuilder<InfoLokasiCubit, InfoLokasiState>(
               builder: (context, state) => state.maybeWhen(
-                loading: () => const CircularProgressIndicator().centered(),
+                loading: () => const LoadingIndicator(
+                  isSearchable: true,
+                  isScrollable: true,
+                ),
                 error: (message) => message.text.base.makeCentered(),
                 loaded: (locations) => VStack(locations
                     .map((e) => LocationCard(location: e).p16())
