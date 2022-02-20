@@ -1,9 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sibaba/applications/info_lokasi/model/location.dart';
 import 'package:sibaba/applications/info_lokasi/model/location_detail.dart';
+import 'package:sibaba/applications/info_lokasi/model/request/location_request.dart';
 import 'package:sibaba/applications/info_lokasi/repository/location_repo.dart';
 
 part 'info_lokasi_state.dart';
@@ -17,6 +19,40 @@ class InfoLokasiCubit extends Cubit<InfoLokasiState> {
 
   List<Location> locationList = [];
   final searchKeyword = TextEditingController();
+
+  final nspq = TextEditingController();
+  final nama = TextEditingController();
+  final alamat = TextEditingController();
+  final telepon = TextEditingController();
+  final sk = TextEditingController();
+  final tempatBelajar = TextEditingController();
+  final email = TextEditingController();
+  final akreditasi = TextEditingController();
+  final tanggalBerdiri = TextEditingController();
+  final direktur = TextEditingController();
+  final tanggalAkreditasi = TextEditingController();
+  final status = TextEditingController();
+  final deskripsi = HtmlEditorController();
+  final hariMasuk = TextEditingController();
+  final jamMasuk = TextEditingController();
+  final jamKeluar = TextEditingController();
+
+  void init({LocationDetail? l}) {
+    nspq.text = l!.detailLokasi.nspq;
+    nama.text = l.detailLokasi.nama;
+    alamat.text = l.detailLokasi.alamat;
+    telepon.text = l.detailLokasi.telpUnit;
+    sk.text = l.detailLokasi.skPendirian;
+    tempatBelajar.text = l.detailLokasi.tmpBelajar;
+    email.text = l.detailLokasi.email;
+    akreditasi.text = l.detailLokasi.akreditasi;
+    tanggalAkreditasi.text = l.detailLokasi.tglAkreditasi.toString();
+    direktur.text = l.detailLokasi.direktur;
+    tanggalBerdiri.text = l.detailLokasi.tglBerdiri.toString();
+    status.text = l.detailLokasi.status;
+    // deskripsi.text = locationRequest.deskripsi;
+    // status.text = locationRequest.status;
+  }
 
   void getLocations() async {
     emit(const InfoLokasiState.loading());

@@ -1,280 +1,161 @@
-import 'dart:math';
-
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:html_editor_enhanced/html_editor.dart';
-import 'package:sibaba/infrastructures/constant.dart';
+import 'package:sibaba/applications/admin/pages/lokasi/add_lokasi_page.dart';
+import 'package:sibaba/applications/info_lokasi/bloc/cubit/info_lokasi_cubit.dart';
+import 'package:sibaba/applications/info_lokasi/model/location.dart';
+import 'package:sibaba/injection.dart';
 import 'package:sibaba/presentation/color_constant.dart';
-import 'package:sibaba/presentation/widgets/sibaba_textfield.dart';
-import 'package:intl/intl.dart';
+import 'package:sibaba/presentation/loading_indicator.dart';
+import 'package:sibaba/presentation/popup_messages.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class LokasiUnitPage extends StatelessWidget {
-  final DataTableSource _data = MyData();
-
-  LokasiUnitPage({Key? key}) : super(key: key);
+  const LokasiUnitPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: 'Lokasi Unit'.text.xl.color(Colors.white).make(),
-        iconTheme: const IconThemeData(color: Colors.white),
-        elevation: 0,
-      ),
-      resizeToAvoidBottomInset: false,
-      body: VStack(
-        [
-          TextFormField(
-            controller: TextEditingController(),
-            decoration: const InputDecoration(
-              prefixIcon: Icon(Icons.search),
-              hintText: 'Search',
-            ),
-            onChanged: (value) {},
+    return BlocProvider(
+      create: (context) => getIt<InfoLokasiCubit>()..getLocations(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: 'Data Lokasi'.text.xl.color(Colors.white).make(),
+          iconTheme: const IconThemeData(color: Colors.white),
+          elevation: 0,
+        ),
+        resizeToAvoidBottomInset: false,
+        body: BlocConsumer<InfoLokasiCubit, InfoLokasiState>(
+          listener: (context, state) => state.maybeWhen(
+            // added: () {
+            //   context.read<InfoLokasiCubit>().getUsers();
+            //   PopupMessages.successPopup('Data Lokasi Berhasil Ditambahkan');
+            // },
+            // deleted: () async {
+            //   context.read<InfoLokasiCubit>().getUsers();
+            //   PopupMessages.successPopup('Data Lokasi Berhasil Dihapus');
+            // },
+            orElse: () {},
           ),
-          const SizedBox(height: 10),
-          PaginatedDataTable(
-            source: _data,
-            header: HStack([
-              'Data Lokasi Unit'.text.xl.make().expand(),
-            ]),
-            columns: const [
-              DataColumn(label: Text('ID')),
-              DataColumn(label: Text('Name')),
-              DataColumn(label: Text('Price'))
-            ],
-            columnSpacing: 100,
-            horizontalMargin: 10,
-            rowsPerPage: 5,
-            showCheckboxColumn: false,
-          ).box.outerShadowXl.make(),
-        ],
-      ).centered().p16().scrollVertical(),
+          builder: (context, state) => state.maybeWhen(
+            loading: () => const LoadingIndicator(isScrollable: true),
+            loaded: (locations) => _LokasiLayout(locations: locations),
+            orElse: () => const SizedBox(),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _LokasiLayout extends StatelessWidget {
+  final List<Location> locations;
+
+  const _LokasiLayout({Key? key, required this.locations}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final cubit = context.read<InfoLokasiCubit>();
+    return Scaffold(
+      body: RefreshIndicator(
+        onRefresh: () async {
+          context.read<InfoLokasiCubit>().getLocations();
+        },
+        child: VStack(
+          [
+            TextFormField(
+              controller: cubit.searchKeyword,
+              decoration: const InputDecoration(
+                prefixIcon: Icon(Icons.search),
+                hintText: 'Cari Lokasi',
+                hintStyle: TextStyle(fontSize: 14),
+              ),
+              onChanged: (value) {
+                // cubit.searchUser();
+              },
+            ),
+            const SizedBox(height: 10),
+            PaginatedDataTable(
+              source: LokasiData(context, locations, cubit),
+              header: 'Data Lokasi'.text.xl.make(),
+              columns: const [
+                DataColumn(label: Text('No')),
+                DataColumn(label: Text('ID')),
+                DataColumn(label: Text('Name')),
+                DataColumn(label: Text('Email')),
+                DataColumn(label: Text('Action')),
+              ],
+              columnSpacing: 50,
+              horizontalMargin: 20,
+              rowsPerPage: locations.length <= 10 ? locations.length : 10,
+              showCheckboxColumn: false,
+            ),
+            const SizedBox(height: 100),
+          ],
+        ).centered().p16().scrollVertical(),
+      ),
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: primaryColor,
         onPressed: () {
-          final res = VxDialog.showCustom(context,
-              child: Dialog(
-                insetPadding: const EdgeInsets.all(10),
-                backgroundColor: Colors.white,
-                child: VxBox(
-                  child: VStack([
-                    'Input Data Unit'.text.xl.bold.make().pOnly(bottom: 10),
-                    VStack([
-                      'NSPQ'.text.base.bold.make(),
-                      TextFormField()
-                          .stylized(hint: 'Masukkan NSPQ')
-                          .pOnly(bottom: 10),
-                      'Nama'.text.base.bold.make(),
-                      TextFormField().stylized(hint: 'Nama').pOnly(bottom: 10),
-                      'Alamat'.text.base.bold.make(),
-                      TextFormField()
-                          .stylized(hint: 'Alamat')
-                          .pOnly(bottom: 10),
-                      'No Telp'.text.base.bold.make(),
-                      TextFormField(
-                        keyboardType: TextInputType.number,
-                      ).stylized(hint: 'No Telp').pOnly(bottom: 10),
-                      'SK Pendirian'.text.base.bold.make(),
-                      TextFormField()
-                          .stylized(hint: 'SK Pendirian')
-                          .pOnly(bottom: 10),
-                      'Tempat Belajar'.text.base.bold.make(),
-                      TextFormField()
-                          .stylized(hint: 'Tempat Belajar')
-                          .pOnly(bottom: 10),
-                      'Email'.text.base.bold.make(),
-                      TextFormField().stylized(hint: 'Email').pOnly(bottom: 10),
-                      'Pilih Akreditasi'.text.base.bold.make(),
-                      DropdownButtonFormField<String>(
-                        hint: 'Pilih Akreditasi'
-                            .text
-                            .base
-                            .color(Colors.grey)
-                            .make(),
-                        items: [
-                          ...akreditasi.map(
-                            (e) => DropdownMenuItem(
-                              value: e,
-                              child: e.text.base.make(),
-                            ),
-                          ),
-                        ],
-                        onChanged: (e) {},
-                      ).pOnly(bottom: 10),
-                      'Tanggal Berdiri'.text.base.bold.make(),
-                      DateTimeField(
-                        decoration: const InputDecoration(
-                            hintText: 'Tanggal Berdiri',
-                            hintStyle: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 14,
-                            )),
-                        format: DateFormat('dd/MM/yyyy'),
-                        onShowPicker: (context, currentValue) {
-                          return showDatePicker(
-                              context: context,
-                              firstDate: DateTime(1900),
-                              initialDate: currentValue ?? DateTime.now(),
-                              lastDate: DateTime(2100));
-                        },
-                      ).pOnly(bottom: 10),
-                      'Direktur'.text.base.bold.make(),
-                      TextFormField()
-                          .stylized(hint: 'Direktur')
-                          .pOnly(bottom: 10),
-                      'Tanggal Akreditasi'.text.base.bold.make(),
-                      DateTimeField(
-                        decoration: const InputDecoration(
-                            hintText: 'Tanggal Akreditasi',
-                            hintStyle: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 14,
-                            )),
-                        format: DateFormat('dd/MM/yyyy'),
-                        onShowPicker: (context, currentValue) {
-                          return showDatePicker(
-                              context: context,
-                              firstDate: DateTime(1900),
-                              initialDate: currentValue ?? DateTime.now(),
-                              lastDate: DateTime(2100));
-                        },
-                      ).pOnly(bottom: 10),
-                      'Status'.text.base.bold.make(),
-                      DropdownButtonFormField<String>(
-                        hint: 'Status'.text.base.color(Colors.grey).make(),
-                        items: [
-                          ...status.map(
-                            (e) => DropdownMenuItem(
-                              value: e,
-                              child: e.text.base.make(),
-                            ),
-                          ),
-                        ],
-                        onChanged: (e) {},
-                      ).pOnly(bottom: 10),
-                      'Deskripsi'.text.base.bold.make(),
-                      HtmlEditor(controller: HtmlEditorController())
-                          .pOnly(bottom: 10),
-                      'Hari Masuk'.text.base.bold.make(),
-                      DropdownButtonFormField<String>(
-                        hint: 'Hari Masuk'.text.base.color(Colors.grey).make(),
-                        items: [
-                          ...listHari.map(
-                            (e) => DropdownMenuItem(
-                              value: e,
-                              child: e.text.base.make(),
-                            ),
-                          ),
-                        ],
-                        onChanged: (e) {},
-                      ).pOnly(bottom: 10),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          VStack([
-                            'Jam Masuk'.text.base.bold.make(),
-                            DateTimeField(
-                              decoration: const InputDecoration(
-                                  hintText: 'Jam Masuk',
-                                  hintStyle: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 14,
-                                  )),
-                              format: DateFormat('hh:mm'),
-                              onShowPicker: (context, currentValue) async {
-                                final time = await showTimePicker(
-                                  context: context,
-                                  initialTime: TimeOfDay.fromDateTime(
-                                      currentValue ?? DateTime.now()),
-                                );
-                                return DateTimeField.convert(time);
-                              },
-                            )
-                                .box
-                                .width(Get.width / 2.5)
-                                .make()
-                                .pOnly(bottom: 10),
-                          ]),
-                          VStack([
-                            'Jam Keluar'.text.base.bold.make(),
-                            DateTimeField(
-                              decoration: const InputDecoration(
-                                  hintText: 'Jam Masuk',
-                                  hintStyle: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 14,
-                                  )),
-                              format: DateFormat('hh:mm'),
-                              onShowPicker: (context, currentValue) async {
-                                final time = await showTimePicker(
-                                  context: context,
-                                  initialTime: TimeOfDay.fromDateTime(
-                                      currentValue ?? DateTime.now()),
-                                );
-                                return DateTimeField.convert(time);
-                              },
-                            )
-                                .box
-                                .width(Get.width / 2.5)
-                                .make()
-                                .pOnly(bottom: 10),
-                          ]),
-                        ],
-                      )
-                    ]).scrollVertical().expand(),
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          OutlinedButton(
-                            onPressed: () {
-                              Navigator.pop(context, true);
-                            },
-                            child: 'Batal'.text.base.color(Colors.grey).make(),
-                          ).box.width(Get.width / 3).make(),
-                          ElevatedButton(
-                            onPressed: () {},
-                            child: 'Simpan'.text.base.make(),
-                          ).box.width(Get.width / 3).make(),
-                        ])
-                  ]),
-                ).width(Get.width).height(Get.height).p16.make().pOnly(top: 10),
-              ));
+          Get.to(() => const AddLokasiPage(isEdit: false));
         },
         label: HStack([
           const Icon(Icons.add),
-          'Tambah Kapanewon'.text.base.make(),
+          'Tambah Lokasi'.text.base.make(),
         ]),
       ),
     );
   }
 }
 
-// The "soruce" of the table
-class MyData extends DataTableSource {
-  // Generate some made-up data
-  final List<Map<String, dynamic>> _data = List.generate(
-      200,
-      (index) => {
-            "id": index + 1,
-            "title": "Item $index",
-            "price": Random().nextInt(10000)
-          });
+class LokasiData extends DataTableSource {
+  final BuildContext context;
+  final List<Location> locations;
+  final InfoLokasiCubit cubit;
+  String role = '';
+
+  LokasiData(this.context, this.locations, this.cubit);
 
   @override
   bool get isRowCountApproximate => false;
   @override
-  int get rowCount => _data.length;
+  int get rowCount => locations.length;
   @override
   int get selectedRowCount => 0;
   @override
   DataRow getRow(int index) {
     return DataRow(cells: [
-      DataCell(Text(_data[index]['id'].toString())),
-      DataCell(Text(_data[index]["title"])),
-      DataCell(Text(_data[index]["price"].toString())),
+      DataCell((index + 1).toString().text.isIntrinsic.make()),
+      DataCell(locations[index].locationId.toString().text.isIntrinsic.make()),
+      DataCell(locations[index].nama!.text.isIntrinsic.make()),
+      DataCell(locations[index].email!.text.isIntrinsic.make()),
+      DataCell(
+        HStack([
+          GestureDetector(
+            onTap: () {
+              Get.to(() =>
+                  AddLokasiPage(isEdit: true, slug: locations[index].locSlug!));
+            },
+            child: VxCapsule(
+              width: 50,
+              height: 20,
+              backgroundColor: Colors.yellow,
+              child: 'Edit'.text.sm.makeCentered(),
+            ),
+          ),
+          const SizedBox(width: 10),
+          GestureDetector(
+            onTap: () {
+              PopupMessages.confirmDeletePopup(context, () {});
+            },
+            child: VxCapsule(
+              width: 50,
+              height: 20,
+              backgroundColor: Colors.red,
+              child: 'Delete'.text.sm.color(Colors.white).makeCentered(),
+            ),
+          ),
+        ]),
+      ),
     ]);
   }
 }

@@ -8,8 +8,8 @@ part 'login_password_cubit.freezed.dart';
 class LoginPasswordCubit extends Cubit<LoginPasswordState> {
   LoginPasswordCubit() : super(const LoginPasswordState.initial());
 
-  bool isObscure = false;
-  bool isConfirmObscure = false;
+  bool isObscure = true;
+  bool isConfirmObscure = true;
 
   void setObscure() {
     emit(const LoginPasswordState.loading());
