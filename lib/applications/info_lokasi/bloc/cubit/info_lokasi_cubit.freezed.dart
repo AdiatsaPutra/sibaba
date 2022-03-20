@@ -25,6 +25,10 @@ class _$InfoLokasiStateTearOff {
     return const _Loading();
   }
 
+  _Picked picked() {
+    return const _Picked();
+  }
+
   _Loaded loaded(List<Location> locations) {
     return _Loaded(
       locations,
@@ -35,6 +39,14 @@ class _$InfoLokasiStateTearOff {
     return _DetailLoaded(
       location,
     );
+  }
+
+  _Added added() {
+    return const _Added();
+  }
+
+  _Deleted deleted() {
+    return const _Deleted();
   }
 
   _Error error(String message) {
@@ -53,8 +65,11 @@ mixin _$InfoLokasiState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() picked,
     required TResult Function(List<Location> locations) loaded,
     required TResult Function(LocationDetail location) detailLoaded,
+    required TResult Function() added,
+    required TResult Function() deleted,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -62,8 +77,11 @@ mixin _$InfoLokasiState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? picked,
     TResult Function(List<Location> locations)? loaded,
     TResult Function(LocationDetail location)? detailLoaded,
+    TResult Function()? added,
+    TResult Function()? deleted,
     TResult Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -71,8 +89,11 @@ mixin _$InfoLokasiState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? picked,
     TResult Function(List<Location> locations)? loaded,
     TResult Function(LocationDetail location)? detailLoaded,
+    TResult Function()? added,
+    TResult Function()? deleted,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -81,8 +102,11 @@ mixin _$InfoLokasiState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_Picked value) picked,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_DetailLoaded value) detailLoaded,
+    required TResult Function(_Added value) added,
+    required TResult Function(_Deleted value) deleted,
     required TResult Function(_Error value) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -90,8 +114,11 @@ mixin _$InfoLokasiState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_Picked value)? picked,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_DetailLoaded value)? detailLoaded,
+    TResult Function(_Added value)? added,
+    TResult Function(_Deleted value)? deleted,
     TResult Function(_Error value)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -99,8 +126,11 @@ mixin _$InfoLokasiState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_Picked value)? picked,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_DetailLoaded value)? detailLoaded,
+    TResult Function(_Added value)? added,
+    TResult Function(_Deleted value)? deleted,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) =>
@@ -164,8 +194,11 @@ class _$_Initial implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() picked,
     required TResult Function(List<Location> locations) loaded,
     required TResult Function(LocationDetail location) detailLoaded,
+    required TResult Function() added,
+    required TResult Function() deleted,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -176,8 +209,11 @@ class _$_Initial implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? picked,
     TResult Function(List<Location> locations)? loaded,
     TResult Function(LocationDetail location)? detailLoaded,
+    TResult Function()? added,
+    TResult Function()? deleted,
     TResult Function(String message)? error,
   }) {
     return initial?.call();
@@ -188,8 +224,11 @@ class _$_Initial implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? picked,
     TResult Function(List<Location> locations)? loaded,
     TResult Function(LocationDetail location)? detailLoaded,
+    TResult Function()? added,
+    TResult Function()? deleted,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -204,8 +243,11 @@ class _$_Initial implements _Initial {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_Picked value) picked,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_DetailLoaded value) detailLoaded,
+    required TResult Function(_Added value) added,
+    required TResult Function(_Deleted value) deleted,
     required TResult Function(_Error value) error,
   }) {
     return initial(this);
@@ -216,8 +258,11 @@ class _$_Initial implements _Initial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_Picked value)? picked,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_DetailLoaded value)? detailLoaded,
+    TResult Function(_Added value)? added,
+    TResult Function(_Deleted value)? deleted,
     TResult Function(_Error value)? error,
   }) {
     return initial?.call(this);
@@ -228,8 +273,11 @@ class _$_Initial implements _Initial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_Picked value)? picked,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_DetailLoaded value)? detailLoaded,
+    TResult Function(_Added value)? added,
+    TResult Function(_Deleted value)? deleted,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -284,8 +332,11 @@ class _$_Loading implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() picked,
     required TResult Function(List<Location> locations) loaded,
     required TResult Function(LocationDetail location) detailLoaded,
+    required TResult Function() added,
+    required TResult Function() deleted,
     required TResult Function(String message) error,
   }) {
     return loading();
@@ -296,8 +347,11 @@ class _$_Loading implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? picked,
     TResult Function(List<Location> locations)? loaded,
     TResult Function(LocationDetail location)? detailLoaded,
+    TResult Function()? added,
+    TResult Function()? deleted,
     TResult Function(String message)? error,
   }) {
     return loading?.call();
@@ -308,8 +362,11 @@ class _$_Loading implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? picked,
     TResult Function(List<Location> locations)? loaded,
     TResult Function(LocationDetail location)? detailLoaded,
+    TResult Function()? added,
+    TResult Function()? deleted,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -324,8 +381,11 @@ class _$_Loading implements _Loading {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_Picked value) picked,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_DetailLoaded value) detailLoaded,
+    required TResult Function(_Added value) added,
+    required TResult Function(_Deleted value) deleted,
     required TResult Function(_Error value) error,
   }) {
     return loading(this);
@@ -336,8 +396,11 @@ class _$_Loading implements _Loading {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_Picked value)? picked,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_DetailLoaded value)? detailLoaded,
+    TResult Function(_Added value)? added,
+    TResult Function(_Deleted value)? deleted,
     TResult Function(_Error value)? error,
   }) {
     return loading?.call(this);
@@ -348,8 +411,11 @@ class _$_Loading implements _Loading {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_Picked value)? picked,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_DetailLoaded value)? detailLoaded,
+    TResult Function(_Added value)? added,
+    TResult Function(_Deleted value)? deleted,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -362,6 +428,144 @@ class _$_Loading implements _Loading {
 
 abstract class _Loading implements InfoLokasiState {
   const factory _Loading() = _$_Loading;
+}
+
+/// @nodoc
+abstract class _$PickedCopyWith<$Res> {
+  factory _$PickedCopyWith(_Picked value, $Res Function(_Picked) then) =
+      __$PickedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$PickedCopyWithImpl<$Res> extends _$InfoLokasiStateCopyWithImpl<$Res>
+    implements _$PickedCopyWith<$Res> {
+  __$PickedCopyWithImpl(_Picked _value, $Res Function(_Picked) _then)
+      : super(_value, (v) => _then(v as _Picked));
+
+  @override
+  _Picked get _value => super._value as _Picked;
+}
+
+/// @nodoc
+
+class _$_Picked implements _Picked {
+  const _$_Picked();
+
+  @override
+  String toString() {
+    return 'InfoLokasiState.picked()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _Picked);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() picked,
+    required TResult Function(List<Location> locations) loaded,
+    required TResult Function(LocationDetail location) detailLoaded,
+    required TResult Function() added,
+    required TResult Function() deleted,
+    required TResult Function(String message) error,
+  }) {
+    return picked();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? picked,
+    TResult Function(List<Location> locations)? loaded,
+    TResult Function(LocationDetail location)? detailLoaded,
+    TResult Function()? added,
+    TResult Function()? deleted,
+    TResult Function(String message)? error,
+  }) {
+    return picked?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? picked,
+    TResult Function(List<Location> locations)? loaded,
+    TResult Function(LocationDetail location)? detailLoaded,
+    TResult Function()? added,
+    TResult Function()? deleted,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (picked != null) {
+      return picked();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Picked value) picked,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_DetailLoaded value) detailLoaded,
+    required TResult Function(_Added value) added,
+    required TResult Function(_Deleted value) deleted,
+    required TResult Function(_Error value) error,
+  }) {
+    return picked(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Picked value)? picked,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_DetailLoaded value)? detailLoaded,
+    TResult Function(_Added value)? added,
+    TResult Function(_Deleted value)? deleted,
+    TResult Function(_Error value)? error,
+  }) {
+    return picked?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Picked value)? picked,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_DetailLoaded value)? detailLoaded,
+    TResult Function(_Added value)? added,
+    TResult Function(_Deleted value)? deleted,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (picked != null) {
+      return picked(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Picked implements InfoLokasiState {
+  const factory _Picked() = _$_Picked;
 }
 
 /// @nodoc
@@ -428,8 +632,11 @@ class _$_Loaded implements _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() picked,
     required TResult Function(List<Location> locations) loaded,
     required TResult Function(LocationDetail location) detailLoaded,
+    required TResult Function() added,
+    required TResult Function() deleted,
     required TResult Function(String message) error,
   }) {
     return loaded(locations);
@@ -440,8 +647,11 @@ class _$_Loaded implements _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? picked,
     TResult Function(List<Location> locations)? loaded,
     TResult Function(LocationDetail location)? detailLoaded,
+    TResult Function()? added,
+    TResult Function()? deleted,
     TResult Function(String message)? error,
   }) {
     return loaded?.call(locations);
@@ -452,8 +662,11 @@ class _$_Loaded implements _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? picked,
     TResult Function(List<Location> locations)? loaded,
     TResult Function(LocationDetail location)? detailLoaded,
+    TResult Function()? added,
+    TResult Function()? deleted,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -468,8 +681,11 @@ class _$_Loaded implements _Loaded {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_Picked value) picked,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_DetailLoaded value) detailLoaded,
+    required TResult Function(_Added value) added,
+    required TResult Function(_Deleted value) deleted,
     required TResult Function(_Error value) error,
   }) {
     return loaded(this);
@@ -480,8 +696,11 @@ class _$_Loaded implements _Loaded {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_Picked value)? picked,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_DetailLoaded value)? detailLoaded,
+    TResult Function(_Added value)? added,
+    TResult Function(_Deleted value)? deleted,
     TResult Function(_Error value)? error,
   }) {
     return loaded?.call(this);
@@ -492,8 +711,11 @@ class _$_Loaded implements _Loaded {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_Picked value)? picked,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_DetailLoaded value)? detailLoaded,
+    TResult Function(_Added value)? added,
+    TResult Function(_Deleted value)? deleted,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -579,8 +801,11 @@ class _$_DetailLoaded implements _DetailLoaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() picked,
     required TResult Function(List<Location> locations) loaded,
     required TResult Function(LocationDetail location) detailLoaded,
+    required TResult Function() added,
+    required TResult Function() deleted,
     required TResult Function(String message) error,
   }) {
     return detailLoaded(location);
@@ -591,8 +816,11 @@ class _$_DetailLoaded implements _DetailLoaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? picked,
     TResult Function(List<Location> locations)? loaded,
     TResult Function(LocationDetail location)? detailLoaded,
+    TResult Function()? added,
+    TResult Function()? deleted,
     TResult Function(String message)? error,
   }) {
     return detailLoaded?.call(location);
@@ -603,8 +831,11 @@ class _$_DetailLoaded implements _DetailLoaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? picked,
     TResult Function(List<Location> locations)? loaded,
     TResult Function(LocationDetail location)? detailLoaded,
+    TResult Function()? added,
+    TResult Function()? deleted,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -619,8 +850,11 @@ class _$_DetailLoaded implements _DetailLoaded {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_Picked value) picked,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_DetailLoaded value) detailLoaded,
+    required TResult Function(_Added value) added,
+    required TResult Function(_Deleted value) deleted,
     required TResult Function(_Error value) error,
   }) {
     return detailLoaded(this);
@@ -631,8 +865,11 @@ class _$_DetailLoaded implements _DetailLoaded {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_Picked value)? picked,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_DetailLoaded value)? detailLoaded,
+    TResult Function(_Added value)? added,
+    TResult Function(_Deleted value)? deleted,
     TResult Function(_Error value)? error,
   }) {
     return detailLoaded?.call(this);
@@ -643,8 +880,11 @@ class _$_DetailLoaded implements _DetailLoaded {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_Picked value)? picked,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_DetailLoaded value)? detailLoaded,
+    TResult Function(_Added value)? added,
+    TResult Function(_Deleted value)? deleted,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -662,6 +902,282 @@ abstract class _DetailLoaded implements InfoLokasiState {
   @JsonKey(ignore: true)
   _$DetailLoadedCopyWith<_DetailLoaded> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$AddedCopyWith<$Res> {
+  factory _$AddedCopyWith(_Added value, $Res Function(_Added) then) =
+      __$AddedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$AddedCopyWithImpl<$Res> extends _$InfoLokasiStateCopyWithImpl<$Res>
+    implements _$AddedCopyWith<$Res> {
+  __$AddedCopyWithImpl(_Added _value, $Res Function(_Added) _then)
+      : super(_value, (v) => _then(v as _Added));
+
+  @override
+  _Added get _value => super._value as _Added;
+}
+
+/// @nodoc
+
+class _$_Added implements _Added {
+  const _$_Added();
+
+  @override
+  String toString() {
+    return 'InfoLokasiState.added()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _Added);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() picked,
+    required TResult Function(List<Location> locations) loaded,
+    required TResult Function(LocationDetail location) detailLoaded,
+    required TResult Function() added,
+    required TResult Function() deleted,
+    required TResult Function(String message) error,
+  }) {
+    return added();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? picked,
+    TResult Function(List<Location> locations)? loaded,
+    TResult Function(LocationDetail location)? detailLoaded,
+    TResult Function()? added,
+    TResult Function()? deleted,
+    TResult Function(String message)? error,
+  }) {
+    return added?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? picked,
+    TResult Function(List<Location> locations)? loaded,
+    TResult Function(LocationDetail location)? detailLoaded,
+    TResult Function()? added,
+    TResult Function()? deleted,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (added != null) {
+      return added();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Picked value) picked,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_DetailLoaded value) detailLoaded,
+    required TResult Function(_Added value) added,
+    required TResult Function(_Deleted value) deleted,
+    required TResult Function(_Error value) error,
+  }) {
+    return added(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Picked value)? picked,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_DetailLoaded value)? detailLoaded,
+    TResult Function(_Added value)? added,
+    TResult Function(_Deleted value)? deleted,
+    TResult Function(_Error value)? error,
+  }) {
+    return added?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Picked value)? picked,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_DetailLoaded value)? detailLoaded,
+    TResult Function(_Added value)? added,
+    TResult Function(_Deleted value)? deleted,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (added != null) {
+      return added(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Added implements InfoLokasiState {
+  const factory _Added() = _$_Added;
+}
+
+/// @nodoc
+abstract class _$DeletedCopyWith<$Res> {
+  factory _$DeletedCopyWith(_Deleted value, $Res Function(_Deleted) then) =
+      __$DeletedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$DeletedCopyWithImpl<$Res> extends _$InfoLokasiStateCopyWithImpl<$Res>
+    implements _$DeletedCopyWith<$Res> {
+  __$DeletedCopyWithImpl(_Deleted _value, $Res Function(_Deleted) _then)
+      : super(_value, (v) => _then(v as _Deleted));
+
+  @override
+  _Deleted get _value => super._value as _Deleted;
+}
+
+/// @nodoc
+
+class _$_Deleted implements _Deleted {
+  const _$_Deleted();
+
+  @override
+  String toString() {
+    return 'InfoLokasiState.deleted()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _Deleted);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() picked,
+    required TResult Function(List<Location> locations) loaded,
+    required TResult Function(LocationDetail location) detailLoaded,
+    required TResult Function() added,
+    required TResult Function() deleted,
+    required TResult Function(String message) error,
+  }) {
+    return deleted();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? picked,
+    TResult Function(List<Location> locations)? loaded,
+    TResult Function(LocationDetail location)? detailLoaded,
+    TResult Function()? added,
+    TResult Function()? deleted,
+    TResult Function(String message)? error,
+  }) {
+    return deleted?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? picked,
+    TResult Function(List<Location> locations)? loaded,
+    TResult Function(LocationDetail location)? detailLoaded,
+    TResult Function()? added,
+    TResult Function()? deleted,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (deleted != null) {
+      return deleted();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Picked value) picked,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_DetailLoaded value) detailLoaded,
+    required TResult Function(_Added value) added,
+    required TResult Function(_Deleted value) deleted,
+    required TResult Function(_Error value) error,
+  }) {
+    return deleted(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Picked value)? picked,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_DetailLoaded value)? detailLoaded,
+    TResult Function(_Added value)? added,
+    TResult Function(_Deleted value)? deleted,
+    TResult Function(_Error value)? error,
+  }) {
+    return deleted?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Picked value)? picked,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_DetailLoaded value)? detailLoaded,
+    TResult Function(_Added value)? added,
+    TResult Function(_Deleted value)? deleted,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (deleted != null) {
+      return deleted(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Deleted implements InfoLokasiState {
+  const factory _Deleted() = _$_Deleted;
 }
 
 /// @nodoc
@@ -728,8 +1244,11 @@ class _$_Error implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() picked,
     required TResult Function(List<Location> locations) loaded,
     required TResult Function(LocationDetail location) detailLoaded,
+    required TResult Function() added,
+    required TResult Function() deleted,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -740,8 +1259,11 @@ class _$_Error implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? picked,
     TResult Function(List<Location> locations)? loaded,
     TResult Function(LocationDetail location)? detailLoaded,
+    TResult Function()? added,
+    TResult Function()? deleted,
     TResult Function(String message)? error,
   }) {
     return error?.call(message);
@@ -752,8 +1274,11 @@ class _$_Error implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? picked,
     TResult Function(List<Location> locations)? loaded,
     TResult Function(LocationDetail location)? detailLoaded,
+    TResult Function()? added,
+    TResult Function()? deleted,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -768,8 +1293,11 @@ class _$_Error implements _Error {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_Picked value) picked,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_DetailLoaded value) detailLoaded,
+    required TResult Function(_Added value) added,
+    required TResult Function(_Deleted value) deleted,
     required TResult Function(_Error value) error,
   }) {
     return error(this);
@@ -780,8 +1308,11 @@ class _$_Error implements _Error {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_Picked value)? picked,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_DetailLoaded value)? detailLoaded,
+    TResult Function(_Added value)? added,
+    TResult Function(_Deleted value)? deleted,
     TResult Function(_Error value)? error,
   }) {
     return error?.call(this);
@@ -792,8 +1323,11 @@ class _$_Error implements _Error {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_Picked value)? picked,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_DetailLoaded value)? detailLoaded,
+    TResult Function(_Added value)? added,
+    TResult Function(_Deleted value)? deleted,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {

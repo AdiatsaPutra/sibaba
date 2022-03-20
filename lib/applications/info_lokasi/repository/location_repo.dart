@@ -10,4 +10,5 @@ abstract class LocationRepo {
     String slug,
   );
   Future<Either<LocationException, void>> addLocation(LocationRequest request);
+  Future<Either<LocationException, void>> deleteLocation(int id);
 }

@@ -3,9 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:injectable/injectable.dart';
+import 'package:logger/logger.dart';
 import 'package:sibaba/applications/info_lokasi/model/location.dart';
 import 'package:sibaba/applications/info_lokasi/model/location_detail.dart';
 import 'package:sibaba/applications/info_lokasi/model/request/location_request.dart';
+import 'package:intl/intl.dart';
 import 'package:sibaba/applications/info_lokasi/repository/location_repo.dart';
 
 part 'info_lokasi_state.dart';
@@ -20,6 +22,8 @@ class InfoLokasiCubit extends Cubit<InfoLokasiState> {
   List<Location> locationList = [];
   final searchKeyword = TextEditingController();
 
+  final key = GlobalKey<FormState>();
+
   final nspq = TextEditingController();
   final nama = TextEditingController();
   final alamat = TextEditingController();
@@ -27,15 +31,21 @@ class InfoLokasiCubit extends Cubit<InfoLokasiState> {
   final sk = TextEditingController();
   final tempatBelajar = TextEditingController();
   final email = TextEditingController();
-  final akreditasi = TextEditingController();
   final tanggalBerdiri = TextEditingController();
   final direktur = TextEditingController();
   final tanggalAkreditasi = TextEditingController();
-  final status = TextEditingController();
   final deskripsi = HtmlEditorController();
   final hariMasuk = TextEditingController();
   final jamMasuk = TextEditingController();
   final jamKeluar = TextEditingController();
+
+  DateTime? tglBerdiri;
+  DateTime? tglAkreditasi;
+  DateTime? jmMasuk;
+  DateTime? jmKeluar;
+
+  String status = '';
+  String akreditasi = '';
 
   void init({LocationDetail? l}) {
     nspq.text = l!.detailLokasi.nspq;
@@ -45,13 +55,56 @@ class InfoLokasiCubit extends Cubit<InfoLokasiState> {
     sk.text = l.detailLokasi.skPendirian;
     tempatBelajar.text = l.detailLokasi.tmpBelajar;
     email.text = l.detailLokasi.email;
-    akreditasi.text = l.detailLokasi.akreditasi;
+    akreditasi = l.detailLokasi.akreditasi;
     tanggalAkreditasi.text = l.detailLokasi.tglAkreditasi.toString();
     direktur.text = l.detailLokasi.direktur;
     tanggalBerdiri.text = l.detailLokasi.tglBerdiri.toString();
-    status.text = l.detailLokasi.status;
+    status = l.detailLokasi.status;
     // deskripsi.text = locationRequest.deskripsi;
-    // status.text = locationRequest.status;
+    // status = locationRequest.status;
+  }
+
+  void setAkreditasi(String value) {
+    emit(const InfoLokasiState.loading());
+    akreditasi = value;
+    emit(const InfoLokasiState.picked());
+  }
+
+  void setStatus(String value) {
+    emit(const InfoLokasiState.loading());
+    status = value;
+    emit(const InfoLokasiState.picked());
+  }
+
+  void setTanggalBerdiri(DateTime value) {
+    emit(const InfoLokasiState.loading());
+    final formattedDate = DateFormat('yyyy-MM-dd').format(value);
+    tglBerdiri = DateTime.parse(formattedDate);
+    tanggalBerdiri.text = formattedDate;
+    emit(const InfoLokasiState.picked());
+  }
+
+  void setTanggalAkreditasi(DateTime value) {
+    emit(const InfoLokasiState.loading());
+    final formattedDate = DateFormat('yyyy-MM-dd').format(value);
+    tglAkreditasi = DateTime.parse(formattedDate);
+    tanggalAkreditasi.text = formattedDate;
+    emit(const InfoLokasiState.picked());
+  }
+
+  void setJamMasuk(DateTime value) {
+    emit(const InfoLokasiState.loading());
+    final formattedTime = DateFormat('hh:mm').format(value);
+    jamMasuk.text = formattedTime;
+    emit(const InfoLokasiState.picked());
+  }
+
+  void setJamKeluar(DateTime value) {
+    emit(const InfoLokasiState.loading());
+    Logger().e(value);
+    final formattedTime = DateFormat('hh:mm').format(value);
+    jamKeluar.text = formattedTime;
+    emit(const InfoLokasiState.picked());
   }
 
   void getLocations() async {
@@ -62,6 +115,15 @@ class InfoLokasiCubit extends Cubit<InfoLokasiState> {
       (r) => locationList.addAll(r),
     );
     emit(InfoLokasiState.loaded(locationList));
+  }
+
+  void getLokasi() async {
+    emit(const InfoLokasiState.loading());
+    final locations = await _locationRepo.getLocations();
+    locations.fold(
+      (l) => emit(InfoLokasiState.error(l.message)),
+      (r) => emit(InfoLokasiState.loaded(r)),
+    );
   }
 
   void searchInfoLokasi() {
@@ -86,6 +148,47 @@ class InfoLokasiCubit extends Cubit<InfoLokasiState> {
     locationDetail.fold(
       (l) => emit(InfoLokasiState.error(l.message)),
       (r) => emit(InfoLokasiState.detailLoaded(r)),
+    );
+  }
+
+  void addLokasi(String userId) async {
+    emit(const InfoLokasiState.loading());
+    final locationRequest = LocationRequest(
+        userId: userId,
+        nspq: nspq.text,
+        areaUnit: 2,
+        districtUnit: 2,
+        nama: nama.text,
+        locSlug: '',
+        alamat: alamat.text,
+        telpUnit: telepon.text,
+        skPendirian: sk.text,
+        tmpBelajar: tempatBelajar.text,
+        email: email.text,
+        akreditasi: akreditasi,
+        tglBerdiri: DateTime.parse(tanggalBerdiri.text),
+        direktur: direktur.text,
+        tglAkreditasi: DateTime.parse(tanggalAkreditasi.text),
+        status: status,
+        deskripsi: 'asasahisashui',
+        hariMasuk: 'Senin',
+        masuk: jamMasuk.text,
+        selesai: jamKeluar.text,
+        latitude: '23434434234324',
+        longitude: '23423432434');
+    Logger().i(locationRequest);
+    final location = await _locationRepo.addLocation(locationRequest);
+    location.fold(
+      (l) => emit(InfoLokasiState.error(l.message)),
+      (r) => emit(const InfoLokasiState.added()),
+    );
+  }
+
+  void deleteLokasi(int id) async {
+    final location = await _locationRepo.deleteLocation(id);
+    location.fold(
+      (l) => emit(InfoLokasiState.error(l.message)),
+      (r) => emit(const InfoLokasiState.deleted()),
     );
   }
 

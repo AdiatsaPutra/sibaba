@@ -6,6 +6,7 @@ import 'package:logging/logging.dart';
 import 'package:sibaba/applications/applications.dart';
 import 'package:sibaba/applications/login/bloc/login_password/login_password_cubit.dart';
 import 'package:sibaba/infrastructures/bloc_observer.dart';
+import 'package:sibaba/infrastructures/refresh/cubit/refresh_cubit.dart';
 import 'package:sibaba/injection.dart';
 import 'package:sibaba/presentation/theme.dart';
 
@@ -14,13 +15,10 @@ import 'applications/login/bloc/register/register_cubit.dart';
 
 void main() {
   setupLogging();
-  configureInjection('http://192.168.0.104:8000/api/');
+  configureInjection('http://192.168.205.170:8000/api/');
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
-    systemNavigationBarColor: Colors.black,
-    statusBarIconBrightness: Brightness.dark,
-    systemNavigationBarIconBrightness: Brightness.dark,
   ));
   BlocOverrides.runZoned(
     () => runApp(const Sibaba()),
@@ -43,6 +41,9 @@ class Sibaba extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => LoginPasswordCubit(),
+        ),
+        BlocProvider(
+          create: (context) => RefreshCubit(),
         ),
       ],
       child: GetMaterialApp(

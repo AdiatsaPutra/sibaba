@@ -4,21 +4,24 @@ import 'package:velocity_x/velocity_x.dart';
 
 class PopupMessages {
   static successPopup(String message) {
-    Get.snackbar('Berhasil', message,
-        backgroundColor: Colors.white,
-        colorText: Colors.black,
-        margin: const EdgeInsets.all(16),
-        padding: const EdgeInsets.all(16),
-        snackPosition: SnackPosition.BOTTOM,
-        boxShadows: [
-          const BoxShadow(),
-        ]);
+    Get.snackbar(
+      'Berhasil',
+      message,
+      backgroundColor: Colors.green[400],
+      colorText: Colors.green[900],
+      margin: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
+      snackPosition: SnackPosition.BOTTOM,
+      boxShadows: [
+        const BoxShadow(),
+      ],
+    );
   }
 
   static errorPopup(String message) {
     Get.snackbar('Gagal', message,
-        backgroundColor: Colors.red,
-        colorText: Colors.black,
+        backgroundColor: Colors.red[400],
+        colorText: Colors.red[900],
         margin: const EdgeInsets.all(16),
         padding: const EdgeInsets.all(16),
         snackPosition: SnackPosition.BOTTOM,

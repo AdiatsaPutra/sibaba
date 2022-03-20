@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:sibaba/applications/admin/models/user.dart';
 import 'package:sibaba/applications/admin/pages/lokasi/add_lokasi_page.dart';
 import 'package:sibaba/applications/info_lokasi/bloc/cubit/info_lokasi_cubit.dart';
 import 'package:sibaba/applications/info_lokasi/model/location.dart';
+import 'package:sibaba/infrastructures/refresh/cubit/refresh_cubit.dart';
 import 'package:sibaba/injection.dart';
 import 'package:sibaba/presentation/color_constant.dart';
 import 'package:sibaba/presentation/loading_indicator.dart';
@@ -11,12 +13,13 @@ import 'package:sibaba/presentation/popup_messages.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class LokasiUnitPage extends StatelessWidget {
-  const LokasiUnitPage({Key? key}) : super(key: key);
+  final User user;
+  const LokasiUnitPage({Key? key, required this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<InfoLokasiCubit>()..getLocations(),
+      create: (context) => getIt<InfoLokasiCubit>()..getLokasi(),
       child: Scaffold(
         appBar: AppBar(
           title: 'Data Lokasi'.text.xl.color(Colors.white).make(),
@@ -24,22 +27,32 @@ class LokasiUnitPage extends StatelessWidget {
           elevation: 0,
         ),
         resizeToAvoidBottomInset: false,
-        body: BlocConsumer<InfoLokasiCubit, InfoLokasiState>(
-          listener: (context, state) => state.maybeWhen(
-            // added: () {
-            //   context.read<InfoLokasiCubit>().getUsers();
-            //   PopupMessages.successPopup('Data Lokasi Berhasil Ditambahkan');
-            // },
-            // deleted: () async {
-            //   context.read<InfoLokasiCubit>().getUsers();
-            //   PopupMessages.successPopup('Data Lokasi Berhasil Dihapus');
-            // },
-            orElse: () {},
-          ),
-          builder: (context, state) => state.maybeWhen(
-            loading: () => const LoadingIndicator(isScrollable: true),
-            loaded: (locations) => _LokasiLayout(locations: locations),
-            orElse: () => const SizedBox(),
+        body: MultiBlocListener(
+          listeners: [
+            BlocListener<RefreshCubit, RefreshState>(
+              listener: (context, state) => state.maybeWhen(
+                locationAdded: () {
+                  context.read<InfoLokasiCubit>().getLokasi();
+                },
+                orElse: () {},
+              ),
+            ),
+            BlocListener<InfoLokasiCubit, InfoLokasiState>(
+              listener: (context, state) => state.maybeWhen(
+                deleted: () {
+                  context.read<InfoLokasiCubit>().getLokasi();
+                },
+                orElse: () {},
+              ),
+            ),
+          ],
+          child: BlocBuilder<InfoLokasiCubit, InfoLokasiState>(
+            builder: (context, state) => state.maybeWhen(
+              loading: () => const LoadingIndicator(isScrollable: true),
+              loaded: (locations) =>
+                  _LokasiLayout(locations: locations, user: user),
+              orElse: () => const SizedBox(),
+            ),
           ),
         ),
       ),
@@ -49,8 +62,10 @@ class LokasiUnitPage extends StatelessWidget {
 
 class _LokasiLayout extends StatelessWidget {
   final List<Location> locations;
+  final User user;
 
-  const _LokasiLayout({Key? key, required this.locations}) : super(key: key);
+  const _LokasiLayout({Key? key, required this.locations, required this.user})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +90,7 @@ class _LokasiLayout extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             PaginatedDataTable(
-              source: LokasiData(context, locations, cubit),
+              source: LokasiData(context, locations, cubit, user),
               header: 'Data Lokasi'.text.xl.make(),
               columns: const [
                 DataColumn(label: Text('No')),
@@ -96,7 +111,12 @@ class _LokasiLayout extends StatelessWidget {
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: primaryColor,
         onPressed: () {
-          Get.to(() => const AddLokasiPage(isEdit: false));
+          Get.to(
+            () => AddLokasiPage(
+              isEdit: false,
+              user: user,
+            ),
+          );
         },
         label: HStack([
           const Icon(Icons.add),
@@ -112,8 +132,9 @@ class LokasiData extends DataTableSource {
   final List<Location> locations;
   final InfoLokasiCubit cubit;
   String role = '';
+  final User user;
 
-  LokasiData(this.context, this.locations, this.cubit);
+  LokasiData(this.context, this.locations, this.cubit, this.user);
 
   @override
   bool get isRowCountApproximate => false;
@@ -132,8 +153,13 @@ class LokasiData extends DataTableSource {
         HStack([
           GestureDetector(
             onTap: () {
-              Get.to(() =>
-                  AddLokasiPage(isEdit: true, slug: locations[index].locSlug!));
+              Get.to(
+                () => AddLokasiPage(
+                  isEdit: true,
+                  slug: locations[index].locSlug!,
+                  user: user,
+                ),
+              );
             },
             child: VxCapsule(
               width: 50,
@@ -145,7 +171,12 @@ class LokasiData extends DataTableSource {
           const SizedBox(width: 10),
           GestureDetector(
             onTap: () {
-              PopupMessages.confirmDeletePopup(context, () {});
+              PopupMessages.confirmDeletePopup(context, () {
+                Navigator.pop(context);
+                context
+                    .read<InfoLokasiCubit>()
+                    .deleteLokasi(locations[index].locationId!);
+              });
             },
             child: VxCapsule(
               width: 50,

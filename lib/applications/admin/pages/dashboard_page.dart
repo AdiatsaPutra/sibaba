@@ -54,9 +54,9 @@ class DashboardPage extends StatelessWidget {
           VStack([
             ...user.roles.map(
               (e) => e.name == 'superadmin'
-                  ? const SuperadminMenu()
+                  ? SuperadminMenu(user: user)
                   : e.name == 'admin'
-                      ? const AdminMenu()
+                      ? AdminMenu(user: user)
                       : const GuestMenu(),
             ),
           ]),

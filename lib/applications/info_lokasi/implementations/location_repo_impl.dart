@@ -66,4 +66,17 @@ class LocationRepoImpl extends LocationRepo {
       return left(LocationException(e.toString()));
     }
   }
+
+  @override
+  Future<Either<LocationException, void>> deleteLocation(int id) async {
+    try {
+      final response = await dio.delete(baseUrl + "lokasi/$id");
+      if (response.statusCode != 201) {
+        throw LocationException(response.data);
+      }
+      return right(null);
+    } catch (e) {
+      return left(LocationException(e.toString()));
+    }
+  }
 }
