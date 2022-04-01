@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sibaba/applications/kontak_kami/bloc/cubit/kontak_kami_cubit.dart';
 import 'package:sibaba/injection.dart';
 import 'package:sibaba/presentation/color_constant.dart';
@@ -178,62 +179,33 @@ class KontakKamiPage extends StatelessWidget {
   }
 }
 
-class _KontakKamiLayout extends StatelessWidget {
+class _KontakKamiLayout extends StatefulWidget {
   const _KontakKamiLayout({Key? key}) : super(key: key);
+
+  @override
+  State<_KontakKamiLayout> createState() => _KontakKamiLayoutState();
+}
+
+class _KontakKamiLayoutState extends State<_KontakKamiLayout> {
+  late GoogleMapController mapController;
+
+  final LatLng _center = const LatLng(45.521563, -122.677433);
+
+  void _onMapCreated(GoogleMapController controller) {
+    mapController = controller;
+  }
 
   @override
   Widget build(BuildContext context) {
     final kontakKami = context.read<KontakKamiCubit>();
     return VStack([
-      // VxBox(
-      //         child: OSMFlutter(
-      //   controller: kontakKami.mapController,
-      //   trackMyPosition: false,
-      //   initZoom: 12,
-      //   minZoomLevel: 8,
-      //   maxZoomLevel: 14,
-      //   stepZoom: 1.0,
-      //   mapIsLoading: const CircularProgressIndicator().centered(),
-      //   userLocationMarker: UserLocationMaker(
-      //     personMarker: MarkerIcon(
-      //       icon: Icon(
-      //         Icons.location_history_rounded,
-      //         color: Colors.red,
-      //         size: 48,
-      //       ),
-      //     ),
-      //     directionArrowMarker: MarkerIcon(
-      //       icon: Icon(
-      //         Icons.double_arrow,
-      //         size: 48,
-      //       ),
-      //     ),
+      // GoogleMap(
+      //   onMapCreated: _onMapCreated,
+      //   initialCameraPosition: CameraPosition(
+      //     target: _center,
+      //     zoom: 11.0,
       //   ),
-      //   road: Road(
-      //     startIcon: MarkerIcon(
-      //       icon: Icon(
-      //         Icons.person,
-      //         size: 64,
-      //         color: Colors.brown,
-      //       ),
-      //     ),
-      //     roadColor: Colors.yellowAccent,
-      //   ),
-      //   markerOption: MarkerOption(
-      //       defaultMarker: MarkerIcon(
-      //     icon: Icon(
-      //       Icons.person_pin_circle,
-      //       color: Colors.blue,
-      //       size: 56,
-      //     ),
-      //   )),
-      // ))
-      //     .width(Get.width)
-      //     .height(Get.height / 2.5)
-      //     .color(Theme.of(context).primaryColor)
-      //     .outerShadowXl
-      //     .make()
-      //     .p16(),
+      // ),
       VxBox(
         child: BlocBuilder<KontakKamiCubit, KontakKamiState>(
           builder: (context, state) => state.maybeWhen(

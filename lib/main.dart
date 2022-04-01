@@ -15,7 +15,7 @@ import 'applications/login/bloc/register/register_cubit.dart';
 
 void main() {
   setupLogging();
-  configureInjection('http://192.168.205.170:8000/api/');
+  configureInjection('http://10.69.11.38:8000/api/');
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,

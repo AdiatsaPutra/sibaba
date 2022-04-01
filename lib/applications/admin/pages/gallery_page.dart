@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sibaba/presentation/color_constant.dart';
-import 'package:sibaba/presentation/widgets/sibaba_textfield.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
+import 'package:sibaba/applications/admin/bloc/image_handler/image_handler_cubit.dart';
+import 'package:sibaba/presentation/widgets/custom_appbar.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class GalleryPage extends StatelessWidget {
@@ -9,22 +11,52 @@ class GalleryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: 'Gallery'.text.xl.color(Colors.white).make(),
-        iconTheme: const IconThemeData(color: Colors.white),
-        elevation: 0,
+      appBar: const CustomAppbar(
+        title: 'Gallery',
       ),
       resizeToAvoidBottomInset: false,
-      body: VStack(
-        [
-          VStack([
-            'Pilih Foto'.text.base.bold.make(),
-            TextFormField(
-              onTap: () {},
-            ).stylized(hint: 'Pilih Foto').pOnly(bottom: 10),
-          ]),
-        ],
-      ).centered().p16().scrollVertical(),
+      body: BlocProvider(
+        create: (context) => ImageHandlerCubit(),
+        child: const _GalleryLayout(),
+      ),
     );
+  }
+}
+
+class _GalleryLayout extends StatelessWidget {
+  const _GalleryLayout({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final cubit = context.read<ImageHandlerCubit>();
+    return VStack(
+      [
+        BlocBuilder<ImageHandlerCubit, ImageHandlerState>(
+          builder: (context, state) {
+            return cubit.image == null
+                ? VxBox(child: 'Belum ada foto'.text.base.makeCentered())
+                    .width(Get.width)
+                    .height(200)
+                    .rounded
+                    .color(Colors.grey[200]!)
+                    .make()
+                : VxBox()
+                    .width(Get.width)
+                    .height(200)
+                    .bgImage(DecorationImage(image: FileImage(cubit.image!)))
+                    .rounded
+                    .color(Colors.grey[200]!)
+                    .make();
+          },
+        ),
+        const SizedBox(height: 20),
+        ElevatedButton(
+          onPressed: () {
+            cubit.setImage();
+          },
+          child: 'Pilih Foto'.text.base.make(),
+        )
+      ],
+    ).centered().p16().scrollVertical();
   }
 }

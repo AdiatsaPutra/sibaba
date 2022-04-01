@@ -5,26 +5,28 @@ import 'package:get/get.dart';
 import 'package:sibaba/applications/info_lokasi/bloc/cubit/info_lokasi_cubit.dart';
 import 'package:sibaba/injection.dart';
 import 'package:intl/intl.dart';
+import 'package:sibaba/presentation/widgets/custom_appbar.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class LocationDetailPage extends StatelessWidget {
+class DetailLokasiPage extends StatelessWidget {
   final String slug;
 
-  const LocationDetailPage({Key? key, required this.slug}) : super(key: key);
+  const DetailLokasiPage({Key? key, required this.slug}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<InfoLokasiCubit>()..getLocationDetail(slug),
       child: const Scaffold(
-        body: _LocationDetailLayout(),
+        appBar: CustomAppbar(title: 'Detail Lokasi'),
+        body: _DetailLokasiLayout(),
       ),
     );
   }
 }
 
-class _LocationDetailLayout extends StatelessWidget {
-  const _LocationDetailLayout({Key? key}) : super(key: key);
+class _DetailLokasiLayout extends StatelessWidget {
+  const _DetailLokasiLayout({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,20 +35,7 @@ class _LocationDetailLayout extends StatelessWidget {
       builder: (context, state) => state.maybeWhen(
         loading: () => const CircularProgressIndicator().centered(),
         detailLoaded: (location) => VStack([
-          VxBox(
-                  child: Align(
-            alignment: Alignment.topLeft,
-            child: IconButton(
-              onPressed: () {
-                Get.back();
-              },
-              icon: const Icon(
-                Icons.arrow_back,
-                size: 20,
-                color: Colors.black,
-              ),
-            ).box.p4.rounded.color(Colors.grey[200]!).make(),
-          ).marginOnly(top: MediaQuery.of(context).viewPadding.top, left: 20))
+          VxBox()
               .width(Get.width)
               .height(350)
               .bgImage(
@@ -104,14 +93,14 @@ class _LocationDetailLayout extends StatelessWidget {
                   location.detailLokasi.direktur.text.lg.bold.make(),
                   location.detailLokasi.email.text.lg.bold.make(),
                   location.detailLokasi.telpUnit.text.lg.bold.make(),
-                  // location.detailLokasi.tglBerdiri == null
-                  //     ? ''.text.base.make()
-                  //     : formatter
-                  //         .format(location.detailLokasi.tglBerdiri!)
-                  //         .text
-                  //         .lg
-                  //         .bold
-                  //         .make(),
+                  location.detailLokasi.tglBerdiri == null
+                      ? ''.text.base.make()
+                      : formatter
+                          .format(location.detailLokasi.tglBerdiri!)
+                          .text
+                          .lg
+                          .bold
+                          .make(),
                   location.detailLokasi.skPendirian.text.lg.bold.make(),
                   formatter
                       .format(location.detailLokasi.tglAkreditasi)

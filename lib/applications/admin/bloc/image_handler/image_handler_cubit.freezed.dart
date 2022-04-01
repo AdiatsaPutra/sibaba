@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'tentang_kami_cubit.dart';
+part of 'image_handler_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,8 +15,8 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$TentangKamiStateTearOff {
-  const _$TentangKamiStateTearOff();
+class _$ImageHandlerStateTearOff {
+  const _$ImageHandlerStateTearOff();
 
   _Initial initial() {
     return const _Initial();
@@ -26,46 +26,42 @@ class _$TentangKamiStateTearOff {
     return const _Loading();
   }
 
-  _Loaded loaded(Tentang tentang) {
-    return _Loaded(
-      tentang,
-    );
+  _Loaded loaded() {
+    return const _Loaded();
   }
 
-  _Error error(String message) {
-    return _Error(
-      message,
-    );
+  _Error error() {
+    return const _Error();
   }
 }
 
 /// @nodoc
-const $TentangKamiState = _$TentangKamiStateTearOff();
+const $ImageHandlerState = _$ImageHandlerStateTearOff();
 
 /// @nodoc
-mixin _$TentangKamiState {
+mixin _$ImageHandlerState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Tentang tentang) loaded,
-    required TResult Function(String message) error,
+    required TResult Function() loaded,
+    required TResult Function() error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Tentang tentang)? loaded,
-    TResult Function(String message)? error,
+    TResult Function()? loaded,
+    TResult Function()? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Tentang tentang)? loaded,
-    TResult Function(String message)? error,
+    TResult Function()? loaded,
+    TResult Function()? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -97,20 +93,20 @@ mixin _$TentangKamiState {
 }
 
 /// @nodoc
-abstract class $TentangKamiStateCopyWith<$Res> {
-  factory $TentangKamiStateCopyWith(
-          TentangKamiState value, $Res Function(TentangKamiState) then) =
-      _$TentangKamiStateCopyWithImpl<$Res>;
+abstract class $ImageHandlerStateCopyWith<$Res> {
+  factory $ImageHandlerStateCopyWith(
+          ImageHandlerState value, $Res Function(ImageHandlerState) then) =
+      _$ImageHandlerStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$TentangKamiStateCopyWithImpl<$Res>
-    implements $TentangKamiStateCopyWith<$Res> {
-  _$TentangKamiStateCopyWithImpl(this._value, this._then);
+class _$ImageHandlerStateCopyWithImpl<$Res>
+    implements $ImageHandlerStateCopyWith<$Res> {
+  _$ImageHandlerStateCopyWithImpl(this._value, this._then);
 
-  final TentangKamiState _value;
+  final ImageHandlerState _value;
   // ignore: unused_field
-  final $Res Function(TentangKamiState) _then;
+  final $Res Function(ImageHandlerState) _then;
 }
 
 /// @nodoc
@@ -120,7 +116,7 @@ abstract class _$InitialCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$InitialCopyWithImpl<$Res> extends _$TentangKamiStateCopyWithImpl<$Res>
+class __$InitialCopyWithImpl<$Res> extends _$ImageHandlerStateCopyWithImpl<$Res>
     implements _$InitialCopyWith<$Res> {
   __$InitialCopyWithImpl(_Initial _value, $Res Function(_Initial) _then)
       : super(_value, (v) => _then(v as _Initial));
@@ -136,7 +132,7 @@ class _$_Initial implements _Initial {
 
   @override
   String toString() {
-    return 'TentangKamiState.initial()';
+    return 'ImageHandlerState.initial()';
   }
 
   @override
@@ -153,8 +149,8 @@ class _$_Initial implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Tentang tentang) loaded,
-    required TResult Function(String message) error,
+    required TResult Function() loaded,
+    required TResult Function() error,
   }) {
     return initial();
   }
@@ -164,8 +160,8 @@ class _$_Initial implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Tentang tentang)? loaded,
-    TResult Function(String message)? error,
+    TResult Function()? loaded,
+    TResult Function()? error,
   }) {
     return initial?.call();
   }
@@ -175,8 +171,8 @@ class _$_Initial implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Tentang tentang)? loaded,
-    TResult Function(String message)? error,
+    TResult Function()? loaded,
+    TResult Function()? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -223,7 +219,7 @@ class _$_Initial implements _Initial {
   }
 }
 
-abstract class _Initial implements TentangKamiState {
+abstract class _Initial implements ImageHandlerState {
   const factory _Initial() = _$_Initial;
 }
 
@@ -234,7 +230,7 @@ abstract class _$LoadingCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$LoadingCopyWithImpl<$Res> extends _$TentangKamiStateCopyWithImpl<$Res>
+class __$LoadingCopyWithImpl<$Res> extends _$ImageHandlerStateCopyWithImpl<$Res>
     implements _$LoadingCopyWith<$Res> {
   __$LoadingCopyWithImpl(_Loading _value, $Res Function(_Loading) _then)
       : super(_value, (v) => _then(v as _Loading));
@@ -250,7 +246,7 @@ class _$_Loading implements _Loading {
 
   @override
   String toString() {
-    return 'TentangKamiState.loading()';
+    return 'ImageHandlerState.loading()';
   }
 
   @override
@@ -267,8 +263,8 @@ class _$_Loading implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Tentang tentang) loaded,
-    required TResult Function(String message) error,
+    required TResult Function() loaded,
+    required TResult Function() error,
   }) {
     return loading();
   }
@@ -278,8 +274,8 @@ class _$_Loading implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Tentang tentang)? loaded,
-    TResult Function(String message)? error,
+    TResult Function()? loaded,
+    TResult Function()? error,
   }) {
     return loading?.call();
   }
@@ -289,8 +285,8 @@ class _$_Loading implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Tentang tentang)? loaded,
-    TResult Function(String message)? error,
+    TResult Function()? loaded,
+    TResult Function()? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -337,7 +333,7 @@ class _$_Loading implements _Loading {
   }
 }
 
-abstract class _Loading implements TentangKamiState {
+abstract class _Loading implements ImageHandlerState {
   const factory _Loading() = _$_Loading;
 }
 
@@ -345,70 +341,46 @@ abstract class _Loading implements TentangKamiState {
 abstract class _$LoadedCopyWith<$Res> {
   factory _$LoadedCopyWith(_Loaded value, $Res Function(_Loaded) then) =
       __$LoadedCopyWithImpl<$Res>;
-  $Res call({Tentang tentang});
 }
 
 /// @nodoc
-class __$LoadedCopyWithImpl<$Res> extends _$TentangKamiStateCopyWithImpl<$Res>
+class __$LoadedCopyWithImpl<$Res> extends _$ImageHandlerStateCopyWithImpl<$Res>
     implements _$LoadedCopyWith<$Res> {
   __$LoadedCopyWithImpl(_Loaded _value, $Res Function(_Loaded) _then)
       : super(_value, (v) => _then(v as _Loaded));
 
   @override
   _Loaded get _value => super._value as _Loaded;
-
-  @override
-  $Res call({
-    Object? tentang = freezed,
-  }) {
-    return _then(_Loaded(
-      tentang == freezed
-          ? _value.tentang
-          : tentang // ignore: cast_nullable_to_non_nullable
-              as Tentang,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$_Loaded implements _Loaded {
-  const _$_Loaded(this.tentang);
-
-  @override
-  final Tentang tentang;
+  const _$_Loaded();
 
   @override
   String toString() {
-    return 'TentangKamiState.loaded(tentang: $tentang)';
+    return 'ImageHandlerState.loaded()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _Loaded &&
-            const DeepCollectionEquality().equals(other.tentang, tentang));
+        (other.runtimeType == runtimeType && other is _Loaded);
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(tentang));
-
-  @JsonKey(ignore: true)
-  @override
-  _$LoadedCopyWith<_Loaded> get copyWith =>
-      __$LoadedCopyWithImpl<_Loaded>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Tentang tentang) loaded,
-    required TResult Function(String message) error,
+    required TResult Function() loaded,
+    required TResult Function() error,
   }) {
-    return loaded(tentang);
+    return loaded();
   }
 
   @override
@@ -416,10 +388,10 @@ class _$_Loaded implements _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Tentang tentang)? loaded,
-    TResult Function(String message)? error,
+    TResult Function()? loaded,
+    TResult Function()? error,
   }) {
-    return loaded?.call(tentang);
+    return loaded?.call();
   }
 
   @override
@@ -427,12 +399,12 @@ class _$_Loaded implements _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Tentang tentang)? loaded,
-    TResult Function(String message)? error,
+    TResult Function()? loaded,
+    TResult Function()? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(tentang);
+      return loaded();
     }
     return orElse();
   }
@@ -475,82 +447,54 @@ class _$_Loaded implements _Loaded {
   }
 }
 
-abstract class _Loaded implements TentangKamiState {
-  const factory _Loaded(Tentang tentang) = _$_Loaded;
-
-  Tentang get tentang;
-  @JsonKey(ignore: true)
-  _$LoadedCopyWith<_Loaded> get copyWith => throw _privateConstructorUsedError;
+abstract class _Loaded implements ImageHandlerState {
+  const factory _Loaded() = _$_Loaded;
 }
 
 /// @nodoc
 abstract class _$ErrorCopyWith<$Res> {
   factory _$ErrorCopyWith(_Error value, $Res Function(_Error) then) =
       __$ErrorCopyWithImpl<$Res>;
-  $Res call({String message});
 }
 
 /// @nodoc
-class __$ErrorCopyWithImpl<$Res> extends _$TentangKamiStateCopyWithImpl<$Res>
+class __$ErrorCopyWithImpl<$Res> extends _$ImageHandlerStateCopyWithImpl<$Res>
     implements _$ErrorCopyWith<$Res> {
   __$ErrorCopyWithImpl(_Error _value, $Res Function(_Error) _then)
       : super(_value, (v) => _then(v as _Error));
 
   @override
   _Error get _value => super._value as _Error;
-
-  @override
-  $Res call({
-    Object? message = freezed,
-  }) {
-    return _then(_Error(
-      message == freezed
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$_Error implements _Error {
-  const _$_Error(this.message);
-
-  @override
-  final String message;
+  const _$_Error();
 
   @override
   String toString() {
-    return 'TentangKamiState.error(message: $message)';
+    return 'ImageHandlerState.error()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _Error &&
-            const DeepCollectionEquality().equals(other.message, message));
+        (other.runtimeType == runtimeType && other is _Error);
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(message));
-
-  @JsonKey(ignore: true)
-  @override
-  _$ErrorCopyWith<_Error> get copyWith =>
-      __$ErrorCopyWithImpl<_Error>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Tentang tentang) loaded,
-    required TResult Function(String message) error,
+    required TResult Function() loaded,
+    required TResult Function() error,
   }) {
-    return error(message);
+    return error();
   }
 
   @override
@@ -558,10 +502,10 @@ class _$_Error implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Tentang tentang)? loaded,
-    TResult Function(String message)? error,
+    TResult Function()? loaded,
+    TResult Function()? error,
   }) {
-    return error?.call(message);
+    return error?.call();
   }
 
   @override
@@ -569,12 +513,12 @@ class _$_Error implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Tentang tentang)? loaded,
-    TResult Function(String message)? error,
+    TResult Function()? loaded,
+    TResult Function()? error,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error(message);
+      return error();
     }
     return orElse();
   }
@@ -617,10 +561,6 @@ class _$_Error implements _Error {
   }
 }
 
-abstract class _Error implements TentangKamiState {
-  const factory _Error(String message) = _$_Error;
-
-  String get message;
-  @JsonKey(ignore: true)
-  _$ErrorCopyWith<_Error> get copyWith => throw _privateConstructorUsedError;
+abstract class _Error implements ImageHandlerState {
+  const factory _Error() = _$_Error;
 }

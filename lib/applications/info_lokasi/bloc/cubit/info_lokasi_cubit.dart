@@ -152,6 +152,7 @@ class InfoLokasiCubit extends Cubit<InfoLokasiState> {
   }
 
   void addLokasi(String userId) async {
+    final deskripsiText = await deskripsi.getText();
     emit(const InfoLokasiState.loading());
     final locationRequest = LocationRequest(
         userId: userId,
@@ -170,7 +171,7 @@ class InfoLokasiCubit extends Cubit<InfoLokasiState> {
         direktur: direktur.text,
         tglAkreditasi: DateTime.parse(tanggalAkreditasi.text),
         status: status,
-        deskripsi: 'asasahisashui',
+        deskripsi: deskripsiText,
         hariMasuk: 'Senin',
         masuk: jamMasuk.text,
         selesai: jamKeluar.text,

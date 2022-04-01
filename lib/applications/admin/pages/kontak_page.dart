@@ -64,36 +64,36 @@ class _KontakLayout extends StatelessWidget {
                     ),
                     const SizedBox(height: 12),
                     'Hari Masuk'.text.base.bold.make(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        DropdownButtonFormField<String>(
-                          value: infoKontak.hari1,
-                          items: [
-                            ...listHari.map(
-                              (e) => DropdownMenuItem<String>(
-                                value: e,
-                                child: e.text.base.make(),
-                              ),
-                            ),
-                          ],
-                          onChanged: (e) {},
-                        ).box.width(Get.width / 2.5).make().pOnly(bottom: 10),
-                        'S/D'.text.base.make(),
-                        DropdownButtonFormField<String>(
-                          value: infoKontak.hari2,
-                          items: [
-                            ...listHari.map(
-                              (e) => DropdownMenuItem(
-                                value: e,
-                                child: e.text.base.make(),
-                              ),
-                            ),
-                          ],
-                          onChanged: (e) {},
-                        ).box.width(Get.width / 2.5).make().pOnly(bottom: 10),
-                      ],
-                    ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //   children: [
+                    //     DropdownButtonFormField<String>(
+                    //       value: infoKontak.hari1,
+                    //       items: [
+                    //         ...listHari.map(
+                    //           (e) => DropdownMenuItem<String>(
+                    //             value: e,
+                    //             child: e.text.base.make(),
+                    //           ),
+                    //         ),
+                    //       ],
+                    //       onChanged: (e) {},
+                    //     ).box.width(Get.width / 2.5).make().pOnly(bottom: 10),
+                    //     'S/D'.text.base.make(),
+                    //     DropdownButtonFormField<String>(
+                    //       value: infoKontak.hari2,
+                    //       items: [
+                    //         ...listHari.map(
+                    //           (e) => DropdownMenuItem(
+                    //             value: e,
+                    //             child: e.text.base.make(),
+                    //           ),
+                    //         ),
+                    //       ],
+                    //       onChanged: (e) {},
+                    //     ).box.width(Get.width / 2.5).make().pOnly(bottom: 10),
+                    //   ],
+                    // ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

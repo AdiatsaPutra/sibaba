@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:sibaba/applications/admin/models/user.dart';
 import 'package:sibaba/applications/admin/pages/lokasi/add_lokasi_page.dart';
+import 'package:sibaba/applications/admin/pages/lokasi/detail_lokasi_page.dart';
 import 'package:sibaba/applications/info_lokasi/bloc/cubit/info_lokasi_cubit.dart';
 import 'package:sibaba/applications/info_lokasi/model/location.dart';
 import 'package:sibaba/infrastructures/refresh/cubit/refresh_cubit.dart';
@@ -94,10 +95,10 @@ class _LokasiLayout extends StatelessWidget {
               header: 'Data Lokasi'.text.xl.make(),
               columns: const [
                 DataColumn(label: Text('No')),
+                DataColumn(label: Text('Action')),
                 DataColumn(label: Text('ID')),
                 DataColumn(label: Text('Name')),
                 DataColumn(label: Text('Email')),
-                DataColumn(label: Text('Action')),
               ],
               columnSpacing: 50,
               horizontalMargin: 20,
@@ -112,10 +113,7 @@ class _LokasiLayout extends StatelessWidget {
         backgroundColor: primaryColor,
         onPressed: () {
           Get.to(
-            () => AddLokasiPage(
-              isEdit: false,
-              user: user,
-            ),
+            () => AddLokasiPage(isEdit: false, user: user),
           );
         },
         label: HStack([
@@ -144,49 +142,46 @@ class LokasiData extends DataTableSource {
   int get selectedRowCount => 0;
   @override
   DataRow getRow(int index) {
-    return DataRow(cells: [
-      DataCell((index + 1).toString().text.isIntrinsic.make()),
-      DataCell(locations[index].locationId.toString().text.isIntrinsic.make()),
-      DataCell(locations[index].nama!.text.isIntrinsic.make()),
-      DataCell(locations[index].email!.text.isIntrinsic.make()),
-      DataCell(
-        HStack([
-          GestureDetector(
-            onTap: () {
-              Get.to(
-                () => AddLokasiPage(
-                  isEdit: true,
-                  slug: locations[index].locSlug!,
-                  user: user,
-                ),
-              );
-            },
-            child: VxCapsule(
-              width: 50,
-              height: 20,
-              backgroundColor: Colors.yellow,
-              child: 'Edit'.text.sm.makeCentered(),
-            ),
+    return DataRow(
+        onSelectChanged: (bool? selected) {
+          if (selected!) {
+            Get.to(
+              () => DetailLokasiPage(
+                slug: locations[index].locSlug!,
+              ),
+            );
+          }
+        },
+        cells: [
+          DataCell((index + 1).toString().text.isIntrinsic.make()),
+          DataCell(
+            HStack([
+              GestureDetector(
+                onTap: () {
+                  Get.to(
+                    () => AddLokasiPage(isEdit: true, user: user),
+                  );
+                },
+                child: const Icon(Icons.edit, color: Colors.yellow),
+              ),
+              const SizedBox(width: 10),
+              GestureDetector(
+                onTap: () {
+                  PopupMessages.confirmDeletePopup(context, () {
+                    Navigator.pop(context);
+                    context
+                        .read<InfoLokasiCubit>()
+                        .deleteLokasi(locations[index].locationId!);
+                  });
+                },
+                child: const Icon(Icons.delete, color: Colors.red),
+              ),
+            ]),
           ),
-          const SizedBox(width: 10),
-          GestureDetector(
-            onTap: () {
-              PopupMessages.confirmDeletePopup(context, () {
-                Navigator.pop(context);
-                context
-                    .read<InfoLokasiCubit>()
-                    .deleteLokasi(locations[index].locationId!);
-              });
-            },
-            child: VxCapsule(
-              width: 50,
-              height: 20,
-              backgroundColor: Colors.red,
-              child: 'Delete'.text.sm.color(Colors.white).makeCentered(),
-            ),
-          ),
-        ]),
-      ),
-    ]);
+          DataCell(
+              locations[index].locationId.toString().text.isIntrinsic.make()),
+          DataCell(locations[index].nama!.text.isIntrinsic.make()),
+          DataCell(locations[index].email!.text.isIntrinsic.make()),
+        ]);
   }
 }

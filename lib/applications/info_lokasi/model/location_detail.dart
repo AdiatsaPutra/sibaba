@@ -72,7 +72,7 @@ class DetailLokasiData {
   final String tmpBelajar;
   final String email;
   final String akreditasi;
-  final DateTime tglBerdiri;
+  final DateTime? tglBerdiri;
   final String direktur;
   final DateTime tglAkreditasi;
   final String status;
@@ -119,7 +119,7 @@ class DetailLokasiData {
         "Email": email,
         "Akreditasi": akreditasi,
         "Tgl_berdiri":
-            "${tglBerdiri.year.toString().padLeft(4, '0')}-${tglBerdiri.month.toString().padLeft(2, '0')}-${tglBerdiri.day.toString().padLeft(2, '0')}",
+            "${tglBerdiri!.year.toString().padLeft(4, '0')}-${tglBerdiri!.month.toString().padLeft(2, '0')}-${tglBerdiri!.day.toString().padLeft(2, '0')}",
         "Direktur": direktur,
         "Tgl_akreditasi":
             "${tglAkreditasi.year.toString().padLeft(4, '0')}-${tglAkreditasi.month.toString().padLeft(2, '0')}-${tglAkreditasi.day.toString().padLeft(2, '0')}",

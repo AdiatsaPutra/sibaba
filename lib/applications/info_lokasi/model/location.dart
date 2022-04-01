@@ -63,7 +63,9 @@ class Location extends Equatable {
         tmpBelajar: json["Tmp_belajar"],
         email: json["Email"] == null ? null : json["Email"],
         akreditasi: json["Akreditasi"],
-        tglBerdiri: DateTime.parse(json["Tgl_berdiri"]),
+        tglBerdiri: json["Tgl_berdiri"] == null
+            ? null
+            : DateTime.parse(json["Tgl_berdiri"]),
         direktur: json["Direktur"],
         tglAkreditasi: json["Tgl_akreditasi"] == null
             ? null
