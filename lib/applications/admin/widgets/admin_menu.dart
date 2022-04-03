@@ -4,14 +4,7 @@ import 'package:sibaba/applications/admin/models/user.dart';
 import 'package:sibaba/applications/admin/pages/data_santri_page.dart';
 import 'package:sibaba/applications/admin/pages/data_unit_page.dart';
 import 'package:sibaba/applications/admin/pages/data_ustadz_page.dart';
-import 'package:sibaba/applications/admin/pages/event_page.dart';
 import 'package:sibaba/applications/admin/pages/gallery_page.dart';
-import 'package:sibaba/applications/admin/pages/kapanewon_page.dart';
-import 'package:sibaba/applications/admin/pages/kelurahan_page.dart';
-import 'package:sibaba/applications/admin/pages/kontak_page.dart';
-import 'package:sibaba/applications/admin/pages/pengguna_page.dart';
-import 'package:sibaba/applications/admin/pages/pesan_page.dart';
-import 'package:sibaba/applications/admin/pages/profil_website_page.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import 'kategori_item.dart';
@@ -53,7 +46,7 @@ class AdminMenu extends StatelessWidget {
             icon: Icons.image,
             title: 'Galeri',
             onTap: () {
-              Get.to(() => const GalleryPage());
+              Get.to(() => GalleryPage(u: user));
             },
           ),
         ],

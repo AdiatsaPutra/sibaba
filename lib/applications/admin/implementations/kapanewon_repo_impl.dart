@@ -1,10 +1,7 @@
 import 'package:injectable/injectable.dart';
-import 'package:logger/logger.dart';
 import 'package:sibaba/applications/admin/models/kapanewon.dart';
-import 'package:sibaba/applications/admin/models/user.dart';
 import 'package:sibaba/applications/admin/exception/admin_exception.dart';
 import 'package:dartz/dartz.dart';
-import 'package:sibaba/applications/admin/repositories/admin_user_repo.dart';
 import 'package:sibaba/applications/admin/repositories/kapanewon_repo.dart';
 import 'package:sibaba/infrastructures/api.dart';
 

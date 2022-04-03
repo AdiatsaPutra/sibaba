@@ -98,7 +98,7 @@ class SuperadminMenu extends StatelessWidget {
             icon: Icons.image,
             title: 'Galeri',
             onTap: () {
-              Get.to(() => const GalleryPage());
+              Get.to(() => GalleryPage(u: user));
             },
           ),
           KategoriItem(
