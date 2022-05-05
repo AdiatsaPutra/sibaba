@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:sibaba/applications/admin/models/ustadz.dart';
 import 'package:sibaba/applications/admin/pages/detail_data_ustadz_page.dart';
+import 'package:sibaba/applications/admin/pages/ustadz/add_ustadz_page.dart';
 import 'package:sibaba/injection.dart';
 import 'package:sibaba/presentation/color_constant.dart';
 import 'package:sibaba/presentation/widgets/custom_appbar.dart';
@@ -34,38 +35,7 @@ class DataUstadzPage extends StatelessWidget {
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: primaryColor,
         onPressed: () {
-          final res = VxDialog.showCustom(context,
-              child: Dialog(
-                insetPadding: const EdgeInsets.all(10),
-                backgroundColor: Colors.white,
-                child: VStack([
-                  'Input Data Ustadz'.text.xl.bold.make().pOnly(bottom: 10),
-                  VStack([
-                    'Nama Data Ustadz'.text.base.bold.make(),
-                    TextFormField()
-                        .stylized(hint: 'Masukkan Nama Data Ustadz')
-                        .pOnly(bottom: 10),
-                    'Kode Data Ustadz'.text.base.bold.make(),
-                    TextFormField()
-                        .stylized(hint: 'Kode Pos Data Ustadz')
-                        .pOnly(bottom: 10),
-                  ]),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        OutlinedButton(
-                          onPressed: () {
-                            Navigator.pop(context, true);
-                          },
-                          child: 'Batal'.text.base.color(Colors.grey).make(),
-                        ).box.width(Get.width / 3).make(),
-                        ElevatedButton(
-                          onPressed: () {},
-                          child: 'Simpan'.text.base.make(),
-                        ).box.width(Get.width / 3).make(),
-                      ])
-                ]).p16(),
-              ));
+          Get.to(() => const AddUstadzPage());
         },
         label: HStack([
           const Icon(Icons.add),

@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:sibaba/presentation/color_constant.dart';
 
 class FormFields {
-  static textFormField({
-    required TextEditingController controller,
-    String? hint,
-    bool isObscure = false,
-    String? Function(String?)? validator,
-    int minLines = 1,
-    int maxLines = 1,
-  }) {
+  static textFormField(
+      {required TextEditingController controller,
+      String? hint,
+      bool isObscure = false,
+      String? Function(String?)? validator,
+      int minLines = 1,
+      int maxLines = 1,
+      bool readOnly = false,
+      VoidCallback? onTap}) {
     return TextFormField(
       controller: controller,
       obscureText: isObscure,
@@ -29,6 +30,8 @@ class FormFields {
         focusColor: primaryColor,
         contentPadding: const EdgeInsets.all(10),
       ),
+      onTap: onTap,
+      readOnly: readOnly,
     );
   }
 }

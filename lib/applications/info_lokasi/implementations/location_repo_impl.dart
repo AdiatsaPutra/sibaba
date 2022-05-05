@@ -43,7 +43,7 @@ class LocationRepoImpl extends LocationRepo {
       if (response.statusCode != 200) {
         throw LocationException(response.data);
       }
-      Logger().i(response);
+      Logger().e(response.data);
       final data = response.data['data'];
       final locationDetail = LocationDetail.fromMap(data);
       return right(locationDetail);

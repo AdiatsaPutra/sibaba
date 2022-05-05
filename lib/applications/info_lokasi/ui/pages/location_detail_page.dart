@@ -113,12 +113,12 @@ class _LocationDetailLayout extends StatelessWidget {
                   //         .bold
                   //         .make(),
                   location.detailLokasi.skPendirian.text.lg.bold.make(),
-                  formatter
-                      .format(location.detailLokasi.tglAkreditasi)
-                      .text
-                      .lg
-                      .bold
-                      .make(),
+                  // formatter
+                  //     .format(location.detailLokasi.tglAkreditasi)
+                  //     .text
+                  //     .lg
+                  //     .bold
+                  //     .make(),
                 ]),
               ]),
             ]).p16(),

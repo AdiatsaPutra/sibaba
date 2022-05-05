@@ -93,21 +93,22 @@ class _DetailLokasiLayout extends StatelessWidget {
                   location.detailLokasi.direktur.text.lg.bold.make(),
                   location.detailLokasi.email.text.lg.bold.make(),
                   location.detailLokasi.telpUnit.text.lg.bold.make(),
-                  location.detailLokasi.tglBerdiri == null
-                      ? ''.text.base.make()
-                      : formatter
-                          .format(location.detailLokasi.tglBerdiri!)
-                          .text
-                          .lg
-                          .bold
-                          .make(),
-                  location.detailLokasi.skPendirian.text.lg.bold.make(),
                   formatter
-                      .format(location.detailLokasi.tglAkreditasi)
+                      .format(location.detailLokasi.tglBerdiri!)
                       .text
                       .lg
                       .bold
                       .make(),
+                  location.detailLokasi.skPendirian.text.lg.bold.make(),
+                  location.detailLokasi.tglAkreditasi == null
+                      ? '-'.text.base.make()
+                      : formatter
+                          .format(DateTime.parse(
+                              location.detailLokasi.tglAkreditasi!))
+                          .text
+                          .lg
+                          .bold
+                          .make(),
                 ]),
               ]),
             ]).p16(),

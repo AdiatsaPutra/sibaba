@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:intl/intl.dart';
+import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../../../infrastructures/constant.dart';
@@ -373,22 +374,12 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
                 .pOnly(bottom: 10),
             const SizedBox(height: 10),
             'Hari Masuk'.text.base.bold.make(),
-            DropdownButtonFormField<String>(
-              hint: 'Hari Masuk'.text.base.color(Colors.grey).make(),
-              validator: (value) {
-                if (value == "") {
-                  return 'Wajib diisi';
-                }
-              },
-              items: [
-                ...listHari.map(
-                  (e) => DropdownMenuItem(
-                    value: e,
-                    child: e.text.base.make(),
-                  ),
-                ),
-              ],
-              onChanged: (e) {},
+            MultiSelectDialogField(
+              items: listHari.map((e) => MultiSelectItem(e, e)).toList(),
+              listType: MultiSelectListType.CHIP,
+              onConfirm: (values) {},
+              buttonIcon: null,
+              searchHint: 'Pilih Hari Masuk',
             ).pOnly(bottom: 10),
             const SizedBox(height: 10),
             Row(

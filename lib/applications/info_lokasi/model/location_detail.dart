@@ -24,15 +24,6 @@ class LocationDetail {
         // ustadzs:
         //     List<Ustadz>.from(json["ustadzs"].map((x) => Ustadz.fromMap(x))),
       );
-
-  Map<String, dynamic> toMap() => {
-        // "foto": List<dynamic>.from(foto.map((x) => x.toMap())),
-        "maps": maps.toMap(),
-        "waktu-masuk": waktuMasuk,
-        "waktu-selesai": waktuSelesai,
-        "detail-lokasi": detailLokasi.toMap(),
-        // "ustadzs": List<dynamic>.from(ustadzs.map((x) => x.toMap())),
-      };
 }
 
 class DetailLokasiData {
@@ -52,7 +43,7 @@ class DetailLokasiData {
     required this.akreditasi,
     required this.tglBerdiri,
     required this.direktur,
-    required this.tglAkreditasi,
+    this.tglAkreditasi = '',
     required this.status,
     required this.deskripsi,
     required this.createdAt,
@@ -74,7 +65,7 @@ class DetailLokasiData {
   final String akreditasi;
   final DateTime? tglBerdiri;
   final String direktur;
-  final DateTime tglAkreditasi;
+  final dynamic tglAkreditasi;
   final String status;
   final String deskripsi;
   final DateTime createdAt;
@@ -97,37 +88,12 @@ class DetailLokasiData {
         akreditasi: json["Akreditasi"],
         tglBerdiri: DateTime.parse(json["Tgl_berdiri"]),
         direktur: json["Direktur"],
-        tglAkreditasi: DateTime.parse(json["Tgl_akreditasi"]),
+        tglAkreditasi: json["Tgl_akreditasi"],
         status: json["Status"],
         deskripsi: json["Deskripsi"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
       );
-
-  Map<String, dynamic> toMap() => {
-        "Location_id": locationId,
-        "User_id": userId,
-        "Nspq": nspq,
-        "Area_unit": areaUnit,
-        "District_unit": districtUnit,
-        "Nama": nama,
-        "Loc_slug": locSlug,
-        "Alamat": alamat,
-        "Telp_unit": telpUnit,
-        "Sk_pendirian": skPendirian,
-        "Tmp_belajar": tmpBelajar,
-        "Email": email,
-        "Akreditasi": akreditasi,
-        "Tgl_berdiri":
-            "${tglBerdiri!.year.toString().padLeft(4, '0')}-${tglBerdiri!.month.toString().padLeft(2, '0')}-${tglBerdiri!.day.toString().padLeft(2, '0')}",
-        "Direktur": direktur,
-        "Tgl_akreditasi":
-            "${tglAkreditasi.year.toString().padLeft(4, '0')}-${tglAkreditasi.month.toString().padLeft(2, '0')}-${tglAkreditasi.day.toString().padLeft(2, '0')}",
-        "Status": status,
-        "Deskripsi": deskripsi,
-        "created_at": createdAt.toIso8601String(),
-        "updated_at": updatedAt.toIso8601String(),
-      };
 }
 
 // class Foto {

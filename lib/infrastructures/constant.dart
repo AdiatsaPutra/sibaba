@@ -1,5 +1,6 @@
 const List<String> akreditasi = ['A', 'B', 'C', 'Belum Terakreditasi'];
 const List<String> status = ['Aktif', 'Tidak Aktif'];
+const List<String> jenisKelamin = ['Laki-laki', 'Perempuan'];
 
 const List<String> listHari = [
   'senin',
