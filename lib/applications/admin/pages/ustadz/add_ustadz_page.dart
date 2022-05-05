@@ -2,6 +2,7 @@ import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:sibaba/applications/admin/widgets/ustadz/ustadz_pendidikan_formal_form.dart';
 import 'package:sibaba/infrastructures/constant.dart';
 import 'package:sibaba/injection.dart';
 import 'package:sibaba/presentation/generic_selector.dart';
@@ -112,7 +113,7 @@ class _AddUstadzLayoutState extends State<_AddUstadzLayout> {
 
   List<Step> getSteps(AddUstadzCubit cubit, ImageHandlerCubit imageHandler) => [
         Step(
-          title: 'Isi Data TPA'.text.base.make(),
+          title: 'Identitas'.text.base.make(),
           content: VStack([
             const SizedBox(height: 10),
             'Lokasi'.text.base.bold.make(),
@@ -340,8 +341,33 @@ class _AddUstadzLayoutState extends State<_AddUstadzLayout> {
           state: _currentStep >= 1 ? StepState.complete : StepState.disabled,
         ),
         Step(
-          title: Text('Mobile Number'),
-          content: 'Content'.text.size(12).make(),
+          title: 'Pendidikan Formal'.text.base.make(),
+          content: VStack([
+            const SizedBox(height: 10),
+            UstadzPendidikanFormalForm(
+              pendidikan: cubit.sd,
+              tahun: cubit.tahunsd,
+              title: 'SD',
+            ),
+            const SizedBox(height: 10),
+            UstadzPendidikanFormalForm(
+              pendidikan: cubit.smp,
+              tahun: cubit.tahunsmp,
+              title: 'SMP',
+            ),
+            const SizedBox(height: 10),
+            UstadzPendidikanFormalForm(
+              pendidikan: cubit.sma,
+              tahun: cubit.tahunsma,
+              title: 'SMA',
+            ),
+            const SizedBox(height: 10),
+            UstadzPendidikanFormalForm(
+              pendidikan: cubit.perguruantinggi,
+              tahun: cubit.tahunperguruantinggi,
+              title: 'Perguruan Tinggi',
+            ),
+          ]),
           isActive: _currentStep >= 0,
           state: _currentStep >= 2 ? StepState.complete : StepState.disabled,
         ),
