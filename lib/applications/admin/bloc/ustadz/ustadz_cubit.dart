@@ -32,4 +32,13 @@ class UstadzCubit extends Cubit<UstadzState> {
       (r) => emit(UstadzState.detailLoaded(r)),
     );
   }
+
+  void deleteUstadz(int ustadzId) async {
+    emit(const UstadzState.loading());
+    final ustadzs = await _ustadzRepo.deleteUstadz(ustadzId);
+    ustadzs.fold(
+      (l) => emit(UstadzState.error(l.message)),
+      (r) => emit(const UstadzState.success()),
+    );
+  }
 }

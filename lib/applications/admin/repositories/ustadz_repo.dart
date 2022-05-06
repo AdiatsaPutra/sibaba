@@ -8,4 +8,5 @@ abstract class UstadzRepo {
   Future<Either<AdminException, List<Ustadz>>> getUstadz();
   Future<Either<AdminException, DetailUstadz>> getUstadzDetail(int ustadzId);
   Future<Either<AdminException, void>> addUstadzs(UstadzRequest ustadzRequest);
+  Future<Either<AdminException, void>> deleteUstadz(int id);
 }

@@ -24,14 +24,28 @@ class DataUstadzPage extends StatelessWidget {
       appBar: const CustomAppbar(title: 'Data Ustadz'),
       body: BlocProvider(
         create: (context) => getIt<UstadzCubit>()..getUstadzs(),
-        child: BlocListener<RefreshCubit, RefreshState>(
-          listener: (context, state) => state.maybeWhen(
-            ustadzAdded: () {
-              context.read<UstadzCubit>().getUstadzs();
-              PopupMessages.successPopup('Berhasil menambahkan ustadz');
-            },
-            orElse: () {},
-          ),
+        child: MultiBlocListener(
+          listeners: [
+            BlocListener<RefreshCubit, RefreshState>(
+              listener: (context, state) => state.maybeWhen(
+                ustadzAdded: () {
+                  context.read<UstadzCubit>().getUstadzs();
+                  PopupMessages.successPopup('Berhasil menambahkan ustadz');
+                },
+                orElse: () {},
+              ),
+            ),
+            BlocListener<UstadzCubit, UstadzState>(
+              listener: (context, state) => state.maybeWhen(
+                success: () {
+                  Navigator.pop(context);
+                  context.read<UstadzCubit>().getUstadzs();
+                  PopupMessages.successPopup('Berhasil menghapus ustadz');
+                },
+                orElse: () {},
+              ),
+            ),
+          ],
           child: BlocBuilder<UstadzCubit, UstadzState>(
             builder: (context, state) => state.maybeWhen(
               loading: () => const CircularProgressIndicator().centered(),
@@ -62,6 +76,7 @@ class _DataUstadzLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<UstadzCubit>();
     return VStack(
       [
         TextFormField(
@@ -74,7 +89,7 @@ class _DataUstadzLayout extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         PaginatedDataTable(
-          source: UstadzData(u, context),
+          source: UstadzData(u, context, cubit),
           header: 'Data Ustadz'.text.xl.make(),
           columns: const [
             DataColumn(label: Text('No')),
@@ -99,8 +114,9 @@ class _DataUstadzLayout extends StatelessWidget {
 class UstadzData extends DataTableSource {
   final BuildContext context;
   final List<Ustadz> u;
+  final UstadzCubit cubit;
 
-  UstadzData(this.u, this.context);
+  UstadzData(this.u, this.context, this.cubit);
 
   @override
   bool get isRowCountApproximate => false;
@@ -128,7 +144,7 @@ class UstadzData extends DataTableSource {
               GestureDetector(
                 onTap: () {
                   PopupMessages.confirmDeletePopup(context, () {
-                    Navigator.pop(context);
+                    cubit.deleteUstadz(u[index].ustadzsId);
                   });
                 },
                 child: const Icon(Icons.delete, color: Colors.red),

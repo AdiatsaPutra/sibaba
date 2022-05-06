@@ -67,4 +67,19 @@ class AdminUstadzImpl extends UstadzRepo {
       return left(AdminException(e.toString()));
     }
   }
+
+  @override
+  Future<Either<AdminException, void>> deleteUstadz(int id) async {
+    try {
+      final response = await dio.delete(
+        baseUrl + "teacher/$id",
+      );
+      if (response.statusCode != 200) {
+        throw AdminException(response.data);
+      }
+      return right(null);
+    } catch (e) {
+      return left(AdminException(e.toString()));
+    }
+  }
 }

@@ -8,7 +8,7 @@ class PopupMessages {
       'Berhasil',
       message,
       backgroundColor: Colors.green[400],
-      colorText: Colors.green[900],
+      colorText: Colors.white,
       margin: const EdgeInsets.all(16),
       padding: const EdgeInsets.all(16),
       snackPosition: SnackPosition.BOTTOM,
@@ -20,8 +20,8 @@ class PopupMessages {
 
   static errorPopup(String message) {
     Get.snackbar('Gagal', message,
-        backgroundColor: Colors.red[400],
-        colorText: Colors.red[900],
+        backgroundColor: Colors.red[900],
+        colorText: Colors.white,
         margin: const EdgeInsets.all(16),
         padding: const EdgeInsets.all(16),
         snackPosition: SnackPosition.BOTTOM,
