@@ -62,11 +62,7 @@ class _DetailDataUstadzLayout extends StatelessWidget {
                   u.ustadzs.ustadzsId.toString().text.base.make(),
                   u.ustadzs.nama.text.base.make(),
                   u.ustadzs.gender.text.base.make(),
-                  Builder(
-                    builder: (context) => u.ustadzs.telpon == null
-                        ? '-'.text.base.make()
-                        : u.ustadzs.telpon.text.base.make(),
-                  ),
+                  u.ustadzs.telpon!.text.base.make(),
                   u.ustadzs.alamat.text.base.make(),
                   u.ustadzs.tmpLahir.text.base.make(),
                   DateFormat('dd-MM-yyyy')
@@ -77,7 +73,7 @@ class _DetailDataUstadzLayout extends StatelessWidget {
                   Builder(
                     builder: (context) => u.ustadzs.email == null
                         ? '-'.text.base.make()
-                        : u.ustadzs.email.text.base.make(),
+                        : u.ustadzs.email!.text.base.make(),
                   ),
                   u.ustadzs.mulaiUstadz.text.base.make(),
                   u.status.status.text.base.make(),
@@ -109,27 +105,27 @@ class _DetailDataUstadzLayout extends StatelessWidget {
                   Builder(
                     builder: (context) => u.pendidikans.tk == null
                         ? '-'.text.base.make()
-                        : u.pendidikans.tk.text.base.make(),
+                        : u.pendidikans.tk!.text.base.make(),
                   ),
                   Builder(
                     builder: (context) => u.pendidikans.sd == null
                         ? '-'.text.base.make()
-                        : u.pendidikans.sd.text.base.make(),
+                        : u.pendidikans.sd!.text.base.make(),
                   ),
                   Builder(
                     builder: (context) => u.pendidikans.smp == null
                         ? '-'.text.base.make()
-                        : u.pendidikans.smp.text.base.make(),
+                        : u.pendidikans.smp!.text.base.make(),
                   ),
                   Builder(
                     builder: (context) => u.pendidikans.sma == null
                         ? '-'.text.base.make()
-                        : u.pendidikans.sma.text.base.make(),
+                        : u.pendidikans.sma!.text.base.make(),
                   ),
                   Builder(
                     builder: (context) => u.pendidikans.pt == null
                         ? '-'.text.base.make()
-                        : u.pendidikans.pt.text.base.make(),
+                        : u.pendidikans.pt!.text.base.make(),
                   ),
                 ]),
                 const SizedBox(width: 50),
@@ -146,27 +142,27 @@ class _DetailDataUstadzLayout extends StatelessWidget {
                   Builder(
                     builder: (context) => u.pendidikans.tkLulus == null
                         ? '-'.text.base.make()
-                        : u.pendidikans.tkLulus.text.base.make(),
+                        : u.pendidikans.tkLulus!.text.base.make(),
                   ),
                   Builder(
                     builder: (context) => u.pendidikans.sdLulus == null
                         ? '-'.text.base.make()
-                        : u.pendidikans.sdLulus.text.base.make(),
+                        : u.pendidikans.sdLulus!.text.base.make(),
                   ),
                   Builder(
                     builder: (context) => u.pendidikans.smpLulus == null
                         ? '-'.text.base.make()
-                        : u.pendidikans.smpLulus.text.base.make(),
+                        : u.pendidikans.smpLulus!.text.base.make(),
                   ),
                   Builder(
                     builder: (context) => u.pendidikans.smaLulus == null
                         ? '-'.text.base.make()
-                        : u.pendidikans.smaLulus.text.base.make(),
+                        : u.pendidikans.smaLulus!.text.base.make(),
                   ),
                   Builder(
                     builder: (context) => u.pendidikans.ptLulus == null
                         ? '-'.text.base.make()
-                        : u.pendidikans.ptLulus.text.base.make(),
+                        : u.pendidikans.ptLulus!.text.base.make(),
                   ),
                 ]),
               ])
@@ -195,22 +191,22 @@ class _DetailDataUstadzLayout extends StatelessWidget {
                   Builder(
                     builder: (context) => u.pelatihans.dasar == null
                         ? '-'.text.base.make()
-                        : u.pelatihans.dasar.text.base.make(),
+                        : u.pelatihans.dasar!.text.base.make(),
                   ),
                   Builder(
                     builder: (context) => u.pelatihans.mahir1 == null
                         ? '-'.text.base.make()
-                        : u.pelatihans.mahir1.text.base.make(),
+                        : u.pelatihans.mahir1!.text.base.make(),
                   ),
                   Builder(
                     builder: (context) => u.pelatihans.mahir2 == null
                         ? '-'.text.base.make()
-                        : u.pelatihans.mahir2.text.base.make(),
+                        : u.pelatihans.mahir2!.text.base.make(),
                   ),
                   Builder(
                     builder: (context) => u.pelatihans.tot == null
                         ? '-'.text.base.make()
-                        : u.pelatihans.tot.text.base.make(),
+                        : u.pelatihans.tot!.text.base.make(),
                   ),
                 ]),
               ])
@@ -240,27 +236,27 @@ class _DetailDataUstadzLayout extends StatelessWidget {
                   Builder(
                     builder: (context) => u.sertifikasis.s1 == null
                         ? '-'.text.base.make()
-                        : u.sertifikasis.s1.text.base.make(),
+                        : u.sertifikasis.s1!.text.base.make(),
                   ),
                   Builder(
                     builder: (context) => u.sertifikasis.s2A == null
                         ? '-'.text.base.make()
-                        : u.sertifikasis.s2A.text.base.make(),
+                        : u.sertifikasis.s2A!.text.base.make(),
                   ),
                   Builder(
                     builder: (context) => u.sertifikasis.s2B == null
                         ? '-'.text.base.make()
-                        : u.sertifikasis.s2B.text.base.make(),
+                        : u.sertifikasis.s2B!.text.base.make(),
                   ),
                   Builder(
                     builder: (context) => u.sertifikasis.s2C == null
                         ? '-'.text.base.make()
-                        : u.sertifikasis.s2C.text.base.make(),
+                        : u.sertifikasis.s2C!.text.base.make(),
                   ),
                   Builder(
                     builder: (context) => u.sertifikasis.s3 == null
                         ? '-'.text.base.make()
-                        : u.sertifikasis.s3.text.base.make(),
+                        : u.sertifikasis.s3!.text.base.make(),
                   ),
                 ]),
               ])

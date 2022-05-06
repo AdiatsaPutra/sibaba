@@ -9,9 +9,9 @@ import 'package:sibaba/applications/admin/pages/ustadz/add_ustadz_page.dart';
 import 'package:sibaba/injection.dart';
 import 'package:sibaba/presentation/color_constant.dart';
 import 'package:sibaba/presentation/widgets/custom_appbar.dart';
-import 'package:sibaba/presentation/widgets/sibaba_textfield.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import '../../../infrastructures/refresh/cubit/refresh_cubit.dart';
 import '../../../presentation/popup_messages.dart';
 import '../bloc/ustadz/ustadz_cubit.dart';
 
@@ -24,11 +24,20 @@ class DataUstadzPage extends StatelessWidget {
       appBar: const CustomAppbar(title: 'Data Ustadz'),
       body: BlocProvider(
         create: (context) => getIt<UstadzCubit>()..getUstadzs(),
-        child: BlocBuilder<UstadzCubit, UstadzState>(
-          builder: (context, state) => state.maybeWhen(
-            loading: () => const CircularProgressIndicator().centered(),
-            loaded: (u) => _DataUstadzLayout(u: u),
-            orElse: () => const SizedBox(),
+        child: BlocListener<RefreshCubit, RefreshState>(
+          listener: (context, state) => state.maybeWhen(
+            ustadzAdded: () {
+              context.read<UstadzCubit>().getUstadzs();
+              PopupMessages.successPopup('Berhasil menambahkan ustadz');
+            },
+            orElse: () {},
+          ),
+          child: BlocBuilder<UstadzCubit, UstadzState>(
+            builder: (context, state) => state.maybeWhen(
+              loading: () => const CircularProgressIndicator().centered(),
+              loaded: (u) => _DataUstadzLayout(u: u),
+              orElse: () => const SizedBox(),
+            ),
           ),
         ),
       ),
@@ -81,6 +90,7 @@ class _DataUstadzLayout extends StatelessWidget {
           rowsPerPage: u.length <= 10 ? u.length : 10,
           showCheckboxColumn: false,
         ),
+        const SizedBox(height: 100),
       ],
     ).centered().p16().scrollVertical();
   }

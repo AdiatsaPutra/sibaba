@@ -29,6 +29,16 @@ class _$AddUstadzStateTearOff {
   _Loaded loaded() {
     return const _Loaded();
   }
+
+  _Success success() {
+    return const _Success();
+  }
+
+  _Error error(String message) {
+    return _Error(
+      message,
+    );
+  }
 }
 
 /// @nodoc
@@ -41,6 +51,8 @@ mixin _$AddUstadzState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() loaded,
+    required TResult Function() success,
+    required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -48,6 +60,8 @@ mixin _$AddUstadzState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loaded,
+    TResult Function()? success,
+    TResult Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,6 +69,8 @@ mixin _$AddUstadzState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loaded,
+    TResult Function()? success,
+    TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -63,6 +79,8 @@ mixin _$AddUstadzState {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Error value) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -70,6 +88,8 @@ mixin _$AddUstadzState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -77,6 +97,8 @@ mixin _$AddUstadzState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -140,6 +162,8 @@ class _$_Initial implements _Initial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() loaded,
+    required TResult Function() success,
+    required TResult Function(String message) error,
   }) {
     return initial();
   }
@@ -150,6 +174,8 @@ class _$_Initial implements _Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loaded,
+    TResult Function()? success,
+    TResult Function(String message)? error,
   }) {
     return initial?.call();
   }
@@ -160,6 +186,8 @@ class _$_Initial implements _Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loaded,
+    TResult Function()? success,
+    TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -174,6 +202,8 @@ class _$_Initial implements _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Error value) error,
   }) {
     return initial(this);
   }
@@ -184,6 +214,8 @@ class _$_Initial implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
   }) {
     return initial?.call(this);
   }
@@ -194,6 +226,8 @@ class _$_Initial implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -248,6 +282,8 @@ class _$_Loading implements _Loading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() loaded,
+    required TResult Function() success,
+    required TResult Function(String message) error,
   }) {
     return loading();
   }
@@ -258,6 +294,8 @@ class _$_Loading implements _Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loaded,
+    TResult Function()? success,
+    TResult Function(String message)? error,
   }) {
     return loading?.call();
   }
@@ -268,6 +306,8 @@ class _$_Loading implements _Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loaded,
+    TResult Function()? success,
+    TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -282,6 +322,8 @@ class _$_Loading implements _Loading {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Error value) error,
   }) {
     return loading(this);
   }
@@ -292,6 +334,8 @@ class _$_Loading implements _Loading {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
   }) {
     return loading?.call(this);
   }
@@ -302,6 +346,8 @@ class _$_Loading implements _Loading {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -356,6 +402,8 @@ class _$_Loaded implements _Loaded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() loaded,
+    required TResult Function() success,
+    required TResult Function(String message) error,
   }) {
     return loaded();
   }
@@ -366,6 +414,8 @@ class _$_Loaded implements _Loaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loaded,
+    TResult Function()? success,
+    TResult Function(String message)? error,
   }) {
     return loaded?.call();
   }
@@ -376,6 +426,8 @@ class _$_Loaded implements _Loaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? loaded,
+    TResult Function()? success,
+    TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -390,6 +442,8 @@ class _$_Loaded implements _Loaded {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Error value) error,
   }) {
     return loaded(this);
   }
@@ -400,6 +454,8 @@ class _$_Loaded implements _Loaded {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
   }) {
     return loaded?.call(this);
   }
@@ -410,6 +466,8 @@ class _$_Loaded implements _Loaded {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -421,4 +479,272 @@ class _$_Loaded implements _Loaded {
 
 abstract class _Loaded implements AddUstadzState {
   const factory _Loaded() = _$_Loaded;
+}
+
+/// @nodoc
+abstract class _$SuccessCopyWith<$Res> {
+  factory _$SuccessCopyWith(_Success value, $Res Function(_Success) then) =
+      __$SuccessCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$SuccessCopyWithImpl<$Res> extends _$AddUstadzStateCopyWithImpl<$Res>
+    implements _$SuccessCopyWith<$Res> {
+  __$SuccessCopyWithImpl(_Success _value, $Res Function(_Success) _then)
+      : super(_value, (v) => _then(v as _Success));
+
+  @override
+  _Success get _value => super._value as _Success;
+}
+
+/// @nodoc
+
+class _$_Success implements _Success {
+  const _$_Success();
+
+  @override
+  String toString() {
+    return 'AddUstadzState.success()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _Success);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() loaded,
+    required TResult Function() success,
+    required TResult Function(String message) error,
+  }) {
+    return success();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? loaded,
+    TResult Function()? success,
+    TResult Function(String message)? error,
+  }) {
+    return success?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? loaded,
+    TResult Function()? success,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (success != null) {
+      return success();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Error value) error,
+  }) {
+    return success(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
+  }) {
+    return success?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (success != null) {
+      return success(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Success implements AddUstadzState {
+  const factory _Success() = _$_Success;
+}
+
+/// @nodoc
+abstract class _$ErrorCopyWith<$Res> {
+  factory _$ErrorCopyWith(_Error value, $Res Function(_Error) then) =
+      __$ErrorCopyWithImpl<$Res>;
+  $Res call({String message});
+}
+
+/// @nodoc
+class __$ErrorCopyWithImpl<$Res> extends _$AddUstadzStateCopyWithImpl<$Res>
+    implements _$ErrorCopyWith<$Res> {
+  __$ErrorCopyWithImpl(_Error _value, $Res Function(_Error) _then)
+      : super(_value, (v) => _then(v as _Error));
+
+  @override
+  _Error get _value => super._value as _Error;
+
+  @override
+  $Res call({
+    Object? message = freezed,
+  }) {
+    return _then(_Error(
+      message == freezed
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_Error implements _Error {
+  const _$_Error(this.message);
+
+  @override
+  final String message;
+
+  @override
+  String toString() {
+    return 'AddUstadzState.error(message: $message)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _Error &&
+            const DeepCollectionEquality().equals(other.message, message));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(message));
+
+  @JsonKey(ignore: true)
+  @override
+  _$ErrorCopyWith<_Error> get copyWith =>
+      __$ErrorCopyWithImpl<_Error>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() loaded,
+    required TResult Function() success,
+    required TResult Function(String message) error,
+  }) {
+    return error(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? loaded,
+    TResult Function()? success,
+    TResult Function(String message)? error,
+  }) {
+    return error?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? loaded,
+    TResult Function()? success,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Success value) success,
+    required TResult Function(_Error value) error,
+  }) {
+    return error(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
+  }) {
+    return error?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_Success value)? success,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (error != null) {
+      return error(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Error implements AddUstadzState {
+  const factory _Error(String message) = _$_Error;
+
+  String get message;
+  @JsonKey(ignore: true)
+  _$ErrorCopyWith<_Error> get copyWith => throw _privateConstructorUsedError;
 }

@@ -29,6 +29,10 @@ class _$RefreshStateTearOff {
   _LocationAdded locationAdded() {
     return const _LocationAdded();
   }
+
+  _UstadzAdded ustadzAdded() {
+    return const _UstadzAdded();
+  }
 }
 
 /// @nodoc
@@ -41,6 +45,7 @@ mixin _$RefreshState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() locationAdded,
+    required TResult Function() ustadzAdded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -48,6 +53,7 @@ mixin _$RefreshState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? locationAdded,
+    TResult Function()? ustadzAdded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,6 +61,7 @@ mixin _$RefreshState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? locationAdded,
+    TResult Function()? ustadzAdded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -63,6 +70,7 @@ mixin _$RefreshState {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loaded value) loading,
     required TResult Function(_LocationAdded value) locationAdded,
+    required TResult Function(_UstadzAdded value) ustadzAdded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -70,6 +78,7 @@ mixin _$RefreshState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loaded value)? loading,
     TResult Function(_LocationAdded value)? locationAdded,
+    TResult Function(_UstadzAdded value)? ustadzAdded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -77,6 +86,7 @@ mixin _$RefreshState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loaded value)? loading,
     TResult Function(_LocationAdded value)? locationAdded,
+    TResult Function(_UstadzAdded value)? ustadzAdded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -139,6 +149,7 @@ class _$_Initial implements _Initial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() locationAdded,
+    required TResult Function() ustadzAdded,
   }) {
     return initial();
   }
@@ -149,6 +160,7 @@ class _$_Initial implements _Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? locationAdded,
+    TResult Function()? ustadzAdded,
   }) {
     return initial?.call();
   }
@@ -159,6 +171,7 @@ class _$_Initial implements _Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? locationAdded,
+    TResult Function()? ustadzAdded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -173,6 +186,7 @@ class _$_Initial implements _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loaded value) loading,
     required TResult Function(_LocationAdded value) locationAdded,
+    required TResult Function(_UstadzAdded value) ustadzAdded,
   }) {
     return initial(this);
   }
@@ -183,6 +197,7 @@ class _$_Initial implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loaded value)? loading,
     TResult Function(_LocationAdded value)? locationAdded,
+    TResult Function(_UstadzAdded value)? ustadzAdded,
   }) {
     return initial?.call(this);
   }
@@ -193,6 +208,7 @@ class _$_Initial implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loaded value)? loading,
     TResult Function(_LocationAdded value)? locationAdded,
+    TResult Function(_UstadzAdded value)? ustadzAdded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -247,6 +263,7 @@ class _$_Loaded implements _Loaded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() locationAdded,
+    required TResult Function() ustadzAdded,
   }) {
     return loading();
   }
@@ -257,6 +274,7 @@ class _$_Loaded implements _Loaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? locationAdded,
+    TResult Function()? ustadzAdded,
   }) {
     return loading?.call();
   }
@@ -267,6 +285,7 @@ class _$_Loaded implements _Loaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? locationAdded,
+    TResult Function()? ustadzAdded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -281,6 +300,7 @@ class _$_Loaded implements _Loaded {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loaded value) loading,
     required TResult Function(_LocationAdded value) locationAdded,
+    required TResult Function(_UstadzAdded value) ustadzAdded,
   }) {
     return loading(this);
   }
@@ -291,6 +311,7 @@ class _$_Loaded implements _Loaded {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loaded value)? loading,
     TResult Function(_LocationAdded value)? locationAdded,
+    TResult Function(_UstadzAdded value)? ustadzAdded,
   }) {
     return loading?.call(this);
   }
@@ -301,6 +322,7 @@ class _$_Loaded implements _Loaded {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loaded value)? loading,
     TResult Function(_LocationAdded value)? locationAdded,
+    TResult Function(_UstadzAdded value)? ustadzAdded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -358,6 +380,7 @@ class _$_LocationAdded implements _LocationAdded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() locationAdded,
+    required TResult Function() ustadzAdded,
   }) {
     return locationAdded();
   }
@@ -368,6 +391,7 @@ class _$_LocationAdded implements _LocationAdded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? locationAdded,
+    TResult Function()? ustadzAdded,
   }) {
     return locationAdded?.call();
   }
@@ -378,6 +402,7 @@ class _$_LocationAdded implements _LocationAdded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? locationAdded,
+    TResult Function()? ustadzAdded,
     required TResult orElse(),
   }) {
     if (locationAdded != null) {
@@ -392,6 +417,7 @@ class _$_LocationAdded implements _LocationAdded {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loaded value) loading,
     required TResult Function(_LocationAdded value) locationAdded,
+    required TResult Function(_UstadzAdded value) ustadzAdded,
   }) {
     return locationAdded(this);
   }
@@ -402,6 +428,7 @@ class _$_LocationAdded implements _LocationAdded {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loaded value)? loading,
     TResult Function(_LocationAdded value)? locationAdded,
+    TResult Function(_UstadzAdded value)? ustadzAdded,
   }) {
     return locationAdded?.call(this);
   }
@@ -412,6 +439,7 @@ class _$_LocationAdded implements _LocationAdded {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loaded value)? loading,
     TResult Function(_LocationAdded value)? locationAdded,
+    TResult Function(_UstadzAdded value)? ustadzAdded,
     required TResult orElse(),
   }) {
     if (locationAdded != null) {
@@ -423,4 +451,120 @@ class _$_LocationAdded implements _LocationAdded {
 
 abstract class _LocationAdded implements RefreshState {
   const factory _LocationAdded() = _$_LocationAdded;
+}
+
+/// @nodoc
+abstract class _$UstadzAddedCopyWith<$Res> {
+  factory _$UstadzAddedCopyWith(
+          _UstadzAdded value, $Res Function(_UstadzAdded) then) =
+      __$UstadzAddedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$UstadzAddedCopyWithImpl<$Res> extends _$RefreshStateCopyWithImpl<$Res>
+    implements _$UstadzAddedCopyWith<$Res> {
+  __$UstadzAddedCopyWithImpl(
+      _UstadzAdded _value, $Res Function(_UstadzAdded) _then)
+      : super(_value, (v) => _then(v as _UstadzAdded));
+
+  @override
+  _UstadzAdded get _value => super._value as _UstadzAdded;
+}
+
+/// @nodoc
+
+class _$_UstadzAdded implements _UstadzAdded {
+  const _$_UstadzAdded();
+
+  @override
+  String toString() {
+    return 'RefreshState.ustadzAdded()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _UstadzAdded);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() locationAdded,
+    required TResult Function() ustadzAdded,
+  }) {
+    return ustadzAdded();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? locationAdded,
+    TResult Function()? ustadzAdded,
+  }) {
+    return ustadzAdded?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? locationAdded,
+    TResult Function()? ustadzAdded,
+    required TResult orElse(),
+  }) {
+    if (ustadzAdded != null) {
+      return ustadzAdded();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loaded value) loading,
+    required TResult Function(_LocationAdded value) locationAdded,
+    required TResult Function(_UstadzAdded value) ustadzAdded,
+  }) {
+    return ustadzAdded(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loaded value)? loading,
+    TResult Function(_LocationAdded value)? locationAdded,
+    TResult Function(_UstadzAdded value)? ustadzAdded,
+  }) {
+    return ustadzAdded?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loaded value)? loading,
+    TResult Function(_LocationAdded value)? locationAdded,
+    TResult Function(_UstadzAdded value)? ustadzAdded,
+    required TResult orElse(),
+  }) {
+    if (ustadzAdded != null) {
+      return ustadzAdded(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UstadzAdded implements RefreshState {
+  const factory _UstadzAdded() = _$_UstadzAdded;
 }

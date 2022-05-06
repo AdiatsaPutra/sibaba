@@ -52,10 +52,10 @@ class Pelatihans {
 
   final int pelatihanId;
   final int ustadzsId;
-  final dynamic dasar;
-  final dynamic mahir1;
-  final dynamic mahir2;
-  final dynamic tot;
+  final String? dasar;
+  final String? mahir1;
+  final String? mahir2;
+  final String? tot;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -102,16 +102,16 @@ class Pendidikans {
 
   final int pendidikanId;
   final int ustadzsId;
-  final dynamic tk;
-  final dynamic tkLulus;
-  final dynamic sd;
-  final dynamic sdLulus;
-  final dynamic smp;
-  final dynamic smpLulus;
-  final dynamic sma;
-  final dynamic smaLulus;
-  final dynamic pt;
-  final dynamic ptLulus;
+  final String? tk;
+  final String? tkLulus;
+  final String? sd;
+  final String? sdLulus;
+  final String? smp;
+  final String? smpLulus;
+  final String? sma;
+  final String? smaLulus;
+  final String? pt;
+  final String? ptLulus;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -197,11 +197,11 @@ class Sertifikasis {
 
   final int sertifikasiId;
   final int ustadzsId;
-  final dynamic s1;
-  final dynamic s2A;
-  final dynamic s2B;
-  final dynamic s2C;
-  final dynamic s3;
+  final String? s1;
+  final String? s2A;
+  final String? s2B;
+  final String? s2C;
+  final String? s3;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -291,8 +291,8 @@ class Ustadzs {
   final String tmpLahir;
   final DateTime tglLahir;
   final String alamat;
-  final dynamic telpon;
-  final dynamic email;
+  final String? telpon;
+  final String? email;
   final String mulaiUstadz;
   final DateTime createdAt;
   final DateTime updatedAt;

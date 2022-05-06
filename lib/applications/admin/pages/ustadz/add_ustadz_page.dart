@@ -2,9 +2,12 @@ import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
 import 'package:sibaba/applications/admin/widgets/ustadz/ustadz_pelatihan_form.dart';
 import 'package:sibaba/applications/admin/widgets/ustadz/ustadz_pendidikan_formal_form.dart';
+import 'package:sibaba/applications/login/bloc/login/login_cubit.dart';
 import 'package:sibaba/infrastructures/constant.dart';
+import 'package:sibaba/infrastructures/refresh/cubit/refresh_cubit.dart';
 import 'package:sibaba/injection.dart';
 import 'package:sibaba/presentation/generic_selector.dart';
 import 'package:sibaba/presentation/widgets/custom_appbar.dart';
@@ -58,7 +61,8 @@ class _AddUstadzLayoutState extends State<_AddUstadzLayout> {
   Widget build(BuildContext context) {
     final cubit = context.read<AddUstadzCubit>();
     final imageHandler = context.read<ImageHandlerCubit>();
-    final isLastStep = _currentStep == getSteps(cubit, imageHandler).length - 1;
+    final isLastStep = _currentStep == 3;
+    Logger().i(isLastStep);
     return Column(
       children: [
         Expanded(
@@ -75,9 +79,29 @@ class _AddUstadzLayoutState extends State<_AddUstadzLayout> {
                   const SizedBox(width: 10),
                   Builder(
                     builder: (context) => isLastStep
-                        ? ElevatedButton(
-                            onPressed: () {},
-                            child: 'Simpan'.text.base.make(),
+                        ? BlocConsumer<AddUstadzCubit, AddUstadzState>(
+                            listener: (context, state) => state.maybeWhen(
+                              success: () {
+                                Navigator.pop(context);
+                                context.read<RefreshCubit>().refreshUstadz();
+                              },
+                              orElse: () {},
+                            ),
+                            builder: (context, state) => state.maybeWhen(
+                              loading: () => ElevatedButton(
+                                onPressed: null,
+                                child: const CircularProgressIndicator()
+                                    .centered(),
+                              ),
+                              orElse: () => ElevatedButton(
+                                onPressed: () {
+                                  cubit.addUstadz(
+                                    context.read<LoginCubit>().user.id,
+                                  );
+                                },
+                                child: 'Simpan'.text.base.make(),
+                              ),
+                            ),
                           ).expand()
                         : ElevatedButton(
                             onPressed: () {
@@ -346,6 +370,12 @@ class _AddUstadzLayoutState extends State<_AddUstadzLayout> {
           title: 'Step 2'.text.base.make(),
           content: VStack([
             'Pendidikan'.text.lg.bold.make(),
+            const SizedBox(height: 20),
+            UstadzPendidikanFormalForm(
+              pendidikan: cubit.tk,
+              tahun: cubit.tahuntk,
+              title: 'TK',
+            ),
             const SizedBox(height: 20),
             UstadzPendidikanFormalForm(
               pendidikan: cubit.sd,
