@@ -2,6 +2,7 @@ import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:sibaba/applications/admin/widgets/ustadz/ustadz_pelatihan_form.dart';
 import 'package:sibaba/applications/admin/widgets/ustadz/ustadz_pendidikan_formal_form.dart';
 import 'package:sibaba/infrastructures/constant.dart';
 import 'package:sibaba/injection.dart';
@@ -104,7 +105,7 @@ class _AddUstadzLayoutState extends State<_AddUstadzLayout> {
   }
 
   continued() {
-    _currentStep < 2 ? setState(() => _currentStep += 1) : null;
+    _currentStep < 3 ? setState(() => _currentStep += 1) : null;
   }
 
   cancel() {
@@ -113,8 +114,9 @@ class _AddUstadzLayoutState extends State<_AddUstadzLayout> {
 
   List<Step> getSteps(AddUstadzCubit cubit, ImageHandlerCubit imageHandler) => [
         Step(
-          title: 'Identitas'.text.base.make(),
+          title: 'Step 1'.text.base.make(),
           content: VStack([
+            'Identitas'.text.lg.bold.make(),
             const SizedBox(height: 10),
             'Lokasi'.text.base.bold.make(),
             BlocBuilder<InfoLokasiCubit, InfoLokasiState>(
@@ -341,27 +343,28 @@ class _AddUstadzLayoutState extends State<_AddUstadzLayout> {
           state: _currentStep >= 1 ? StepState.complete : StepState.disabled,
         ),
         Step(
-          title: 'Pendidikan Formal'.text.base.make(),
+          title: 'Step 2'.text.base.make(),
           content: VStack([
-            const SizedBox(height: 10),
+            'Pendidikan'.text.lg.bold.make(),
+            const SizedBox(height: 20),
             UstadzPendidikanFormalForm(
               pendidikan: cubit.sd,
               tahun: cubit.tahunsd,
               title: 'SD',
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 20),
             UstadzPendidikanFormalForm(
               pendidikan: cubit.smp,
               tahun: cubit.tahunsmp,
               title: 'SMP',
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 20),
             UstadzPendidikanFormalForm(
               pendidikan: cubit.sma,
               tahun: cubit.tahunsma,
               title: 'SMA',
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 20),
             UstadzPendidikanFormalForm(
               pendidikan: cubit.perguruantinggi,
               tahun: cubit.tahunperguruantinggi,
@@ -370,6 +373,67 @@ class _AddUstadzLayoutState extends State<_AddUstadzLayout> {
           ]),
           isActive: _currentStep >= 0,
           state: _currentStep >= 2 ? StepState.complete : StepState.disabled,
+        ),
+        Step(
+          title: 'Step 3'.text.base.make(),
+          content: VStack([
+            'Pelatihan'.text.lg.bold.make(),
+            const SizedBox(height: 20),
+            UstadzTahunForm(
+              controller: cubit.dasar,
+              title: 'Dasar',
+            ),
+            const SizedBox(height: 20),
+            UstadzTahunForm(
+              controller: cubit.mahir,
+              title: 'Mahir 1',
+            ),
+            const SizedBox(height: 20),
+            UstadzTahunForm(
+              controller: cubit.mahir2,
+              title: 'Mahir 2',
+            ),
+            const SizedBox(height: 20),
+            UstadzTahunForm(
+              controller: cubit.tot,
+              title: 'TOT',
+            ),
+          ]),
+          isActive: _currentStep >= 0,
+          state: _currentStep >= 3 ? StepState.complete : StepState.disabled,
+        ),
+        Step(
+          title: 'Step 4'.text.base.make(),
+          content: VStack([
+            'Serifikasi Tartil'.text.lg.bold.make(),
+            const SizedBox(height: 20),
+            UstadzTahunForm(
+              controller: cubit.s1,
+              title: 'S1',
+            ),
+            const SizedBox(height: 20),
+            UstadzTahunForm(
+              controller: cubit.s2a,
+              title: 'S2A',
+            ),
+            const SizedBox(height: 20),
+            UstadzTahunForm(
+              controller: cubit.s2b,
+              title: 'S2B',
+            ),
+            const SizedBox(height: 20),
+            UstadzTahunForm(
+              controller: cubit.s2c,
+              title: 'S2C',
+            ),
+            const SizedBox(height: 20),
+            UstadzTahunForm(
+              controller: cubit.s3,
+              title: 'S3',
+            ),
+          ]),
+          isActive: _currentStep >= 0,
+          state: _currentStep >= 4 ? StepState.complete : StepState.disabled,
         ),
       ];
 }

@@ -27,6 +27,17 @@ class AddUstadzCubit extends Cubit<AddUstadzState> {
   final perguruantinggi = TextEditingController();
   final tahunperguruantinggi = TextEditingController();
 
+  final dasar = TextEditingController();
+  final mahir = TextEditingController();
+  final mahir2 = TextEditingController();
+  final tot = TextEditingController();
+
+  final s1 = TextEditingController();
+  final s2a = TextEditingController();
+  final s2b = TextEditingController();
+  final s2c = TextEditingController();
+  final s3 = TextEditingController();
+
   String jenisKelamin = '';
   String tanggalLahir = '';
   String status = '';
