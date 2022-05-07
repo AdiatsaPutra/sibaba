@@ -22,7 +22,12 @@ class InfoLokasiCubit extends Cubit<InfoLokasiState> {
   List<Location> locationList = [];
   final searchKeyword = TextEditingController();
 
-  final key = GlobalKey<FormState>();
+  List<GlobalKey<FormState>> formKeys = [
+    GlobalKey<FormState>(),
+    GlobalKey<FormState>(),
+    GlobalKey<FormState>(),
+    GlobalKey<FormState>()
+  ];
 
   final nspq = TextEditingController();
   final nama = TextEditingController();
