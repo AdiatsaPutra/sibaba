@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
@@ -43,6 +44,8 @@ class InfoLokasiCubit extends Cubit<InfoLokasiState> {
   final hariMasuk = TextEditingController();
   final jamMasuk = TextEditingController();
   final jamKeluar = TextEditingController();
+  final lat = TextEditingController();
+  final lng = TextEditingController();
 
   DateTime? tglBerdiri;
   DateTime? tglAkreditasi;
@@ -51,6 +54,11 @@ class InfoLokasiCubit extends Cubit<InfoLokasiState> {
 
   String status = '';
   String akreditasi = '';
+
+  void setLocation(LatLng latLng) {
+    lat.text = latLng.latitude.toString();
+    lng.text = latLng.longitude.toString();
+  }
 
   void init({LocationDetail? l}) {
     nspq.text = l!.detailLokasi.nspq;
@@ -180,8 +188,8 @@ class InfoLokasiCubit extends Cubit<InfoLokasiState> {
         hariMasuk: 'Senin',
         masuk: jamMasuk.text,
         selesai: jamKeluar.text,
-        latitude: '23434434234324',
-        longitude: '23423432434');
+        latitude: lat.text,
+        longitude: lng.text);
     Logger().i(locationRequest);
     final location = await _locationRepo.addLocation(locationRequest);
     location.fold(

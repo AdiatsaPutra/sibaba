@@ -1,5 +1,6 @@
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -22,11 +23,16 @@ import '../../../info_lokasi/bloc/cubit/info_lokasi_cubit.dart';
 import '../../models/user.dart';
 
 class AddLokasiPage extends StatelessWidget {
+  final LatLng latLng;
   final bool isEdit;
   final String? slug;
   final User user;
   const AddLokasiPage(
-      {Key? key, this.slug, required this.isEdit, required this.user})
+      {Key? key,
+      this.slug,
+      required this.isEdit,
+      required this.user,
+      required this.latLng})
       : super(key: key);
 
   @override
@@ -39,32 +45,39 @@ class AddLokasiPage extends StatelessWidget {
       body: MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) => MapsCubit(),
+            create: (context) => MapsCubit()
+              ..setInitialPosition(latLng)
+              ..changeMarkerposition(latLng),
           ),
           BlocProvider(
-            create: (context) => LocationCubit()..getLocation(),
+            create: (context) => LocationCubit()..getAddress(latLng),
           ),
         ],
         child: Builder(
-          builder: (context) => isEdit == true
-              ? BlocProvider(
-                  create: (context) =>
-                      getIt<InfoLokasiCubit>()..getLocationDetail(slug!),
-                  child: BlocBuilder<InfoLokasiCubit, InfoLokasiState>(
-                    builder: (context, state) => state.maybeWhen(
-                      loading: () => const LoadingIndicator(isScrollable: true),
-                      detailLoaded: (location) {
-                        context.read<InfoLokasiCubit>().init(l: location);
-                        return _AddLokasiLayout(isEdit: isEdit, user: user);
-                      },
-                      orElse: () => const SizedBox(),
+          builder: (context) {
+            final map = context.read<LocationCubit>();
+            return isEdit == true
+                ? BlocProvider(
+                    create: (context) =>
+                        getIt<InfoLokasiCubit>()..getLocationDetail(slug!),
+                    child: BlocBuilder<InfoLokasiCubit, InfoLokasiState>(
+                      builder: (context, state) => state.maybeWhen(
+                        loading: () =>
+                            const LoadingIndicator(isScrollable: true),
+                        detailLoaded: (location) {
+                          context.read<InfoLokasiCubit>().init(l: location);
+                          return _AddLokasiLayout(isEdit: isEdit, user: user);
+                        },
+                        orElse: () => const SizedBox(),
+                      ),
                     ),
-                  ),
-                )
-              : BlocProvider(
-                  create: (context) => getIt<InfoLokasiCubit>(),
-                  child: _AddLokasiLayout(isEdit: isEdit, user: user),
-                ),
+                  )
+                : BlocProvider(
+                    create: (context) => getIt<InfoLokasiCubit>()
+                      ..setLocation(LatLng(map.lat, map.long)),
+                    child: _AddLokasiLayout(isEdit: isEdit, user: user),
+                  );
+          },
         ),
       ),
     );
@@ -223,6 +236,10 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
                     return 'Wajib diisi';
                   }
                 },
+                keyboardType: TextInputType.number,
+                formatter: [
+                  LengthLimitingTextInputFormatter(13),
+                ],
               ),
               const SizedBox(height: 10),
               'SK Pendirian'.text.base.bold.make(),
@@ -266,6 +283,7 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
                     return 'Wajib diisi';
                   }
                 },
+                keyboardType: TextInputType.emailAddress,
               ),
               const SizedBox(height: 10),
               'Pilih Akreditasi'.text.base.bold.make(),
@@ -511,6 +529,7 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
                               orElse: () {
                                 mapsCubit.changeMarkerposition(langId);
                                 locationCubit.getAddress(langId);
+                                cubit.setLocation(langId);
                               },
                             );
                           },
@@ -520,7 +539,29 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
                     ),
                   ),
                 ).width(Get.width).height(500).make(),
-              )
+              ),
+              const SizedBox(height: 20),
+              HStack([
+                VStack([
+                  'Lattitude'.text.base.bold.make(),
+                  VxBox(
+                    child: FormFields.textFormField(
+                      controller: cubit.lat,
+                      hint: 'Lattitude',
+                    ),
+                  ).make()
+                ]).expand(),
+                const SizedBox(width: 15),
+                VStack([
+                  'Longtitude'.text.base.bold.make(),
+                  VxBox(
+                    child: FormFields.textFormField(
+                      controller: cubit.lat,
+                      hint: 'Longtitude',
+                    ),
+                  ).make()
+                ]).expand()
+              ])
             ]),
           ),
           isActive: _currentStep >= 0,

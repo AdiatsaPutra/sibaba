@@ -3,7 +3,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:geocoding/geocoding.dart' as geo_coding;
-import 'package:logger/logger.dart';
 
 part 'location_state.dart';
 part 'location_cubit.freezed.dart';
@@ -19,9 +18,6 @@ class LocationCubit extends Cubit<LocationState> {
 
   double lat = 0;
   double long = 0;
-
-  String selectedPlace = '';
-  String selectedLocation = '';
 
   Future<void> checkService() async {
     emit(const LocationState.loading());
@@ -60,18 +56,13 @@ class LocationCubit extends Cubit<LocationState> {
     bool status = await checkStatus();
     if (status) {
       locationData = await location.getLocation();
-      Logger().i(locationData);
-      final result = await geo_coding.placemarkFromCoordinates(
+      await geo_coding.placemarkFromCoordinates(
         locationData.latitude!,
         locationData.longitude!,
       );
       lat = locationData.latitude!;
       long = locationData.longitude!;
-      placemarks = result;
-      final place = placemarks!.first;
-      selectedPlace = place.subLocality!;
-      selectedLocation =
-          '${place.locality}, ${place.subAdministrativeArea}, ${place.administrativeArea}';
+
       emit(const LocationState.success());
     }
   }
@@ -79,17 +70,12 @@ class LocationCubit extends Cubit<LocationState> {
   Future<void> getAddress(LatLng latLng) async {
     try {
       emit(const LocationState.loading());
-      final result = await geo_coding.placemarkFromCoordinates(
+      await geo_coding.placemarkFromCoordinates(
         latLng.latitude,
         latLng.longitude,
       );
       lat = latLng.latitude;
       long = latLng.longitude;
-      placemarks = result;
-      final place = placemarks!.first;
-      selectedPlace = place.subLocality!;
-      selectedLocation =
-          '${place.locality}, ${place.subAdministrativeArea}, ${place.administrativeArea}';
       emit(const LocationState.addressFetched());
     } catch (e) {
       emit(LocationState.error(e.toString()));

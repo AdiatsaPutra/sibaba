@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:sibaba/presentation/color_constant.dart';
 
 class FormFields {
@@ -10,7 +11,9 @@ class FormFields {
       int minLines = 1,
       int maxLines = 1,
       bool readOnly = false,
-      VoidCallback? onTap}) {
+      VoidCallback? onTap,
+      TextInputType? keyboardType,
+      List<TextInputFormatter>? formatter}) {
     return TextFormField(
       controller: controller,
       obscureText: isObscure,
@@ -30,6 +33,8 @@ class FormFields {
         focusColor: primaryColor,
         contentPadding: const EdgeInsets.all(10),
       ),
+      keyboardType: keyboardType,
+      inputFormatters: formatter,
       onTap: onTap,
       readOnly: readOnly,
     );

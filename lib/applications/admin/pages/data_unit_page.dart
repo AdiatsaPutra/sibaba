@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:sibaba/applications/admin/bloc/location/location_cubit.dart';
 import 'package:sibaba/applications/admin/models/user.dart';
 import 'package:sibaba/applications/admin/pages/lokasi/add_lokasi_page.dart';
 import 'package:sibaba/applications/admin/pages/lokasi/detail_lokasi_page.dart';
@@ -19,8 +21,15 @@ class LokasiUnitPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<InfoLokasiCubit>()..getLokasi(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => getIt<InfoLokasiCubit>()..getLokasi(),
+        ),
+        BlocProvider(
+          create: (context) => LocationCubit(),
+        ),
+      ],
       child: Scaffold(
         appBar: AppBar(
           title: 'Data Lokasi'.text.xl.color(Colors.white).make(),
@@ -71,6 +80,7 @@ class _LokasiLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<InfoLokasiCubit>();
+    final map = context.read<LocationCubit>();
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: () async {
@@ -109,17 +119,32 @@ class _LokasiLayout extends StatelessWidget {
           ],
         ).centered().p16().scrollVertical(),
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: primaryColor,
-        onPressed: () {
-          Get.to(
-            () => AddLokasiPage(isEdit: false, user: user),
-          );
-        },
-        label: HStack([
-          const Icon(Icons.add),
-          'Tambah Lokasi'.text.base.make(),
-        ]),
+      floatingActionButton: BlocListener<LocationCubit, LocationState>(
+        listener: (context, state) => state.maybeWhen(
+          success: () => Get.to(
+            () => AddLokasiPage(
+              isEdit: false,
+              user: user,
+              latLng: LatLng(map.lat, map.long),
+            ),
+          ),
+          orElse: () {},
+        ),
+        child: FloatingActionButton.extended(
+          backgroundColor: primaryColor,
+          onPressed: () {
+            map.getLocation();
+          },
+          label: BlocBuilder<LocationCubit, LocationState>(
+            builder: (context, state) => state.maybeWhen(
+              loading: () => const CircularProgressIndicator().centered(),
+              orElse: () => HStack([
+                const Icon(Icons.add),
+                'Tambah Lokasi'.text.base.make(),
+              ]),
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -159,7 +184,11 @@ class LokasiData extends DataTableSource {
               GestureDetector(
                 onTap: () {
                   Get.to(
-                    () => AddLokasiPage(isEdit: true, user: user),
+                    () => AddLokasiPage(
+                      isEdit: true,
+                      user: user,
+                      latLng: LatLng(0, 0),
+                    ),
                   );
                 },
                 child: const Icon(Icons.edit, color: Colors.yellow),
