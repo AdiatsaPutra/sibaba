@@ -1,6 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:logger/logger.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sibaba/applications/login/exceptions/login_exceptions.dart';
 import 'package:sibaba/applications/admin/models/user.dart';
 import 'package:sibaba/applications/login/repositories/login_repo.dart';
@@ -32,6 +34,9 @@ class LoginRepoImpl extends LoginRepo {
         throw LoginException(response.data['message']);
       }
       final data = response.data['data'];
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      sharedPreferences.setString('user', data['name']);
       final user = User.fromMap(data);
       return right(user);
     } catch (e) {

@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:sibaba/applications/admin/bloc/user/user_cubit.dart';
 import 'package:sibaba/applications/info_lokasi/bloc/cubit/info_lokasi_cubit.dart';
 import 'package:sibaba/injection.dart';
-import 'package:sibaba/presentation/loading_indicator.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class AdminDashboardInfo extends StatelessWidget {
@@ -18,7 +17,7 @@ class AdminDashboardInfo extends StatelessWidget {
           create: (context) => getIt<UserCubit>()..getUsers(),
         ),
         BlocProvider(
-          create: (context) => getIt<InfoLokasiCubit>()..getLocations(),
+          create: (context) => getIt<InfoLokasiCubit>()..getLokasi(),
         ),
       ],
       child: const _AdminDashboardLayout(),
@@ -47,7 +46,7 @@ class _AdminDashboardLayout extends StatelessWidget {
               builder: (context, state) => state.maybeWhen(
                 loading: () => _buildAdminInfo('0', 'Loading'),
                 loaded: (locations) =>
-                    _buildAdminInfo('${locations.length}', 'Lokasi'),
+                    _buildAdminInfo('${locations.lokasi.length}', 'Lokasi'),
                 orElse: () => const SizedBox(),
               ),
             ),

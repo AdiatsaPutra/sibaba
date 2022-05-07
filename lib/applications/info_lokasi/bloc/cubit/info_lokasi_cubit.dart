@@ -20,7 +20,12 @@ class InfoLokasiCubit extends Cubit<InfoLokasiState> {
 
   final LocationRepo _locationRepo;
 
-  List<Location> locationList = [];
+  Location location = Location(
+    lokasi: [],
+    maps: [],
+    events: [],
+  );
+  List<Lokasi> locationList = [];
   final searchKeyword = TextEditingController();
 
   List<GlobalKey<FormState>> formKeys = [
@@ -120,29 +125,22 @@ class InfoLokasiCubit extends Cubit<InfoLokasiState> {
     emit(const InfoLokasiState.picked());
   }
 
-  void getLocations() async {
-    emit(const InfoLokasiState.loading());
-    final locations = await _locationRepo.getLocations();
-    locations.fold(
-      (l) => locationList.clear(),
-      (r) => locationList.addAll(r),
-    );
-    emit(InfoLokasiState.loaded(locationList));
-  }
-
   void getLokasi() async {
     emit(const InfoLokasiState.loading());
     final locations = await _locationRepo.getLocations();
     locations.fold(
       (l) => emit(InfoLokasiState.error(l.message)),
-      (r) => emit(InfoLokasiState.loaded(r)),
+      (r) {
+        location = r;
+        emit(InfoLokasiState.loaded(r));
+      },
     );
   }
 
   void searchInfoLokasi() {
     emit(const InfoLokasiState.loading());
     if (searchKeyword.text.isEmpty) {
-      emit(InfoLokasiState.loaded(locationList));
+      emit(InfoLokasiState.loaded(location));
     } else {
       final filteredLokasi = locationList
           .where(
@@ -151,7 +149,12 @@ class InfoLokasiCubit extends Cubit<InfoLokasiState> {
                 .contains(searchKeyword.text.toLowerCase()),
           )
           .toList();
-      emit(InfoLokasiState.loaded(filteredLokasi));
+      var filteredLocation = Location(
+        lokasi: filteredLokasi,
+        maps: location.maps,
+        events: location.events,
+      );
+      emit(InfoLokasiState.loaded(filteredLocation));
     }
   }
 

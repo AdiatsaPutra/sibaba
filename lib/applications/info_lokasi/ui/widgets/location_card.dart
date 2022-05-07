@@ -6,7 +6,7 @@ import 'package:sibaba/infrastructures/extensions.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class LocationCard extends StatelessWidget {
-  final Location location;
+  final Lokasi location;
 
   const LocationCard({Key? key, required this.location}) : super(key: key);
 
@@ -78,7 +78,7 @@ class LocationCard extends StatelessWidget {
                   [
                     'Status: '.text.base.make(),
                     Builder(
-                      builder: (context) => location.status! == "Aktif"
+                      builder: (context) => location.status == "Aktif"
                           ? location.status!.text.sm
                               .color(Colors.white)
                               .make()

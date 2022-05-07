@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:logger/logger.dart';
 
 import '../bloc/maps/maps_cubit.dart';
 
 class Minimap extends StatelessWidget {
   const Minimap({Key? key, required this.latLng}) : super(key: key);
 
-  final LatLng latLng;
+  final List<LatLng> latLng;
 
   @override
   Widget build(BuildContext context) {
+    Logger().i(latLng);
     return BlocProvider(
-      create: (context) => MapsCubit()..setInitialPosition(latLng),
+      create: (context) => MapsCubit(),
       child: _MinimapBody(
         latLng: latLng,
       ),
@@ -23,7 +25,7 @@ class Minimap extends StatelessWidget {
 class _MinimapBody extends StatelessWidget {
   const _MinimapBody({Key? key, required this.latLng}) : super(key: key);
 
-  final LatLng latLng;
+  final List<LatLng> latLng;
 
   @override
   Widget build(BuildContext context) {
@@ -45,16 +47,9 @@ class _MinimapBody extends StatelessWidget {
             ),
             child: GoogleMap(
               initialCameraPosition: mapsCubit.initialPosition,
-              myLocationEnabled: false,
-              myLocationButtonEnabled: false,
-              zoomControlsEnabled: false,
-              zoomGesturesEnabled: false,
-              scrollGesturesEnabled: false,
-              rotateGesturesEnabled: false,
-              mapType: MapType.normal,
+              mapType: MapType.satellite,
               onMapCreated: (controller) {
                 mapsCubit.createController(controller);
-                mapsCubit.changeMarkerposition(latLng);
               },
               markers: mapsCubit.markers,
             ),

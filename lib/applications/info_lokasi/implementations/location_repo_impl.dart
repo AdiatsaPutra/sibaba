@@ -16,7 +16,7 @@ class LocationRepoImpl extends LocationRepo {
   String baseUrl = getIt.get(instanceName: 'baseUrl');
   final dio = Api.createDio();
   @override
-  Future<Either<LocationException, List<Location>>> getLocations() async {
+  Future<Either<LocationException, Location>> getLocations() async {
     try {
       final response = await dio.get(
         baseUrl + "lokasi",
@@ -25,8 +25,8 @@ class LocationRepoImpl extends LocationRepo {
         throw LocationException(response.data);
       }
       Logger().i(response);
-      List data = response.data['lokasi'];
-      final locations = data.map((e) => Location.fromMap(e)).toList();
+      final data = response.data;
+      final locations = Location.fromJson(data);
       return right(locations);
     } catch (e) {
       return left(LocationException(e.toString()));

@@ -60,7 +60,7 @@ class LokasiUnitPage extends StatelessWidget {
             builder: (context, state) => state.maybeWhen(
               loading: () => const LoadingIndicator(isScrollable: true),
               loaded: (locations) =>
-                  _LokasiLayout(locations: locations, user: user),
+                  _LokasiLayout(locations: locations.lokasi, user: user),
               orElse: () => const SizedBox(),
             ),
           ),
@@ -71,7 +71,7 @@ class LokasiUnitPage extends StatelessWidget {
 }
 
 class _LokasiLayout extends StatelessWidget {
-  final List<Location> locations;
+  final List<Lokasi> locations;
   final User user;
 
   const _LokasiLayout({Key? key, required this.locations, required this.user})
@@ -84,7 +84,7 @@ class _LokasiLayout extends StatelessWidget {
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: () async {
-          context.read<InfoLokasiCubit>().getLocations();
+          context.read<InfoLokasiCubit>().getLokasi();
         },
         child: VStack(
           [
@@ -152,7 +152,7 @@ class _LokasiLayout extends StatelessWidget {
 
 class LokasiData extends DataTableSource {
   final BuildContext context;
-  final List<Location> locations;
+  final List<Lokasi> locations;
   final InfoLokasiCubit cubit;
   String role = '';
   final User user;

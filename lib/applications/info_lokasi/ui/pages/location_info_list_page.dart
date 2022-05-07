@@ -20,7 +20,7 @@ class InfoLokasiPage extends StatelessWidget {
       ),
       backgroundColor: Colors.white,
       body: BlocProvider(
-        create: (context) => getIt<InfoLokasiCubit>()..getLocations(),
+        create: (context) => getIt<InfoLokasiCubit>()..getLokasi(),
         child: const InfoLokasiScreen(),
       ),
     );
@@ -33,7 +33,7 @@ class InfoLokasiScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
-      onRefresh: () async => context.read<InfoLokasiCubit>().getLocations(),
+      onRefresh: () async => context.read<InfoLokasiCubit>().getLokasi(),
       child: ZStack(
         [
           const SizedBox(height: 10),
@@ -46,7 +46,7 @@ class InfoLokasiScreen extends StatelessWidget {
                   isScrollable: true,
                 ),
                 error: (message) => message.text.base.makeCentered(),
-                loaded: (locations) => VStack(locations
+                loaded: (locations) => VStack(locations.lokasi
                     .map((e) => LocationCard(location: e).p16())
                     .toList()),
                 orElse: () => const SizedBox(),

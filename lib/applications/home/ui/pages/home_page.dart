@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sibaba/applications/applications.dart';
 import 'package:sibaba/applications/home/ui/widgets/home_menu.dart';
 import 'package:sibaba/applications/info_lokasi/ui/pages/location_info_list_page.dart';
@@ -11,8 +12,20 @@ import 'package:sibaba/applications/tentang_kami/pages/tentang_kami_page.dart';
 import 'package:sibaba/presentation/core.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  bool isLoggedIn = false;
+  @override
+  void initState() {
+    getUser();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,5 +111,20 @@ class HomePage extends StatelessWidget {
             ]).p16().scrollVertical(),
           ])),
     );
+  }
+
+  void getUser() async {
+    try {
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      sharedPreferences.getString('user');
+      setState(() {
+        isLoggedIn = true;
+      });
+    } catch (e) {
+      setState(() {
+        isLoggedIn = false;
+      });
+    }
   }
 }

@@ -164,7 +164,7 @@ class _AddUstadzLayoutState extends State<_AddUstadzLayout> {
                       MaterialPageRoute(
                         builder: (context) => GenericSelector(
                           genericList: [
-                            ...locations.map(
+                            ...locations.lokasi.map(
                               (location) => Generic(
                                 location.locationId!,
                                 location.nama!,

@@ -1,34 +1,106 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:logger/logger.dart';
+import 'package:sibaba/applications/admin/bloc/location/location_cubit.dart';
+import 'package:sibaba/applications/admin/bloc/maps/maps_cubit.dart';
 import 'package:sibaba/applications/admin/models/user.dart';
+import 'package:sibaba/applications/admin/pages/maps_all_page.dart';
 import 'package:sibaba/applications/admin/pages/user_profil.dart';
 import 'package:sibaba/applications/admin/widgets/admin_dashboard_info.dart';
 import 'package:sibaba/applications/admin/widgets/admin_menu.dart';
 import 'package:sibaba/applications/admin/widgets/guest_menu.dart';
 import 'package:sibaba/applications/admin/widgets/minimap.dart';
 import 'package:sibaba/applications/admin/widgets/superadmin_menu.dart';
+import 'package:sibaba/injection.dart';
 
 import 'package:velocity_x/velocity_x.dart';
 
+import '../../info_lokasi/bloc/cubit/info_lokasi_cubit.dart';
+import '../../info_lokasi/model/location.dart';
+
 class DashboardPage extends StatelessWidget {
   final User user;
-
   const DashboardPage({Key? key, required this.user}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => MapsCubit(),
+        ),
+        BlocProvider(
+          create: (context) => LocationCubit(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<InfoLokasiCubit>()..getLokasi(),
+        ),
+      ],
+      child: BlocBuilder<InfoLokasiCubit, InfoLokasiState>(
+        builder: (context, state) => state.maybeWhen(
+          loading: () => _DashboardLayout(
+            user: user,
+            locations: Location(lokasi: [], maps: [], events: []),
+          ),
+          loaded: (location) => _DashboardLayout(
+            user: user,
+            locations: location,
+          ),
+          orElse: () => _DashboardLayout(
+            user: user,
+            locations: Location(lokasi: [], maps: [], events: []),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _DashboardLayout extends StatefulWidget {
+  final User user;
+  final Location locations;
+
+  const _DashboardLayout(
+      {Key? key, required this.user, required this.locations})
+      : super(key: key);
+
+  @override
+  State<_DashboardLayout> createState() => _DashboardLayoutState();
+}
+
+class _DashboardLayoutState extends State<_DashboardLayout> {
+  late GoogleMapController mapController;
+  final Set<Marker> markers = {};
+  late LatLng showLocation;
+  @override
+  void initState() {
+    showLocation = LatLng(
+      widget.locations.maps[0].latitude,
+      widget.locations.maps[0].longitude,
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title:
-            'Selamat Datang, ${user.name}'.text.color(Colors.white).xl.make(),
+        title: 'Selamat Datang, ${widget.user.name}'
+            .text
+            .color(Colors.white)
+            .xl
+            .make(),
         titleTextStyle: const TextStyle(fontWeight: FontWeight.bold),
         elevation: 0,
         actions: [
           GestureDetector(
             onTap: () {
-              Get.to(() => UserProfilPage(user: user));
+              Get.to(() => UserProfilPage(user: widget.user));
             },
             child: VxBox(
               child: const Icon(
@@ -47,27 +119,47 @@ class DashboardPage extends StatelessWidget {
       body: ZStack([
         VStack([
           VStack([
-            ...user.roles.map(
+            ...widget.user.roles.map(
               (e) => e.name == 'superadmin'
                   ? SizedBox(height: Get.height / 6.5)
                   : const SizedBox(),
             ),
           ]),
           VStack([
-            'Lokasi'.text.lg.bold.make(),
-            const Minimap(latLng: LatLng(0, 0)),
+            HStack([
+              'Lokasi'.text.lg.bold.make().expand(),
+              GestureDetector(
+                onTap: () {
+                  Get.to(() => const MapsAllPage());
+                },
+                child: 'Lihat Penuh'.text.lg.make(),
+              )
+            ]),
+            const SizedBox(height: 10),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: GoogleMap(
+                zoomGesturesEnabled: true,
+                initialCameraPosition: CameraPosition(
+                  target: showLocation,
+                  zoom: 15.0,
+                ),
+                markers: getmarkers(widget.locations),
+                mapType: MapType.satellite,
+              ).box.height(120).make(),
+            ),
             const SizedBox(height: 20),
-            ...user.roles.map(
+            ...widget.user.roles.map(
               (e) => e.name == 'superadmin'
-                  ? SuperadminMenu(user: user)
+                  ? SuperadminMenu(user: widget.user)
                   : e.name == 'admin'
-                      ? AdminMenu(user: user)
+                      ? AdminMenu(user: widget.user)
                       : const GuestMenu(),
             ),
           ]),
-        ]).p20().scrollVertical(),
+        ]).p20(),
         VStack([
-          ...user.roles.map(
+          ...widget.user.roles.map(
             (e) => e.name == 'superadmin'
                 ? VxBox()
                     .width(Get.width)
@@ -79,7 +171,7 @@ class DashboardPage extends StatelessWidget {
           ),
         ]),
         VStack([
-          ...user.roles.map(
+          ...widget.user.roles.map(
             (e) => e.name == 'superadmin'
                 ? const AdminDashboardInfo()
                 : const SizedBox(),
@@ -87,5 +179,18 @@ class DashboardPage extends StatelessWidget {
         ]),
       ]),
     );
+  }
+
+  Set<Marker> getmarkers(Location location) {
+    setState(() {
+      for (var y in location.maps) {
+        markers.add(Marker(
+          markerId: MarkerId(Random().nextInt(100).toString()),
+          position: LatLng(y.latitude, y.longitude),
+        ));
+      }
+    });
+
+    return markers;
   }
 }

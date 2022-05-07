@@ -5,7 +5,7 @@ import 'package:sibaba/applications/info_lokasi/model/location_detail.dart';
 import 'package:sibaba/applications/info_lokasi/model/request/location_request.dart';
 
 abstract class LocationRepo {
-  Future<Either<LocationException, List<Location>>> getLocations();
+  Future<Either<LocationException, Location>> getLocations();
   Future<Either<LocationException, LocationDetail>> getLocationDetail(
     String slug,
   );

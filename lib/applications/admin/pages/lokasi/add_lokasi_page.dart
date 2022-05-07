@@ -73,8 +73,8 @@ class AddLokasiPage extends StatelessWidget {
                     ),
                   )
                 : BlocProvider(
-                    create: (context) => getIt<InfoLokasiCubit>()
-                      ..setLocation(LatLng(map.lat, map.long)),
+                    create: (context) =>
+                        getIt<InfoLokasiCubit>()..setLocation(latLng),
                     child: _AddLokasiLayout(isEdit: isEdit, user: user),
                   );
           },
