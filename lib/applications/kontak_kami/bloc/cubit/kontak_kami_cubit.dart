@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
-// import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sibaba/applications/kontak_kami/models/info_kontak.dart';
 import 'package:sibaba/applications/kontak_kami/models/message.dart';
+import 'package:sibaba/applications/kontak_kami/models/request/kontak_request.dart';
 import 'package:sibaba/applications/kontak_kami/repository/kontak_kami_repo.dart';
 
 part 'kontak_kami_state.dart';
@@ -19,30 +19,10 @@ class KontakKamiCubit extends Cubit<KontakKamiState> {
 
   final formKey = GlobalKey<FormState>();
 
-  final alamat = TextEditingController();
-  final linkMaps = TextEditingController();
-  final telepon = TextEditingController();
-  final hariMasuk1 = TextEditingController();
-  final hariMasuk2 = TextEditingController();
-  final jamMasuk = TextEditingController();
-  final jamKeluar = TextEditingController();
-
   final fullName = TextEditingController();
   final phone = TextEditingController();
   final email = TextEditingController();
   final message = TextEditingController();
-
-  // MapController mapController = MapController(
-  //   initMapWithUserPosition: false,
-  //   initPosition:
-  //       GeoPoint(latitude: -7.88701036772721, longitude: 110.33188331534542),
-  //   // areaLimit: const BoundingBox(
-  //   //   east: 10.4922941,
-  //   //   north: 47.8084648,
-  //   //   south: 45.817995,
-  //   //   west: 5.9559113,
-  //   // ),
-  // );
 
   void getKontakKami() async {
     emit(const KontakKamiState.loading());

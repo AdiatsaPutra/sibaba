@@ -6,9 +6,9 @@ class InfoKontak extends Equatable {
     required this.alamat,
     required this.linkmaps,
     required this.telpon,
-    required this.email,
-    this.hari1 = '-',
-    this.hari2 = '-',
+    this.email = '',
+    this.hari1 = 'senin',
+    this.hari2 = 'senin',
     required this.masukJam,
     required this.selesaiJam,
   });
@@ -17,9 +17,9 @@ class InfoKontak extends Equatable {
   final String alamat;
   final String linkmaps;
   final String telpon;
-  final String email;
-  final String hari1;
-  final String hari2;
+  final String? email;
+  final String? hari1;
+  final String? hari2;
   final String masukJam;
   final String selesaiJam;
 

@@ -6,6 +6,7 @@ import 'package:dartz/dartz.dart';
 import 'package:sibaba/applications/kontak_kami/exception/kontak_kami_exception.dart';
 import 'package:sibaba/applications/kontak_kami/models/info_kontak.dart';
 import 'package:sibaba/applications/kontak_kami/models/message.dart';
+import 'package:sibaba/applications/kontak_kami/models/request/kontak_request.dart';
 import 'package:sibaba/applications/kontak_kami/repository/kontak_kami_repo.dart';
 import 'package:sibaba/infrastructures/api.dart';
 
@@ -67,6 +68,23 @@ class KontakKamiRepoImpl extends KontakKamiRepo {
       List data = response.data['data'];
       final message = data.map((e) => Message.fromMap(e)).toList();
       return right(message);
+    } catch (e) {
+      return left(KontakException(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<KontakException, void>> updateKontak(
+      KontakRequest kontakRequest) async {
+    try {
+      final response = await dio.put(
+        baseUrl + "kontak",
+        data: kontakRequest.toJson(),
+      );
+      if (response.statusCode != 200) {
+        throw KontakException(response.data);
+      }
+      return right(null);
     } catch (e) {
       return left(KontakException(e.toString()));
     }

@@ -100,21 +100,23 @@ class _LokasiLayout extends StatelessWidget {
               },
             ),
             const SizedBox(height: 10),
-            PaginatedDataTable(
-              source: LokasiData(context, locations, cubit, user),
-              header: 'Data Lokasi'.text.xl.make(),
-              columns: const [
-                DataColumn(label: Text('No')),
-                DataColumn(label: Text('Action')),
-                DataColumn(label: Text('ID')),
-                DataColumn(label: Text('Name')),
-                DataColumn(label: Text('Email')),
-              ],
-              columnSpacing: 50,
-              horizontalMargin: 20,
-              rowsPerPage: locations.length <= 10 ? locations.length : 10,
-              showCheckboxColumn: false,
-            ),
+            locations.isEmpty
+                ? 'Tidak ada lokasi'.text.base.makeCentered()
+                : PaginatedDataTable(
+                    source: LokasiData(context, locations, cubit, user),
+                    header: 'Data Lokasi'.text.xl.make(),
+                    columns: const [
+                      DataColumn(label: Text('No')),
+                      DataColumn(label: Text('Action')),
+                      DataColumn(label: Text('ID')),
+                      DataColumn(label: Text('Name')),
+                      DataColumn(label: Text('Email')),
+                    ],
+                    columnSpacing: 50,
+                    horizontalMargin: 20,
+                    rowsPerPage: locations.length <= 10 ? locations.length : 10,
+                    showCheckboxColumn: false,
+                  ),
             const SizedBox(height: 100),
           ],
         ).centered().p16().scrollVertical(),

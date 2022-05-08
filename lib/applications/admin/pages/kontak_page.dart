@@ -6,17 +6,26 @@ import 'package:sibaba/applications/kontak_kami/bloc/cubit/kontak_kami_cubit.dar
 import 'package:sibaba/infrastructures/constant.dart';
 import 'package:sibaba/injection.dart';
 import 'package:sibaba/presentation/form_fields.dart';
-import 'package:sibaba/presentation/widgets/sibaba_textfield.dart';
 import 'package:intl/intl.dart';
+import 'package:sibaba/presentation/popup_messages.dart';
 import 'package:velocity_x/velocity_x.dart';
+
+import '../../kontak_kami/bloc/cubit/update_kontak_cubit.dart';
 
 class KontakPage extends StatelessWidget {
   const KontakPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<KontakKamiCubit>()..getKontakKami(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => getIt<KontakKamiCubit>()..getKontakKami(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<UpdateKontakCubit>(),
+        ),
+      ],
       child: const _KontakLayout(),
     );
   }
@@ -28,6 +37,7 @@ class _KontakLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<KontakKamiCubit>();
+    final kontakCubit = context.read<UpdateKontakCubit>();
     return Scaffold(
       appBar: AppBar(
         title: 'Data Kontak'.text.xl.color(Colors.white).make(),
@@ -41,66 +51,120 @@ class _KontakLayout extends StatelessWidget {
           loaded: (infoKontak) => VStack(
             [
               Form(
+                key: kontakCubit.formKey,
                 child: VStack([
                   VStack([
                     const SizedBox(height: 10),
                     'Alamat'.text.base.bold.make(),
                     FormFields.textFormField(
-                      controller: cubit.alamat..text = infoKontak.alamat,
+                      controller: kontakCubit.alamat..text = infoKontak.alamat,
                       minLines: 2,
                       maxLines: 5,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Alamat tidak boleh kosong';
+                        }
+                      },
                     ),
                     const SizedBox(height: 12),
                     'Link Maps'.text.base.bold.make(),
                     FormFields.textFormField(
-                      controller: cubit.linkMaps..text = infoKontak.linkmaps,
+                      controller: kontakCubit.linkMaps
+                        ..text = infoKontak.linkmaps,
                       minLines: 2,
                       maxLines: 5,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Link Maps tidak boleh kosong';
+                        }
+                      },
                     ),
                     const SizedBox(height: 12),
                     'Telepon'.text.base.bold.make(),
                     FormFields.textFormField(
-                      controller: cubit.telepon..text = infoKontak.telpon,
+                      controller: kontakCubit.telepon..text = infoKontak.telpon,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Telepon tidak boleh kosong';
+                        }
+                      },
+                    ),
+                    const SizedBox(height: 12),
+                    'Email'.text.base.bold.make(),
+                    FormFields.textFormField(
+                      controller: kontakCubit.emailBadko
+                        ..text = infoKontak.email!,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Email tidak boleh kosong';
+                        }
+                      },
                     ),
                     const SizedBox(height: 12),
                     'Hari Masuk'.text.base.bold.make(),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //   children: [
-                    //     DropdownButtonFormField<String>(
-                    //       value: infoKontak.hari1,
-                    //       items: [
-                    //         ...listHari.map(
-                    //           (e) => DropdownMenuItem<String>(
-                    //             value: e,
-                    //             child: e.text.base.make(),
-                    //           ),
-                    //         ),
-                    //       ],
-                    //       onChanged: (e) {},
-                    //     ).box.width(Get.width / 2.5).make().pOnly(bottom: 10),
-                    //     'S/D'.text.base.make(),
-                    //     DropdownButtonFormField<String>(
-                    //       value: infoKontak.hari2,
-                    //       items: [
-                    //         ...listHari.map(
-                    //           (e) => DropdownMenuItem(
-                    //             value: e,
-                    //             child: e.text.base.make(),
-                    //           ),
-                    //         ),
-                    //       ],
-                    //       onChanged: (e) {},
-                    //     ).box.width(Get.width / 2.5).make().pOnly(bottom: 10),
-                    //   ],
-                    // ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        BlocBuilder<UpdateKontakCubit, UpdateKontakState>(
+                          builder: (context, state) {
+                            return DropdownButtonFormField<String>(
+                              value: infoKontak.hari1 == null
+                                  ? listHari[0]
+                                  : infoKontak.hari1!.toLowerCase(),
+                              items: [
+                                ...listHari.map(
+                                  (e) => DropdownMenuItem<String>(
+                                    value: e,
+                                    child: e.text.base.make(),
+                                  ),
+                                ),
+                              ],
+                              onChanged: (e) {
+                                kontakCubit.setHari1(e!);
+                              },
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Hari 1 tidak boleh kosong';
+                                }
+                              },
+                            );
+                          },
+                        ).box.width(Get.width / 2.5).make().pOnly(bottom: 10),
+                        'S/D'.text.base.make(),
+                        BlocBuilder<UpdateKontakCubit, UpdateKontakState>(
+                          builder: (context, state) {
+                            return DropdownButtonFormField<String>(
+                              value: infoKontak.hari2 == null
+                                  ? listHari[0]
+                                  : infoKontak.hari2!.toLowerCase(),
+                              items: [
+                                ...listHari.map(
+                                  (e) => DropdownMenuItem(
+                                    value: e,
+                                    child: e.text.base.make(),
+                                  ),
+                                ),
+                              ],
+                              onChanged: (e) {
+                                kontakCubit.setHari2(e!);
+                              },
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Hari 2 tidak boleh kosong';
+                                }
+                              },
+                            );
+                          },
+                        ).box.width(Get.width / 2.5).make().pOnly(bottom: 10),
+                      ],
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         VStack([
                           'Jam Masuk'.text.base.bold.make(),
                           DateTimeField(
-                            controller: cubit.jamMasuk
+                            controller: kontakCubit.jamMasuk
                               ..text = infoKontak.formattedJamMasuk,
                             decoration: const InputDecoration(
                                 hintText: 'Jam Masuk',
@@ -117,12 +181,17 @@ class _KontakLayout extends StatelessWidget {
                               );
                               return DateTimeField.convert(time);
                             },
+                            validator: (value) {
+                              if (kontakCubit.jamMasuk.text.isEmpty) {
+                                return 'Jam Masuk tidak boleh kosong';
+                              }
+                            },
                           ).box.width(Get.width / 2.5).make().pOnly(bottom: 10),
                         ]),
                         VStack([
                           'Jam Keluar'.text.base.bold.make(),
                           DateTimeField(
-                            controller: cubit.jamKeluar
+                            controller: kontakCubit.jamKeluar
                               ..text = infoKontak.formattedJamKeluar,
                             decoration: const InputDecoration(
                                 hintText: 'Jam Masuk',
@@ -139,15 +208,44 @@ class _KontakLayout extends StatelessWidget {
                               );
                               return DateTimeField.convert(time);
                             },
+                            validator: (value) {
+                              if (kontakCubit.jamKeluar.text.isEmpty) {
+                                return 'Jam Keluar tidak boleh kosong';
+                              }
+                            },
                           ).box.width(Get.width / 2.5).make().pOnly(bottom: 10),
                         ]),
                       ],
                     )
                   ]),
                   const SizedBox(height: 10),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: 'Simpan'.text.base.make(),
+                  BlocListener<UpdateKontakCubit, UpdateKontakState>(
+                    listener: (context, state) => state.maybeWhen(
+                      success: () {
+                        cubit.getKontakKami();
+                        PopupMessages.successPopup(
+                          'Berhasil mengupdate data kontak',
+                        );
+                      },
+                      orElse: () {},
+                    ),
+                    child: BlocBuilder<UpdateKontakCubit, UpdateKontakState>(
+                      builder: (context, state) => state.maybeWhen(
+                        loading: () => ElevatedButton(
+                          onPressed: null,
+                          child: const CircularProgressIndicator().centered(),
+                        ),
+                        orElse: () => ElevatedButton(
+                          onPressed: () {
+                            if (kontakCubit.formKey.currentState!.validate()) {
+                              kontakCubit.formKey.currentState!.save();
+                              kontakCubit.updateKontak();
+                            }
+                          },
+                          child: 'Simpan'.text.base.make(),
+                        ),
+                      ),
+                    ),
                   ),
                 ]),
               ),

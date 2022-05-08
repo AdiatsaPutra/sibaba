@@ -66,7 +66,7 @@ class LoginForm extends StatelessWidget {
           listener: (context, state) => state.maybeWhen(
             loaded: (user) {
               cubit.clear();
-              Get.to(() => DashboardPage(user: user));
+              Get.offAll(() => DashboardPage(user: user));
             },
             error: (message) => PopupMessages.errorPopup('Periksa data anda'),
             orElse: () {},

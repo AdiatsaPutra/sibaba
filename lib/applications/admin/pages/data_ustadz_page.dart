@@ -88,23 +88,29 @@ class _DataUstadzLayout extends StatelessWidget {
           onChanged: (value) {},
         ),
         const SizedBox(height: 10),
-        PaginatedDataTable(
-          source: UstadzData(u, context, cubit),
-          header: 'Data Ustadz'.text.xl.make(),
-          columns: const [
-            DataColumn(label: Text('No')),
-            DataColumn(label: Text('Aksi')),
-            DataColumn(label: Text('No Induk')),
-            DataColumn(label: Text('Unit')),
-            DataColumn(label: Text('Kapanewon')),
-            DataColumn(label: Text('Nama')),
-            DataColumn(label: Text('Alamat'))
-          ],
-          columnSpacing: 50,
-          horizontalMargin: 10,
-          rowsPerPage: u.length <= 10 ? u.length : 10,
-          showCheckboxColumn: false,
-        ),
+        u.isEmpty
+            ? 'Tidak ada data ustadz'.text.base.makeCentered()
+            : PaginatedDataTable(
+                source: UstadzData(u, context, cubit),
+                header: 'Data Ustadz'.text.xl.make(),
+                columns: const [
+                  DataColumn(label: Text('No')),
+                  DataColumn(label: Text('Aksi')),
+                  DataColumn(label: Text('No Induk')),
+                  DataColumn(label: Text('Unit')),
+                  DataColumn(label: Text('Kapanewon')),
+                  DataColumn(label: Text('Nama')),
+                  DataColumn(label: Text('Alamat'))
+                ],
+                columnSpacing: 50,
+                horizontalMargin: 10,
+                rowsPerPage: u.isEmpty
+                    ? 1
+                    : u.length <= 10 && u.isNotEmpty
+                        ? u.length
+                        : 10,
+                showCheckboxColumn: false,
+              ),
         const SizedBox(height: 100),
       ],
     ).centered().p16().scrollVertical();

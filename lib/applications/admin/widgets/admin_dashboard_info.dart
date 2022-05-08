@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:sibaba/applications/admin/bloc/user/user_cubit.dart';
+import 'package:sibaba/applications/admin/bloc/ustadz/ustadz_cubit.dart';
 import 'package:sibaba/applications/info_lokasi/bloc/cubit/info_lokasi_cubit.dart';
 import 'package:sibaba/injection.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -18,6 +19,9 @@ class AdminDashboardInfo extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => getIt<InfoLokasiCubit>()..getLokasi(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<UstadzCubit>()..getUstadzs(),
         ),
       ],
       child: const _AdminDashboardLayout(),
@@ -50,12 +54,13 @@ class _AdminDashboardLayout extends StatelessWidget {
                 orElse: () => const SizedBox(),
               ),
             ),
-            VStack(
-              [
-                '7'.text.xl3.bold.make(),
-                'Ustadz'.text.base.make(),
-              ],
-              crossAlignment: CrossAxisAlignment.center,
+            BlocBuilder<UstadzCubit, UstadzState>(
+              builder: (context, state) => state.maybeWhen(
+                loading: () => _buildAdminInfo('0', 'Loading'),
+                loaded: (ustadz) =>
+                    _buildAdminInfo('${ustadz.length}', 'Ustadz'),
+                orElse: () => const SizedBox(),
+              ),
             ),
           ],
           alignment: MainAxisAlignment.spaceAround,
