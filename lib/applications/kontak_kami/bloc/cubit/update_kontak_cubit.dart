@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:logger/logger.dart';
 
 import '../../models/request/kontak_request.dart';
 import '../../repository/kontak_kami_repo.dart';
@@ -30,6 +31,7 @@ class UpdateKontakCubit extends Cubit<UpdateKontakState> {
 
   void setHari1(String hariMasuk) {
     emit(const UpdateKontakState.loading());
+    Logger().i(hariMasuk);
     hariMasuk1 = hariMasuk;
     emit(const UpdateKontakState.loaded());
   }

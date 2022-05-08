@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
 import 'package:sibaba/applications/kontak_kami/bloc/cubit/kontak_kami_cubit.dart';
 import 'package:sibaba/infrastructures/constant.dart';
 import 'package:sibaba/injection.dart';
@@ -115,9 +116,7 @@ class _KontakLayout extends StatelessWidget {
                         BlocBuilder<UpdateKontakCubit, UpdateKontakState>(
                           builder: (context, state) {
                             return DropdownButtonFormField<String>(
-                              value: infoKontak.hari1 == null
-                                  ? listHari[0]
-                                  : infoKontak.hari1!.toLowerCase(),
+                              value: infoKontak.hari1 ?? 'senin',
                               items: [
                                 ...listHari.map(
                                   (e) => DropdownMenuItem<String>(
@@ -141,9 +140,7 @@ class _KontakLayout extends StatelessWidget {
                         BlocBuilder<UpdateKontakCubit, UpdateKontakState>(
                           builder: (context, state) {
                             return DropdownButtonFormField<String>(
-                              value: infoKontak.hari2 == null
-                                  ? listHari[0]
-                                  : infoKontak.hari2!.toLowerCase(),
+                              value: infoKontak.hari2 ?? 'senin',
                               items: [
                                 ...listHari.map(
                                   (e) => DropdownMenuItem(
