@@ -32,9 +32,9 @@ class UserCubit extends Cubit<UserState> {
     role = user.roles[0].name;
   }
 
-  void profile(String email) async {
+  void profile(int id) async {
     emit(const UserState.loading());
-    final users = await _adminUserRepo.profile(email);
+    final users = await _adminUserRepo.profile(id);
     users.fold(
       (l) => emit(UserState.error(l.message)),
       (r) => emit(UserState.profile(r)),

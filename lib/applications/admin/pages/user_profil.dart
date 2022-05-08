@@ -38,7 +38,39 @@ class _UserProfileLayout extends StatelessWidget {
         actions: [
           GestureDetector(
             onTap: () {
-              Get.offAll(const HomePage());
+              showDialog(
+                context: context,
+                builder: (context) => Dialog(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: VStack([
+                    'Anda yakin akan logout?'
+                        .text
+                        .base
+                        .isIntrinsic
+                        .makeCentered(),
+                    const SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        OutlinedButton(
+                          onPressed: () {
+                            Get.back();
+                          },
+                          child: 'Batal'.text.base.make(),
+                        ).box.width(100).make(),
+                        ElevatedButton(
+                          onPressed: () {
+                            Get.offAll(const HomePage());
+                          },
+                          child: 'Oke'.text.base.make(),
+                        ).box.width(100).make(),
+                      ],
+                    )
+                  ]).p16(),
+                ),
+              );
             },
             child: const Icon(Icons.logout, color: Colors.red),
           ).pOnly(right: 20),

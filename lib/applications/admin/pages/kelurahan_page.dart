@@ -3,21 +3,33 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:sibaba/applications/admin/bloc/kapanewon/kapanewon_cubit.dart';
 import 'package:sibaba/applications/admin/models/kapanewon.dart';
-import 'package:sibaba/applications/admin/widgets/kapanewon/add_kapanewon_dialog.dart';
-import 'package:sibaba/applications/admin/widgets/kapanewon/edit_kapanewon_dialog.dart';
 import 'package:sibaba/applications/admin/widgets/kelurahan/add_kelurahan_dialog.dart';
 import 'package:sibaba/injection.dart';
 import 'package:sibaba/presentation/color_constant.dart';
 import 'package:sibaba/presentation/popup_messages.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import '../bloc/add_kelurahan/add_kelurahan_cubit.dart';
+import '../bloc/kelurahan/kelurahan_cubit.dart';
+import '../models/kelurahan.dart';
+
 class KelurahanPage extends StatelessWidget {
   const KelurahanPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<KapanewonCubit>()..getKapanewon(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => getIt<KelurahanCubit>()..getKelurahan(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<KapanewonCubit>()..getKapanewon(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<AddKelurahanCubit>(),
+        ),
+      ],
       child: Scaffold(
         appBar: AppBar(
           title: 'Data Kelurahan'.text.xl.color(Colors.white).make(),
@@ -25,13 +37,22 @@ class KelurahanPage extends StatelessWidget {
           elevation: 0,
         ),
         resizeToAvoidBottomInset: false,
-        body: BlocConsumer<KapanewonCubit, KapanewonState>(
-          listener: (context, state) => state.maybeWhen(
-            orElse: () {},
-          ),
+        body: BlocBuilder<KapanewonCubit, KapanewonState>(
           builder: (context, state) => state.maybeWhen(
             loading: () => const CircularProgressIndicator().centered(),
-            loaded: (kapanewon) => _KapanewonLayout(kapanewon: kapanewon),
+            loaded: (kapanewon) => BlocConsumer<KelurahanCubit, KelurahanState>(
+              listener: (context, state) => state.maybeWhen(
+                orElse: () {},
+              ),
+              builder: (context, state) => state.maybeWhen(
+                loading: () => const CircularProgressIndicator().centered(),
+                loaded: (kelurahan) => _KapanewonLayout(
+                  kelurahan: kelurahan,
+                  kapanewon: kapanewon,
+                ),
+                orElse: () => const SizedBox(),
+              ),
+            ),
             orElse: () => const SizedBox(),
           ),
         ),
@@ -41,13 +62,17 @@ class KelurahanPage extends StatelessWidget {
 }
 
 class _KapanewonLayout extends StatelessWidget {
+  final List<Kelurahan> kelurahan;
   final List<Kapanewon> kapanewon;
 
-  const _KapanewonLayout({Key? key, required this.kapanewon}) : super(key: key);
+  const _KapanewonLayout(
+      {Key? key, required this.kelurahan, required this.kapanewon})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<KapanewonCubit>();
+    final cubit = context.read<KelurahanCubit>();
+    final addKelurahanCubit = context.read<AddKelurahanCubit>();
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: () async {
@@ -63,12 +88,13 @@ class _KapanewonLayout extends StatelessWidget {
                 hintStyle: TextStyle(fontSize: 14),
               ),
               onChanged: (value) {
-                cubit.searchKapanewon();
+                cubit.searchKelurahan();
               },
             ),
             const SizedBox(height: 10),
             PaginatedDataTable(
-              source: KapanewonData(context, kapanewon, cubit),
+              source: KapanewonData(
+                  context, kelurahan, addKelurahanCubit, kapanewon),
               header: 'Data Kelurahan'.text.xl.make(),
               columns: const [
                 DataColumn(label: Text('No')),
@@ -88,10 +114,12 @@ class _KapanewonLayout extends StatelessWidget {
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: primaryColor,
         onPressed: () {
-          cubit.clear();
           VxDialog.showCustom(
             context,
-            child: AddKelurahanDialog(cubit: cubit, kapanewon: kapanewon),
+            child: AddKelurahanDialog(
+                kelurahan: cubit,
+                cubit: addKelurahanCubit,
+                kapanewon: kapanewon),
           );
         },
         label: HStack([
@@ -105,36 +133,30 @@ class _KapanewonLayout extends StatelessWidget {
 
 class KapanewonData extends DataTableSource {
   final BuildContext context;
+  final List<Kelurahan> kelurahan;
   final List<Kapanewon> kapanewon;
-  final KapanewonCubit cubit;
+  final AddKelurahanCubit cubit;
   String role = '';
 
-  KapanewonData(this.context, this.kapanewon, this.cubit);
+  KapanewonData(this.context, this.kelurahan, this.cubit, this.kapanewon);
 
   @override
   bool get isRowCountApproximate => false;
   @override
-  int get rowCount => kapanewon.length;
+  int get rowCount => kelurahan.length;
   @override
   int get selectedRowCount => 0;
   @override
   DataRow getRow(int index) {
     return DataRow(cells: [
       DataCell((index + 1).toString().text.isIntrinsic.make()),
-      DataCell(kapanewon[index].areaName.text.isIntrinsic.make()),
-      DataCell(kapanewon[index].kodeArea.text.isIntrinsic.make()),
+      DataCell(kelurahan[index].districtName.text.isIntrinsic.make()),
+      DataCell(
+          kapanewon[kelurahan[index].areaId].areaName.text.isIntrinsic.make()),
       DataCell(
         HStack([
           GestureDetector(
-            onTap: () {
-              VxDialog.showCustom(
-                context,
-                child: EditKapanewonDialog(
-                  cubit: cubit,
-                  kapanewon: kapanewon[index],
-                ),
-              );
-            },
+            onTap: () {},
             child: VxCapsule(
               width: 50,
               height: 20,
@@ -146,7 +168,6 @@ class KapanewonData extends DataTableSource {
           GestureDetector(
             onTap: () {
               PopupMessages.confirmDeletePopup(context, () {
-                cubit.deleteKapanewon(kapanewon[index].areaId);
                 Get.back();
               });
             },

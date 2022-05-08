@@ -86,10 +86,10 @@ class AdminUserImpl extends AdminUserRepo {
   }
 
   @override
-  Future<Either<AdminException, User>> profile(String email) async {
+  Future<Either<AdminException, User>> profile(int id) async {
     try {
       final data = {
-        'email': email,
+        'id': id,
       };
       final response = await dio.post(baseUrl + "profile", data: data);
       if (response.statusCode != 200) {

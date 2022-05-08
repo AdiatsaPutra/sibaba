@@ -4,7 +4,7 @@ import 'package:sibaba/applications/admin/models/user.dart';
 
 abstract class AdminUserRepo {
   Future<Either<AdminException, List<User>>> getUsers();
-  Future<Either<AdminException, User>> profile(String email);
+  Future<Either<AdminException, User>> profile(int id);
   Future<Either<AdminException, void>> addUser(
     String name,
     String email,

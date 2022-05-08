@@ -40,12 +40,12 @@ class DashboardPage extends StatelessWidget {
           create: (context) => getIt<InfoLokasiCubit>()..getLokasi(),
         ),
         BlocProvider(
-          create: (context) => getIt<UserCubit>()..profile(user.email),
+          create: (context) => getIt<UserCubit>()..profile(user.id),
         ),
       ],
       child: BlocListener<RefreshCubit, RefreshState>(
         listener: (context, state) => state.maybeWhen(
-          profileUpdated: () => context.read<UserCubit>().profile(user.email),
+          profileUpdated: () => context.read<UserCubit>().profile(user.id),
           orElse: () {},
         ),
         child: BlocBuilder<UserCubit, UserState>(
@@ -229,10 +229,15 @@ class _DashboardLayoutState extends State<_DashboardLayout> {
   Set<Marker> getmarkers(Location location) {
     setState(() {
       for (var y in location.maps) {
-        markers.add(Marker(
-          markerId: MarkerId(Random().nextInt(100).toString()),
-          position: LatLng(y.latitude, y.longitude),
-        ));
+        for (var x in location.lokasi) {
+          markers.add(Marker(
+            markerId: MarkerId(Random().nextInt(100).toString()),
+            position: LatLng(y.latitude, y.longitude),
+            infoWindow: InfoWindow(
+              title: x.nama,
+            ),
+          ));
+        }
       }
     });
 

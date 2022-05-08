@@ -90,10 +90,15 @@ class _DashboardLayoutState extends State<_DashboardLayout> {
   Set<Marker> getmarkers(Location location) {
     setState(() {
       for (var y in location.maps) {
-        markers.add(Marker(
-          markerId: MarkerId(Random().nextInt(100).toString()),
-          position: LatLng(y.latitude, y.longitude),
-        ));
+        for (var x in location.lokasi) {
+          markers.add(
+            Marker(
+              markerId: MarkerId(Random().nextInt(100).toString()),
+              position: LatLng(y.latitude, y.longitude),
+              infoWindow: InfoWindow(title: x.nama),
+            ),
+          );
+        }
       }
     });
 
