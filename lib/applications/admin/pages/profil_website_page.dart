@@ -5,7 +5,10 @@ import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:sibaba/applications/tentang_kami/bloc/cubit/tentang_kami_cubit.dart';
 import 'package:sibaba/injection.dart';
 import 'package:sibaba/presentation/loading_indicator.dart';
+import 'package:sibaba/presentation/popup_messages.dart';
 import 'package:velocity_x/velocity_x.dart';
+
+import '../../tentang_kami/bloc/cubit/edit_tentang_kami_cubit.dart';
 
 class ProfilWebsitePage extends StatelessWidget {
   const ProfilWebsitePage({Key? key}) : super(key: key);
@@ -19,8 +22,15 @@ class ProfilWebsitePage extends StatelessWidget {
         elevation: 0,
       ),
       resizeToAvoidBottomInset: false,
-      body: BlocProvider(
-        create: (context) => getIt<TentangKamiCubit>()..getTentangkami(),
+      body: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => getIt<TentangKamiCubit>()..getTentangkami(),
+          ),
+          BlocProvider(
+            create: (context) => getIt<EditTentangKamiCubit>(),
+          ),
+        ],
         child: const _ProfilWebsiteLayout(),
       ),
     );
@@ -33,29 +43,30 @@ class _ProfilWebsiteLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<TentangKamiCubit>();
+    final editTentangKamiCubit = context.read<EditTentangKamiCubit>();
     return VStack([
       BlocBuilder<TentangKamiCubit, TentangKamiState>(
         builder: (context, state) => state.maybeWhen(
           loading: () => const LoadingIndicator(isScrollable: true),
           loaded: (tentang) {
-            Future.delayed(const Duration(seconds: 5)).then((value) {
-              cubit.sejarah.setText(tentang.profiles.sejarah);
-              cubit.struktur.setText(tentang.profiles.struktur);
-              cubit.visiMisi.setText(tentang.profiles.visimisi);
+            Future.delayed(const Duration(seconds: 3)).then((value) {
+              editTentangKamiCubit.sejarah.setText(tentang.profiles.sejarah);
+              editTentangKamiCubit.struktur.setText(tentang.profiles.struktur);
+              editTentangKamiCubit.visimisi.setText(tentang.profiles.visimisi);
             });
             return VStack([
               const SizedBox(height: 10),
               'Sejarah Berdiri'.text.lg.make(),
               const SizedBox(height: 10),
-              HtmlEditor(controller: cubit.sejarah),
+              HtmlEditor(controller: editTentangKamiCubit.sejarah),
               const SizedBox(height: 10),
               'Struktur Organisasi'.text.lg.make(),
               const SizedBox(height: 10),
-              HtmlEditor(controller: cubit.struktur),
+              HtmlEditor(controller: editTentangKamiCubit.struktur),
               const SizedBox(height: 10),
               'Visi Misi'.text.lg.make(),
               const SizedBox(height: 10),
-              HtmlEditor(controller: cubit.visiMisi),
+              HtmlEditor(controller: editTentangKamiCubit.visimisi),
             ]);
           },
           orElse: () => const SizedBox(),
@@ -63,17 +74,36 @@ class _ProfilWebsiteLayout extends StatelessWidget {
       ).p16().scrollVertical().expand(),
       HStack([
         ElevatedButton(
-          onPressed: () {},
-          child: 'Simpan'.text.base.make(),
-        ).box.width(Get.width / 2.5).make(),
-        const SizedBox().expand(),
-        ElevatedButton(
           style: ElevatedButton.styleFrom(primary: Colors.red),
           onPressed: () {
             Get.back();
           },
           child: 'Batal'.text.base.make(),
-        ).box.width(Get.width / 2.5).make(),
+        ).expand(),
+        const SizedBox(width: 10),
+        BlocListener<EditTentangKamiCubit, EditTentangKamiState>(
+          listener: (context, state) => state.maybeWhen(
+            success: () {
+              cubit.getTentangkami();
+              PopupMessages.successPopup('Profile berhasil diubah');
+            },
+            orElse: () {},
+          ),
+          child: BlocBuilder<EditTentangKamiCubit, EditTentangKamiState>(
+            builder: (context, state) => state.maybeWhen(
+              loading: () => ElevatedButton(
+                onPressed: null,
+                child: const CircularProgressIndicator().centered(),
+              ),
+              orElse: () => ElevatedButton(
+                onPressed: () {
+                  editTentangKamiCubit.updateTentangKami();
+                },
+                child: 'Simpan'.text.base.make(),
+              ),
+            ),
+          ),
+        ).expand()
       ]).p16()
     ]);
   }

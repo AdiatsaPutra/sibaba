@@ -9,10 +9,10 @@ import 'package:injectable/injectable.dart' as _i2;
 
 import 'applications/admin/bloc/add_ustadz/add_ustadz_cubit.dart' as _i23;
 import 'applications/admin/bloc/edit_profile/edit_profile_cubit.dart' as _i5;
-import 'applications/admin/bloc/gallery/gallery_cubit.dart' as _i24;
-import 'applications/admin/bloc/kapanewon/kapanewon_cubit.dart' as _i26;
+import 'applications/admin/bloc/gallery/gallery_cubit.dart' as _i25;
+import 'applications/admin/bloc/kapanewon/kapanewon_cubit.dart' as _i27;
 import 'applications/admin/bloc/user/user_cubit.dart' as _i20;
-import 'applications/admin/bloc/ustadz/ustadz_cubit.dart' as _i30;
+import 'applications/admin/bloc/ustadz/ustadz_cubit.dart' as _i31;
 import 'applications/admin/implementations/admin_user_impl.dart' as _i4;
 import 'applications/admin/implementations/admin_ustadz_impl.dart' as _i22;
 import 'applications/admin/implementations/gallery_repo_impl.dart' as _i7;
@@ -21,20 +21,22 @@ import 'applications/admin/repositories/admin_user_repo.dart' as _i3;
 import 'applications/admin/repositories/gallery_repo.dart' as _i6;
 import 'applications/admin/repositories/kapanewon_repo.dart' as _i8;
 import 'applications/admin/repositories/ustadz_repo.dart' as _i21;
-import 'applications/info_lokasi/bloc/cubit/info_lokasi_cubit.dart' as _i25;
+import 'applications/info_lokasi/bloc/cubit/info_lokasi_cubit.dart' as _i26;
 import 'applications/info_lokasi/implementations/location_repo_impl.dart'
     as _i13;
 import 'applications/info_lokasi/repository/location_repo.dart' as _i12;
-import 'applications/kontak_kami/bloc/cubit/kontak_kami_cubit.dart' as _i27;
+import 'applications/kontak_kami/bloc/cubit/kontak_kami_cubit.dart' as _i28;
 import 'applications/kontak_kami/bloc/cubit/update_kontak_cubit.dart' as _i19;
 import 'applications/kontak_kami/implementations/kontak_kami_repo_impl.dart'
     as _i11;
 import 'applications/kontak_kami/repository/kontak_kami_repo.dart' as _i10;
-import 'applications/login/bloc/login/login_cubit.dart' as _i28;
+import 'applications/login/bloc/login/login_cubit.dart' as _i29;
 import 'applications/login/bloc/register/register_cubit.dart' as _i16;
 import 'applications/login/implementations/login_repo_impl.dart' as _i15;
 import 'applications/login/repositories/login_repo.dart' as _i14;
-import 'applications/tentang_kami/bloc/cubit/tentang_kami_cubit.dart' as _i29;
+import 'applications/tentang_kami/bloc/cubit/edit_tentang_kami_cubit.dart'
+    as _i24;
+import 'applications/tentang_kami/bloc/cubit/tentang_kami_cubit.dart' as _i30;
 import 'applications/tentang_kami/implementations/tentang_kami_repo_impl.dart'
     as _i18;
 import 'applications/tentang_kami/repository/tentang_kami_repo.dart'
@@ -61,17 +63,19 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   gh.factory<_i21.UstadzRepo>(() => _i22.AdminUstadzImpl());
   gh.factory<_i23.AddUstadzCubit>(
       () => _i23.AddUstadzCubit(get<_i21.UstadzRepo>()));
-  gh.factory<_i24.GalleryCubit>(
-      () => _i24.GalleryCubit(get<_i6.GalleryRepo>()));
-  gh.factory<_i25.InfoLokasiCubit>(
-      () => _i25.InfoLokasiCubit(get<_i12.LocationRepo>()));
-  gh.factory<_i26.KapanewonCubit>(
-      () => _i26.KapanewonCubit(get<_i8.KapanewonRepo>()));
-  gh.factory<_i27.KontakKamiCubit>(
-      () => _i27.KontakKamiCubit(get<_i10.KontakKamiRepo>()));
-  gh.factory<_i28.LoginCubit>(() => _i28.LoginCubit(get<_i14.LoginRepo>()));
-  gh.factory<_i29.TentangKamiCubit>(
-      () => _i29.TentangKamiCubit(get<_i17.TentangKamirepo>()));
-  gh.factory<_i30.UstadzCubit>(() => _i30.UstadzCubit(get<_i21.UstadzRepo>()));
+  gh.factory<_i24.EditTentangKamiCubit>(
+      () => _i24.EditTentangKamiCubit(get<_i17.TentangKamirepo>()));
+  gh.factory<_i25.GalleryCubit>(
+      () => _i25.GalleryCubit(get<_i6.GalleryRepo>()));
+  gh.factory<_i26.InfoLokasiCubit>(
+      () => _i26.InfoLokasiCubit(get<_i12.LocationRepo>()));
+  gh.factory<_i27.KapanewonCubit>(
+      () => _i27.KapanewonCubit(get<_i8.KapanewonRepo>()));
+  gh.factory<_i28.KontakKamiCubit>(
+      () => _i28.KontakKamiCubit(get<_i10.KontakKamiRepo>()));
+  gh.factory<_i29.LoginCubit>(() => _i29.LoginCubit(get<_i14.LoginRepo>()));
+  gh.factory<_i30.TentangKamiCubit>(
+      () => _i30.TentangKamiCubit(get<_i17.TentangKamirepo>()));
+  gh.factory<_i31.UstadzCubit>(() => _i31.UstadzCubit(get<_i21.UstadzRepo>()));
   return get;
 }

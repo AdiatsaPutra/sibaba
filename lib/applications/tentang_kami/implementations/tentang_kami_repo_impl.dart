@@ -1,6 +1,4 @@
-import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:logger/logger.dart';
 import 'package:sibaba/applications/info_lokasi/exception/location_exception.dart';
 import 'package:dartz/dartz.dart';
 import 'package:sibaba/applications/tentang_kami/models/tentang.dart';
@@ -26,6 +24,27 @@ class TentangKamiRepoImpl extends TentangKamirepo {
       final data = response.data;
       final tentang = Tentang.fromJson(data);
       return right(tentang);
+    } catch (e) {
+      return left(TentangKamiException(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<TentangKamiException, void>> updateTentangkami(
+      String sejarah, String struktur, String visimisi) async {
+    try {
+      final response = await dio.put(
+        baseUrl + "profile",
+        data: {
+          "Struktur": struktur,
+          "Sejarah": sejarah,
+          "Visimisi": visimisi,
+        },
+      );
+      if (response.statusCode != 200) {
+        throw LocationException(response.data);
+      }
+      return right(null);
     } catch (e) {
       return left(TentangKamiException(e.toString()));
     }

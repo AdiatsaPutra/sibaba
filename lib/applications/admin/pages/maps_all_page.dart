@@ -2,18 +2,9 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:logger/logger.dart';
 import 'package:sibaba/applications/admin/bloc/location/location_cubit.dart';
 import 'package:sibaba/applications/admin/bloc/maps/maps_cubit.dart';
-import 'package:sibaba/applications/admin/models/user.dart';
-import 'package:sibaba/applications/admin/pages/user_profil.dart';
-import 'package:sibaba/applications/admin/widgets/admin_dashboard_info.dart';
-import 'package:sibaba/applications/admin/widgets/admin_menu.dart';
-import 'package:sibaba/applications/admin/widgets/guest_menu.dart';
-import 'package:sibaba/applications/admin/widgets/minimap.dart';
-import 'package:sibaba/applications/admin/widgets/superadmin_menu.dart';
 import 'package:sibaba/injection.dart';
 import 'package:velocity_x/velocity_x.dart';
 
