@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sibaba/applications/kontak_kami/bloc/cubit/kontak_kami_cubit.dart';
 import 'package:sibaba/injection.dart';
 import 'package:sibaba/presentation/color_constant.dart';
 import 'package:sibaba/presentation/loading_indicator.dart';
+import 'package:sibaba/presentation/minimap.dart';
 import 'package:sibaba/presentation/success_dialog.dart';
 import 'package:sibaba/presentation/widgets/custom_appbar.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -177,29 +179,21 @@ class KontakKamiPage extends StatelessWidget {
   }
 }
 
-class _KontakKamiLayout extends StatefulWidget {
+class _KontakKamiLayout extends StatelessWidget {
   const _KontakKamiLayout({Key? key}) : super(key: key);
 
   @override
-  State<_KontakKamiLayout> createState() => _KontakKamiLayoutState();
-}
-
-class _KontakKamiLayoutState extends State<_KontakKamiLayout> {
-  @override
   Widget build(BuildContext context) {
     return VStack([
-      // GoogleMap(
-      //   onMapCreated: _onMapCreated,
-      //   initialCameraPosition: CameraPosition(
-      //     target: _center,
-      //     zoom: 11.0,
-      //   ),
-      // ),
       VxBox(
         child: BlocBuilder<KontakKamiCubit, KontakKamiState>(
           builder: (context, state) => state.maybeWhen(
             loading: () => const LoadingIndicator(),
             loaded: (infoKontak) => VStack([
+              const Minimap(
+                latLng: LatLng(-7.887392001723083, 110.33191832274352),
+              ),
+              const SizedBox(height: 10),
               'Kontak Kami'.text.xl.bold.make(),
               const SizedBox(height: 10),
               'Alamat: ${infoKontak.alamat}'.text.lg.make(),
@@ -209,9 +203,15 @@ class _KontakKamiLayoutState extends State<_KontakKamiLayout> {
               'Email: ${infoKontak.email}'.text.lg.make(),
               const SizedBox(height: 10),
               HStack([
-                infoKontak.masukJam.substring(0, 5).text.base.make(),
-                ' S/D '.text.base.make(),
-                infoKontak.selesaiJam.substring(0, 5).text.base.make(),
+                infoKontak.hari1!.text.lg.make(),
+                ' S/D '.text.lg.make(),
+                infoKontak.hari2!.text.lg.make(),
+              ]),
+              const SizedBox(height: 10),
+              HStack([
+                infoKontak.masukJam.substring(0, 5).text.lg.make(),
+                ' S/D '.text.lg.make(),
+                infoKontak.selesaiJam.substring(0, 5).text.lg.make(),
               ])
             ]),
             orElse: () => const SizedBox(),

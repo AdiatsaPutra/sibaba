@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:sibaba/applications/admin/bloc/edit_profile/edit_profile_cubit.dart';
 import 'package:sibaba/applications/admin/models/user.dart';
+import 'package:sibaba/applications/home/ui/ui.dart';
 import 'package:sibaba/injection.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -34,8 +35,7 @@ class _UserProfileLayout extends StatelessWidget {
         actions: [
           GestureDetector(
             onTap: () {
-              Get.back();
-              Get.back();
+              Get.offAll(const HomePage());
             },
             child: const Icon(Icons.logout, color: Colors.red),
           ).pOnly(right: 20),
