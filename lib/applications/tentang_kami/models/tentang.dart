@@ -5,27 +5,27 @@ import 'package:equatable/equatable.dart';
 class Tentang extends Equatable {
   const Tentang({
     required this.profiles,
-    // required this.gallery,
+    required this.gallery,
   });
 
   final Profiles profiles;
-  // final List<Gallery> gallery;
+  final List<Gallery> gallery;
 
   factory Tentang.fromJson(Map<String, dynamic> json) => Tentang(
         profiles: Profiles.fromMap(json["profiles"]),
-        // gallery:
-        //     List<Gallery>.from(json["gallery"].map((x) => Gallery.fromMap(x))),
+        gallery:
+            List<Gallery>.from(json["gallery"].map((x) => Gallery.fromMap(x))),
       );
 
   Map<String, dynamic> toMap() => {
         "profiles": profiles.toMap(),
-        // "gallery": List<dynamic>.from(gallery.map((x) => x.toMap())),
+        "gallery": List<dynamic>.from(gallery.map((x) => x.toMap())),
       };
 
   @override
   List<Object?> get props => [
         profiles,
-        // gallery,
+        gallery,
       ];
 }
 

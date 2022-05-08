@@ -8,6 +8,7 @@ import 'package:sibaba/presentation/popup_messages.dart';
 import 'package:sibaba/presentation/widgets/custom_appbar.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import '../../tentang_kami/bloc/cubit/tentang_kami_cubit.dart';
 import '../bloc/gallery/gallery_cubit.dart';
 
 class GalleryPage extends StatelessWidget {
@@ -29,6 +30,9 @@ class GalleryPage extends StatelessWidget {
           BlocProvider(
             create: (context) => getIt<GalleryCubit>(),
           ),
+          BlocProvider(
+            create: (context) => getIt<TentangKamiCubit>()..getTentangkami(),
+          ),
         ],
         child: _GalleryLayout(u: u),
       ),
@@ -44,6 +48,7 @@ class _GalleryLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = context.read<ImageHandlerCubit>();
     final gallery = context.read<GalleryCubit>();
+    final profile = context.read<TentangKamiCubit>();
     return VStack(
       [
         BlocBuilder<ImageHandlerCubit, ImageHandlerState>(
@@ -86,6 +91,8 @@ class _GalleryLayout extends StatelessWidget {
             success: () {
               Navigator.pop(context);
               PopupMessages.successPopup('Berhasil mengupload foto');
+              cubit.reset();
+              profile.getTentangkami();
             },
             error: (e) {
               Navigator.pop(context);
@@ -109,6 +116,43 @@ class _GalleryLayout extends StatelessWidget {
             },
           ),
         ),
+        const SizedBox(height: 20),
+        'Klik untuk memperbesar'.text.base.make(),
+        const SizedBox(height: 10),
+        BlocBuilder<TentangKamiCubit, TentangKamiState>(
+          builder: (context, state) => state.maybeWhen(
+            loading: () => const CircularProgressIndicator().centered(),
+            loaded: (tentang) => HStack([
+              ...tentang.gallery.map((e) => GestureDetector(
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => VxBox()
+                            .bgImage(
+                              DecorationImage(
+                                image: NetworkImage(
+                                    'http://10.0.2.2:8000/storage/fileGallery/${e.file}'),
+                              ),
+                            )
+                            .roundedSM
+                            .make(),
+                      );
+                    },
+                    child: VxBox()
+                        .width(250)
+                        .height(200)
+                        .bgImage(DecorationImage(
+                            image: NetworkImage(
+                                'http://10.0.2.2:8000/storage/fileGallery/${e.file}'),
+                            fit: BoxFit.cover))
+                        .roundedSM
+                        .make()
+                        .pOnly(right: 10),
+                  ))
+            ]).scrollHorizontal(),
+            orElse: () => const SizedBox(),
+          ),
+        )
       ],
     ).centered().p16().scrollVertical();
   }

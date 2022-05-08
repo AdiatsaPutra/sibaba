@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:sibaba/applications/tentang_kami/bloc/cubit/tentang_kami_cubit.dart';
 import 'package:sibaba/infrastructures/extensions.dart';
 import 'package:sibaba/injection.dart';
@@ -13,7 +14,7 @@ class TentangKamiPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Scaffold(
         appBar: const CustomAppbar(title: 'Tentang Kami'),
         body: BlocProvider(
@@ -40,15 +41,19 @@ class _TentangKamiLayout extends StatelessWidget {
         ).centered(),
         const SizedBox(height: 20),
         TabBar(
+          indicatorSize: TabBarIndicatorSize.label,
           tabs: [
             Tab(
-              child: 'Sejarah'.text.lg.bold.make(),
+              child: 'Sejarah'.text.base.bold.make(),
             ),
             Tab(
-              child: 'Struktur'.text.lg.bold.make(),
+              child: 'Struktur'.text.base.bold.make(),
             ),
             Tab(
-              child: 'Visi-misi'.text.lg.bold.make(),
+              child: 'Visi-misi'.text.base.bold.make(),
+            ),
+            Tab(
+              child: 'Gallery'.text.base.bold.make(),
             ),
           ],
         ).p16(),
@@ -82,6 +87,39 @@ class _TentangKamiLayout extends StatelessWidget {
                       .make()
                       .p16()
                       .scrollVertical(),
+                  VStack([
+                    'Klik untuk memperbesar'.text.base.make(),
+                    VStack([
+                      ...tentang.gallery.map(
+                        (e) => GestureDetector(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) => VxBox()
+                                  .bgImage(
+                                    DecorationImage(
+                                      image: NetworkImage(
+                                          'http://10.0.2.2:8000/storage/fileGallery/${e.file}'),
+                                    ),
+                                  )
+                                  .roundedSM
+                                  .make(),
+                            );
+                          },
+                          child: VxBox()
+                              .width(Get.width)
+                              .height(200)
+                              .bgImage(DecorationImage(
+                                  image: NetworkImage(
+                                      'http://10.0.2.2:8000/storage/fileGallery/${e.file}'),
+                                  fit: BoxFit.cover))
+                              .roundedSM
+                              .make()
+                              .pOnly(bottom: 10),
+                        ),
+                      ),
+                    ]).scrollVertical().expand(),
+                  ]).p16()
                 ],
               ),
             ),

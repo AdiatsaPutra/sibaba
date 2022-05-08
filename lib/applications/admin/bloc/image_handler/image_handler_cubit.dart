@@ -20,7 +20,7 @@ class ImageHandlerCubit extends Cubit<ImageHandlerState> {
   void setImage() async {
     emit(const ImageHandlerState.loading());
     final XFile? pickedImage =
-        await _picker.pickImage(source: ImageSource.gallery);
+        await _picker.pickImage(source: ImageSource.camera);
     File? croppedFile = await ImageCropper().cropImage(
         sourcePath: pickedImage!.path,
         aspectRatioPresets: [
@@ -40,6 +40,12 @@ class ImageHandlerCubit extends Cubit<ImageHandlerState> {
           minimumAspectRatio: 1.0,
         ));
     image = File(croppedFile!.path);
+    emit(const ImageHandlerState.loaded());
+  }
+
+  void reset() async {
+    emit(const ImageHandlerState.loading());
+    image = null;
     emit(const ImageHandlerState.loaded());
   }
 }

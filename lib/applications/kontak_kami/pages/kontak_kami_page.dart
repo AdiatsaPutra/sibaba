@@ -9,6 +9,7 @@ import 'package:sibaba/presentation/loading_indicator.dart';
 import 'package:sibaba/presentation/minimap.dart';
 import 'package:sibaba/presentation/success_dialog.dart';
 import 'package:sibaba/presentation/widgets/custom_appbar.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class KontakKamiPage extends StatelessWidget {
@@ -190,6 +191,21 @@ class _KontakKamiLayout extends StatelessWidget {
           builder: (context, state) => state.maybeWhen(
             loading: () => const LoadingIndicator(),
             loaded: (infoKontak) => VStack([
+              const SizedBox(height: 10),
+              HStack([
+                'Peta Lokasi'.text.xl.bold.make().expand(),
+                GestureDetector(
+                  onTap: () async {
+                    String googleUrl =
+                        'https://www.google.com/maps/search/?api=1&query=${-7.887392001723083},${110.33191832274352}';
+                    if (await launchUrl(Uri.parse(googleUrl))) {
+                    } else {
+                      throw 'Could not open the map.';
+                    }
+                  },
+                  child: 'Buka Di Map'.text.xl.make(),
+                ),
+              ]),
               const Minimap(
                 latLng: LatLng(-7.887392001723083, 110.33191832274352),
               ),
