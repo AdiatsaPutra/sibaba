@@ -26,14 +26,28 @@ class _$UserStateTearOff {
     return const _Loading();
   }
 
+  _Picked picked() {
+    return const _Picked();
+  }
+
   _Loaded loaded(List<User> users) {
     return _Loaded(
       users,
     );
   }
 
+  _Profile profile(User user) {
+    return _Profile(
+      user,
+    );
+  }
+
   _Added added() {
     return const _Added();
+  }
+
+  _Edited edited() {
+    return const _Edited();
   }
 
   _Deleted deleted() {
@@ -56,8 +70,11 @@ mixin _$UserState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() picked,
     required TResult Function(List<User> users) loaded,
+    required TResult Function(User user) profile,
     required TResult Function() added,
+    required TResult Function() edited,
     required TResult Function() deleted,
     required TResult Function(String message) error,
   }) =>
@@ -66,8 +83,11 @@ mixin _$UserState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? picked,
     TResult Function(List<User> users)? loaded,
+    TResult Function(User user)? profile,
     TResult Function()? added,
+    TResult Function()? edited,
     TResult Function()? deleted,
     TResult Function(String message)? error,
   }) =>
@@ -76,8 +96,11 @@ mixin _$UserState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? picked,
     TResult Function(List<User> users)? loaded,
+    TResult Function(User user)? profile,
     TResult Function()? added,
+    TResult Function()? edited,
     TResult Function()? deleted,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -87,8 +110,11 @@ mixin _$UserState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_Picked value) picked,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Profile value) profile,
     required TResult Function(_Added value) added,
+    required TResult Function(_Edited value) edited,
     required TResult Function(_Deleted value) deleted,
     required TResult Function(_Error value) error,
   }) =>
@@ -97,8 +123,11 @@ mixin _$UserState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_Picked value)? picked,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Profile value)? profile,
     TResult Function(_Added value)? added,
+    TResult Function(_Edited value)? edited,
     TResult Function(_Deleted value)? deleted,
     TResult Function(_Error value)? error,
   }) =>
@@ -107,8 +136,11 @@ mixin _$UserState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_Picked value)? picked,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Profile value)? profile,
     TResult Function(_Added value)? added,
+    TResult Function(_Edited value)? edited,
     TResult Function(_Deleted value)? deleted,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -171,8 +203,11 @@ class _$_Initial implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() picked,
     required TResult Function(List<User> users) loaded,
+    required TResult Function(User user) profile,
     required TResult Function() added,
+    required TResult Function() edited,
     required TResult Function() deleted,
     required TResult Function(String message) error,
   }) {
@@ -184,8 +219,11 @@ class _$_Initial implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? picked,
     TResult Function(List<User> users)? loaded,
+    TResult Function(User user)? profile,
     TResult Function()? added,
+    TResult Function()? edited,
     TResult Function()? deleted,
     TResult Function(String message)? error,
   }) {
@@ -197,8 +235,11 @@ class _$_Initial implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? picked,
     TResult Function(List<User> users)? loaded,
+    TResult Function(User user)? profile,
     TResult Function()? added,
+    TResult Function()? edited,
     TResult Function()? deleted,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -214,8 +255,11 @@ class _$_Initial implements _Initial {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_Picked value) picked,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Profile value) profile,
     required TResult Function(_Added value) added,
+    required TResult Function(_Edited value) edited,
     required TResult Function(_Deleted value) deleted,
     required TResult Function(_Error value) error,
   }) {
@@ -227,8 +271,11 @@ class _$_Initial implements _Initial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_Picked value)? picked,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Profile value)? profile,
     TResult Function(_Added value)? added,
+    TResult Function(_Edited value)? edited,
     TResult Function(_Deleted value)? deleted,
     TResult Function(_Error value)? error,
   }) {
@@ -240,8 +287,11 @@ class _$_Initial implements _Initial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_Picked value)? picked,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Profile value)? profile,
     TResult Function(_Added value)? added,
+    TResult Function(_Edited value)? edited,
     TResult Function(_Deleted value)? deleted,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -297,8 +347,11 @@ class _$_Loading implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() picked,
     required TResult Function(List<User> users) loaded,
+    required TResult Function(User user) profile,
     required TResult Function() added,
+    required TResult Function() edited,
     required TResult Function() deleted,
     required TResult Function(String message) error,
   }) {
@@ -310,8 +363,11 @@ class _$_Loading implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? picked,
     TResult Function(List<User> users)? loaded,
+    TResult Function(User user)? profile,
     TResult Function()? added,
+    TResult Function()? edited,
     TResult Function()? deleted,
     TResult Function(String message)? error,
   }) {
@@ -323,8 +379,11 @@ class _$_Loading implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? picked,
     TResult Function(List<User> users)? loaded,
+    TResult Function(User user)? profile,
     TResult Function()? added,
+    TResult Function()? edited,
     TResult Function()? deleted,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -340,8 +399,11 @@ class _$_Loading implements _Loading {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_Picked value) picked,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Profile value) profile,
     required TResult Function(_Added value) added,
+    required TResult Function(_Edited value) edited,
     required TResult Function(_Deleted value) deleted,
     required TResult Function(_Error value) error,
   }) {
@@ -353,8 +415,11 @@ class _$_Loading implements _Loading {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_Picked value)? picked,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Profile value)? profile,
     TResult Function(_Added value)? added,
+    TResult Function(_Edited value)? edited,
     TResult Function(_Deleted value)? deleted,
     TResult Function(_Error value)? error,
   }) {
@@ -366,8 +431,11 @@ class _$_Loading implements _Loading {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_Picked value)? picked,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Profile value)? profile,
     TResult Function(_Added value)? added,
+    TResult Function(_Edited value)? edited,
     TResult Function(_Deleted value)? deleted,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -381,6 +449,150 @@ class _$_Loading implements _Loading {
 
 abstract class _Loading implements UserState {
   const factory _Loading() = _$_Loading;
+}
+
+/// @nodoc
+abstract class _$PickedCopyWith<$Res> {
+  factory _$PickedCopyWith(_Picked value, $Res Function(_Picked) then) =
+      __$PickedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$PickedCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
+    implements _$PickedCopyWith<$Res> {
+  __$PickedCopyWithImpl(_Picked _value, $Res Function(_Picked) _then)
+      : super(_value, (v) => _then(v as _Picked));
+
+  @override
+  _Picked get _value => super._value as _Picked;
+}
+
+/// @nodoc
+
+class _$_Picked implements _Picked {
+  const _$_Picked();
+
+  @override
+  String toString() {
+    return 'UserState.picked()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _Picked);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() picked,
+    required TResult Function(List<User> users) loaded,
+    required TResult Function(User user) profile,
+    required TResult Function() added,
+    required TResult Function() edited,
+    required TResult Function() deleted,
+    required TResult Function(String message) error,
+  }) {
+    return picked();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? picked,
+    TResult Function(List<User> users)? loaded,
+    TResult Function(User user)? profile,
+    TResult Function()? added,
+    TResult Function()? edited,
+    TResult Function()? deleted,
+    TResult Function(String message)? error,
+  }) {
+    return picked?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? picked,
+    TResult Function(List<User> users)? loaded,
+    TResult Function(User user)? profile,
+    TResult Function()? added,
+    TResult Function()? edited,
+    TResult Function()? deleted,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (picked != null) {
+      return picked();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Picked value) picked,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Profile value) profile,
+    required TResult Function(_Added value) added,
+    required TResult Function(_Edited value) edited,
+    required TResult Function(_Deleted value) deleted,
+    required TResult Function(_Error value) error,
+  }) {
+    return picked(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Picked value)? picked,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_Profile value)? profile,
+    TResult Function(_Added value)? added,
+    TResult Function(_Edited value)? edited,
+    TResult Function(_Deleted value)? deleted,
+    TResult Function(_Error value)? error,
+  }) {
+    return picked?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Picked value)? picked,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_Profile value)? profile,
+    TResult Function(_Added value)? added,
+    TResult Function(_Edited value)? edited,
+    TResult Function(_Deleted value)? deleted,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (picked != null) {
+      return picked(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Picked implements UserState {
+  const factory _Picked() = _$_Picked;
 }
 
 /// @nodoc
@@ -447,8 +659,11 @@ class _$_Loaded implements _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() picked,
     required TResult Function(List<User> users) loaded,
+    required TResult Function(User user) profile,
     required TResult Function() added,
+    required TResult Function() edited,
     required TResult Function() deleted,
     required TResult Function(String message) error,
   }) {
@@ -460,8 +675,11 @@ class _$_Loaded implements _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? picked,
     TResult Function(List<User> users)? loaded,
+    TResult Function(User user)? profile,
     TResult Function()? added,
+    TResult Function()? edited,
     TResult Function()? deleted,
     TResult Function(String message)? error,
   }) {
@@ -473,8 +691,11 @@ class _$_Loaded implements _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? picked,
     TResult Function(List<User> users)? loaded,
+    TResult Function(User user)? profile,
     TResult Function()? added,
+    TResult Function()? edited,
     TResult Function()? deleted,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -490,8 +711,11 @@ class _$_Loaded implements _Loaded {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_Picked value) picked,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Profile value) profile,
     required TResult Function(_Added value) added,
+    required TResult Function(_Edited value) edited,
     required TResult Function(_Deleted value) deleted,
     required TResult Function(_Error value) error,
   }) {
@@ -503,8 +727,11 @@ class _$_Loaded implements _Loaded {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_Picked value)? picked,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Profile value)? profile,
     TResult Function(_Added value)? added,
+    TResult Function(_Edited value)? edited,
     TResult Function(_Deleted value)? deleted,
     TResult Function(_Error value)? error,
   }) {
@@ -516,8 +743,11 @@ class _$_Loaded implements _Loaded {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_Picked value)? picked,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Profile value)? profile,
     TResult Function(_Added value)? added,
+    TResult Function(_Edited value)? edited,
     TResult Function(_Deleted value)? deleted,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -535,6 +765,179 @@ abstract class _Loaded implements UserState {
   List<User> get users;
   @JsonKey(ignore: true)
   _$LoadedCopyWith<_Loaded> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$ProfileCopyWith<$Res> {
+  factory _$ProfileCopyWith(_Profile value, $Res Function(_Profile) then) =
+      __$ProfileCopyWithImpl<$Res>;
+  $Res call({User user});
+}
+
+/// @nodoc
+class __$ProfileCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
+    implements _$ProfileCopyWith<$Res> {
+  __$ProfileCopyWithImpl(_Profile _value, $Res Function(_Profile) _then)
+      : super(_value, (v) => _then(v as _Profile));
+
+  @override
+  _Profile get _value => super._value as _Profile;
+
+  @override
+  $Res call({
+    Object? user = freezed,
+  }) {
+    return _then(_Profile(
+      user == freezed
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_Profile implements _Profile {
+  const _$_Profile(this.user);
+
+  @override
+  final User user;
+
+  @override
+  String toString() {
+    return 'UserState.profile(user: $user)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _Profile &&
+            const DeepCollectionEquality().equals(other.user, user));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(user));
+
+  @JsonKey(ignore: true)
+  @override
+  _$ProfileCopyWith<_Profile> get copyWith =>
+      __$ProfileCopyWithImpl<_Profile>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() picked,
+    required TResult Function(List<User> users) loaded,
+    required TResult Function(User user) profile,
+    required TResult Function() added,
+    required TResult Function() edited,
+    required TResult Function() deleted,
+    required TResult Function(String message) error,
+  }) {
+    return profile(user);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? picked,
+    TResult Function(List<User> users)? loaded,
+    TResult Function(User user)? profile,
+    TResult Function()? added,
+    TResult Function()? edited,
+    TResult Function()? deleted,
+    TResult Function(String message)? error,
+  }) {
+    return profile?.call(user);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? picked,
+    TResult Function(List<User> users)? loaded,
+    TResult Function(User user)? profile,
+    TResult Function()? added,
+    TResult Function()? edited,
+    TResult Function()? deleted,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (profile != null) {
+      return profile(user);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Picked value) picked,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Profile value) profile,
+    required TResult Function(_Added value) added,
+    required TResult Function(_Edited value) edited,
+    required TResult Function(_Deleted value) deleted,
+    required TResult Function(_Error value) error,
+  }) {
+    return profile(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Picked value)? picked,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_Profile value)? profile,
+    TResult Function(_Added value)? added,
+    TResult Function(_Edited value)? edited,
+    TResult Function(_Deleted value)? deleted,
+    TResult Function(_Error value)? error,
+  }) {
+    return profile?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Picked value)? picked,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_Profile value)? profile,
+    TResult Function(_Added value)? added,
+    TResult Function(_Edited value)? edited,
+    TResult Function(_Deleted value)? deleted,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (profile != null) {
+      return profile(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Profile implements UserState {
+  const factory _Profile(User user) = _$_Profile;
+
+  User get user;
+  @JsonKey(ignore: true)
+  _$ProfileCopyWith<_Profile> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -577,8 +980,11 @@ class _$_Added implements _Added {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() picked,
     required TResult Function(List<User> users) loaded,
+    required TResult Function(User user) profile,
     required TResult Function() added,
+    required TResult Function() edited,
     required TResult Function() deleted,
     required TResult Function(String message) error,
   }) {
@@ -590,8 +996,11 @@ class _$_Added implements _Added {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? picked,
     TResult Function(List<User> users)? loaded,
+    TResult Function(User user)? profile,
     TResult Function()? added,
+    TResult Function()? edited,
     TResult Function()? deleted,
     TResult Function(String message)? error,
   }) {
@@ -603,8 +1012,11 @@ class _$_Added implements _Added {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? picked,
     TResult Function(List<User> users)? loaded,
+    TResult Function(User user)? profile,
     TResult Function()? added,
+    TResult Function()? edited,
     TResult Function()? deleted,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -620,8 +1032,11 @@ class _$_Added implements _Added {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_Picked value) picked,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Profile value) profile,
     required TResult Function(_Added value) added,
+    required TResult Function(_Edited value) edited,
     required TResult Function(_Deleted value) deleted,
     required TResult Function(_Error value) error,
   }) {
@@ -633,8 +1048,11 @@ class _$_Added implements _Added {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_Picked value)? picked,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Profile value)? profile,
     TResult Function(_Added value)? added,
+    TResult Function(_Edited value)? edited,
     TResult Function(_Deleted value)? deleted,
     TResult Function(_Error value)? error,
   }) {
@@ -646,8 +1064,11 @@ class _$_Added implements _Added {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_Picked value)? picked,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Profile value)? profile,
     TResult Function(_Added value)? added,
+    TResult Function(_Edited value)? edited,
     TResult Function(_Deleted value)? deleted,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -661,6 +1082,150 @@ class _$_Added implements _Added {
 
 abstract class _Added implements UserState {
   const factory _Added() = _$_Added;
+}
+
+/// @nodoc
+abstract class _$EditedCopyWith<$Res> {
+  factory _$EditedCopyWith(_Edited value, $Res Function(_Edited) then) =
+      __$EditedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$EditedCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
+    implements _$EditedCopyWith<$Res> {
+  __$EditedCopyWithImpl(_Edited _value, $Res Function(_Edited) _then)
+      : super(_value, (v) => _then(v as _Edited));
+
+  @override
+  _Edited get _value => super._value as _Edited;
+}
+
+/// @nodoc
+
+class _$_Edited implements _Edited {
+  const _$_Edited();
+
+  @override
+  String toString() {
+    return 'UserState.edited()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _Edited);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() picked,
+    required TResult Function(List<User> users) loaded,
+    required TResult Function(User user) profile,
+    required TResult Function() added,
+    required TResult Function() edited,
+    required TResult Function() deleted,
+    required TResult Function(String message) error,
+  }) {
+    return edited();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? picked,
+    TResult Function(List<User> users)? loaded,
+    TResult Function(User user)? profile,
+    TResult Function()? added,
+    TResult Function()? edited,
+    TResult Function()? deleted,
+    TResult Function(String message)? error,
+  }) {
+    return edited?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? picked,
+    TResult Function(List<User> users)? loaded,
+    TResult Function(User user)? profile,
+    TResult Function()? added,
+    TResult Function()? edited,
+    TResult Function()? deleted,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (edited != null) {
+      return edited();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Picked value) picked,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Profile value) profile,
+    required TResult Function(_Added value) added,
+    required TResult Function(_Edited value) edited,
+    required TResult Function(_Deleted value) deleted,
+    required TResult Function(_Error value) error,
+  }) {
+    return edited(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Picked value)? picked,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_Profile value)? profile,
+    TResult Function(_Added value)? added,
+    TResult Function(_Edited value)? edited,
+    TResult Function(_Deleted value)? deleted,
+    TResult Function(_Error value)? error,
+  }) {
+    return edited?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Picked value)? picked,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_Profile value)? profile,
+    TResult Function(_Added value)? added,
+    TResult Function(_Edited value)? edited,
+    TResult Function(_Deleted value)? deleted,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (edited != null) {
+      return edited(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Edited implements UserState {
+  const factory _Edited() = _$_Edited;
 }
 
 /// @nodoc
@@ -703,8 +1268,11 @@ class _$_Deleted implements _Deleted {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() picked,
     required TResult Function(List<User> users) loaded,
+    required TResult Function(User user) profile,
     required TResult Function() added,
+    required TResult Function() edited,
     required TResult Function() deleted,
     required TResult Function(String message) error,
   }) {
@@ -716,8 +1284,11 @@ class _$_Deleted implements _Deleted {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? picked,
     TResult Function(List<User> users)? loaded,
+    TResult Function(User user)? profile,
     TResult Function()? added,
+    TResult Function()? edited,
     TResult Function()? deleted,
     TResult Function(String message)? error,
   }) {
@@ -729,8 +1300,11 @@ class _$_Deleted implements _Deleted {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? picked,
     TResult Function(List<User> users)? loaded,
+    TResult Function(User user)? profile,
     TResult Function()? added,
+    TResult Function()? edited,
     TResult Function()? deleted,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -746,8 +1320,11 @@ class _$_Deleted implements _Deleted {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_Picked value) picked,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Profile value) profile,
     required TResult Function(_Added value) added,
+    required TResult Function(_Edited value) edited,
     required TResult Function(_Deleted value) deleted,
     required TResult Function(_Error value) error,
   }) {
@@ -759,8 +1336,11 @@ class _$_Deleted implements _Deleted {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_Picked value)? picked,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Profile value)? profile,
     TResult Function(_Added value)? added,
+    TResult Function(_Edited value)? edited,
     TResult Function(_Deleted value)? deleted,
     TResult Function(_Error value)? error,
   }) {
@@ -772,8 +1352,11 @@ class _$_Deleted implements _Deleted {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_Picked value)? picked,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Profile value)? profile,
     TResult Function(_Added value)? added,
+    TResult Function(_Edited value)? edited,
     TResult Function(_Deleted value)? deleted,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -853,8 +1436,11 @@ class _$_Error implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
+    required TResult Function() picked,
     required TResult Function(List<User> users) loaded,
+    required TResult Function(User user) profile,
     required TResult Function() added,
+    required TResult Function() edited,
     required TResult Function() deleted,
     required TResult Function(String message) error,
   }) {
@@ -866,8 +1452,11 @@ class _$_Error implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? picked,
     TResult Function(List<User> users)? loaded,
+    TResult Function(User user)? profile,
     TResult Function()? added,
+    TResult Function()? edited,
     TResult Function()? deleted,
     TResult Function(String message)? error,
   }) {
@@ -879,8 +1468,11 @@ class _$_Error implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
+    TResult Function()? picked,
     TResult Function(List<User> users)? loaded,
+    TResult Function(User user)? profile,
     TResult Function()? added,
+    TResult Function()? edited,
     TResult Function()? deleted,
     TResult Function(String message)? error,
     required TResult orElse(),
@@ -896,8 +1488,11 @@ class _$_Error implements _Error {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_Picked value) picked,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Profile value) profile,
     required TResult Function(_Added value) added,
+    required TResult Function(_Edited value) edited,
     required TResult Function(_Deleted value) deleted,
     required TResult Function(_Error value) error,
   }) {
@@ -909,8 +1504,11 @@ class _$_Error implements _Error {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_Picked value)? picked,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Profile value)? profile,
     TResult Function(_Added value)? added,
+    TResult Function(_Edited value)? edited,
     TResult Function(_Deleted value)? deleted,
     TResult Function(_Error value)? error,
   }) {
@@ -922,8 +1520,11 @@ class _$_Error implements _Error {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
+    TResult Function(_Picked value)? picked,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_Profile value)? profile,
     TResult Function(_Added value)? added,
+    TResult Function(_Edited value)? edited,
     TResult Function(_Deleted value)? deleted,
     TResult Function(_Error value)? error,
     required TResult orElse(),

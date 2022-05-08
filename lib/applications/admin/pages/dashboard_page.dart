@@ -17,8 +17,10 @@ import 'package:sibaba/injection.dart';
 
 import 'package:velocity_x/velocity_x.dart';
 
+import '../../../infrastructures/refresh/cubit/refresh_cubit.dart';
 import '../../info_lokasi/bloc/cubit/info_lokasi_cubit.dart';
 import '../../info_lokasi/model/location.dart';
+import '../bloc/user/user_cubit.dart';
 
 class DashboardPage extends StatelessWidget {
   final User user;
@@ -37,20 +39,65 @@ class DashboardPage extends StatelessWidget {
         BlocProvider(
           create: (context) => getIt<InfoLokasiCubit>()..getLokasi(),
         ),
+        BlocProvider(
+          create: (context) => getIt<UserCubit>()..profile(user.email),
+        ),
       ],
-      child: BlocBuilder<InfoLokasiCubit, InfoLokasiState>(
-        builder: (context, state) => state.maybeWhen(
-          loading: () => _DashboardLayout(
-            user: user,
-            locations: Location(lokasi: [], maps: [], events: []),
-          ),
-          loaded: (location) => _DashboardLayout(
-            user: user,
-            locations: location,
-          ),
-          orElse: () => _DashboardLayout(
-            user: user,
-            locations: Location(lokasi: [], maps: [], events: []),
+      child: BlocListener<RefreshCubit, RefreshState>(
+        listener: (context, state) => state.maybeWhen(
+          profileUpdated: () => context.read<UserCubit>().profile(user.email),
+          orElse: () {},
+        ),
+        child: BlocBuilder<UserCubit, UserState>(
+          builder: (context, state) => state.maybeWhen(
+            loading: () => BlocBuilder<InfoLokasiCubit, InfoLokasiState>(
+              builder: (context, state) => state.maybeWhen(
+                loading: () => _DashboardLayout(
+                  user: user,
+                  locations: Location(lokasi: [], maps: [], events: []),
+                ),
+                loaded: (location) => _DashboardLayout(
+                  user: user,
+                  locations: location,
+                ),
+                orElse: () => _DashboardLayout(
+                  user: user,
+                  locations: Location(lokasi: [], maps: [], events: []),
+                ),
+              ),
+            ),
+            profile: (u) => BlocBuilder<InfoLokasiCubit, InfoLokasiState>(
+              builder: (context, state) => state.maybeWhen(
+                loading: () => _DashboardLayout(
+                  user: u,
+                  locations: Location(lokasi: [], maps: [], events: []),
+                ),
+                loaded: (location) => _DashboardLayout(
+                  user: u,
+                  locations: location,
+                ),
+                orElse: () => _DashboardLayout(
+                  user: u,
+                  locations: Location(lokasi: [], maps: [], events: []),
+                ),
+              ),
+            ),
+            orElse: () => BlocBuilder<InfoLokasiCubit, InfoLokasiState>(
+              builder: (context, state) => state.maybeWhen(
+                loading: () => _DashboardLayout(
+                  user: user,
+                  locations: Location(lokasi: [], maps: [], events: []),
+                ),
+                loaded: (location) => _DashboardLayout(
+                  user: user,
+                  locations: location,
+                ),
+                orElse: () => _DashboardLayout(
+                  user: user,
+                  locations: Location(lokasi: [], maps: [], events: []),
+                ),
+              ),
+            ),
           ),
         ),
       ),

@@ -18,7 +18,7 @@ class AddUserDialog extends StatelessWidget {
       child: VStack([
         'Input Data Pengguna'.text.xl.bold.make().pOnly(bottom: 10),
         Form(
-          key: cubit.key,
+          key: cubit.formkey,
           child: VStack([
             const SizedBox(height: 10),
             FormFields.textFormField(
@@ -96,8 +96,8 @@ class AddUserDialog extends StatelessWidget {
           ).box.width(Get.width / 3).make(),
           ElevatedButton(
             onPressed: () {
-              if (cubit.key.currentState!.validate()) {
-                cubit.key.currentState!.save();
+              if (cubit.formkey.currentState!.validate()) {
+                cubit.formkey.currentState!.save();
                 cubit.addUser();
                 Get.back();
               }

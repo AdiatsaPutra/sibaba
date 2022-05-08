@@ -33,6 +33,10 @@ class _$RefreshStateTearOff {
   _UstadzAdded ustadzAdded() {
     return const _UstadzAdded();
   }
+
+  _ProfileUpdated profileUpdated() {
+    return const _ProfileUpdated();
+  }
 }
 
 /// @nodoc
@@ -46,6 +50,7 @@ mixin _$RefreshState {
     required TResult Function() loading,
     required TResult Function() locationAdded,
     required TResult Function() ustadzAdded,
+    required TResult Function() profileUpdated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -54,6 +59,7 @@ mixin _$RefreshState {
     TResult Function()? loading,
     TResult Function()? locationAdded,
     TResult Function()? ustadzAdded,
+    TResult Function()? profileUpdated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -62,6 +68,7 @@ mixin _$RefreshState {
     TResult Function()? loading,
     TResult Function()? locationAdded,
     TResult Function()? ustadzAdded,
+    TResult Function()? profileUpdated,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -71,6 +78,7 @@ mixin _$RefreshState {
     required TResult Function(_Loaded value) loading,
     required TResult Function(_LocationAdded value) locationAdded,
     required TResult Function(_UstadzAdded value) ustadzAdded,
+    required TResult Function(_ProfileUpdated value) profileUpdated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -79,6 +87,7 @@ mixin _$RefreshState {
     TResult Function(_Loaded value)? loading,
     TResult Function(_LocationAdded value)? locationAdded,
     TResult Function(_UstadzAdded value)? ustadzAdded,
+    TResult Function(_ProfileUpdated value)? profileUpdated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -87,6 +96,7 @@ mixin _$RefreshState {
     TResult Function(_Loaded value)? loading,
     TResult Function(_LocationAdded value)? locationAdded,
     TResult Function(_UstadzAdded value)? ustadzAdded,
+    TResult Function(_ProfileUpdated value)? profileUpdated,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -150,6 +160,7 @@ class _$_Initial implements _Initial {
     required TResult Function() loading,
     required TResult Function() locationAdded,
     required TResult Function() ustadzAdded,
+    required TResult Function() profileUpdated,
   }) {
     return initial();
   }
@@ -161,6 +172,7 @@ class _$_Initial implements _Initial {
     TResult Function()? loading,
     TResult Function()? locationAdded,
     TResult Function()? ustadzAdded,
+    TResult Function()? profileUpdated,
   }) {
     return initial?.call();
   }
@@ -172,6 +184,7 @@ class _$_Initial implements _Initial {
     TResult Function()? loading,
     TResult Function()? locationAdded,
     TResult Function()? ustadzAdded,
+    TResult Function()? profileUpdated,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -187,6 +200,7 @@ class _$_Initial implements _Initial {
     required TResult Function(_Loaded value) loading,
     required TResult Function(_LocationAdded value) locationAdded,
     required TResult Function(_UstadzAdded value) ustadzAdded,
+    required TResult Function(_ProfileUpdated value) profileUpdated,
   }) {
     return initial(this);
   }
@@ -198,6 +212,7 @@ class _$_Initial implements _Initial {
     TResult Function(_Loaded value)? loading,
     TResult Function(_LocationAdded value)? locationAdded,
     TResult Function(_UstadzAdded value)? ustadzAdded,
+    TResult Function(_ProfileUpdated value)? profileUpdated,
   }) {
     return initial?.call(this);
   }
@@ -209,6 +224,7 @@ class _$_Initial implements _Initial {
     TResult Function(_Loaded value)? loading,
     TResult Function(_LocationAdded value)? locationAdded,
     TResult Function(_UstadzAdded value)? ustadzAdded,
+    TResult Function(_ProfileUpdated value)? profileUpdated,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -264,6 +280,7 @@ class _$_Loaded implements _Loaded {
     required TResult Function() loading,
     required TResult Function() locationAdded,
     required TResult Function() ustadzAdded,
+    required TResult Function() profileUpdated,
   }) {
     return loading();
   }
@@ -275,6 +292,7 @@ class _$_Loaded implements _Loaded {
     TResult Function()? loading,
     TResult Function()? locationAdded,
     TResult Function()? ustadzAdded,
+    TResult Function()? profileUpdated,
   }) {
     return loading?.call();
   }
@@ -286,6 +304,7 @@ class _$_Loaded implements _Loaded {
     TResult Function()? loading,
     TResult Function()? locationAdded,
     TResult Function()? ustadzAdded,
+    TResult Function()? profileUpdated,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -301,6 +320,7 @@ class _$_Loaded implements _Loaded {
     required TResult Function(_Loaded value) loading,
     required TResult Function(_LocationAdded value) locationAdded,
     required TResult Function(_UstadzAdded value) ustadzAdded,
+    required TResult Function(_ProfileUpdated value) profileUpdated,
   }) {
     return loading(this);
   }
@@ -312,6 +332,7 @@ class _$_Loaded implements _Loaded {
     TResult Function(_Loaded value)? loading,
     TResult Function(_LocationAdded value)? locationAdded,
     TResult Function(_UstadzAdded value)? ustadzAdded,
+    TResult Function(_ProfileUpdated value)? profileUpdated,
   }) {
     return loading?.call(this);
   }
@@ -323,6 +344,7 @@ class _$_Loaded implements _Loaded {
     TResult Function(_Loaded value)? loading,
     TResult Function(_LocationAdded value)? locationAdded,
     TResult Function(_UstadzAdded value)? ustadzAdded,
+    TResult Function(_ProfileUpdated value)? profileUpdated,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -381,6 +403,7 @@ class _$_LocationAdded implements _LocationAdded {
     required TResult Function() loading,
     required TResult Function() locationAdded,
     required TResult Function() ustadzAdded,
+    required TResult Function() profileUpdated,
   }) {
     return locationAdded();
   }
@@ -392,6 +415,7 @@ class _$_LocationAdded implements _LocationAdded {
     TResult Function()? loading,
     TResult Function()? locationAdded,
     TResult Function()? ustadzAdded,
+    TResult Function()? profileUpdated,
   }) {
     return locationAdded?.call();
   }
@@ -403,6 +427,7 @@ class _$_LocationAdded implements _LocationAdded {
     TResult Function()? loading,
     TResult Function()? locationAdded,
     TResult Function()? ustadzAdded,
+    TResult Function()? profileUpdated,
     required TResult orElse(),
   }) {
     if (locationAdded != null) {
@@ -418,6 +443,7 @@ class _$_LocationAdded implements _LocationAdded {
     required TResult Function(_Loaded value) loading,
     required TResult Function(_LocationAdded value) locationAdded,
     required TResult Function(_UstadzAdded value) ustadzAdded,
+    required TResult Function(_ProfileUpdated value) profileUpdated,
   }) {
     return locationAdded(this);
   }
@@ -429,6 +455,7 @@ class _$_LocationAdded implements _LocationAdded {
     TResult Function(_Loaded value)? loading,
     TResult Function(_LocationAdded value)? locationAdded,
     TResult Function(_UstadzAdded value)? ustadzAdded,
+    TResult Function(_ProfileUpdated value)? profileUpdated,
   }) {
     return locationAdded?.call(this);
   }
@@ -440,6 +467,7 @@ class _$_LocationAdded implements _LocationAdded {
     TResult Function(_Loaded value)? loading,
     TResult Function(_LocationAdded value)? locationAdded,
     TResult Function(_UstadzAdded value)? ustadzAdded,
+    TResult Function(_ProfileUpdated value)? profileUpdated,
     required TResult orElse(),
   }) {
     if (locationAdded != null) {
@@ -497,6 +525,7 @@ class _$_UstadzAdded implements _UstadzAdded {
     required TResult Function() loading,
     required TResult Function() locationAdded,
     required TResult Function() ustadzAdded,
+    required TResult Function() profileUpdated,
   }) {
     return ustadzAdded();
   }
@@ -508,6 +537,7 @@ class _$_UstadzAdded implements _UstadzAdded {
     TResult Function()? loading,
     TResult Function()? locationAdded,
     TResult Function()? ustadzAdded,
+    TResult Function()? profileUpdated,
   }) {
     return ustadzAdded?.call();
   }
@@ -519,6 +549,7 @@ class _$_UstadzAdded implements _UstadzAdded {
     TResult Function()? loading,
     TResult Function()? locationAdded,
     TResult Function()? ustadzAdded,
+    TResult Function()? profileUpdated,
     required TResult orElse(),
   }) {
     if (ustadzAdded != null) {
@@ -534,6 +565,7 @@ class _$_UstadzAdded implements _UstadzAdded {
     required TResult Function(_Loaded value) loading,
     required TResult Function(_LocationAdded value) locationAdded,
     required TResult Function(_UstadzAdded value) ustadzAdded,
+    required TResult Function(_ProfileUpdated value) profileUpdated,
   }) {
     return ustadzAdded(this);
   }
@@ -545,6 +577,7 @@ class _$_UstadzAdded implements _UstadzAdded {
     TResult Function(_Loaded value)? loading,
     TResult Function(_LocationAdded value)? locationAdded,
     TResult Function(_UstadzAdded value)? ustadzAdded,
+    TResult Function(_ProfileUpdated value)? profileUpdated,
   }) {
     return ustadzAdded?.call(this);
   }
@@ -556,6 +589,7 @@ class _$_UstadzAdded implements _UstadzAdded {
     TResult Function(_Loaded value)? loading,
     TResult Function(_LocationAdded value)? locationAdded,
     TResult Function(_UstadzAdded value)? ustadzAdded,
+    TResult Function(_ProfileUpdated value)? profileUpdated,
     required TResult orElse(),
   }) {
     if (ustadzAdded != null) {
@@ -567,4 +601,127 @@ class _$_UstadzAdded implements _UstadzAdded {
 
 abstract class _UstadzAdded implements RefreshState {
   const factory _UstadzAdded() = _$_UstadzAdded;
+}
+
+/// @nodoc
+abstract class _$ProfileUpdatedCopyWith<$Res> {
+  factory _$ProfileUpdatedCopyWith(
+          _ProfileUpdated value, $Res Function(_ProfileUpdated) then) =
+      __$ProfileUpdatedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$ProfileUpdatedCopyWithImpl<$Res>
+    extends _$RefreshStateCopyWithImpl<$Res>
+    implements _$ProfileUpdatedCopyWith<$Res> {
+  __$ProfileUpdatedCopyWithImpl(
+      _ProfileUpdated _value, $Res Function(_ProfileUpdated) _then)
+      : super(_value, (v) => _then(v as _ProfileUpdated));
+
+  @override
+  _ProfileUpdated get _value => super._value as _ProfileUpdated;
+}
+
+/// @nodoc
+
+class _$_ProfileUpdated implements _ProfileUpdated {
+  const _$_ProfileUpdated();
+
+  @override
+  String toString() {
+    return 'RefreshState.profileUpdated()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _ProfileUpdated);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() locationAdded,
+    required TResult Function() ustadzAdded,
+    required TResult Function() profileUpdated,
+  }) {
+    return profileUpdated();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? locationAdded,
+    TResult Function()? ustadzAdded,
+    TResult Function()? profileUpdated,
+  }) {
+    return profileUpdated?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? locationAdded,
+    TResult Function()? ustadzAdded,
+    TResult Function()? profileUpdated,
+    required TResult orElse(),
+  }) {
+    if (profileUpdated != null) {
+      return profileUpdated();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loaded value) loading,
+    required TResult Function(_LocationAdded value) locationAdded,
+    required TResult Function(_UstadzAdded value) ustadzAdded,
+    required TResult Function(_ProfileUpdated value) profileUpdated,
+  }) {
+    return profileUpdated(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loaded value)? loading,
+    TResult Function(_LocationAdded value)? locationAdded,
+    TResult Function(_UstadzAdded value)? ustadzAdded,
+    TResult Function(_ProfileUpdated value)? profileUpdated,
+  }) {
+    return profileUpdated?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loaded value)? loading,
+    TResult Function(_LocationAdded value)? locationAdded,
+    TResult Function(_UstadzAdded value)? ustadzAdded,
+    TResult Function(_ProfileUpdated value)? profileUpdated,
+    required TResult orElse(),
+  }) {
+    if (profileUpdated != null) {
+      return profileUpdated(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ProfileUpdated implements RefreshState {
+  const factory _ProfileUpdated() = _$_ProfileUpdated;
 }

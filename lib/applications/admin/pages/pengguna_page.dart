@@ -31,6 +31,10 @@ class PenggunaPage extends StatelessWidget {
               context.read<UserCubit>().getUsers();
               PopupMessages.successPopup('Data Pengguna Berhasil Ditambahkan');
             },
+            edited: () {
+              context.read<UserCubit>().getUsers();
+              PopupMessages.successPopup('Data Pengguna Berhasil Diubah');
+            },
             deleted: () async {
               context.read<UserCubit>().getUsers();
               PopupMessages.successPopup('Data Pengguna Berhasil Dihapus');
@@ -144,9 +148,12 @@ class UsersData extends DataTableSource {
             onTap: () {
               VxDialog.showCustom(
                 context,
-                child: EditUserDialog(
-                  cubit: cubit,
-                  user: users[index],
+                child: BlocProvider.value(
+                  value: cubit,
+                  child: EditUserDialog(
+                    cubit: cubit,
+                    user: users[index],
+                  ),
                 ),
               );
             },

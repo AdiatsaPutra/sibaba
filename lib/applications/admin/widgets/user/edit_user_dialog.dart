@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:sibaba/applications/admin/bloc/user/user_cubit.dart';
 import 'package:sibaba/applications/admin/models/user.dart';
@@ -44,20 +45,28 @@ class EditUserDialog extends StatelessWidget {
             isObscure: true,
           ),
           const SizedBox(height: 10),
-          ...user!.roles.map(
-            (e) => DropdownButtonFormField<String>(
-              hint: 'Pilih Role'.text.base.make(),
-              value: e.name,
-              items: [
-                ...roles.map(
-                  (e) => DropdownMenuItem<String>(
-                    value: e,
-                    child: e.text.base.make(),
-                  ),
+          BlocBuilder<UserCubit, UserState>(
+            builder: (context, state) {
+              return VStack([
+                ...user!.roles.map(
+                  (e) => DropdownButtonFormField<String>(
+                    hint: 'Pilih Role'.text.base.make(),
+                    value: e.name,
+                    items: [
+                      ...roles.map(
+                        (e) => DropdownMenuItem<String>(
+                          value: e,
+                          child: e.text.base.make(),
+                        ),
+                      ),
+                    ],
+                    onChanged: (e) {
+                      cubit.role = e!;
+                    },
+                  ).box.width(Get.width).make().pOnly(bottom: 10),
                 ),
-              ],
-              onChanged: (e) {},
-            ).box.width(Get.width).make().pOnly(bottom: 10),
+              ]);
+            },
           )
         ]),
         const SizedBox(height: 10),
@@ -70,6 +79,7 @@ class EditUserDialog extends StatelessWidget {
           ).box.width(Get.width / 3).make(),
           ElevatedButton(
             onPressed: () {
+              cubit.updateUser(user!.id);
               Navigator.pop(context, true);
             },
             child: 'Simpan'.text.base.make(),

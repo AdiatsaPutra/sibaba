@@ -64,4 +64,42 @@ class AdminUserImpl extends AdminUserRepo {
       return left(AdminException(e.toString()));
     }
   }
+
+  @override
+  Future<Either<AdminException, void>> editUser(
+      int id, String name, String email, String password, String role) async {
+    try {
+      final data = {
+        'name': name,
+        'email': email,
+        'password': password,
+        'roles': role
+      };
+      final response = await dio.put(baseUrl + "user/$id", data: data);
+      if (response.statusCode != 200) {
+        throw AdminException(response.data);
+      }
+      return right(null);
+    } catch (e) {
+      return left(AdminException(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<AdminException, User>> profile(String email) async {
+    try {
+      final data = {
+        'email': email,
+      };
+      final response = await dio.post(baseUrl + "profile", data: data);
+      if (response.statusCode != 200) {
+        throw AdminException(response.data);
+      }
+      final users = response.data['data'];
+      final user = User.fromMap(users);
+      return right(user);
+    } catch (e) {
+      return left(AdminException(e.toString()));
+    }
+  }
 }

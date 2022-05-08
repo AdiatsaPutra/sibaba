@@ -14,7 +14,7 @@ class UserCubit extends Cubit<UserState> {
 
   final AdminUserRepo _adminUserRepo;
 
-  final key = GlobalKey<FormState>();
+  final formkey = GlobalKey<FormState>();
 
   List<User> userList = [];
   final searchKeyword = TextEditingController();
@@ -25,6 +25,21 @@ class UserCubit extends Cubit<UserState> {
   final confirmPassword = TextEditingController();
 
   String role = '';
+
+  void init(User user) {
+    name.text = user.name;
+    email.text = user.email;
+    role = user.roles[0].name;
+  }
+
+  void profile(String email) async {
+    emit(const UserState.loading());
+    final users = await _adminUserRepo.profile(email);
+    users.fold(
+      (l) => emit(UserState.error(l.message)),
+      (r) => emit(UserState.profile(r)),
+    );
+  }
 
   void getUsers() async {
     emit(const UserState.loading());
@@ -45,6 +60,16 @@ class UserCubit extends Cubit<UserState> {
     users.fold(
       (l) => emit(UserState.error(l.message)),
       (r) => emit(const UserState.added()),
+    );
+  }
+
+  void updateUser(int id) async {
+    emit(const UserState.loading());
+    final users = await _adminUserRepo.editUser(
+        id, name.text, email.text, password.text, role);
+    users.fold(
+      (l) => emit(UserState.error(l.message)),
+      (r) => emit(const UserState.edited()),
     );
   }
 

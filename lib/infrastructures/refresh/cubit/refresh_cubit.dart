@@ -16,4 +16,9 @@ class RefreshCubit extends Cubit<RefreshState> {
     emit(const RefreshState.loading());
     emit(const RefreshState.ustadzAdded());
   }
+
+  void updateProfile() {
+    emit(const RefreshState.loading());
+    emit(const RefreshState.profileUpdated());
+  }
 }
