@@ -1,5 +1,6 @@
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:sibaba/applications/kontak_kami/bloc/cubit/kontak_kami_cubit.dart';
@@ -88,6 +89,9 @@ class _KontakLayout extends StatelessWidget {
                           return 'Telepon tidak boleh kosong';
                         }
                       },
+                      formatter: [
+                        LengthLimitingTextInputFormatter(13),
+                      ],
                     ),
                     const SizedBox(height: 12),
                     'Email'.text.base.bold.make(),
@@ -97,6 +101,9 @@ class _KontakLayout extends StatelessWidget {
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Email tidak boleh kosong';
+                        }
+                        if (!value.contains('@')) {
+                          return 'Email tidak valid';
                         }
                       },
                     ),
