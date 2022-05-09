@@ -116,7 +116,9 @@ class _KontakLayout extends StatelessWidget {
                         BlocBuilder<UpdateKontakCubit, UpdateKontakState>(
                           builder: (context, state) {
                             return DropdownButtonFormField<String>(
-                              value: infoKontak.hari1 ?? 'senin',
+                              value: infoKontak.hari1 == null
+                                  ? 'senin'
+                                  : infoKontak.hari1!.toLowerCase(),
                               items: [
                                 ...listHari.map(
                                   (e) => DropdownMenuItem<String>(
@@ -140,7 +142,9 @@ class _KontakLayout extends StatelessWidget {
                         BlocBuilder<UpdateKontakCubit, UpdateKontakState>(
                           builder: (context, state) {
                             return DropdownButtonFormField<String>(
-                              value: infoKontak.hari2 ?? 'senin',
+                              value: infoKontak.hari2 == null
+                                  ? 'senin'
+                                  : infoKontak.hari2!.toLowerCase(),
                               items: [
                                 ...listHari.map(
                                   (e) => DropdownMenuItem(

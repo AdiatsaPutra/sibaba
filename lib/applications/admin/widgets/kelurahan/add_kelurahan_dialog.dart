@@ -1,27 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
 import 'package:sibaba/applications/admin/bloc/add_kelurahan/add_kelurahan_cubit.dart';
 import 'package:sibaba/applications/admin/bloc/kelurahan/kelurahan_cubit.dart';
 import 'package:sibaba/applications/admin/models/kapanewon.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../../../presentation/form_fields.dart';
+import '../../models/kelurahan.dart';
 
 class AddKelurahanDialog extends StatelessWidget {
+  final int index;
+  final int? kapanewonId;
+  final int? kelurahanId;
   final KelurahanCubit kelurahan;
   final AddKelurahanCubit cubit;
   final List<Kapanewon> kapanewon;
+  final List<Kelurahan> kelurahanList;
 
   const AddKelurahanDialog(
       {Key? key,
       required this.cubit,
       required this.kapanewon,
-      required this.kelurahan})
+      required this.kelurahan,
+      this.kelurahanId,
+      required this.kelurahanList,
+      this.kapanewonId,
+      required this.index})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Logger().i(kapanewon);
     return MultiBlocProvider(
       providers: [
         BlocProvider.value(
@@ -41,14 +52,26 @@ class AddKelurahanDialog extends StatelessWidget {
             child: VStack([
               const SizedBox(height: 10),
               DropdownButtonFormField<String>(
+                value: kelurahanId == null
+                    ? null
+                    : kapanewon
+                        .where(
+                          (element) =>
+                              element.areaId == kelurahanList[index].areaId,
+                        )
+                        .map((e) => e.areaId)
+                        .toString()
+                        .replaceAll('(', '')
+                        .replaceAll(')', ''),
                 hint: 'Pilih Kapanewon'.text.lg.make(),
                 items: [
-                  ...kapanewon.map(
-                    (e) => DropdownMenuItem<String>(
+                  ...kapanewon.map((e) {
+                    Logger().i(e);
+                    return DropdownMenuItem<String>(
                       value: e.areaId.toString(),
                       child: e.areaName.text.lg.make(),
-                    ),
-                  ),
+                    );
+                  }),
                 ],
                 validator: (value) {
                   if (value == null) {
@@ -85,6 +108,10 @@ class AddKelurahanDialog extends StatelessWidget {
                   cubit.name.clear();
                   context.read<KelurahanCubit>().getKelurahan();
                 },
+                updated: () {
+                  cubit.name.clear();
+                  context.read<KelurahanCubit>().getKelurahan();
+                },
                 orElse: () {},
               ),
               child: BlocBuilder<AddKelurahanCubit, AddKelurahanState>(
@@ -94,13 +121,21 @@ class AddKelurahanDialog extends StatelessWidget {
                     child: const CircularProgressIndicator().centered(),
                   ),
                   orElse: () => ElevatedButton(
-                    onPressed: () {
-                      if (cubit.key.currentState!.validate()) {
-                        cubit.key.currentState!.save();
-                        cubit.addKelurahan();
-                        Get.back();
-                      }
-                    },
+                    onPressed: kelurahanId != null
+                        ? () {
+                            if (cubit.key.currentState!.validate()) {
+                              cubit.key.currentState!.save();
+                              cubit.updateKelurahan(kelurahanId!);
+                              Get.back();
+                            }
+                          }
+                        : () {
+                            if (cubit.key.currentState!.validate()) {
+                              cubit.key.currentState!.save();
+                              cubit.addKelurahan();
+                              Get.back();
+                            }
+                          },
                     child: 'Simpan'.text.base.make(),
                   ),
                 ),

@@ -42,6 +42,10 @@ class KelurahanPage extends StatelessWidget {
             loading: () => const CircularProgressIndicator().centered(),
             loaded: (kapanewon) => BlocConsumer<KelurahanCubit, KelurahanState>(
               listener: (context, state) => state.maybeWhen(
+                deleted: () {
+                  Get.back();
+                  context.read<KelurahanCubit>().getKelurahan();
+                },
                 orElse: () {},
               ),
               builder: (context, state) => state.maybeWhen(
@@ -94,17 +98,17 @@ class _KapanewonLayout extends StatelessWidget {
             const SizedBox(height: 10),
             PaginatedDataTable(
               source: KapanewonData(
-                  context, kelurahan, addKelurahanCubit, kapanewon),
+                  context, kelurahan, cubit, kapanewon, addKelurahanCubit),
               header: 'Data Kelurahan'.text.xl.make(),
               columns: const [
                 DataColumn(label: Text('No')),
-                DataColumn(label: Text('Kapanewon')),
                 DataColumn(label: Text('Kelurahan')),
+                DataColumn(label: Text('Kapanewon')),
                 DataColumn(label: Text('Action')),
               ],
               columnSpacing: 50,
               horizontalMargin: 20,
-              rowsPerPage: 5,
+              // rowsPerPage: 5,
               showCheckboxColumn: false,
             ),
             const SizedBox(height: 100),
@@ -117,9 +121,12 @@ class _KapanewonLayout extends StatelessWidget {
           VxDialog.showCustom(
             context,
             child: AddKelurahanDialog(
-                kelurahan: cubit,
-                cubit: addKelurahanCubit,
-                kapanewon: kapanewon),
+              index: 0,
+              kelurahan: cubit,
+              cubit: addKelurahanCubit,
+              kapanewon: kapanewon,
+              kelurahanList: kelurahan,
+            ),
           );
         },
         label: HStack([
@@ -135,10 +142,12 @@ class KapanewonData extends DataTableSource {
   final BuildContext context;
   final List<Kelurahan> kelurahan;
   final List<Kapanewon> kapanewon;
-  final AddKelurahanCubit cubit;
+  final KelurahanCubit cubit;
+  final AddKelurahanCubit addKelurahanCubit;
   String role = '';
 
-  KapanewonData(this.context, this.kelurahan, this.cubit, this.kapanewon);
+  KapanewonData(this.context, this.kelurahan, this.cubit, this.kapanewon,
+      this.addKelurahanCubit);
 
   @override
   bool get isRowCountApproximate => false;
@@ -151,12 +160,33 @@ class KapanewonData extends DataTableSource {
     return DataRow(cells: [
       DataCell((index + 1).toString().text.isIntrinsic.make()),
       DataCell(kelurahan[index].districtName.text.isIntrinsic.make()),
-      DataCell(
-          kapanewon[kelurahan[index].areaId].areaName.text.isIntrinsic.make()),
+      DataCell(kapanewon
+          .where((element) => element.areaId == kelurahan[index].areaId)
+          .map((e) => e.areaName)
+          .toString()
+          .replaceAll('(', '')
+          .replaceAll(')', '')
+          .text
+          .isIntrinsic
+          .make()),
       DataCell(
         HStack([
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              addKelurahanCubit.init(kelurahan[index]);
+              VxDialog.showCustom(
+                context,
+                child: AddKelurahanDialog(
+                  index: index,
+                  kelurahanId: kelurahan[index].districtId,
+                  kapanewonId: kapanewon[kelurahan[index].areaId].areaId,
+                  kelurahan: cubit,
+                  cubit: addKelurahanCubit,
+                  kapanewon: kapanewon,
+                  kelurahanList: kelurahan,
+                ),
+              );
+            },
             child: VxCapsule(
               width: 50,
               height: 20,
@@ -168,7 +198,7 @@ class KapanewonData extends DataTableSource {
           GestureDetector(
             onTap: () {
               PopupMessages.confirmDeletePopup(context, () {
-                Get.back();
+                cubit.deleteKelurahan(kelurahan[index].districtId);
               });
             },
             child: VxCapsule(

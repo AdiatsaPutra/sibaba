@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:logger/logger.dart';
 import 'package:sibaba/applications/admin/bloc/location/location_cubit.dart';
 import 'package:sibaba/applications/admin/bloc/maps/maps_cubit.dart';
 import 'package:sibaba/injection.dart';
@@ -79,7 +80,7 @@ class _DashboardLayoutState extends State<_DashboardLayout> {
         zoomGesturesEnabled: true,
         initialCameraPosition: CameraPosition(
           target: showLocation,
-          zoom: 15.0,
+          zoom: 20.0,
         ),
         markers: getmarkers(widget.locations),
         mapType: MapType.satellite,
@@ -90,15 +91,12 @@ class _DashboardLayoutState extends State<_DashboardLayout> {
   Set<Marker> getmarkers(Location location) {
     setState(() {
       for (var y in location.maps) {
-        for (var x in location.lokasi) {
-          markers.add(
-            Marker(
-              markerId: MarkerId(Random().nextInt(100).toString()),
-              position: LatLng(y.latitude, y.longitude),
-              infoWindow: InfoWindow(title: x.nama),
-            ),
-          );
-        }
+        markers.add(
+          Marker(
+            markerId: MarkerId(Random().nextInt(100).toString()),
+            position: LatLng(y.latitude, y.longitude),
+          ),
+        );
       }
     });
 

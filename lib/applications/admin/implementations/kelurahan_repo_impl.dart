@@ -30,15 +30,15 @@ class KelurahanRepoImpl extends KelurahanRepo {
   }
 
   @override
-  Future<Either<AdminException, void>> updateKapanewon(
-      String name, String kode, int id) async {
+  Future<Either<AdminException, void>> updateKelurahan(
+      int kapanewonId, String name, int id) async {
     try {
       final data = {
-        'area_name': name,
-        'kode_area': kode,
+        'Area_id': kapanewonId,
+        'district_name': name,
       };
       final response = await dio.put(
-        baseUrl + "kapanewon" + '/$id',
+        baseUrl + "kelurahan" + '/$id',
         data: data,
       );
       if (response.statusCode != 200) {
@@ -51,10 +51,10 @@ class KelurahanRepoImpl extends KelurahanRepo {
   }
 
   @override
-  Future<Either<AdminException, void>> deleteKapanewon(int id) async {
+  Future<Either<AdminException, void>> deleteKelurahan(int id) async {
     try {
       final response = await dio.delete(
-        baseUrl + "kapanewon" + "/$id",
+        baseUrl + "kelurahan" + "/$id",
       );
       if (response.statusCode != 200) {
         throw AdminException(response.data);

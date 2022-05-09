@@ -1,5 +1,7 @@
-class Kelurahan {
-  Kelurahan({
+import 'package:equatable/equatable.dart';
+
+class Kelurahan extends Equatable {
+  const Kelurahan({
     required this.districtId,
     required this.areaId,
     required this.districtName,
@@ -28,4 +30,13 @@ class Kelurahan {
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
       };
+
+  @override
+  List<Object?> get props => [
+        districtId,
+        areaId,
+        districtName,
+        createdAt,
+        updatedAt,
+      ];
 }

@@ -57,6 +57,7 @@ class InfoLokasiCubit extends Cubit<InfoLokasiState> {
   DateTime? jmMasuk;
   DateTime? jmKeluar;
 
+  String kapanewon = '';
   String status = '';
   String akreditasi = '';
 
@@ -131,15 +132,18 @@ class InfoLokasiCubit extends Cubit<InfoLokasiState> {
     locations.fold(
       (l) => emit(InfoLokasiState.error(l.message)),
       (r) {
+        locationList.clear();
+        locationList = r.lokasi;
         location = r;
         emit(InfoLokasiState.loaded(r));
       },
     );
   }
 
-  void searchInfoLokasi() {
+  void searchInfoLokasi() async {
     emit(const InfoLokasiState.loading());
     if (searchKeyword.text.isEmpty) {
+      locationList = location.lokasi;
       emit(InfoLokasiState.loaded(location));
     } else {
       final filteredLokasi = locationList
@@ -154,6 +158,42 @@ class InfoLokasiCubit extends Cubit<InfoLokasiState> {
         maps: location.maps,
         events: location.events,
       );
+      locationList = filteredLokasi;
+      emit(InfoLokasiState.loaded(filteredLocation));
+    }
+  }
+
+  void filterInfoLokasi(String kapanewon) async {
+    emit(const InfoLokasiState.loading());
+    if (kapanewon.isEmpty) {
+      emit(InfoLokasiState.loaded(location));
+    } else {
+      this.kapanewon = kapanewon;
+      final locations = await _locationRepo.getLocations();
+      locations.fold(
+        (l) => emit(InfoLokasiState.error(l.message)),
+        (r) {
+          locationList.clear();
+          locationList = r.lokasi;
+          location = r;
+          emit(InfoLokasiState.loaded(r));
+        },
+      );
+      final filteredLokasi = locationList.where(
+        (element) {
+          return element.areaUnit!.toLowerCase().contains(
+                kapanewon.toLowerCase(),
+              );
+        },
+      ).toList();
+      var filteredLocation = Location(
+        lokasi: filteredLokasi,
+        maps: location.maps,
+        events: location.events,
+      );
+      Logger().i(filteredLokasi);
+      kapanewon = '';
+      locationList = filteredLokasi;
       emit(InfoLokasiState.loaded(filteredLocation));
     }
   }

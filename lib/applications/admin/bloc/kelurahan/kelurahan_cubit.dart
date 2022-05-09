@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:logger/logger.dart';
 import 'package:sibaba/applications/admin/models/kelurahan.dart';
 
 import '../../repositories/kelurahan_repo.dart';
@@ -15,7 +16,7 @@ class KelurahanCubit extends Cubit<KelurahanState> {
 
   final KelurahanRepo _kelurahanRepo;
 
-  List<Kelurahan> kapanewonList = [];
+  List<Kelurahan> kelurahanList = [];
 
   final searchKeyword = TextEditingController();
 
@@ -25,8 +26,8 @@ class KelurahanCubit extends Cubit<KelurahanState> {
     kapanewon.fold(
       (l) => emit(KelurahanState.error(l.message)),
       (r) {
-        kapanewonList = r;
-        emit(KelurahanState.loaded(kapanewonList));
+        kelurahanList = r;
+        emit(KelurahanState.loaded(kelurahanList));
       },
     );
   }
@@ -34,14 +35,24 @@ class KelurahanCubit extends Cubit<KelurahanState> {
   void searchKelurahan() {
     emit(const KelurahanState.loading());
     if (searchKeyword.text.isEmpty) {
-      emit(KelurahanState.loaded(kapanewonList));
+      emit(KelurahanState.loaded(kelurahanList));
     } else {
-      final filteredKapanewon = kapanewonList
+      Logger().i(searchKeyword.text.toLowerCase());
+      final filteredkelurahan = kelurahanList
           .where((element) => element.districtName
               .toLowerCase()
               .contains(searchKeyword.text.toLowerCase()))
           .toList();
-      emit(KelurahanState.loaded(filteredKapanewon));
+      emit(KelurahanState.loaded(filteredkelurahan));
     }
+  }
+
+  void deleteKelurahan(int id) async {
+    emit(const KelurahanState.loading());
+    final kapanewon = await _kelurahanRepo.deleteKelurahan(id);
+    kapanewon.fold(
+      (l) => emit(KelurahanState.error(l.message)),
+      (r) => emit(const KelurahanState.deleted()),
+    );
   }
 }

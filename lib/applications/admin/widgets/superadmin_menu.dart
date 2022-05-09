@@ -4,7 +4,6 @@ import 'package:sibaba/applications/admin/models/user.dart';
 import 'package:sibaba/applications/admin/pages/data_santri_page.dart';
 import 'package:sibaba/applications/admin/pages/data_unit_page.dart';
 import 'package:sibaba/applications/admin/pages/data_ustadz_page.dart';
-import 'package:sibaba/applications/admin/pages/event_page.dart';
 import 'package:sibaba/applications/admin/pages/gallery_page.dart';
 import 'package:sibaba/applications/admin/pages/kapanewon_page.dart';
 import 'package:sibaba/applications/admin/pages/kelurahan_page.dart';
@@ -34,13 +33,6 @@ class SuperadminMenu extends StatelessWidget {
             },
           ),
           KategoriItem(
-            icon: Icons.event,
-            title: 'Event\n',
-            onTap: () {
-              Get.to(() => const EventPage());
-            },
-          ),
-          KategoriItem(
             icon: Icons.person,
             title: 'Profil\nWebsite',
             onTap: () {
@@ -54,19 +46,19 @@ class SuperadminMenu extends StatelessWidget {
               Get.to(() => const PenggunaPage());
             },
           ),
+          KategoriItem(
+            icon: Icons.place,
+            title: 'Kapanewon\n',
+            onTap: () {
+              Get.to(() => const KapanewonPage());
+            },
+          ),
         ],
       ),
       const SizedBox(height: 20),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          KategoriItem(
-            icon: Icons.place,
-            title: 'Kapanewon',
-            onTap: () {
-              Get.to(() => const KapanewonPage());
-            },
-          ),
           KategoriItem(
             icon: Icons.place_outlined,
             title: 'Kelurahan',
@@ -88,12 +80,6 @@ class SuperadminMenu extends StatelessWidget {
               Get.to(() => DataSantriPage());
             },
           ),
-        ],
-      ),
-      const SizedBox(height: 50),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
           KategoriItem(
             icon: Icons.image,
             title: 'Galeri',
@@ -101,6 +87,12 @@ class SuperadminMenu extends StatelessWidget {
               Get.to(() => GalleryPage(u: user));
             },
           ),
+        ],
+      ),
+      const SizedBox(height: 50),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
           KategoriItem(
             icon: Icons.message,
             title: 'Pesan',
@@ -115,7 +107,7 @@ class SuperadminMenu extends StatelessWidget {
               Get.to(() => const KontakPage());
             },
           ),
-          const SizedBox(width: 50)
+          const SizedBox(width: 150)
         ],
       ),
       const SizedBox(height: 20),

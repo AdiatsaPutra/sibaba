@@ -1,7 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:logger/logger.dart';
+import 'package:open_file/open_file.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:sibaba/applications/admin/bloc/location/location_cubit.dart';
 import 'package:sibaba/applications/admin/models/user.dart';
 import 'package:sibaba/applications/admin/pages/lokasi/add_lokasi_page.dart';
@@ -13,7 +18,10 @@ import 'package:sibaba/injection.dart';
 import 'package:sibaba/presentation/color_constant.dart';
 import 'package:sibaba/presentation/loading_indicator.dart';
 import 'package:sibaba/presentation/popup_messages.dart';
+import 'package:syncfusion_flutter_pdf/pdf.dart';
 import 'package:velocity_x/velocity_x.dart';
+
+import '../bloc/kapanewon/kapanewon_cubit.dart';
 
 class LokasiUnitPage extends StatelessWidget {
   final User user;
@@ -28,6 +36,9 @@ class LokasiUnitPage extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => LocationCubit(),
+        ),
+        BlocProvider(
+          create: (context) => getIt<KapanewonCubit>()..getKapanewon(),
         ),
       ],
       child: Scaffold(
@@ -96,25 +107,81 @@ class _LokasiLayout extends StatelessWidget {
                 hintStyle: TextStyle(fontSize: 14),
               ),
               onChanged: (value) {
-                // cubit.searchUser();
+                cubit.searchInfoLokasi();
               },
             ),
             const SizedBox(height: 10),
-            locations.isEmpty
+            BlocBuilder<InfoLokasiCubit, InfoLokasiState>(
+              builder: (context, state) {
+                return BlocBuilder<KapanewonCubit, KapanewonState>(
+                  builder: (context, state) => state.maybeWhen(
+                    loading: () => DropdownButtonFormField<String>(
+                      hint: 'Loading'.text.lg.make(),
+                      items: const [],
+                      onChanged: (e) {},
+                    ).box.width(Get.width).make().pOnly(bottom: 10),
+                    loaded: (kapanewon) => DropdownButtonFormField<String>(
+                      value: cubit.kapanewon == '' ? null : cubit.kapanewon,
+                      hint: 'Pilih Kapanewon'.text.lg.make(),
+                      items: [
+                        ...kapanewon.map((e) {
+                          return DropdownMenuItem<String>(
+                            value: e.areaName,
+                            child: e.areaName.text.lg.make(),
+                          );
+                        }),
+                      ],
+                      validator: (value) {
+                        if (value == null) {
+                          return 'Pilih Kapanewon';
+                        }
+                      },
+                      onChanged: (e) {
+                        cubit.filterInfoLokasi(e!);
+                      },
+                    ).box.width(Get.width).make().pOnly(bottom: 10),
+                    orElse: () => const SizedBox(),
+                  ),
+                );
+              },
+            ),
+            const SizedBox(height: 10),
+            HStack([
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(primary: Colors.red),
+                onPressed: () {
+                  _createPDF(locations);
+                },
+                child: 'Cetak'.text.base.make(),
+              ).w(100).h(30),
+              const SizedBox(width: 10),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(primary: Colors.red),
+                onPressed: () {},
+                child: 'Cetak'.text.base.make(),
+              ).w(100).h(30),
+            ]),
+            const SizedBox(height: 10),
+            cubit.locationList.isEmpty
                 ? 'Tidak ada lokasi'.text.base.makeCentered()
                 : PaginatedDataTable(
-                    source: LokasiData(context, locations, cubit, user),
+                    source:
+                        LokasiData(context, cubit.locationList, cubit, user),
                     header: 'Data Lokasi'.text.xl.make(),
                     columns: const [
                       DataColumn(label: Text('No')),
                       DataColumn(label: Text('Action')),
                       DataColumn(label: Text('ID')),
                       DataColumn(label: Text('Name')),
-                      DataColumn(label: Text('Email')),
+                      DataColumn(label: Text('Kapanewon')),
+                      DataColumn(label: Text('Direktur')),
+                      DataColumn(label: Text('Alamat')),
                     ],
                     columnSpacing: 50,
                     horizontalMargin: 20,
-                    rowsPerPage: locations.length <= 10 ? locations.length : 10,
+                    rowsPerPage: cubit.locationList.length <= 10
+                        ? cubit.locationList.length
+                        : 10,
                     showCheckboxColumn: false,
                   ),
             const SizedBox(height: 100),
@@ -149,6 +216,50 @@ class _LokasiLayout extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> _createPDF(List<Lokasi> locations) async {
+    PdfDocument document = PdfDocument();
+
+    PdfGrid grid = PdfGrid();
+    grid.style = PdfGridStyle(
+        font: PdfStandardFont(PdfFontFamily.helvetica, 12),
+        cellPadding: PdfPaddings(left: 5, right: 2, top: 2, bottom: 2));
+
+    grid.columns.add(count: 5);
+    grid.headers.add(1);
+
+    PdfGridRow header = grid.headers[0];
+    header.cells[0].value = 'No Induk';
+    header.cells[1].value = 'Nama';
+    header.cells[2].value = 'Kapanewon';
+    header.cells[3].value = 'Direktur';
+    header.cells[4].value = 'Alamat';
+
+    PdfGridRow row;
+    for (int i = 0; i < locations.length; i++) {
+      row = grid.rows.add();
+      row.cells[0].value = locations[i].locationId.toString();
+      row.cells[1].value = locations[i].nama;
+      row.cells[2].value = locations[i].areaUnit;
+      row.cells[3].value = locations[i].direktur;
+      row.cells[4].value = locations[i].alamat;
+    }
+
+    grid.draw(
+        page: document.pages.add(), bounds: const Rect.fromLTWH(0, 0, 0, 0));
+
+    List<int> bytes = document.save();
+    document.dispose();
+
+    saveAndLaunchFile(bytes, 'Output.pdf');
+  }
+
+  Future<void> saveAndLaunchFile(List<int> bytes, String fileName) async {
+    final path = (await getExternalStorageDirectory())!.path;
+    final file = File('$path/$fileName');
+    await file.writeAsBytes(bytes, flush: true);
+    OpenFile.open('$path/$fileName');
   }
 }
 
@@ -212,7 +323,9 @@ class LokasiData extends DataTableSource {
           DataCell(
               locations[index].locationId.toString().text.isIntrinsic.make()),
           DataCell(locations[index].nama!.text.isIntrinsic.make()),
-          DataCell(locations[index].email!.text.isIntrinsic.make()),
+          DataCell(locations[index].areaUnit!.text.isIntrinsic.make()),
+          DataCell(locations[index].direktur!.text.isIntrinsic.make()),
+          DataCell(locations[index].alamat!.text.isIntrinsic.make()),
         ]);
   }
 }

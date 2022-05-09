@@ -34,6 +34,10 @@ class _$AddKelurahanStateTearOff {
     return const _Added();
   }
 
+  _Updated updated() {
+    return const _Updated();
+  }
+
   _Error error(String message) {
     return _Error(
       message,
@@ -52,6 +56,7 @@ mixin _$AddKelurahanState {
     required TResult Function() loading,
     required TResult Function() loaded,
     required TResult Function() added,
+    required TResult Function() updated,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -61,6 +66,7 @@ mixin _$AddKelurahanState {
     TResult Function()? loading,
     TResult Function()? loaded,
     TResult Function()? added,
+    TResult Function()? updated,
     TResult Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -70,6 +76,7 @@ mixin _$AddKelurahanState {
     TResult Function()? loading,
     TResult Function()? loaded,
     TResult Function()? added,
+    TResult Function()? updated,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -80,6 +87,7 @@ mixin _$AddKelurahanState {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Added value) added,
+    required TResult Function(_Updated value) updated,
     required TResult Function(_Error value) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -89,6 +97,7 @@ mixin _$AddKelurahanState {
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Added value)? added,
+    TResult Function(_Updated value)? updated,
     TResult Function(_Error value)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -98,6 +107,7 @@ mixin _$AddKelurahanState {
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Added value)? added,
+    TResult Function(_Updated value)? updated,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) =>
@@ -163,6 +173,7 @@ class _$_Initial implements _Initial {
     required TResult Function() loading,
     required TResult Function() loaded,
     required TResult Function() added,
+    required TResult Function() updated,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -175,6 +186,7 @@ class _$_Initial implements _Initial {
     TResult Function()? loading,
     TResult Function()? loaded,
     TResult Function()? added,
+    TResult Function()? updated,
     TResult Function(String message)? error,
   }) {
     return initial?.call();
@@ -187,6 +199,7 @@ class _$_Initial implements _Initial {
     TResult Function()? loading,
     TResult Function()? loaded,
     TResult Function()? added,
+    TResult Function()? updated,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -203,6 +216,7 @@ class _$_Initial implements _Initial {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Added value) added,
+    required TResult Function(_Updated value) updated,
     required TResult Function(_Error value) error,
   }) {
     return initial(this);
@@ -215,6 +229,7 @@ class _$_Initial implements _Initial {
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Added value)? added,
+    TResult Function(_Updated value)? updated,
     TResult Function(_Error value)? error,
   }) {
     return initial?.call(this);
@@ -227,6 +242,7 @@ class _$_Initial implements _Initial {
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Added value)? added,
+    TResult Function(_Updated value)? updated,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -283,6 +299,7 @@ class _$_Loading implements _Loading {
     required TResult Function() loading,
     required TResult Function() loaded,
     required TResult Function() added,
+    required TResult Function() updated,
     required TResult Function(String message) error,
   }) {
     return loading();
@@ -295,6 +312,7 @@ class _$_Loading implements _Loading {
     TResult Function()? loading,
     TResult Function()? loaded,
     TResult Function()? added,
+    TResult Function()? updated,
     TResult Function(String message)? error,
   }) {
     return loading?.call();
@@ -307,6 +325,7 @@ class _$_Loading implements _Loading {
     TResult Function()? loading,
     TResult Function()? loaded,
     TResult Function()? added,
+    TResult Function()? updated,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -323,6 +342,7 @@ class _$_Loading implements _Loading {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Added value) added,
+    required TResult Function(_Updated value) updated,
     required TResult Function(_Error value) error,
   }) {
     return loading(this);
@@ -335,6 +355,7 @@ class _$_Loading implements _Loading {
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Added value)? added,
+    TResult Function(_Updated value)? updated,
     TResult Function(_Error value)? error,
   }) {
     return loading?.call(this);
@@ -347,6 +368,7 @@ class _$_Loading implements _Loading {
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Added value)? added,
+    TResult Function(_Updated value)? updated,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -403,6 +425,7 @@ class _$_Loaded implements _Loaded {
     required TResult Function() loading,
     required TResult Function() loaded,
     required TResult Function() added,
+    required TResult Function() updated,
     required TResult Function(String message) error,
   }) {
     return loaded();
@@ -415,6 +438,7 @@ class _$_Loaded implements _Loaded {
     TResult Function()? loading,
     TResult Function()? loaded,
     TResult Function()? added,
+    TResult Function()? updated,
     TResult Function(String message)? error,
   }) {
     return loaded?.call();
@@ -427,6 +451,7 @@ class _$_Loaded implements _Loaded {
     TResult Function()? loading,
     TResult Function()? loaded,
     TResult Function()? added,
+    TResult Function()? updated,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -443,6 +468,7 @@ class _$_Loaded implements _Loaded {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Added value) added,
+    required TResult Function(_Updated value) updated,
     required TResult Function(_Error value) error,
   }) {
     return loaded(this);
@@ -455,6 +481,7 @@ class _$_Loaded implements _Loaded {
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Added value)? added,
+    TResult Function(_Updated value)? updated,
     TResult Function(_Error value)? error,
   }) {
     return loaded?.call(this);
@@ -467,6 +494,7 @@ class _$_Loaded implements _Loaded {
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Added value)? added,
+    TResult Function(_Updated value)? updated,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -523,6 +551,7 @@ class _$_Added implements _Added {
     required TResult Function() loading,
     required TResult Function() loaded,
     required TResult Function() added,
+    required TResult Function() updated,
     required TResult Function(String message) error,
   }) {
     return added();
@@ -535,6 +564,7 @@ class _$_Added implements _Added {
     TResult Function()? loading,
     TResult Function()? loaded,
     TResult Function()? added,
+    TResult Function()? updated,
     TResult Function(String message)? error,
   }) {
     return added?.call();
@@ -547,6 +577,7 @@ class _$_Added implements _Added {
     TResult Function()? loading,
     TResult Function()? loaded,
     TResult Function()? added,
+    TResult Function()? updated,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -563,6 +594,7 @@ class _$_Added implements _Added {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Added value) added,
+    required TResult Function(_Updated value) updated,
     required TResult Function(_Error value) error,
   }) {
     return added(this);
@@ -575,6 +607,7 @@ class _$_Added implements _Added {
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Added value)? added,
+    TResult Function(_Updated value)? updated,
     TResult Function(_Error value)? error,
   }) {
     return added?.call(this);
@@ -587,6 +620,7 @@ class _$_Added implements _Added {
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Added value)? added,
+    TResult Function(_Updated value)? updated,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -599,6 +633,132 @@ class _$_Added implements _Added {
 
 abstract class _Added implements AddKelurahanState {
   const factory _Added() = _$_Added;
+}
+
+/// @nodoc
+abstract class _$UpdatedCopyWith<$Res> {
+  factory _$UpdatedCopyWith(_Updated value, $Res Function(_Updated) then) =
+      __$UpdatedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$UpdatedCopyWithImpl<$Res> extends _$AddKelurahanStateCopyWithImpl<$Res>
+    implements _$UpdatedCopyWith<$Res> {
+  __$UpdatedCopyWithImpl(_Updated _value, $Res Function(_Updated) _then)
+      : super(_value, (v) => _then(v as _Updated));
+
+  @override
+  _Updated get _value => super._value as _Updated;
+}
+
+/// @nodoc
+
+class _$_Updated implements _Updated {
+  const _$_Updated();
+
+  @override
+  String toString() {
+    return 'AddKelurahanState.updated()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _Updated);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() loaded,
+    required TResult Function() added,
+    required TResult Function() updated,
+    required TResult Function(String message) error,
+  }) {
+    return updated();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? loaded,
+    TResult Function()? added,
+    TResult Function()? updated,
+    TResult Function(String message)? error,
+  }) {
+    return updated?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? loaded,
+    TResult Function()? added,
+    TResult Function()? updated,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (updated != null) {
+      return updated();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Added value) added,
+    required TResult Function(_Updated value) updated,
+    required TResult Function(_Error value) error,
+  }) {
+    return updated(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_Added value)? added,
+    TResult Function(_Updated value)? updated,
+    TResult Function(_Error value)? error,
+  }) {
+    return updated?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_Added value)? added,
+    TResult Function(_Updated value)? updated,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (updated != null) {
+      return updated(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Updated implements AddKelurahanState {
+  const factory _Updated() = _$_Updated;
 }
 
 /// @nodoc
@@ -667,6 +827,7 @@ class _$_Error implements _Error {
     required TResult Function() loading,
     required TResult Function() loaded,
     required TResult Function() added,
+    required TResult Function() updated,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -679,6 +840,7 @@ class _$_Error implements _Error {
     TResult Function()? loading,
     TResult Function()? loaded,
     TResult Function()? added,
+    TResult Function()? updated,
     TResult Function(String message)? error,
   }) {
     return error?.call(message);
@@ -691,6 +853,7 @@ class _$_Error implements _Error {
     TResult Function()? loading,
     TResult Function()? loaded,
     TResult Function()? added,
+    TResult Function()? updated,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -707,6 +870,7 @@ class _$_Error implements _Error {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Added value) added,
+    required TResult Function(_Updated value) updated,
     required TResult Function(_Error value) error,
   }) {
     return error(this);
@@ -719,6 +883,7 @@ class _$_Error implements _Error {
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Added value)? added,
+    TResult Function(_Updated value)? updated,
     TResult Function(_Error value)? error,
   }) {
     return error?.call(this);
@@ -731,6 +896,7 @@ class _$_Error implements _Error {
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Added value)? added,
+    TResult Function(_Updated value)? updated,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {

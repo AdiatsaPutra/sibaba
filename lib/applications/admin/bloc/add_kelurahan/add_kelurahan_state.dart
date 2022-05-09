@@ -6,5 +6,6 @@ class AddKelurahanState with _$AddKelurahanState {
   const factory AddKelurahanState.loading() = _Loading;
   const factory AddKelurahanState.loaded() = _Loaded;
   const factory AddKelurahanState.added() = _Added;
+  const factory AddKelurahanState.updated() = _Updated;
   const factory AddKelurahanState.error(String message) = _Error;
 }

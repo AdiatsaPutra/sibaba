@@ -34,6 +34,7 @@ class _DetailLokasiLayout extends StatelessWidget {
     return BlocBuilder<InfoLokasiCubit, InfoLokasiState>(
       builder: (context, state) => state.maybeWhen(
         loading: () => const CircularProgressIndicator().centered(),
+        error: (e) => e.text.base.makeCentered(),
         detailLoaded: (location) => VStack([
           VxBox()
               .width(Get.width)

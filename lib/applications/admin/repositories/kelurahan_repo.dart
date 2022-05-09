@@ -8,7 +8,7 @@ abstract class KelurahanRepo {
     int id,
     String name,
   );
-  Future<Either<AdminException, void>> updateKapanewon(
-      String name, String kode, int id);
-  Future<Either<AdminException, void>> deleteKapanewon(int id);
+  Future<Either<AdminException, void>> updateKelurahan(
+      int kapanewonId, String name, int id);
+  Future<Either<AdminException, void>> deleteKelurahan(int id);
 }
