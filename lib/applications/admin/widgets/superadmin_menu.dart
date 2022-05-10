@@ -61,28 +61,28 @@ class SuperadminMenu extends StatelessWidget {
         children: [
           KategoriItem(
             icon: Icons.place_outlined,
-            title: 'Kelurahan',
+            title: 'Kelurahan\n',
             onTap: () {
               Get.to(() => const KelurahanPage());
             },
           ),
           KategoriItem(
             icon: Icons.school_outlined,
-            title: 'Data Ustadz',
+            title: 'Data\nUstadz',
             onTap: () {
-              Get.to(() => DataUstadzPage());
+              Get.to(() => const DataUstadzPage());
             },
           ),
           KategoriItem(
             icon: Icons.school,
-            title: 'Data Santri',
+            title: 'Data\nSantri',
             onTap: () {
               Get.to(() => DataSantriPage());
             },
           ),
           KategoriItem(
             icon: Icons.image,
-            title: 'Galeri',
+            title: 'Galeri\n',
             onTap: () {
               Get.to(() => GalleryPage(u: user));
             },

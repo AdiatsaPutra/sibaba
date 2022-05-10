@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sibaba/applications/admin/models/ustadz_detail.dart';
@@ -15,12 +16,25 @@ class UstadzCubit extends Cubit<UstadzState> {
 
   final UstadzRepo _ustadzRepo;
 
+  List<Ustadz> ustadz = [];
+
+  final searchKeyword = TextEditingController();
+
+  String kapanewon = '';
+
+  void refresh() {
+    kapanewon = '';
+  }
+
   void getUstadzs() async {
     emit(const UstadzState.loading());
     final ustadzs = await _ustadzRepo.getUstadz();
     ustadzs.fold(
       (l) => emit(UstadzState.error(l.message)),
-      (r) => emit(UstadzState.loaded(r)),
+      (r) {
+        ustadz = r;
+        emit(UstadzState.loaded(r));
+      },
     );
   }
 
@@ -40,5 +54,50 @@ class UstadzCubit extends Cubit<UstadzState> {
       (l) => emit(UstadzState.error(l.message)),
       (r) => emit(const UstadzState.success()),
     );
+  }
+
+  void searchInfoLokasi() async {
+    emit(const UstadzState.loading());
+    if (searchKeyword.text.isEmpty) {
+      emit(UstadzState.loaded(ustadz));
+    } else {
+      final filteredUstadz = ustadz
+          .where(
+            (element) => element.nama
+                .toLowerCase()
+                .contains(searchKeyword.text.toLowerCase()),
+          )
+          .toList();
+
+      emit(UstadzState.loaded(filteredUstadz));
+    }
+  }
+
+  void filterInfoLokasi(String kapanewon) async {
+    emit(const UstadzState.loading());
+    if (kapanewon.isEmpty) {
+      emit(UstadzState.loaded(ustadz));
+    } else {
+      this.kapanewon = kapanewon;
+      final locations = await _ustadzRepo.getUstadz();
+      locations.fold(
+        (l) => emit(UstadzState.error(l.message)),
+        (r) {
+          ustadz.clear();
+          ustadz = r;
+          emit(UstadzState.loaded(r));
+        },
+      );
+      final filteredUstadz = ustadz.where(
+        (element) {
+          return element.location.areaUnit.toLowerCase().contains(
+                kapanewon.toLowerCase(),
+              );
+        },
+      ).toList();
+      kapanewon = '';
+      ustadz = filteredUstadz;
+      emit(UstadzState.loaded(filteredUstadz));
+    }
   }
 }

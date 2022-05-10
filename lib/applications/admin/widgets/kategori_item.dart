@@ -26,10 +26,10 @@ class KategoriItem extends StatelessWidget {
               .rounded
               .make(),
           const SizedBox(height: 10),
-          title.text.base.bold.center.make(),
+          title.text.sm.bold.center.make(),
         ],
         crossAlignment: CrossAxisAlignment.center,
-      ),
+      ).box.width(75).make(),
     );
   }
 }
