@@ -66,6 +66,10 @@ class InfoLokasiCubit extends Cubit<InfoLokasiState> {
     lng.text = latLng.longitude.toString();
   }
 
+  void refresh() {
+    kapanewon = '';
+  }
+
   void init({LocationDetail? l}) {
     nspq.text = l!.detailLokasi.nspq;
     nama.text = l.detailLokasi.nama;

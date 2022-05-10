@@ -38,6 +38,7 @@ dependencies:
   shimmer: ^2.0.0
   stepper: ^0.0.2
   syncfusion_flutter_pdf: ^20.1.52-beta
+  syncfusion_flutter_xlsio: ^20.1.52-beta
   url_launcher: ^6.1.0
   velocity_x: ^3.3.0
 
