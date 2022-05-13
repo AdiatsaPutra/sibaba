@@ -33,14 +33,14 @@ class UstadzPendidikanFormalForm extends StatelessWidget {
       VStack([
         'Tahun'.text.base.bold.make(),
         FormFields.textFormField(
-          controller: tahun,
-          hint: 'Tahun',
-          validator: (value) {
-            if (value == "") {
-              return 'Wajib diisi';
-            }
-          },
-        ),
+            controller: tahun,
+            hint: 'Tahun',
+            validator: (value) {
+              if (value == "") {
+                return 'Wajib diisi';
+              }
+            },
+            keyboardType: TextInputType.number),
       ]).w(100)
     ]);
   }

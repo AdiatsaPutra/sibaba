@@ -20,6 +20,7 @@ class UstadzTahunForm extends StatelessWidget {
         child: FormFields.textFormField(
           controller: controller,
           hint: 'Tahun',
+          keyboardType: TextInputType.number,
         ),
       ).width(Get.width).make().expand(),
       const SizedBox(width: 10),

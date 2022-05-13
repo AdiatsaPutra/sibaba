@@ -23,6 +23,7 @@ class GalleryRepoImpl extends GalleryRepo {
         "file": await MultipartFile.fromFile(file.path, filename: fileName),
         "userId": userId,
       });
+      Logger().i(formData);
       await Api.createDio().post(
         baseUrl + 'gallery',
         data: formData,

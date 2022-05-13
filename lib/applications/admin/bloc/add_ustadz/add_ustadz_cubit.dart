@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -73,7 +75,7 @@ class AddUstadzCubit extends Cubit<AddUstadzState> {
     emit(const AddUstadzState.loaded());
   }
 
-  void addUstadz(int userId) async {
+  void addUstadz(File file, int userId) async {
     emit(const AddUstadzState.loading());
     final ustadzRequest = UstadzRequest(
       userId: userId,
@@ -109,7 +111,7 @@ class AddUstadzCubit extends Cubit<AddUstadzState> {
       s3: s3.text,
     );
     Logger().i(ustadzRequest);
-    final result = await _ustadzRepo.addUstadzs(ustadzRequest);
+    final result = await _ustadzRepo.addUstadzs(file, ustadzRequest);
     result.fold(
       (l) => emit(AddUstadzState.error(l.message)),
       (r) => emit(const AddUstadzState.success()),

@@ -212,16 +212,16 @@ class _DataUstadzLayout extends StatelessWidget {
 
     PdfGridRow header = grid.headers[0];
     header.cells[0].value = 'No Induk';
-    header.cells[2].value = 'Kapanewon';
     header.cells[1].value = 'Nama';
+    header.cells[2].value = 'Kapanewon';
     header.cells[3].value = 'Alamat';
 
     PdfGridRow row;
     for (int i = 0; i < ustadz.length; i++) {
       row = grid.rows.add();
       row.cells[0].value = ustadz[i].ustadzsId.toString();
-      row.cells[1].value = ustadz[i].location.areaUnit;
-      row.cells[2].value = ustadz[i].nama;
+      row.cells[1].value = ustadz[i].nama;
+      row.cells[2].value = ustadz[i].location.areaUnit;
       row.cells[3].value = ustadz[i].alamat;
     }
 

@@ -96,6 +96,7 @@ class _AddUstadzLayoutState extends State<_AddUstadzLayout> {
                               orElse: () => ElevatedButton(
                                 onPressed: () {
                                   cubit.addUstadz(
+                                    imageHandler.image!,
                                     context.read<LoginCubit>().user.id,
                                   );
                                 },
@@ -281,14 +282,14 @@ class _AddUstadzLayoutState extends State<_AddUstadzLayout> {
             const SizedBox(height: 10),
             'No HP'.text.base.bold.make(),
             FormFields.textFormField(
-              controller: cubit.noHp,
-              hint: 'No HP',
-              validator: (value) {
-                if (value == "") {
-                  return 'Wajib diisi';
-                }
-              },
-            ),
+                controller: cubit.noHp,
+                hint: 'No HP',
+                validator: (value) {
+                  if (value == "") {
+                    return 'Wajib diisi';
+                  }
+                },
+                keyboardType: TextInputType.number),
             const SizedBox(height: 10),
             'Email'.text.base.bold.make(),
             FormFields.textFormField(
@@ -310,6 +311,7 @@ class _AddUstadzLayoutState extends State<_AddUstadzLayout> {
                   return 'Wajib diisi';
                 }
               },
+              keyboardType: TextInputType.number,
             ),
             const SizedBox(height: 10),
             'Status'.text.base.bold.make(),

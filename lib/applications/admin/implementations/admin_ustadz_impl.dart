@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 import 'package:sibaba/applications/admin/exception/admin_exception.dart';
@@ -53,11 +56,47 @@ class AdminUstadzImpl extends UstadzRepo {
 
   @override
   Future<Either<AdminException, void>> addUstadzs(
-      UstadzRequest ustadzRequest) async {
+      File file, UstadzRequest ustadzRequest) async {
     try {
+      String fileName = file.path.split('/').last;
+      FormData formData = FormData.fromMap({
+        "Photo": await MultipartFile.fromFile(file.path, filename: fileName),
+        "User_id": ustadzRequest.userId,
+        "Location_name": ustadzRequest.locationName,
+        "Nama": ustadzRequest.nama,
+        "Gender": ustadzRequest.gender,
+        "Tmp_lahir": ustadzRequest.tmpLahir,
+        "Tgl_lahir": ustadzRequest.tglLahir,
+        "Alamat": ustadzRequest.alamat,
+        "Telpon": ustadzRequest.telpon,
+        "Email": ustadzRequest.email,
+        "Mulai_ustadz": ustadzRequest.mulaiUstadz,
+        "Status": ustadzRequest.status,
+        "T_Ajar": ustadzRequest.tAjar,
+        "TK": ustadzRequest.tk,
+        "TK_lulus": ustadzRequest.tkLulus,
+        "SD": ustadzRequest.sd,
+        "SD_lulus": ustadzRequest.sdLulus,
+        "SMP": ustadzRequest.smp,
+        "SMP_lulus": ustadzRequest.smpLulus,
+        "SMA": ustadzRequest.sma,
+        "SMA_lulus": ustadzRequest.smaLulus,
+        "PT": ustadzRequest.pt,
+        "PT_lulus": ustadzRequest.ptLulus,
+        "Dasar": ustadzRequest.dasar,
+        "Mahir1": ustadzRequest.mahir1,
+        "Mahir2": ustadzRequest.mahir2,
+        "TOT": ustadzRequest.tot,
+        "S1": ustadzRequest.s1,
+        "S2A": ustadzRequest.s2A,
+        "S2B": ustadzRequest.s2B,
+        "S2C": ustadzRequest.s2C,
+        "S3": ustadzRequest.s3,
+      });
+      Logger().i(formData);
       final response = await dio.post(
         baseUrl + "teacher",
-        data: ustadzRequest.toJson(),
+        data: formData,
       );
       if (response.statusCode != 200) {
         throw AdminException(response.data);
