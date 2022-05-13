@@ -61,6 +61,17 @@ class LokasiUnitPage extends StatelessWidget {
             ),
             BlocListener<InfoLokasiCubit, InfoLokasiState>(
               listener: (context, state) => state.maybeWhen(
+                detailLoaded: (detailLocation) {
+                  Get.to(
+                    () => AddLokasiPage(
+                      isEdit: true,
+                      user: user,
+                      latLng: LatLng(0, 0),
+                      locationDetail: detailLocation,
+                    ),
+                  );
+                  context.read<InfoLokasiCubit>().getLokasi();
+                },
                 deleted: () {
                   context.read<InfoLokasiCubit>().getLokasi();
                 },
@@ -367,13 +378,7 @@ class LokasiData extends DataTableSource {
             HStack([
               GestureDetector(
                 onTap: () {
-                  Get.to(
-                    () => AddLokasiPage(
-                      isEdit: true,
-                      user: user,
-                      latLng: LatLng(0, 0),
-                    ),
-                  );
+                  cubit.getLocationDetail(locations[index].locSlug!);
                 },
                 child: const Icon(Icons.edit, color: Colors.yellow),
               ),

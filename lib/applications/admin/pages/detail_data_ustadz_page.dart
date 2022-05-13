@@ -92,78 +92,80 @@ class _DetailDataUstadzLayout extends StatelessWidget {
             child: VStack([
               'Pendidikan Formal'.text.xl.bold.make(),
               const SizedBox(height: 10),
-              HStack([
-                VStack([
-                  'TK'.text.base.make(),
-                  'SD'.text.base.make(),
-                  'SMP'.text.base.make(),
-                  'SMA'.text.base.make(),
-                  'Perguruan Tinggi'.text.base.make(),
+              VStack([
+                HStack([
+                  VStack([
+                    'TK'.text.base.make(),
+                    'SD'.text.base.make(),
+                    'SMP'.text.base.make(),
+                    'SMA'.text.base.make(),
+                    'Perguruan Tinggi'.text.base.make(),
+                  ]).box.width(120).make(),
+                  const SizedBox(width: 30),
+                  VStack([
+                    Builder(
+                      builder: (context) => u.pendidikans.tk == null
+                          ? '-'.text.base.make()
+                          : u.pendidikans.tk!.text.base.make(),
+                    ),
+                    Builder(
+                      builder: (context) => u.pendidikans.sd == null
+                          ? '-'.text.base.make()
+                          : u.pendidikans.sd!.text.base.make(),
+                    ),
+                    Builder(
+                      builder: (context) => u.pendidikans.smp == null
+                          ? '-'.text.base.make()
+                          : u.pendidikans.smp!.text.base.make(),
+                    ),
+                    Builder(
+                      builder: (context) => u.pendidikans.sma == null
+                          ? '-'.text.base.make()
+                          : u.pendidikans.sma!.text.base.make(),
+                    ),
+                    Builder(
+                      builder: (context) => u.pendidikans.pt == null
+                          ? '-'.text.base.make()
+                          : u.pendidikans.pt!.text.base.make(),
+                    ),
+                  ]),
                 ]),
-                const SizedBox(width: 10),
-                VStack([
-                  Builder(
-                    builder: (context) => u.pendidikans.tk == null
-                        ? '-'.text.base.make()
-                        : u.pendidikans.tk!.text.base.make(),
-                  ),
-                  Builder(
-                    builder: (context) => u.pendidikans.sd == null
-                        ? '-'.text.base.make()
-                        : u.pendidikans.sd!.text.base.make(),
-                  ),
-                  Builder(
-                    builder: (context) => u.pendidikans.smp == null
-                        ? '-'.text.base.make()
-                        : u.pendidikans.smp!.text.base.make(),
-                  ),
-                  Builder(
-                    builder: (context) => u.pendidikans.sma == null
-                        ? '-'.text.base.make()
-                        : u.pendidikans.sma!.text.base.make(),
-                  ),
-                  Builder(
-                    builder: (context) => u.pendidikans.pt == null
-                        ? '-'.text.base.make()
-                        : u.pendidikans.pt!.text.base.make(),
-                  ),
-                ]),
-                const SizedBox(width: 50),
-                VStack([
-                  'Tahun Lulus'.text.base.make(),
-                  'Tahun Lulus'.text.base.make(),
-                  'Tahun Lulus'.text.base.make(),
-                  'Tahun Lulus'.text.base.make(),
-                  'Tahun Lulus'.text.base.make(),
-                ]),
-                const SizedBox(width: 10),
-                const SizedBox(width: 10),
-                VStack([
-                  Builder(
-                    builder: (context) => u.pendidikans.tkLulus == null
-                        ? '-'.text.base.make()
-                        : u.pendidikans.tkLulus!.text.base.make(),
-                  ),
-                  Builder(
-                    builder: (context) => u.pendidikans.sdLulus == null
-                        ? '-'.text.base.make()
-                        : u.pendidikans.sdLulus!.text.base.make(),
-                  ),
-                  Builder(
-                    builder: (context) => u.pendidikans.smpLulus == null
-                        ? '-'.text.base.make()
-                        : u.pendidikans.smpLulus!.text.base.make(),
-                  ),
-                  Builder(
-                    builder: (context) => u.pendidikans.smaLulus == null
-                        ? '-'.text.base.make()
-                        : u.pendidikans.smaLulus!.text.base.make(),
-                  ),
-                  Builder(
-                    builder: (context) => u.pendidikans.ptLulus == null
-                        ? '-'.text.base.make()
-                        : u.pendidikans.ptLulus!.text.base.make(),
-                  ),
+                HStack([
+                  VStack([
+                    'Tahun Lulus'.text.base.make(),
+                    'Tahun Lulus'.text.base.make(),
+                    'Tahun Lulus'.text.base.make(),
+                    'Tahun Lulus'.text.base.make(),
+                    'Tahun Lulus'.text.base.make(),
+                  ]).box.width(100).make(),
+                  const SizedBox(width: 50),
+                  VStack([
+                    Builder(
+                      builder: (context) => u.pendidikans.tkLulus == null
+                          ? '-'.text.base.make()
+                          : u.pendidikans.tkLulus!.text.base.make(),
+                    ),
+                    Builder(
+                      builder: (context) => u.pendidikans.sdLulus == null
+                          ? '-'.text.base.make()
+                          : u.pendidikans.sdLulus!.text.base.make(),
+                    ),
+                    Builder(
+                      builder: (context) => u.pendidikans.smpLulus == null
+                          ? '-'.text.base.make()
+                          : u.pendidikans.smpLulus!.text.base.make(),
+                    ),
+                    Builder(
+                      builder: (context) => u.pendidikans.smaLulus == null
+                          ? '-'.text.base.make()
+                          : u.pendidikans.smaLulus!.text.base.make(),
+                    ),
+                    Builder(
+                      builder: (context) => u.pendidikans.ptLulus == null
+                          ? '-'.text.base.make()
+                          : u.pendidikans.ptLulus!.text.base.make(),
+                    ),
+                  ]),
                 ]),
               ])
             ]),

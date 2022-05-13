@@ -30,6 +30,10 @@ class _$GalleryStateTearOff {
     return const _Success();
   }
 
+  _SuccessDelete successDelete() {
+    return const _SuccessDelete();
+  }
+
   _Error error(String message) {
     return _Error(
       message,
@@ -47,6 +51,7 @@ mixin _$GalleryState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() success,
+    required TResult Function() successDelete,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -55,6 +60,7 @@ mixin _$GalleryState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
+    TResult Function()? successDelete,
     TResult Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -63,6 +69,7 @@ mixin _$GalleryState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
+    TResult Function()? successDelete,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -72,6 +79,7 @@ mixin _$GalleryState {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_SuccessDelete value) successDelete,
     required TResult Function(_Error value) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -80,6 +88,7 @@ mixin _$GalleryState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_SuccessDelete value)? successDelete,
     TResult Function(_Error value)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -88,6 +97,7 @@ mixin _$GalleryState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_SuccessDelete value)? successDelete,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) =>
@@ -151,6 +161,7 @@ class _$_Initial implements _Initial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() success,
+    required TResult Function() successDelete,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -162,6 +173,7 @@ class _$_Initial implements _Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
+    TResult Function()? successDelete,
     TResult Function(String message)? error,
   }) {
     return initial?.call();
@@ -173,6 +185,7 @@ class _$_Initial implements _Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
+    TResult Function()? successDelete,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -188,6 +201,7 @@ class _$_Initial implements _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_SuccessDelete value) successDelete,
     required TResult Function(_Error value) error,
   }) {
     return initial(this);
@@ -199,6 +213,7 @@ class _$_Initial implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_SuccessDelete value)? successDelete,
     TResult Function(_Error value)? error,
   }) {
     return initial?.call(this);
@@ -210,6 +225,7 @@ class _$_Initial implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_SuccessDelete value)? successDelete,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -265,6 +281,7 @@ class _$_Loading implements _Loading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() success,
+    required TResult Function() successDelete,
     required TResult Function(String message) error,
   }) {
     return loading();
@@ -276,6 +293,7 @@ class _$_Loading implements _Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
+    TResult Function()? successDelete,
     TResult Function(String message)? error,
   }) {
     return loading?.call();
@@ -287,6 +305,7 @@ class _$_Loading implements _Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
+    TResult Function()? successDelete,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -302,6 +321,7 @@ class _$_Loading implements _Loading {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_SuccessDelete value) successDelete,
     required TResult Function(_Error value) error,
   }) {
     return loading(this);
@@ -313,6 +333,7 @@ class _$_Loading implements _Loading {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_SuccessDelete value)? successDelete,
     TResult Function(_Error value)? error,
   }) {
     return loading?.call(this);
@@ -324,6 +345,7 @@ class _$_Loading implements _Loading {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_SuccessDelete value)? successDelete,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -379,6 +401,7 @@ class _$_Success implements _Success {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() success,
+    required TResult Function() successDelete,
     required TResult Function(String message) error,
   }) {
     return success();
@@ -390,6 +413,7 @@ class _$_Success implements _Success {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
+    TResult Function()? successDelete,
     TResult Function(String message)? error,
   }) {
     return success?.call();
@@ -401,6 +425,7 @@ class _$_Success implements _Success {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
+    TResult Function()? successDelete,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -416,6 +441,7 @@ class _$_Success implements _Success {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_SuccessDelete value) successDelete,
     required TResult Function(_Error value) error,
   }) {
     return success(this);
@@ -427,6 +453,7 @@ class _$_Success implements _Success {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_SuccessDelete value)? successDelete,
     TResult Function(_Error value)? error,
   }) {
     return success?.call(this);
@@ -438,6 +465,7 @@ class _$_Success implements _Success {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_SuccessDelete value)? successDelete,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -450,6 +478,129 @@ class _$_Success implements _Success {
 
 abstract class _Success implements GalleryState {
   const factory _Success() = _$_Success;
+}
+
+/// @nodoc
+abstract class _$SuccessDeleteCopyWith<$Res> {
+  factory _$SuccessDeleteCopyWith(
+          _SuccessDelete value, $Res Function(_SuccessDelete) then) =
+      __$SuccessDeleteCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$SuccessDeleteCopyWithImpl<$Res>
+    extends _$GalleryStateCopyWithImpl<$Res>
+    implements _$SuccessDeleteCopyWith<$Res> {
+  __$SuccessDeleteCopyWithImpl(
+      _SuccessDelete _value, $Res Function(_SuccessDelete) _then)
+      : super(_value, (v) => _then(v as _SuccessDelete));
+
+  @override
+  _SuccessDelete get _value => super._value as _SuccessDelete;
+}
+
+/// @nodoc
+
+class _$_SuccessDelete implements _SuccessDelete {
+  const _$_SuccessDelete();
+
+  @override
+  String toString() {
+    return 'GalleryState.successDelete()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _SuccessDelete);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function() success,
+    required TResult Function() successDelete,
+    required TResult Function(String message) error,
+  }) {
+    return successDelete();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? success,
+    TResult Function()? successDelete,
+    TResult Function(String message)? error,
+  }) {
+    return successDelete?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function()? success,
+    TResult Function()? successDelete,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (successDelete != null) {
+      return successDelete();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Success value) success,
+    required TResult Function(_SuccessDelete value) successDelete,
+    required TResult Function(_Error value) error,
+  }) {
+    return successDelete(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? success,
+    TResult Function(_SuccessDelete value)? successDelete,
+    TResult Function(_Error value)? error,
+  }) {
+    return successDelete?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Success value)? success,
+    TResult Function(_SuccessDelete value)? successDelete,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (successDelete != null) {
+      return successDelete(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SuccessDelete implements GalleryState {
+  const factory _SuccessDelete() = _$_SuccessDelete;
 }
 
 /// @nodoc
@@ -517,6 +668,7 @@ class _$_Error implements _Error {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function() success,
+    required TResult Function() successDelete,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -528,6 +680,7 @@ class _$_Error implements _Error {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
+    TResult Function()? successDelete,
     TResult Function(String message)? error,
   }) {
     return error?.call(message);
@@ -539,6 +692,7 @@ class _$_Error implements _Error {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function()? success,
+    TResult Function()? successDelete,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -554,6 +708,7 @@ class _$_Error implements _Error {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Success value) success,
+    required TResult Function(_SuccessDelete value) successDelete,
     required TResult Function(_Error value) error,
   }) {
     return error(this);
@@ -565,6 +720,7 @@ class _$_Error implements _Error {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_SuccessDelete value)? successDelete,
     TResult Function(_Error value)? error,
   }) {
     return error?.call(this);
@@ -576,6 +732,7 @@ class _$_Error implements _Error {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Success value)? success,
+    TResult Function(_SuccessDelete value)? successDelete,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {

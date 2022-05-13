@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:logger/logger.dart';
 import 'package:sibaba/applications/admin/bloc/location/location_cubit.dart';
 import 'package:sibaba/applications/admin/bloc/maps/maps_cubit.dart';
 import 'package:sibaba/applications/admin/models/user.dart';
@@ -123,9 +124,9 @@ class _DashboardLayoutState extends State<_DashboardLayout> {
   late LatLng showLocation;
   @override
   void initState() {
-    showLocation = LatLng(
-      widget.locations.maps[0].latitude,
-      widget.locations.maps[0].longitude,
+    showLocation = const LatLng(
+      -7.821494391265134,
+      110.32701712802746,
     );
     super.initState();
   }
@@ -171,6 +172,7 @@ class _DashboardLayoutState extends State<_DashboardLayout> {
             ),
           ]),
           VStack([
+            const SizedBox(height: 20),
             HStack([
               'Lokasi'.text.lg.bold.make().expand(),
               GestureDetector(
@@ -187,7 +189,7 @@ class _DashboardLayoutState extends State<_DashboardLayout> {
                 zoomGesturesEnabled: true,
                 initialCameraPosition: CameraPosition(
                   target: showLocation,
-                  zoom: 15.0,
+                  zoom: 10.0,
                 ),
                 markers: getmarkers(widget.locations),
                 mapType: MapType.satellite,
@@ -202,7 +204,7 @@ class _DashboardLayoutState extends State<_DashboardLayout> {
                       : const GuestMenu(),
             ),
           ]),
-        ]).p20(),
+        ]).p20().scrollVertical(),
         VStack([
           ...widget.user.roles.map(
             (e) => e.name == 'superadmin'

@@ -46,7 +46,6 @@ class InfoLokasiCubit extends Cubit<InfoLokasiState> {
   final direktur = TextEditingController();
   final tanggalAkreditasi = TextEditingController();
   final deskripsi = HtmlEditorController();
-  final hariMasuk = TextEditingController();
   final jamMasuk = TextEditingController();
   final jamKeluar = TextEditingController();
   final lat = TextEditingController();
@@ -60,6 +59,8 @@ class InfoLokasiCubit extends Cubit<InfoLokasiState> {
   String kapanewon = '';
   String status = '';
   String akreditasi = '';
+  String hariMasuk = '';
+  String deskripsiText = '';
 
   void setLocation(LatLng latLng) {
     lat.text = latLng.latitude.toString();
@@ -83,8 +84,15 @@ class InfoLokasiCubit extends Cubit<InfoLokasiState> {
     direktur.text = l.detailLokasi.direktur;
     tanggalBerdiri.text = l.detailLokasi.tglBerdiri.toString();
     status = l.detailLokasi.status;
-    // deskripsi.text = locationRequest.deskripsi;
-    // status = locationRequest.status;
+    deskripsiText = l.detailLokasi.deskripsi;
+    status = l.detailLokasi.status;
+    tanggalBerdiri.text = l.detailLokasi.tglBerdiri.toString();
+    tanggalAkreditasi.text = l.detailLokasi.tglAkreditasi.toString();
+    hariMasuk = 'senin';
+    jamMasuk.text = l.waktuMasuk;
+    jamKeluar.text = l.waktuSelesai;
+    lat.text = l.maps.latitude.toString();
+    lng.text = l.maps.longitude.toString();
   }
 
   void setAkreditasi(String value) {
@@ -115,6 +123,12 @@ class InfoLokasiCubit extends Cubit<InfoLokasiState> {
     emit(const InfoLokasiState.picked());
   }
 
+  void setHariMasuk(String value) {
+    emit(const InfoLokasiState.loading());
+    hariMasuk = value;
+    emit(const InfoLokasiState.picked());
+  }
+
   void setJamMasuk(DateTime value) {
     emit(const InfoLokasiState.loading());
     final formattedTime = DateFormat('hh:mm').format(value);
@@ -124,7 +138,6 @@ class InfoLokasiCubit extends Cubit<InfoLokasiState> {
 
   void setJamKeluar(DateTime value) {
     emit(const InfoLokasiState.loading());
-    Logger().e(value);
     final formattedTime = DateFormat('hh:mm').format(value);
     jamKeluar.text = formattedTime;
     emit(const InfoLokasiState.picked());
@@ -195,7 +208,6 @@ class InfoLokasiCubit extends Cubit<InfoLokasiState> {
         maps: location.maps,
         events: location.events,
       );
-      Logger().i(filteredLokasi);
       kapanewon = '';
       locationList = filteredLokasi;
       emit(InfoLokasiState.loaded(filteredLocation));
@@ -232,12 +244,11 @@ class InfoLokasiCubit extends Cubit<InfoLokasiState> {
         tglAkreditasi: DateTime.parse(tanggalAkreditasi.text),
         status: status,
         deskripsi: deskripsiText,
-        hariMasuk: 'Senin',
+        hariMasuk: hariMasuk,
         masuk: jamMasuk.text,
         selesai: jamKeluar.text,
         latitude: lat.text,
         longitude: lng.text);
-    Logger().i(locationRequest);
     final location = await _locationRepo.addLocation(locationRequest);
     location.fold(
       (l) => emit(InfoLokasiState.error(l.message)),

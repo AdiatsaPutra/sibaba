@@ -137,29 +137,30 @@ class _DetailLokasiLayout extends StatelessWidget {
               'Pengajar'.text.xl.bold.make(),
               const SizedBox(height: 10),
             ]).px16(),
-            // HStack([
-            //   ...location.ustadzs.map((e) => ZStack([
-            //         VxBox()
-            //             .width(200)
-            //             .height(250)
-            //             .bgImage(
-            //               const DecorationImage(
-            //                   image: NetworkImage(
-            //                       'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg'),
-            //                   fit: BoxFit.cover),
-            //             )
-            //             .rounded
-            //             .outerShadowXl
-            //             .make(),
-            //         VxBox(
-            //           child: VStack([
-            //             const SizedBox().expand(),
-            //             e.nama.text.base.make(),
-            //           ]).p16(),
-            //         ).width(200).height(250).rounded.make(),
-            //       ]).pOnly(right: 20)),
-            // ]).scrollHorizontal()
+            HStack([
+              ...location.ustadzs.map((e) => ZStack([
+                    VxBox()
+                        .width(200)
+                        .height(250)
+                        .bgImage(
+                          const DecorationImage(
+                              image: NetworkImage(
+                                  'https://www.generationsforpeace.org/wp-content/uploads/2018/03/empty.jpg'),
+                              fit: BoxFit.cover),
+                        )
+                        .rounded
+                        .outerShadowXl
+                        .make(),
+                    VxBox(
+                      child: VStack([
+                        const SizedBox().expand(),
+                        e.nama.text.base.make(),
+                      ]).p16(),
+                    ).width(200).height(250).rounded.make(),
+                  ]).pOnly(right: 20, left: 16)),
+            ]).scrollHorizontal()
           ]),
+          const SizedBox(height: 20),
         ]).scrollVertical(),
         orElse: () => const SizedBox(),
       ),

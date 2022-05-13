@@ -1,6 +1,7 @@
 class UstadzRequest {
   UstadzRequest({
     required this.userId,
+    required this.locationName,
     required this.nama,
     required this.gender,
     required this.tmpLahir,
@@ -33,6 +34,7 @@ class UstadzRequest {
   });
 
   final int userId;
+  final String locationName;
   final String nama;
   final String gender;
   final String tmpLahir;
@@ -65,6 +67,7 @@ class UstadzRequest {
 
   Map<String, dynamic> toJson() => {
         "User_id": userId == null ? null : userId,
+        "Location_name": locationName == null ? null : locationName,
         "Nama": nama == null ? null : nama,
         "Gender": gender == null ? null : gender,
         "Tmp_lahir": tmpLahir == null ? null : tmpLahir,

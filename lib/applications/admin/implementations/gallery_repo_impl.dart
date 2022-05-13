@@ -23,11 +23,22 @@ class GalleryRepoImpl extends GalleryRepo {
         "file": await MultipartFile.fromFile(file.path, filename: fileName),
         "userId": userId,
       });
-      final response = await Api.createDio().post(
+      await Api.createDio().post(
         baseUrl + 'gallery',
         data: formData,
       );
-      Logger().i(response);
+      return right(null);
+    } catch (e) {
+      return left(AdminException(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<AdminException, void>> deleteGallery(int galleryId) async {
+    try {
+      final response = await Api.createDio().delete(
+        baseUrl + 'gallery/$galleryId',
+      );
       return right(null);
     } catch (e) {
       return left(AdminException(e.toString()));

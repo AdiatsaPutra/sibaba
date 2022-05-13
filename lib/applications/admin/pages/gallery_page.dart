@@ -94,6 +94,12 @@ class _GalleryLayout extends StatelessWidget {
               cubit.reset();
               profile.getTentangkami();
             },
+            successDelete: () {
+              Navigator.pop(context);
+              PopupMessages.successPopup('Berhasil menghapus foto');
+              cubit.reset();
+              profile.getTentangkami();
+            },
             error: (e) {
               Navigator.pop(context);
               PopupMessages.successPopup(e);
@@ -136,6 +142,40 @@ class _GalleryLayout extends StatelessWidget {
                             )
                             .roundedSM
                             .make(),
+                      );
+                    },
+                    onLongPress: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => Dialog(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          backgroundColor: Colors.white,
+                          child: VStack([
+                            'Anda yakin akan menghapus gallery?'
+                                .text
+                                .lg
+                                .makeCentered(),
+                            const SizedBox(height: 10),
+                            HStack([
+                              OutlinedButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: 'Batal'.text.base.make(),
+                              ).expand(),
+                              const SizedBox(width: 10),
+                              ElevatedButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                  gallery.deleteGallery(e.galleryId);
+                                },
+                                child: 'Ok'.text.base.make(),
+                              ).expand()
+                            ]),
+                          ]).p16(),
+                        ),
                       );
                     },
                     child: VxBox()

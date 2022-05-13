@@ -6,17 +6,16 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:intl/intl.dart';
-import 'package:logger/logger.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:sibaba/applications/admin/bloc/location/location_cubit.dart';
 import 'package:sibaba/applications/admin/bloc/maps/maps_cubit.dart';
+import 'package:sibaba/applications/info_lokasi/model/location_detail.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../../../infrastructures/constant.dart';
 import '../../../../infrastructures/refresh/cubit/refresh_cubit.dart';
 import '../../../../injection.dart';
 import '../../../../presentation/form_fields.dart';
-import '../../../../presentation/loading_indicator.dart';
 import '../../../../presentation/popup_messages.dart';
 import '../../../../presentation/widgets/custom_appbar.dart';
 import '../../../info_lokasi/bloc/cubit/info_lokasi_cubit.dart';
@@ -25,14 +24,14 @@ import '../../models/user.dart';
 class AddLokasiPage extends StatelessWidget {
   final LatLng latLng;
   final bool isEdit;
-  final String? slug;
+  final LocationDetail? locationDetail;
   final User user;
   const AddLokasiPage(
       {Key? key,
-      this.slug,
       required this.isEdit,
       required this.user,
-      required this.latLng})
+      required this.latLng,
+      this.locationDetail})
       : super(key: key);
 
   @override
@@ -49,28 +48,23 @@ class AddLokasiPage extends StatelessWidget {
               ..setInitialPosition(latLng)
               ..changeMarkerposition(latLng),
           ),
-          BlocProvider(
-            create: (context) => LocationCubit()..getAddress(latLng),
-          ),
+          isEdit == true
+              ? BlocProvider(
+                  create: (context) => LocationCubit()
+                    ..getAddress(LatLng(locationDetail!.maps.latitude,
+                        locationDetail!.maps.longitude)),
+                )
+              : BlocProvider(
+                  create: (context) => LocationCubit()..getAddress(latLng),
+                ),
         ],
         child: Builder(
           builder: (context) {
-            final map = context.read<LocationCubit>();
             return isEdit == true
                 ? BlocProvider(
                     create: (context) =>
-                        getIt<InfoLokasiCubit>()..getLocationDetail(slug!),
-                    child: BlocBuilder<InfoLokasiCubit, InfoLokasiState>(
-                      builder: (context, state) => state.maybeWhen(
-                        loading: () =>
-                            const LoadingIndicator(isScrollable: true),
-                        detailLoaded: (location) {
-                          context.read<InfoLokasiCubit>().init(l: location);
-                          return _AddLokasiLayout(isEdit: isEdit, user: user);
-                        },
-                        orElse: () => const SizedBox(),
-                      ),
-                    ),
+                        getIt<InfoLokasiCubit>()..init(l: locationDetail),
+                    child: _AddLokasiLayout(isEdit: isEdit, user: user),
                   )
                 : BlocProvider(
                     create: (context) =>
@@ -138,9 +132,12 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
                                   const CircularProgressIndicator().centered(),
                             ),
                             orElse: () => ElevatedButton(
-                              onPressed: () {
-                                cubit.addLokasi(widget.user.id.toString());
-                              },
+                              onPressed: widget.isEdit
+                                  ? () {}
+                                  : () {
+                                      cubit
+                                          .addLokasi(widget.user.id.toString());
+                                    },
                               child: 'Simpan'.text.base.make(),
                             ),
                           ),
@@ -172,10 +169,9 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
   continued(
       InfoLokasiCubit cubit, MapsCubit mapsCubit, LocationCubit locationCubit) {
     setState(() {
-      Logger().i(cubit.formKeys[_currentStep].currentState!);
-      if (cubit.formKeys[_currentStep].currentState!.validate()) {
-        _currentStep += 1;
-      }
+      // if (cubit.formKeys[_currentStep].currentState!.validate()) {
+      _currentStep += 1;
+      // }
     });
   }
 
@@ -192,7 +188,7 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
         Step(
           title: 'Step 1'.text.base.make(),
           content: Form(
-            key: cubit.formKeys[0],
+            // key: cubit.formKeys[0],
             child: VStack([
               'NSPQ'.text.base.bold.make(),
               FormFields.textFormField(
@@ -271,7 +267,7 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
         Step(
           title: const Text('Step 2'),
           content: Form(
-            key: cubit.formKeys[1],
+            // key: cubit.formKeys[1],
             child: VStack([
               const SizedBox(height: 10),
               'Email'.text.base.bold.make(),
@@ -288,6 +284,7 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
               const SizedBox(height: 10),
               'Pilih Akreditasi'.text.base.bold.make(),
               DropdownButtonFormField<String>(
+                value: cubit.akreditasi == '' ? null : cubit.akreditasi,
                 hint: 'Pilih Akreditasi'.text.base.color(Colors.grey).make(),
                 validator: (value) {
                   if (value == "") {
@@ -311,6 +308,9 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
               BlocBuilder<InfoLokasiCubit, InfoLokasiState>(
                 builder: (context, state) {
                   return DateTimeField(
+                    initialValue: cubit.tanggalBerdiri.text.isEmpty
+                        ? null
+                        : DateTime.parse(cubit.tanggalBerdiri.text),
                     decoration: const InputDecoration(
                       hintText: 'Tanggal Berdiri',
                       hintStyle: TextStyle(
@@ -354,8 +354,11 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
               BlocBuilder<InfoLokasiCubit, InfoLokasiState>(
                 builder: (context, state) {
                   return DateTimeField(
+                    initialValue: cubit.tanggalAkreditasi.text.isEmpty
+                        ? null
+                        : DateTime.parse(cubit.tanggalAkreditasi.text),
                     decoration: const InputDecoration(
-                      hintText: 'Tanggal Berdiri',
+                      hintText: 'Tanggal Akreditasi',
                       hintStyle: TextStyle(
                         color: Colors.grey,
                         fontSize: 14,
@@ -384,6 +387,7 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
               const SizedBox(height: 10),
               'Status'.text.base.bold.make(),
               DropdownButtonFormField<String>(
+                value: cubit.status == '' ? null : cubit.status,
                 hint: 'Status'.text.base.color(Colors.grey).make(),
                 validator: (value) {
                   if (value == "") {
@@ -410,23 +414,33 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
         Step(
           title: const Text('Step 3'),
           content: Form(
-            key: cubit.formKeys[2],
+            // key: cubit.formKeys[2],
             child: VStack([
               const SizedBox(height: 10),
               'Deskripsi'.text.base.bold.make(),
-              HtmlEditor(controller: cubit.deskripsi)
-                  .box
-                  .height(200)
-                  .make()
-                  .pOnly(bottom: 10),
+              HtmlEditor(
+                controller: cubit.deskripsi,
+                htmlEditorOptions: HtmlEditorOptions(
+                  initialText: cubit.deskripsiText,
+                ),
+              ).box.height(200).make().pOnly(bottom: 10),
               const SizedBox(height: 10),
               'Hari Masuk'.text.base.bold.make(),
-              MultiSelectDialogField(
-                items: listHari.map((e) => MultiSelectItem(e, e)).toList(),
-                listType: MultiSelectListType.CHIP,
-                onConfirm: (values) {},
-                buttonIcon: null,
-                searchHint: 'Pilih Hari Masuk',
+              BlocBuilder<InfoLokasiCubit, InfoLokasiState>(
+                builder: (context, state) {
+                  return MultiSelectDialogField<String>(
+                    initialValue: cubit.hariMasuk == ''
+                        ? null
+                        : cubit.hariMasuk.split(','),
+                    items: listHari.map((e) => MultiSelectItem(e, e)).toList(),
+                    listType: MultiSelectListType.CHIP,
+                    onConfirm: (values) {
+                      cubit.setHariMasuk(values.join(','));
+                    },
+                    buttonIcon: null,
+                    searchHint: 'Pilih Hari Masuk',
+                  );
+                },
               ).pOnly(bottom: 10),
               const SizedBox(height: 10),
               Row(
@@ -435,6 +449,10 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
                   VStack([
                     'Jam Masuk'.text.base.bold.make(),
                     DateTimeField(
+                      initialValue: cubit.jamMasuk.text.isEmpty
+                          ? null
+                          : DateTime.parse(
+                              '1999-12-20 ${cubit.jamMasuk.text}:00'),
                       decoration: const InputDecoration(
                           hintText: 'Jam Masuk',
                           hintStyle: TextStyle(
@@ -463,6 +481,10 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
                   VStack([
                     'Jam Keluar'.text.base.bold.make(),
                     DateTimeField(
+                      initialValue: cubit.jamKeluar.text.isEmpty
+                          ? null
+                          : DateTime.parse(
+                              '1999-12-20 ${cubit.jamKeluar.text}:00'),
                       decoration: const InputDecoration(
                           hintText: 'Jam Keluar',
                           hintStyle: TextStyle(
@@ -498,7 +520,7 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
         Step(
           title: const Text('Step 4'),
           content: Form(
-            key: cubit.formKeys[3],
+            // key: cubit.formKeys[3],
             child: VStack([
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),

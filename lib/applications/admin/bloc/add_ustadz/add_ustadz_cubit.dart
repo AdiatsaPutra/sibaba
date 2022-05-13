@@ -77,6 +77,7 @@ class AddUstadzCubit extends Cubit<AddUstadzState> {
     emit(const AddUstadzState.loading());
     final ustadzRequest = UstadzRequest(
       userId: userId,
+      locationName: lokasi.text,
       nama: nama.text,
       gender: jenisKelamin,
       tmpLahir: tempatLahir.text,

@@ -22,4 +22,13 @@ class GalleryCubit extends Cubit<GalleryState> {
       (r) => emit(const GalleryState.success()),
     );
   }
+
+  void deleteGallery(int galleryId) async {
+    emit(const GalleryState.loading());
+    final upload = await _galleryRepo.deleteGallery(galleryId);
+    upload.fold(
+      (l) => emit(GalleryState.error(l.message)),
+      (r) => emit(const GalleryState.successDelete()),
+    );
+  }
 }

@@ -19,28 +19,28 @@ class Location {
 }
 
 class Lokasi {
-  Lokasi({
-    this.locationId,
-    this.userId,
-    this.nspq,
-    this.areaUnit,
-    this.districtUnit,
-    this.nama,
-    this.locSlug,
-    this.alamat,
-    this.telpUnit,
-    this.skPendirian,
-    this.tmpBelajar,
-    this.email,
-    this.akreditasi,
-    this.tglBerdiri,
-    this.direktur,
-    this.tglAkreditasi,
-    this.status,
-    this.deskripsi,
-    this.createdAt,
-    this.updatedAt,
-  });
+  Lokasi(
+      {this.locationId,
+      this.userId,
+      this.nspq,
+      this.areaUnit,
+      this.districtUnit,
+      this.nama,
+      this.locSlug,
+      this.alamat,
+      this.telpUnit,
+      this.skPendirian,
+      this.tmpBelajar,
+      this.email,
+      this.akreditasi,
+      this.tglBerdiri,
+      this.direktur,
+      this.tglAkreditasi,
+      this.status,
+      this.deskripsi,
+      this.createdAt,
+      this.updatedAt,
+      this.photo});
 
   final int? locationId;
   final int? userId;
@@ -62,6 +62,7 @@ class Lokasi {
   final String? deskripsi;
   final DateTime? createdAt;
   final DateTime? updatedAt;
+  final Photo? photo;
 
   factory Lokasi.fromJson(Map<String, dynamic> json) => Lokasi(
         locationId: json["Location_id"] == null ? null : json["Location_id"],
@@ -86,6 +87,7 @@ class Lokasi {
         deskripsi: json["Deskripsi"] == null ? null : json["Deskripsi"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
+        photo: json["photo"] == null ? null : Photo.fromJson(json["photo"]),
       );
 }
 

@@ -63,9 +63,9 @@ class _DashboardLayoutState extends State<_DashboardLayout> {
   late LatLng showLocation;
   @override
   void initState() {
-    showLocation = LatLng(
-      widget.locations.maps[0].latitude,
-      widget.locations.maps[0].longitude,
+    showLocation = const LatLng(
+      -7.821494391265134,
+      110.32701712802746,
     );
     super.initState();
   }
@@ -80,7 +80,7 @@ class _DashboardLayoutState extends State<_DashboardLayout> {
         zoomGesturesEnabled: true,
         initialCameraPosition: CameraPosition(
           target: showLocation,
-          zoom: 20.0,
+          zoom: 10.0,
         ),
         markers: getmarkers(widget.locations),
         mapType: MapType.satellite,
