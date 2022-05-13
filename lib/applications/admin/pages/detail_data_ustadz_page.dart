@@ -35,9 +35,12 @@ class _DetailDataUstadzLayout extends StatelessWidget {
         detailLoaded: (u) => VStack([
           VxBox(
             child: VStack([
-              VxBox(child: 'Image'.text.base.makeCentered())
+              VxBox()
                   .width(double.infinity)
                   .height(200)
+                  .bgImage(DecorationImage(
+                      image: NetworkImage(
+                          'http://10.0.2.2:8000/storage/fileUstadz/${u.photo.photo}')))
                   .color(Colors.grey)
                   .rounded
                   .make(),

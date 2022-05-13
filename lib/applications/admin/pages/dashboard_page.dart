@@ -192,7 +192,7 @@ class _DashboardLayoutState extends State<_DashboardLayout> {
                   zoom: 10.0,
                 ),
                 markers: getmarkers(widget.locations),
-                mapType: MapType.satellite,
+                mapType: MapType.normal,
               ).box.height(120).make(),
             ),
             const SizedBox(height: 20),

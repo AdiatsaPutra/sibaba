@@ -7,6 +7,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:intl/intl.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
+import 'package:sibaba/applications/admin/bloc/kelurahan/kelurahan_cubit.dart';
 import 'package:sibaba/applications/admin/bloc/location/location_cubit.dart';
 import 'package:sibaba/applications/admin/bloc/maps/maps_cubit.dart';
 import 'package:sibaba/applications/info_lokasi/model/location_detail.dart';
@@ -15,10 +16,12 @@ import 'package:velocity_x/velocity_x.dart';
 import '../../../../infrastructures/constant.dart';
 import '../../../../infrastructures/refresh/cubit/refresh_cubit.dart';
 import '../../../../injection.dart';
+import '../../../../presentation/color_constant.dart';
 import '../../../../presentation/form_fields.dart';
 import '../../../../presentation/popup_messages.dart';
 import '../../../../presentation/widgets/custom_appbar.dart';
 import '../../../info_lokasi/bloc/cubit/info_lokasi_cubit.dart';
+import '../../bloc/kapanewon/kapanewon_cubit.dart';
 import '../../models/user.dart';
 
 class AddLokasiPage extends StatelessWidget {
@@ -66,9 +69,20 @@ class AddLokasiPage extends StatelessWidget {
                         getIt<InfoLokasiCubit>()..init(l: locationDetail),
                     child: _AddLokasiLayout(isEdit: isEdit, user: user),
                   )
-                : BlocProvider(
-                    create: (context) =>
-                        getIt<InfoLokasiCubit>()..setLocation(latLng),
+                : MultiBlocProvider(
+                    providers: [
+                      BlocProvider(
+                        create: (context) =>
+                            getIt<InfoLokasiCubit>()..setLocation(latLng),
+                      ),
+                      BlocProvider(
+                        create: (context) =>
+                            getIt<KapanewonCubit>()..getKapanewon(),
+                      ),
+                      BlocProvider(
+                        create: (context) => getIt<KelurahanCubit>(),
+                      ),
+                    ],
                     child: _AddLokasiLayout(isEdit: isEdit, user: user),
                   );
           },
@@ -97,6 +111,7 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
     final cubit = context.read<InfoLokasiCubit>();
     final mapsCubit = context.read<MapsCubit>();
     final locationCubit = context.read<LocationCubit>();
+    final kelurahanCubit = context.read<KelurahanCubit>();
     final isLastStep = _currentStep == 3;
     return Column(
       children: [
@@ -155,7 +170,7 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
             physics: const ScrollPhysics(),
             currentStep: _currentStep,
             onStepTapped: (step) => tapped(step),
-            steps: getSteps(cubit, mapsCubit, locationCubit),
+            steps: getSteps(cubit, mapsCubit, locationCubit, kelurahanCubit),
           ),
         ),
       ],
@@ -169,9 +184,9 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
   continued(
       InfoLokasiCubit cubit, MapsCubit mapsCubit, LocationCubit locationCubit) {
     setState(() {
-      // if (cubit.formKeys[_currentStep].currentState!.validate()) {
-      _currentStep += 1;
-      // }
+      if (cubit.formKeys[_currentStep].currentState!.validate()) {
+        _currentStep += 1;
+      }
     });
   }
 
@@ -183,13 +198,99 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
     InfoLokasiCubit cubit,
     MapsCubit mapsCubit,
     LocationCubit locationCubit,
+    KelurahanCubit kelurahanCubit,
   ) =>
       [
         Step(
           title: 'Step 1'.text.base.make(),
           content: Form(
-            // key: cubit.formKeys[0],
+            key: cubit.formKeys[0],
             child: VStack([
+              BlocBuilder<KapanewonCubit, KapanewonState>(
+                builder: (context, state) => state.maybeWhen(
+                  loading: () => DropdownButtonFormField<String>(
+                    hint: 'Loading'.text.lg.make(),
+                    items: const [],
+                    onChanged: (e) {},
+                  ).box.width(Get.width).make().pOnly(bottom: 10),
+                  loaded: (kapanewon) => HStack([
+                    DropdownButtonFormField(
+                      value: cubit.kapanewon == ''
+                          ? null
+                          : kapanewon
+                              .where((element) =>
+                                  element.areaName == cubit.kapanewon)
+                              .first
+                              .areaName,
+                      hint: 'Pilih Kapanewon'.text.lg.make(),
+                      items: [
+                        ...kapanewon.map((e) {
+                          return DropdownMenuItem(
+                            value: e.areaId,
+                            child: e.areaName.text.lg.make(),
+                          );
+                        }),
+                      ],
+                      validator: (value) {
+                        if (value == null) {
+                          return 'Pilih Kapanewon';
+                        }
+                      },
+                      onChanged: (e) {
+                        cubit.setKapanewon(e as int);
+                        kelurahanCubit.getKelurahan();
+                      },
+                    ).box.width(Get.width - 50).make().pOnly(bottom: 10),
+                  ]),
+                  orElse: () => const SizedBox(),
+                ),
+              ),
+              BlocBuilder<KelurahanCubit, KelurahanState>(
+                builder: (context, state) => state.maybeWhen(
+                  loading: () => DropdownButtonFormField<String>(
+                    hint: 'Loading'.text.lg.make(),
+                    items: const [],
+                    onChanged: (e) {},
+                  ).box.width(Get.width).make().pOnly(bottom: 10),
+                  loaded: (kapanewon) => HStack([
+                    DropdownButtonFormField(
+                      value: cubit.kapanewon == ''
+                          ? null
+                          : kapanewon
+                              .where((element) =>
+                                  element.districtName == cubit.kapanewon)
+                              .first
+                              .districtName,
+                      hint: 'Pilih Kelurahan'.text.lg.make(),
+                      items: [
+                        ...kapanewon
+                            .where(
+                          (element) => element.areaId == cubit.kapanewonId,
+                        )
+                            .map((e) {
+                          return DropdownMenuItem(
+                            value: e.districtId,
+                            child: e.districtName.text.lg.make(),
+                          );
+                        }),
+                      ],
+                      validator: (value) {
+                        if (value == null) {
+                          return 'Pilih Kapanewon';
+                        }
+                      },
+                      onChanged: (e) {
+                        cubit.setKelurahan(e as int);
+                      },
+                    ).box.width(Get.width - 50).make().pOnly(bottom: 10),
+                  ]),
+                  orElse: () => DropdownButtonFormField<String>(
+                    hint: 'Kelurahan'.text.lg.make(),
+                    items: const [],
+                    onChanged: (e) {},
+                  ).box.width(Get.width).make().pOnly(bottom: 10),
+                ),
+              ),
               'NSPQ'.text.base.bold.make(),
               FormFields.textFormField(
                 controller: cubit.nspq,
@@ -267,7 +368,7 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
         Step(
           title: const Text('Step 2'),
           content: Form(
-            // key: cubit.formKeys[1],
+            key: cubit.formKeys[1],
             child: VStack([
               const SizedBox(height: 10),
               'Email'.text.base.bold.make(),
@@ -414,7 +515,7 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
         Step(
           title: const Text('Step 3'),
           content: Form(
-            // key: cubit.formKeys[2],
+            key: cubit.formKeys[2],
             child: VStack([
               const SizedBox(height: 10),
               'Deskripsi'.text.base.bold.make(),
@@ -520,7 +621,7 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
         Step(
           title: const Text('Step 4'),
           content: Form(
-            // key: cubit.formKeys[3],
+            key: cubit.formKeys[3],
             child: VStack([
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
@@ -541,7 +642,7 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
                       builder: (context, state) {
                         return GoogleMap(
                           initialCameraPosition: mapsCubit.initialPosition,
-                          mapType: MapType.satellite,
+                          mapType: MapType.normal,
                           onMapCreated: (controller) {
                             mapsCubit.createController(controller);
                           },

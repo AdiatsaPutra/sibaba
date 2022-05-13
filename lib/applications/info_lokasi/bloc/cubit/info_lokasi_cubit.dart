@@ -56,7 +56,11 @@ class InfoLokasiCubit extends Cubit<InfoLokasiState> {
   DateTime? jmMasuk;
   DateTime? jmKeluar;
 
+  int kapanewonId = 0;
+  int kelurahanId = 0;
+
   String kapanewon = '';
+  String kelurahan = '';
   String status = '';
   String akreditasi = '';
   String hariMasuk = '';
@@ -91,8 +95,22 @@ class InfoLokasiCubit extends Cubit<InfoLokasiState> {
     hariMasuk = 'senin';
     jamMasuk.text = l.waktuMasuk;
     jamKeluar.text = l.waktuSelesai;
+    kapanewon = l.detailLokasi.areaUnit;
+    kelurahan = l.detailLokasi.districtUnit;
     lat.text = l.maps.latitude.toString();
     lng.text = l.maps.longitude.toString();
+  }
+
+  void setKapanewon(int kapanewonId) {
+    emit(const InfoLokasiState.loading());
+    this.kapanewonId = kapanewonId;
+    emit(const InfoLokasiState.picked());
+  }
+
+  void setKelurahan(int kelurahanId) {
+    emit(const InfoLokasiState.loading());
+    this.kelurahanId = kelurahanId;
+    emit(const InfoLokasiState.picked());
   }
 
   void setAkreditasi(String value) {
@@ -229,8 +247,8 @@ class InfoLokasiCubit extends Cubit<InfoLokasiState> {
     final locationRequest = LocationRequest(
         userId: userId,
         nspq: nspq.text,
-        areaUnit: 2,
-        districtUnit: 2,
+        areaUnit: kapanewonId,
+        districtUnit: kelurahanId,
         nama: nama.text,
         locSlug: '',
         alamat: alamat.text,
