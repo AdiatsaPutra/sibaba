@@ -40,7 +40,7 @@ class _DetailDataUstadzLayout extends StatelessWidget {
                   .height(200)
                   .bgImage(DecorationImage(
                       image: NetworkImage(
-                          'http://10.0.2.2:8000/storage/fileUstadz/${u.photo.photo}')))
+                          'https://badkobantul.tatiumy.com/storage/fileUstadz/${u.photo.photo}')))
                   .color(Colors.grey)
                   .rounded
                   .make(),

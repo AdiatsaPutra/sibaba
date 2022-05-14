@@ -173,35 +173,38 @@ class _DashboardLayoutState extends State<_DashboardLayout> {
           ]),
           VStack([
             const SizedBox(height: 20),
-            HStack([
-              'Lokasi'.text.lg.bold.make().expand(),
-              GestureDetector(
-                onTap: () {
-                  Get.to(() => const MapsAllPage());
-                },
-                child: 'Lihat Penuh'.text.lg.make(),
-              )
-            ]),
-            const SizedBox(height: 10),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(15),
-              child: GoogleMap(
-                zoomGesturesEnabled: true,
-                initialCameraPosition: CameraPosition(
-                  target: showLocation,
-                  zoom: 10.0,
-                ),
-                markers: getmarkers(widget.locations),
-                mapType: MapType.normal,
-              ).box.height(120).make(),
-            ),
-            const SizedBox(height: 20),
             ...widget.user.roles.map(
               (e) => e.name == 'superadmin'
-                  ? SuperadminMenu(user: widget.user)
+                  ? VStack([
+                      HStack([
+                        'Lokasi'.text.lg.bold.make().expand(),
+                        GestureDetector(
+                          onTap: () {
+                            Get.to(() => const MapsAllPage());
+                          },
+                          child: 'Lihat Penuh'.text.lg.make(),
+                        )
+                      ]),
+                      const SizedBox(height: 20),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: GoogleMap(
+                          zoomGesturesEnabled: true,
+                          initialCameraPosition: CameraPosition(
+                            target: showLocation,
+                            zoom: 10.0,
+                          ),
+                          markers: getmarkers(widget.locations),
+                          mapType: MapType.normal,
+                        ).box.height(120).make(),
+                      ),
+                      SuperadminMenu(user: widget.user),
+                    ])
                   : e.name == 'admin'
                       ? AdminMenu(user: widget.user)
-                      : const GuestMenu(),
+                      : GuestMenu(
+                          name: widget.user.name,
+                        ),
             ),
           ]),
         ]).p20().scrollVertical(),

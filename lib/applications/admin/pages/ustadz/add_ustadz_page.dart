@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
+import 'package:sibaba/applications/admin/models/ustadz_detail.dart';
 import 'package:sibaba/applications/admin/widgets/ustadz/ustadz_pelatihan_form.dart';
 import 'package:sibaba/applications/admin/widgets/ustadz/ustadz_pendidikan_formal_form.dart';
+import 'package:sibaba/applications/info_lokasi/model/location_detail.dart';
 import 'package:sibaba/applications/login/bloc/login/login_cubit.dart';
 import 'package:sibaba/infrastructures/constant.dart';
 import 'package:sibaba/infrastructures/refresh/cubit/refresh_cubit.dart';
@@ -19,9 +21,13 @@ import '../../../../presentation/form_fields.dart';
 import '../../../info_lokasi/bloc/cubit/info_lokasi_cubit.dart';
 import '../../bloc/add_ustadz/add_ustadz_cubit.dart';
 import '../../bloc/image_handler/image_handler_cubit.dart';
+import '../../bloc/ustadz/ustadz_cubit.dart';
 
 class AddUstadzPage extends StatelessWidget {
-  const AddUstadzPage({Key? key}) : super(key: key);
+  final bool isEdit;
+  final int? ustadzId;
+  const AddUstadzPage({Key? key, this.isEdit = false, this.ustadzId})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,30 +37,57 @@ class AddUstadzPage extends StatelessWidget {
       ),
       body: MultiBlocProvider(
         providers: [
-          BlocProvider(
-            create: (context) => getIt<AddUstadzCubit>(),
-          ),
+          isEdit
+              ? BlocProvider(
+                  create: (context) =>
+                      getIt<UstadzCubit>()..getDetailUstadzs(ustadzId!),
+                )
+              : BlocProvider(
+                  create: (context) => getIt<UstadzCubit>(),
+                ),
           BlocProvider(
             create: (context) => getIt<InfoLokasiCubit>()..getLokasi(),
+          ),
+          BlocProvider(
+            create: (context) => getIt<AddUstadzCubit>(),
           ),
           BlocProvider(
             create: (context) => ImageHandlerCubit(),
           ),
         ],
-        child: const _AddUstadzLayout(),
+        child: isEdit
+            ? BlocBuilder<UstadzCubit, UstadzState>(
+                builder: (context, state) => state.maybeWhen(
+                  loading: () => const CircularProgressIndicator().centered(),
+                  detailLoaded: (detail) => _AddUstadzLayout(
+                    detailUstadz: detail,
+                  ),
+                  orElse: () => const SizedBox(),
+                ),
+              )
+            : const _AddUstadzLayout(),
       ),
     );
   }
 }
 
 class _AddUstadzLayout extends StatefulWidget {
-  const _AddUstadzLayout({Key? key}) : super(key: key);
+  final DetailUstadz? detailUstadz;
+  const _AddUstadzLayout({Key? key, this.detailUstadz}) : super(key: key);
 
   @override
   State<_AddUstadzLayout> createState() => _AddUstadzLayoutState();
 }
 
 class _AddUstadzLayoutState extends State<_AddUstadzLayout> {
+  @override
+  initState() {
+    super.initState();
+    widget.detailUstadz == null
+        ? null
+        : BlocProvider.of<AddUstadzCubit>(context).init(widget.detailUstadz!);
+  }
+
   int _currentStep = 0;
   StepperType stepperType = StepperType.horizontal;
   @override
@@ -205,6 +238,8 @@ class _AddUstadzLayoutState extends State<_AddUstadzLayout> {
             BlocBuilder<AddUstadzCubit, AddUstadzState>(
               builder: (context, state) {
                 return DropdownButtonFormField<String>(
+                  value:
+                      widget.detailUstadz == null ? null : cubit.jenisKelamin,
                   hint: 'Jenis Kelamin'.text.base.color(Colors.grey).make(),
                   validator: (value) {
                     if (value == "") {
@@ -241,6 +276,9 @@ class _AddUstadzLayoutState extends State<_AddUstadzLayout> {
             BlocBuilder<AddUstadzCubit, AddUstadzState>(
               builder: (context, state) {
                 return DateTimeField(
+                  initialValue: widget.detailUstadz == null
+                      ? null
+                      : DateTime.parse(cubit.tanggalLahir),
                   decoration: const InputDecoration(
                     hintText: 'Tanggal Lahir',
                     hintStyle: TextStyle(
@@ -316,6 +354,7 @@ class _AddUstadzLayoutState extends State<_AddUstadzLayout> {
             const SizedBox(height: 10),
             'Status'.text.base.bold.make(),
             DropdownButtonFormField<String>(
+              value: widget.detailUstadz == null ? null : cubit.status,
               hint: 'Status'.text.base.color(Colors.grey).make(),
               validator: (value) {
                 if (value == "") {

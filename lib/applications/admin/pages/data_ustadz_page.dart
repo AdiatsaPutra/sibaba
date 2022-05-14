@@ -314,7 +314,14 @@ class UstadzData extends DataTableSource {
           DataCell(
             HStack([
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Get.to(
+                    () => AddUstadzPage(
+                      isEdit: true,
+                      ustadzId: u[index].ustadzsId,
+                    ),
+                  );
+                },
                 child: const Icon(Icons.edit, color: Colors.yellow),
               ),
               const SizedBox(width: 10),

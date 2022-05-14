@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:intl/intl.dart';
+import 'package:logger/logger.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:sibaba/applications/admin/bloc/kelurahan/kelurahan_cubit.dart';
 import 'package:sibaba/applications/admin/bloc/location/location_cubit.dart';
@@ -64,9 +65,21 @@ class AddLokasiPage extends StatelessWidget {
         child: Builder(
           builder: (context) {
             return isEdit == true
-                ? BlocProvider(
-                    create: (context) =>
-                        getIt<InfoLokasiCubit>()..init(l: locationDetail),
+                ? MultiBlocProvider(
+                    providers: [
+                      BlocProvider(
+                        create: (context) =>
+                            getIt<InfoLokasiCubit>()..init(l: locationDetail),
+                      ),
+                      BlocProvider(
+                        create: (context) =>
+                            getIt<KapanewonCubit>()..getKapanewon(),
+                      ),
+                      BlocProvider(
+                        create: (context) =>
+                            getIt<KelurahanCubit>()..getKelurahan(),
+                      ),
+                    ],
                     child: _AddLokasiLayout(isEdit: isEdit, user: user),
                   )
                 : MultiBlocProvider(
@@ -213,35 +226,44 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
                     items: const [],
                     onChanged: (e) {},
                   ).box.width(Get.width).make().pOnly(bottom: 10),
-                  loaded: (kapanewon) => HStack([
-                    DropdownButtonFormField(
-                      value: cubit.kapanewon == ''
-                          ? null
-                          : kapanewon
-                              .where((element) =>
-                                  element.areaName == cubit.kapanewon)
-                              .first
-                              .areaName,
-                      hint: 'Pilih Kapanewon'.text.lg.make(),
-                      items: [
-                        ...kapanewon.map((e) {
-                          return DropdownMenuItem(
-                            value: e.areaId,
-                            child: e.areaName.text.lg.make(),
-                          );
-                        }),
-                      ],
-                      validator: (value) {
-                        if (value == null) {
-                          return 'Pilih Kapanewon';
-                        }
-                      },
-                      onChanged: (e) {
-                        cubit.setKapanewon(e as int);
-                        kelurahanCubit.getKelurahan();
-                      },
-                    ).box.width(Get.width - 50).make().pOnly(bottom: 10),
-                  ]),
+                  loaded: (kapanewon) {
+                    cubit.kapanewon == ''
+                        ? null
+                        : cubit.initKapanewon(kapanewon
+                            .where((element) =>
+                                element.areaName == cubit.kapanewon)
+                            .first
+                            .areaId);
+                    return HStack([
+                      DropdownButtonFormField(
+                        value: cubit.kapanewon == ''
+                            ? null
+                            : kapanewon
+                                .where((element) =>
+                                    element.areaName == cubit.kapanewon)
+                                .first
+                                .areaId,
+                        hint: 'Pilih Kapanewon'.text.lg.make(),
+                        items: [
+                          ...kapanewon.map((e) {
+                            return DropdownMenuItem(
+                              value: e.areaId,
+                              child: e.areaName.text.lg.make(),
+                            );
+                          }),
+                        ],
+                        validator: (value) {
+                          if (value == null) {
+                            return 'Pilih Kapanewon';
+                          }
+                        },
+                        onChanged: (e) {
+                          cubit.setKapanewon(e as int);
+                          kelurahanCubit.getKelurahan();
+                        },
+                      ).box.width(Get.width - 50).make().pOnly(bottom: 10),
+                    ]);
+                  },
                   orElse: () => const SizedBox(),
                 ),
               ),
@@ -254,13 +276,6 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
                   ).box.width(Get.width).make().pOnly(bottom: 10),
                   loaded: (kapanewon) => HStack([
                     DropdownButtonFormField(
-                      value: cubit.kapanewon == ''
-                          ? null
-                          : kapanewon
-                              .where((element) =>
-                                  element.districtName == cubit.kapanewon)
-                              .first
-                              .districtName,
                       hint: 'Pilih Kelurahan'.text.lg.make(),
                       items: [
                         ...kapanewon

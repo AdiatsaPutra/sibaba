@@ -77,7 +77,24 @@ class SuperadminMenu extends StatelessWidget {
             icon: Icons.school,
             title: 'Data\nSantri',
             onTap: () {
-              Get.to(() => DataSantriPage());
+              showDialog(
+                context: context,
+                builder: (context) => Dialog(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  backgroundColor: Colors.white,
+                  child: VStack([
+                    'Dalam pengembangan'.text.lg.makeCentered(),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: 'Ok'.text.base.make(),
+                    )
+                  ]).p16(),
+                ),
+              );
             },
           ),
           KategoriItem(

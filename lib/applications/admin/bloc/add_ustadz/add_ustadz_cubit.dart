@@ -6,6 +6,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 import 'package:sibaba/applications/admin/models/request/ustadz_request.dart';
+import 'package:sibaba/applications/admin/models/ustadz_detail.dart';
 import 'package:sibaba/applications/admin/repositories/ustadz_repo.dart';
 
 part 'add_ustadz_state.dart';
@@ -47,9 +48,48 @@ class AddUstadzCubit extends Cubit<AddUstadzState> {
   final s2c = TextEditingController();
   final s3 = TextEditingController();
 
+  int locationId = 0;
+
   String jenisKelamin = '';
   String tanggalLahir = '';
   String status = '';
+
+  void init(DetailUstadz detailUstadz) {
+    nama.text = detailUstadz.ustadzs.nama;
+    tempatLahir.text = detailUstadz.ustadzs.tmpLahir;
+    alamatLengkap.text = detailUstadz.ustadzs.alamat;
+    noHp.text = detailUstadz.ustadzs.telpon!;
+    email.text = detailUstadz.ustadzs.email!;
+    mulaiMengajar.text = detailUstadz.ustadzs.mulaiUstadz;
+// lokasi.text = detailUstadz.ustadzs.;
+    locationId = detailUstadz.ustadzs.locId;
+
+    jenisKelamin = detailUstadz.ustadzs.gender;
+    tanggalLahir = detailUstadz.ustadzs.tglLahir.toString();
+    status = detailUstadz.status.status;
+
+    tk.text = detailUstadz.pendidikans.tk!;
+    tahuntk.text = detailUstadz.pendidikans.tkLulus!;
+    sd.text = detailUstadz.pendidikans.sd!;
+    tahunsd.text = detailUstadz.pendidikans.sdLulus!;
+    smp.text = detailUstadz.pendidikans.smp!;
+    tahunsmp.text = detailUstadz.pendidikans.smpLulus!;
+    sma.text = detailUstadz.pendidikans.sma!;
+    tahunsma.text = detailUstadz.pendidikans.smaLulus!;
+    perguruantinggi.text = detailUstadz.pendidikans.pt!;
+    tahunperguruantinggi.text = detailUstadz.pendidikans.ptLulus!;
+
+    dasar.text = detailUstadz.pelatihans.dasar!;
+    mahir.text = detailUstadz.pelatihans.mahir1!;
+    mahir2.text = detailUstadz.pelatihans.mahir2!;
+    tot.text = detailUstadz.pelatihans.tot!;
+
+    s1.text = detailUstadz.sertifikasis.s1!;
+    s2a.text = detailUstadz.sertifikasis.s2A!;
+    s2b.text = detailUstadz.sertifikasis.s2B!;
+    s2c.text = detailUstadz.sertifikasis.s2C!;
+    s3.text = detailUstadz.sertifikasis.s3!;
+  }
 
   void setLokasi(String value) {
     emit(const AddUstadzState.loading());

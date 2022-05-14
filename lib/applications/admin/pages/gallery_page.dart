@@ -137,7 +137,7 @@ class _GalleryLayout extends StatelessWidget {
                             .bgImage(
                               DecorationImage(
                                 image: NetworkImage(
-                                    'http://10.0.2.2:8000/storage/fileGallery/${e.file}'),
+                                    'https://badkobantul.tatiumy.com/storage/fileGallery/${e.file}'),
                               ),
                             )
                             .roundedSM
@@ -183,7 +183,7 @@ class _GalleryLayout extends StatelessWidget {
                         .height(200)
                         .bgImage(DecorationImage(
                             image: NetworkImage(
-                                'http://10.0.2.2:8000/storage/fileGallery/${e.file}'),
+                                'https://badkobantul.tatiumy.com/storage/fileGallery/${e.file}'),
                             fit: BoxFit.cover))
                         .roundedSM
                         .make()

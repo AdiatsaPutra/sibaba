@@ -96,9 +96,16 @@ class InfoLokasiCubit extends Cubit<InfoLokasiState> {
     jamMasuk.text = l.waktuMasuk;
     jamKeluar.text = l.waktuSelesai;
     kapanewon = l.detailLokasi.areaUnit;
+    kapanewon = l.detailLokasi.areaUnit;
     kelurahan = l.detailLokasi.districtUnit;
     lat.text = l.maps.latitude.toString();
     lng.text = l.maps.longitude.toString();
+  }
+
+  void initKapanewon(int kapanewonId) {
+    emit(const InfoLokasiState.loading());
+    this.kapanewonId = kapanewonId;
+    emit(const InfoLokasiState.picked());
   }
 
   void setKapanewon(int kapanewonId) {
