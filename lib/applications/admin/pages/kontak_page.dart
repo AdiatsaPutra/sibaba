@@ -15,7 +15,11 @@ import 'package:velocity_x/velocity_x.dart';
 import '../../kontak_kami/bloc/cubit/update_kontak_cubit.dart';
 
 class KontakPage extends StatelessWidget {
-  const KontakPage({Key? key}) : super(key: key);
+  final String hariMasuk1;
+  final String hariMasuk2;
+  const KontakPage(
+      {Key? key, required this.hariMasuk1, required this.hariMasuk2})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +29,8 @@ class KontakPage extends StatelessWidget {
           create: (context) => getIt<KontakKamiCubit>()..getKontakKami(),
         ),
         BlocProvider(
-          create: (context) => getIt<UpdateKontakCubit>(),
+          create: (context) =>
+              getIt<UpdateKontakCubit>()..init(hariMasuk1, hariMasuk2),
         ),
       ],
       child: const _KontakLayout(),

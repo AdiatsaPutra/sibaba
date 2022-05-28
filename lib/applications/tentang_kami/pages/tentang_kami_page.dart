@@ -5,6 +5,7 @@ import 'package:sibaba/applications/tentang_kami/bloc/cubit/tentang_kami_cubit.d
 import 'package:sibaba/infrastructures/extensions.dart';
 import 'package:sibaba/injection.dart';
 import 'package:sibaba/presentation/loading_indicator.dart';
+import 'package:sibaba/presentation/photo_page.dart';
 import 'package:sibaba/presentation/widgets/custom_appbar.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -71,14 +72,18 @@ class _TentangKamiLayout extends StatelessWidget {
                       .make()
                       .p16()
                       .scrollVertical(),
-                  tentang.profiles.struktur
-                      .removeHTMLTag()
-                      .text
-                      .lg
-                      .align(TextAlign.justify)
-                      .make()
-                      .p16()
-                      .scrollVertical(),
+                  VStack([
+                    'Klik untuk memperbesar'.text.base.make(),
+                    GestureDetector(
+                      onTap: () => Get.to(
+                        const PhotoPage(
+                          image: 'assets/struktur.jpeg',
+                          isAsset: true,
+                        ),
+                      ),
+                      child: Image.asset('assets/struktur.jpeg'),
+                    )
+                  ]),
                   tentang.profiles.visimisi
                       .removeHTMLTag()
                       .text
@@ -93,17 +98,10 @@ class _TentangKamiLayout extends StatelessWidget {
                       ...tentang.gallery.map(
                         (e) => GestureDetector(
                           onTap: () {
-                            showDialog(
-                              context: context,
-                              builder: (context) => VxBox()
-                                  .bgImage(
-                                    DecorationImage(
-                                      image: NetworkImage(
-                                          'https://badkobantul.tatiumy.com/storage/fileGallery/${e.file}'),
-                                    ),
-                                  )
-                                  .roundedSM
-                                  .make(),
+                            Get.to(
+                              PhotoPage(
+                                  image:
+                                      'https://badkobantul.tatiumy.com/storage/fileGallery/${e.file}'),
                             );
                           },
                           child: VxBox()

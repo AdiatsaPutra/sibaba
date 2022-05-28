@@ -40,13 +40,13 @@ ThemeData theme() {
       focusColor: primaryColor,
       contentPadding: const EdgeInsets.all(10),
     ),
-    iconTheme: const IconThemeData(color: Color(0xFF6C63FF)),
+    iconTheme: const IconThemeData(color: primaryColor),
     tabBarTheme: const TabBarTheme(
-      labelColor: Color(0xFF6C63FF),
+      labelColor: primaryColor,
       unselectedLabelColor: Colors.grey,
       indicator: UnderlineTabIndicator(
         borderSide: BorderSide(
-          color: Color(0xFF6C63FF),
+          color: primaryColor,
           width: 2,
         ),
       ),

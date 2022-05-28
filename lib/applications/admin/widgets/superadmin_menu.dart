@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:sibaba/applications/admin/models/user.dart';
 import 'package:sibaba/applications/admin/pages/data_santri_page.dart';
@@ -13,6 +14,7 @@ import 'package:sibaba/applications/admin/pages/pesan_page.dart';
 import 'package:sibaba/applications/admin/pages/profil_website_page.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import '../../kontak_kami/bloc/cubit/kontak_kami_cubit.dart';
 import 'kategori_item.dart';
 
 class SuperadminMenu extends StatelessWidget {
@@ -117,12 +119,35 @@ class SuperadminMenu extends StatelessWidget {
               Get.to(() => const PesanPage());
             },
           ),
-          KategoriItem(
-            icon: Icons.phone,
-            title: 'Kontak',
-            onTap: () {
-              Get.to(() => const KontakPage());
-            },
+          BlocBuilder<KontakKamiCubit, KontakKamiState>(
+            builder: (context, state) => state.maybeWhen(
+              loading: () => KategoriItem(
+                icon: Icons.phone,
+                title: 'Kontak',
+                onTap: () {
+                  Get.to(() => KontakPage(hariMasuk1: '', hariMasuk2: ''));
+                },
+              ),
+              loaded: (kontakKami) => KategoriItem(
+                icon: Icons.phone,
+                title: 'Kontak',
+                onTap: () {
+                  Get.to(
+                    () => KontakPage(
+                      hariMasuk1: kontakKami.hari1 ?? 'senin',
+                      hariMasuk2: kontakKami.hari2 ?? 'senin',
+                    ),
+                  );
+                },
+              ),
+              orElse: () => KategoriItem(
+                icon: Icons.phone,
+                title: 'Kontak',
+                onTap: () {
+                  Get.to(() => KontakPage(hariMasuk1: '', hariMasuk2: ''));
+                },
+              ),
+            ),
           ),
           const SizedBox(width: 150)
         ],

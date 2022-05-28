@@ -80,7 +80,7 @@ class LoginForm extends StatelessWidget {
                   .width(20)
                   .height(20)
                   .make(),
-            ),
+            ).w(context.screenWidth),
             orElse: () => ElevatedButton(
               onPressed: () {
                 if (cubit.key.currentState!.validate()) {
@@ -89,7 +89,7 @@ class LoginForm extends StatelessWidget {
                 }
               },
               child: 'Masuk'.text.color(Colors.white).base.make(),
-            ),
+            ).w(context.screenWidth),
           ),
         ),
         const SizedBox(height: 20),

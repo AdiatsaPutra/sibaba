@@ -219,9 +219,14 @@ class _KontakKamiLayout extends StatelessWidget {
               'Email: ${infoKontak.email}'.text.lg.make(),
               const SizedBox(height: 10),
               HStack([
-                infoKontak.hari1!.text.lg.make(),
+                infoKontak.hari1 == null
+                    ? '-'.text.lg.make()
+                    : infoKontak.hari1!.text.lg.make(),
                 ' S/D '.text.lg.make(),
-                infoKontak.hari2!.text.lg.make(),
+                infoKontak.hari2 == null
+                    ? '-'.text.lg.make()
+                    : infoKontak.hari2!.text.lg.make(),
+                // infoKontak.hari2!.text.lg.make(),
               ]),
               const SizedBox(height: 10),
               HStack([

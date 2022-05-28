@@ -29,9 +29,13 @@ class UpdateKontakCubit extends Cubit<UpdateKontakState> {
   String hariMasuk1 = '';
   String hariMasuk2 = '';
 
+  void init(String hariMasuk, String hariMasuk2) {
+    hariMasuk1 = hariMasuk;
+    hariMasuk2 = hariMasuk2;
+  }
+
   void setHari1(String hariMasuk) {
     emit(const UpdateKontakState.loading());
-    Logger().i(hariMasuk);
     hariMasuk1 = hariMasuk;
     emit(const UpdateKontakState.loaded());
   }
