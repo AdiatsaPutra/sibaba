@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:sibaba/applications/admin/bloc/image_handler/image_handler_cubit.dart';
 import 'package:sibaba/applications/admin/models/user.dart';
 import 'package:sibaba/injection.dart';
+import 'package:sibaba/presentation/photo_page.dart';
 import 'package:sibaba/presentation/popup_messages.dart';
 import 'package:sibaba/presentation/widgets/custom_appbar.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -131,17 +132,11 @@ class _GalleryLayout extends StatelessWidget {
             loaded: (tentang) => HStack([
               ...tentang.gallery.map((e) => GestureDetector(
                     onTap: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) => VxBox()
-                            .bgImage(
-                              DecorationImage(
-                                image: NetworkImage(
-                                    'https://badkobantul.tatiumy.com/storage/fileGallery/${e.file}'),
-                              ),
-                            )
-                            .roundedSM
-                            .make(),
+                      Get.to(
+                        () => PhotoPage(
+                          image:
+                              'https://badkobantul.tatiumy.com/storage/fileGallery/${e.file}',
+                        ),
                       );
                     },
                     onLongPress: () {
@@ -182,9 +177,10 @@ class _GalleryLayout extends StatelessWidget {
                         .width(250)
                         .height(200)
                         .bgImage(DecorationImage(
-                            image: NetworkImage(
-                                'https://badkobantul.tatiumy.com/storage/fileGallery/${e.file}'),
-                            fit: BoxFit.cover))
+                          image: NetworkImage(
+                              'https://badkobantul.tatiumy.com/storage/fileGallery/${e.file}'),
+                          fit: BoxFit.cover,
+                        ))
                         .roundedSM
                         .make()
                         .pOnly(right: 10),

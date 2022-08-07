@@ -184,6 +184,7 @@ class _DashboardLayoutState extends State<_DashboardLayout> {
               ...widget.user.roles.map(
                 (e) => e.name == 'superadmin'
                     ? VStack([
+                        const SizedBox(height: 30),
                         HStack([
                           'Lokasi'.text.lg.bold.make().expand(),
                           GestureDetector(

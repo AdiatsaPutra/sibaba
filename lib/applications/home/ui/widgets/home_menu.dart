@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class HomeMenu extends StatelessWidget {
@@ -21,6 +20,8 @@ class HomeMenu extends StatelessWidget {
       child: Image.asset(
         imagePath,
         width: width,
+        height: 200,
+        fit: BoxFit.cover,
       ).box.makeCentered(),
     );
   }

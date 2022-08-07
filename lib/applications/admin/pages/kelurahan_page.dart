@@ -102,13 +102,13 @@ class _KapanewonLayout extends StatelessWidget {
               header: 'Data Kelurahan'.text.xl.make(),
               columns: const [
                 DataColumn(label: Text('No')),
+                DataColumn(label: Text('Action')),
                 DataColumn(label: Text('Kelurahan')),
                 DataColumn(label: Text('Kapanewon')),
-                DataColumn(label: Text('Action')),
               ],
               columnSpacing: 50,
               horizontalMargin: 20,
-              // rowsPerPage: 5,
+              rowsPerPage: kelurahan.length,
               showCheckboxColumn: false,
             ),
             const SizedBox(height: 100),
@@ -159,16 +159,6 @@ class KapanewonData extends DataTableSource {
   DataRow getRow(int index) {
     return DataRow(cells: [
       DataCell((index + 1).toString().text.isIntrinsic.make()),
-      DataCell(kelurahan[index].districtName.text.isIntrinsic.make()),
-      DataCell(kapanewon
-          .where((element) => element.areaId == kelurahan[index].areaId)
-          .map((e) => e.areaName)
-          .toString()
-          .replaceAll('(', '')
-          .replaceAll(')', '')
-          .text
-          .isIntrinsic
-          .make()),
       DataCell(
         HStack([
           GestureDetector(
@@ -210,6 +200,16 @@ class KapanewonData extends DataTableSource {
           ),
         ]),
       ),
+      DataCell(kelurahan[index].districtName.text.isIntrinsic.make()),
+      DataCell(kapanewon
+          .where((element) => element.areaId == kelurahan[index].areaId)
+          .map((e) => e.areaName)
+          .toString()
+          .replaceAll('(', '')
+          .replaceAll(')', '')
+          .text
+          .isIntrinsic
+          .make()),
     ]);
   }
 }

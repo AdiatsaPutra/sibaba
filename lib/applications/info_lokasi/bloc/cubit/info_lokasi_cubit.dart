@@ -268,7 +268,7 @@ class InfoLokasiCubit extends Cubit<InfoLokasiState> {
         direktur: direktur.text,
         tglAkreditasi: DateTime.parse(tanggalAkreditasi.text),
         status: status,
-        deskripsi: deskripsiText,
+        deskripsi: deskripsiText == '' ? '-' : deskripsiText,
         hariMasuk: hariMasuk,
         masuk: jamMasuk.text,
         selesai: jamKeluar.text,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sibaba/applications/admin/models/user.dart';
 import 'package:sibaba/applications/home/ui/ui.dart';
 import 'package:sibaba/infrastructures/refresh/cubit/refresh_cubit.dart';
@@ -61,7 +62,11 @@ class _UserProfileLayout extends StatelessWidget {
                           child: 'Batal'.text.base.make(),
                         ).box.width(100).make(),
                         ElevatedButton(
-                          onPressed: () {
+                          onPressed: () async {
+                            SharedPreferences preferences =
+                                await SharedPreferences.getInstance();
+                            preferences.remove('email');
+                            preferences.remove('password');
                             Get.offAll(const HomePage());
                           },
                           child: 'Oke'.text.base.make(),
@@ -72,7 +77,7 @@ class _UserProfileLayout extends StatelessWidget {
                 ),
               );
             },
-            child: const Icon(Icons.logout, color: Colors.red),
+            child: const Icon(Icons.logout, color: Colors.white),
           ).pOnly(right: 20),
         ],
       ),
@@ -146,7 +151,7 @@ class _UserProfileLayout extends StatelessWidget {
                     }
                   },
                   child: 'Edit Profil'.text.color(Colors.white).base.make(),
-                ),
+                ).wFull(context).h(50),
               ),
             ),
           ]).p16(),

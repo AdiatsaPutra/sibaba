@@ -87,9 +87,9 @@ class _KapanewonLayout extends StatelessWidget {
               header: 'Data Kapanewon'.text.xl.make(),
               columns: const [
                 DataColumn(label: Text('No')),
+                DataColumn(label: Text('Action')),
                 DataColumn(label: Text('Nama')),
                 DataColumn(label: Text('Kode Area')),
-                DataColumn(label: Text('Action')),
               ],
               columnSpacing: 50,
               horizontalMargin: 20,
@@ -136,8 +136,6 @@ class KapanewonData extends DataTableSource {
   DataRow getRow(int index) {
     return DataRow(cells: [
       DataCell((index + 1).toString().text.isIntrinsic.make()),
-      DataCell(kapanewon[index].areaName.text.isIntrinsic.make()),
-      DataCell(kapanewon[index].kodeArea.text.isIntrinsic.make()),
       DataCell(
         HStack([
           GestureDetector(
@@ -174,6 +172,8 @@ class KapanewonData extends DataTableSource {
           ),
         ]),
       ),
+      DataCell(kapanewon[index].areaName.text.isIntrinsic.make()),
+      DataCell(kapanewon[index].kodeArea.text.isIntrinsic.make()),
     ]);
   }
 }

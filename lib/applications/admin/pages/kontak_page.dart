@@ -256,7 +256,7 @@ class _KontakLayout extends StatelessWidget {
                             }
                           },
                           child: 'Simpan'.text.base.make(),
-                        ),
+                        ).wFull(context).h(50),
                       ),
                     ),
                   ),

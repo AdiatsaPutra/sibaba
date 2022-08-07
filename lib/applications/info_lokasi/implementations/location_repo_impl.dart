@@ -57,7 +57,7 @@ class LocationRepoImpl extends LocationRepo {
       LocationRequest request) async {
     try {
       final response =
-          await dio.post(baseUrl + "lokasi/", data: request.toJson());
+          await dio.post(baseUrl + "lokasi", data: request.toJson());
       if (response.statusCode != 201) {
         throw LocationException(response.data);
       }

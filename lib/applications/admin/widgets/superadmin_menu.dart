@@ -12,6 +12,7 @@ import 'package:sibaba/applications/admin/pages/kontak_page.dart';
 import 'package:sibaba/applications/admin/pages/pengguna_page.dart';
 import 'package:sibaba/applications/admin/pages/pesan_page.dart';
 import 'package:sibaba/applications/admin/pages/profil_website_page.dart';
+import 'package:sibaba/applications/home/ui/ui.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../kontak_kami/bloc/cubit/kontak_kami_cubit.dart';
@@ -108,13 +109,13 @@ class SuperadminMenu extends StatelessWidget {
           ),
         ],
       ),
-      const SizedBox(height: 50),
+      const SizedBox(height: 20),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           KategoriItem(
             icon: Icons.message,
-            title: 'Pesan',
+            title: 'Pesan\n',
             onTap: () {
               Get.to(() => const PesanPage());
             },
@@ -123,14 +124,14 @@ class SuperadminMenu extends StatelessWidget {
             builder: (context, state) => state.maybeWhen(
               loading: () => KategoriItem(
                 icon: Icons.phone,
-                title: 'Kontak',
+                title: 'Kontak\n',
                 onTap: () {
-                  Get.to(() => KontakPage(hariMasuk1: '', hariMasuk2: ''));
+                  // Get.to(() => KontakPage(hariMasuk1: '', hariMasuk2: ''));
                 },
               ),
               loaded: (kontakKami) => KategoriItem(
                 icon: Icons.phone,
-                title: 'Kontak',
+                title: 'Kontak\n',
                 onTap: () {
                   Get.to(
                     () => KontakPage(
@@ -142,14 +143,21 @@ class SuperadminMenu extends StatelessWidget {
               ),
               orElse: () => KategoriItem(
                 icon: Icons.phone,
-                title: 'Kontak',
+                title: 'Kontak\n',
                 onTap: () {
-                  Get.to(() => KontakPage(hariMasuk1: '', hariMasuk2: ''));
+                  // Get.to(() => KontakPage(hariMasuk1: '', hariMasuk2: ''));
                 },
               ),
             ),
           ),
-          const SizedBox(width: 150)
+          KategoriItem(
+            icon: Icons.home,
+            title: 'Kembali ke Home',
+            onTap: () {
+              Get.offAll(() => const HomePage());
+            },
+          ),
+          const SizedBox(width: 65)
         ],
       ),
       const SizedBox(height: 20),

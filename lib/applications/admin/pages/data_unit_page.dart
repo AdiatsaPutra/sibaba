@@ -81,7 +81,7 @@ class LokasiUnitPage extends StatelessWidget {
           ],
           child: BlocBuilder<InfoLokasiCubit, InfoLokasiState>(
             builder: (context, state) => state.maybeWhen(
-              loading: () => const LoadingIndicator(isScrollable: true),
+              loading: () => const CircularProgressIndicator().centered(),
               loaded: (locations) =>
                   _LokasiLayout(locations: locations.lokasi, user: user),
               orElse: () => const SizedBox(),

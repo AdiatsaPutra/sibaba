@@ -84,11 +84,11 @@ class _PenggunaLayout extends StatelessWidget {
               header: 'Data Pengguna'.text.xl.make(),
               columns: const [
                 DataColumn(label: Text('No')),
+                DataColumn(label: Text('Action')),
                 DataColumn(label: Text('ID')),
                 DataColumn(label: Text('Name')),
                 DataColumn(label: Text('Email')),
                 DataColumn(label: Text('Role')),
-                DataColumn(label: Text('Action')),
               ],
               columnSpacing: 50,
               horizontalMargin: 20,
@@ -135,13 +135,6 @@ class UsersData extends DataTableSource {
   DataRow getRow(int index) {
     return DataRow(cells: [
       DataCell((index + 1).toString().text.isIntrinsic.make()),
-      DataCell(users[index].id.toString().text.isIntrinsic.make()),
-      DataCell(users[index].name.text.isIntrinsic.make()),
-      DataCell(users[index].email.text.isIntrinsic.make()),
-      DataCell(
-        VStack(
-            [...users[index].roles.map((e) => e.name.text.isIntrinsic.make())]),
-      ),
       DataCell(
         HStack([
           GestureDetector(
@@ -180,6 +173,13 @@ class UsersData extends DataTableSource {
             ),
           ),
         ]),
+      ),
+      DataCell(users[index].id.toString().text.isIntrinsic.make()),
+      DataCell(users[index].name.text.isIntrinsic.make()),
+      DataCell(users[index].email.text.isIntrinsic.make()),
+      DataCell(
+        VStack(
+            [...users[index].roles.map((e) => e.name.text.isIntrinsic.make())]),
       ),
     ]);
   }

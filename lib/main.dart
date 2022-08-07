@@ -17,9 +17,11 @@ void main() {
   setupLogging();
   configureInjection('https://badkobantul.tatiumy.com/api/');
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarColor: Colors.transparent,
-  ));
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+    ),
+  );
   BlocOverrides.runZoned(
     () => runApp(const Sibaba()),
     blocObserver: AppBlocObserver(),

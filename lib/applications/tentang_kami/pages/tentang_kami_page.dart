@@ -37,24 +37,24 @@ class _TentangKamiLayout extends StatelessWidget {
         const SizedBox(height: 20),
         Image.asset(
           'assets/logo.png',
-          width: 200,
-          height: 200,
+          width: 100,
+          height: 100,
         ).centered(),
         const SizedBox(height: 20),
         TabBar(
           indicatorSize: TabBarIndicatorSize.label,
           tabs: [
             Tab(
-              child: 'Sejarah'.text.base.bold.make(),
+              child: 'Sejarah'.text.size(12).bold.make(),
             ),
             Tab(
-              child: 'Struktur'.text.base.bold.make(),
+              child: 'Struktur'.text.size(12).bold.make(),
             ),
             Tab(
-              child: 'Visi-misi'.text.base.bold.make(),
+              child: 'Visi-misi'.text.size(12).bold.make(),
             ),
             Tab(
-              child: 'Gallery'.text.base.bold.make(),
+              child: 'Gallery'.text.size(12).bold.make(),
             ),
           ],
         ).p16(),
@@ -83,7 +83,7 @@ class _TentangKamiLayout extends StatelessWidget {
                       ),
                       child: Image.asset('assets/struktur.jpeg'),
                     )
-                  ]),
+                  ]).scrollVertical(),
                   tentang.profiles.visimisi
                       .removeHTMLTag()
                       .text

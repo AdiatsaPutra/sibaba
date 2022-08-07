@@ -57,6 +57,7 @@ class _AdminDashboardLayout extends StatelessWidget {
             BlocBuilder<UstadzCubit, UstadzState>(
               builder: (context, state) => state.maybeWhen(
                 loading: () => _buildAdminInfo('0', 'Loading'),
+                error: (message) => _buildAdminInfo('0', 'Ustadz'),
                 loaded: (ustadz) =>
                     _buildAdminInfo('${ustadz.length}', 'Ustadz'),
                 orElse: () => const SizedBox(),

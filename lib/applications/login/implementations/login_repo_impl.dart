@@ -36,7 +36,8 @@ class LoginRepoImpl extends LoginRepo {
       final data = response.data['data'];
       SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
-      sharedPreferences.setString('user', data['name']);
+      sharedPreferences.setString('email', email);
+      sharedPreferences.setString('password', password);
       final user = User.fromMap(data);
       return right(user);
     } catch (e) {

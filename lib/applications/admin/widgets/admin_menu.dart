@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sibaba/applications/admin/models/user.dart';
-import 'package:sibaba/applications/admin/pages/data_santri_page.dart';
 import 'package:sibaba/applications/admin/pages/data_unit_page.dart';
 import 'package:sibaba/applications/admin/pages/data_ustadz_page.dart';
 import 'package:sibaba/applications/admin/pages/gallery_page.dart';
@@ -37,9 +36,26 @@ class AdminMenu extends StatelessWidget {
           ),
           KategoriItem(
             icon: Icons.school,
-            title: 'Data Santri',
+            title: 'Data\nSantri',
             onTap: () {
-              Get.to(() => DataSantriPage());
+              showDialog(
+                context: context,
+                builder: (context) => Dialog(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  backgroundColor: Colors.white,
+                  child: VStack([
+                    'Dalam pengembangan'.text.lg.makeCentered(),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: 'Ok'.text.base.make(),
+                    )
+                  ]).p16(),
+                ),
+              );
             },
           ),
           KategoriItem(
