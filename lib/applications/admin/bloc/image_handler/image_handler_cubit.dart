@@ -21,24 +21,25 @@ class ImageHandlerCubit extends Cubit<ImageHandlerState> {
     emit(const ImageHandlerState.loading());
     final XFile? pickedImage =
         await _picker.pickImage(source: ImageSource.gallery);
-    File? croppedFile = await ImageCropper().cropImage(
-        sourcePath: pickedImage!.path,
-        aspectRatioPresets: [
-          CropAspectRatioPreset.square,
-          CropAspectRatioPreset.ratio3x2,
-          CropAspectRatioPreset.original,
-          CropAspectRatioPreset.ratio4x3,
-          CropAspectRatioPreset.ratio16x9
-        ],
-        androidUiSettings: const AndroidUiSettings(
-            toolbarTitle: 'Cropper',
-            toolbarColor: primaryColor,
-            toolbarWidgetColor: Colors.white,
-            initAspectRatio: CropAspectRatioPreset.original,
-            lockAspectRatio: false),
-        iosUiSettings: const IOSUiSettings(
-          minimumAspectRatio: 1.0,
-        ));
+    var croppedFile = await ImageCropper().cropImage(
+      sourcePath: pickedImage!.path,
+      aspectRatioPresets: [
+        CropAspectRatioPreset.square,
+        CropAspectRatioPreset.ratio3x2,
+        CropAspectRatioPreset.original,
+        CropAspectRatioPreset.ratio4x3,
+        CropAspectRatioPreset.ratio16x9
+      ],
+      // androidUiSettings: const AndroidUiSettings(
+      //     toolbarTitle: 'Cropper',
+      //     toolbarColor: primaryColor,
+      //     toolbarWidgetColor: Colors.white,
+      //     initAspectRatio: CropAspectRatioPreset.original,
+      //     lockAspectRatio: false),
+      // iosUiSettings: const IOSUiSettings(
+      //   minimumAspectRatio: 1.0,
+      // ),
+    );
     image = File(croppedFile!.path);
     emit(const ImageHandlerState.loaded());
   }

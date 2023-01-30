@@ -27,6 +27,7 @@ class AddUserDialog extends StatelessWidget {
                 if (value == "") {
                   return 'Mohon isi nama';
                 }
+                return null;
               },
               hint: 'Masukkan Nama',
             ),
@@ -37,6 +38,7 @@ class AddUserDialog extends StatelessWidget {
                 if (value == "") {
                   return 'Mohon isi email';
                 }
+                return null;
               },
               hint: 'Masukkan Email',
             ),
@@ -49,6 +51,7 @@ class AddUserDialog extends StatelessWidget {
                 } else if (value!.length < 8) {
                   return 'Password minimal 8';
                 }
+                return null;
               },
               hint: 'Masukkan Password',
               isObscure: true,
@@ -60,6 +63,7 @@ class AddUserDialog extends StatelessWidget {
                 if (value == "" || value != cubit.password.text) {
                   return 'Konfirmasi pasword tidak sama dengan password';
                 }
+                return null;
               },
               hint: 'Ulangi Password',
               isObscure: true,
@@ -79,6 +83,7 @@ class AddUserDialog extends StatelessWidget {
                 if (value == null) {
                   return 'Pilih role';
                 }
+                return null;
               },
               onChanged: (e) {
                 cubit.role = e!;

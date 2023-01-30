@@ -65,26 +65,26 @@ class Lokasi {
   final Photo? photo;
 
   factory Lokasi.fromJson(Map<String, dynamic> json) => Lokasi(
-        locationId: json["Location_id"] == null ? null : json["Location_id"],
-        userId: json["User_id"] == null ? null : json["User_id"],
-        nspq: json["Nspq"] == null ? null : json["Nspq"],
-        areaUnit: json["Area_unit"] == null ? null : json["Area_unit"],
+        locationId: json["Location_id"],
+        userId: json["User_id"],
+        nspq: json["Nspq"],
+        areaUnit: json["Area_unit"],
         districtUnit:
-            json["District_unit"] == null ? null : json["District_unit"],
-        nama: json["Nama"] == null ? null : json["Nama"],
-        locSlug: json["Loc_slug"] == null ? null : json["Loc_slug"],
-        alamat: json["Alamat"] == null ? null : json["Alamat"],
-        telpUnit: json["Telp_unit"] == null ? null : json["Telp_unit"],
-        skPendirian: json["Sk_pendirian"] == null ? null : json["Sk_pendirian"],
-        tmpBelajar: json["Tmp_belajar"] == null ? null : json["Tmp_belajar"],
-        email: json["Email"] == null ? null : json["Email"],
-        akreditasi: json["Akreditasi"] == null ? null : json["Akreditasi"],
+            json["District_unit"],
+        nama: json["Nama"],
+        locSlug: json["Loc_slug"],
+        alamat: json["Alamat"],
+        telpUnit: json["Telp_unit"],
+        skPendirian: json["Sk_pendirian"],
+        tmpBelajar: json["Tmp_belajar"],
+        email: json["Email"],
+        akreditasi: json["Akreditasi"],
         tglBerdiri: DateTime.parse(json["Tgl_berdiri"]),
-        direktur: json["Direktur"] == null ? null : json["Direktur"],
+        direktur: json["Direktur"],
         tglAkreditasi:
-            json["Tgl_akreditasi"] == null ? null : json["Tgl_akreditasi"],
-        status: json["Status"] == null ? null : json["Status"],
-        deskripsi: json["Deskripsi"] == null ? null : json["Deskripsi"],
+            json["Tgl_akreditasi"],
+        status: json["Status"],
+        deskripsi: json["Deskripsi"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
         photo: json["photo"] == null ? null : Photo.fromJson(json["photo"]),
@@ -107,17 +107,17 @@ class Photo {
   final DateTime updatedAt;
 
   factory Photo.fromJson(Map<String, dynamic> json) => Photo(
-        id: json["id"] == null ? null : json["id"],
-        locId: json["Loc_id"] == null ? null : json["Loc_id"],
-        fileLoc: json["File_loc"] == null ? null : json["File_loc"],
+        id: json["id"],
+        locId: json["Loc_id"],
+        fileLoc: json["File_loc"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id == null ? null : id,
-        "Loc_id": locId == null ? null : locId,
-        "File_loc": fileLoc == null ? null : fileLoc,
+        "id": id,
+        "Loc_id": locId,
+        "File_loc": fileLoc,
         "created_at": createdAt == null ? null : createdAt.toIso8601String(),
         "updated_at": updatedAt == null ? null : updatedAt.toIso8601String(),
       };
@@ -141,8 +141,8 @@ class MapElement {
   final DateTime updatedAt;
 
   factory MapElement.fromJson(Map<String, dynamic> json) => MapElement(
-        mapsId: json["Maps_id"] == null ? null : json["Maps_id"],
-        locId: json["Loc_id"] == null ? null : json["Loc_id"],
+        mapsId: json["Maps_id"],
+        locId: json["Loc_id"],
         latitude: json["Latitude"] == null ? null : json["Latitude"].toDouble(),
         longitude:
             json["Longitude"] == null ? null : json["Longitude"].toDouble(),
@@ -151,10 +151,10 @@ class MapElement {
       );
 
   Map<String, dynamic> toJson() => {
-        "Maps_id": mapsId == null ? null : mapsId,
-        "Loc_id": locId == null ? null : locId,
-        "Latitude": latitude == null ? null : latitude,
-        "Longitude": longitude == null ? null : longitude,
+        "Maps_id": mapsId,
+        "Loc_id": locId,
+        "Latitude": latitude,
+        "Longitude": longitude,
         "created_at": createdAt == null ? null : createdAt.toIso8601String(),
         "updated_at": updatedAt == null ? null : updatedAt.toIso8601String(),
       };

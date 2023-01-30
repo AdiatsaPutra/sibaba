@@ -2,13 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:sibaba/applications/admin/bloc/kapanewon/kapanewon_cubit.dart';
-import 'package:sibaba/applications/admin/bloc/user/user_cubit.dart';
 import 'package:sibaba/applications/admin/models/kapanewon.dart';
-import 'package:sibaba/applications/admin/models/user.dart';
 import 'package:sibaba/applications/admin/widgets/kapanewon/add_kapanewon_dialog.dart';
 import 'package:sibaba/applications/admin/widgets/kapanewon/edit_kapanewon_dialog.dart';
-import 'package:sibaba/applications/admin/widgets/user/add_user_dialog.dart';
-import 'package:sibaba/applications/admin/widgets/user/edit_user_dialog.dart';
 import 'package:sibaba/injection.dart';
 import 'package:sibaba/presentation/color_constant.dart';
 import 'package:sibaba/presentation/popup_messages.dart';
@@ -33,16 +29,21 @@ class KapanewonPage extends StatelessWidget {
             added: () {
               context.read<KapanewonCubit>().getKapanewon();
               PopupMessages.successPopup('Data Kapanewon Berhasil Ditambahkan');
+              return null;
             },
             updated: () async {
               context.read<KapanewonCubit>().getKapanewon();
               PopupMessages.successPopup('Data Kapanewon Berhasil Diubah');
+              return null;
             },
             deleted: () async {
               context.read<KapanewonCubit>().getKapanewon();
               PopupMessages.successPopup('Data Kapanewon Berhasil Dihapus');
+              return null;
             },
-            orElse: () {},
+            orElse: () {
+              return null;
+            },
           ),
           builder: (context, state) => state.maybeWhen(
             loading: () => const CircularProgressIndicator().centered(),

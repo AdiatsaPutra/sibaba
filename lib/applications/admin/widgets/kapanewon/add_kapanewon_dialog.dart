@@ -26,6 +26,7 @@ class AddKapanewonDialog extends StatelessWidget {
                 if (value == "") {
                   return 'Mohon isi nama';
                 }
+                return null;
               },
               hint: 'Masukkan Nama',
             ),
@@ -36,6 +37,7 @@ class AddKapanewonDialog extends StatelessWidget {
                 if (value == "") {
                   return 'Mohon isi kode';
                 }
+                return null;
               },
               hint: 'Masukkan Kode',
             ),

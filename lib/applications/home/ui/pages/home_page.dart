@@ -2,7 +2,6 @@ import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sibaba/applications/admin/pages/dashboard_page.dart';
 import 'package:sibaba/applications/applications.dart';
@@ -100,8 +99,11 @@ class _HomePageState extends State<HomePage> {
                             login.email.clear();
                             login.password.clear();
                             Get.to(() => DashboardPage(user: user));
+                            return null;
                           },
-                          orElse: () {},
+                          orElse: () {
+                            return null;
+                          },
                         ),
                         child: HomeMenu(
                           imagePath: 'assets/home.png',

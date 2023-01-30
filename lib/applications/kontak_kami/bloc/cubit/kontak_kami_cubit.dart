@@ -4,7 +4,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:sibaba/applications/kontak_kami/models/info_kontak.dart';
 import 'package:sibaba/applications/kontak_kami/models/message.dart';
-import 'package:sibaba/applications/kontak_kami/models/request/kontak_request.dart';
 import 'package:sibaba/applications/kontak_kami/repository/kontak_kami_repo.dart';
 
 part 'kontak_kami_state.dart';

@@ -21,7 +21,7 @@ class GuestMenu extends StatelessWidget {
           .make(),
       const SizedBox(height: 20),
       ElevatedButton(
-        style: ElevatedButton.styleFrom(primary: Colors.green),
+        style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
         onPressed: () {
           var sendText =
               'Halo admin Badko Bantul, saya $name ingin menjadi admin';

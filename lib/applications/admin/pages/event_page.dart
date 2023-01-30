@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:sibaba/presentation/color_constant.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -15,7 +14,7 @@ class EventPage extends StatelessWidget {
         elevation: 0,
       ),
       resizeToAvoidBottomInset: false,
-      body: VStack([]).p16(),
+      body: const VStack([]).p16(),
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: primaryColor,
         label: HStack([

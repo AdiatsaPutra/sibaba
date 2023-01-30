@@ -4,19 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:logger/logger.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sibaba/applications/admin/bloc/location/location_cubit.dart';
 import 'package:sibaba/applications/admin/models/user.dart';
 import 'package:sibaba/applications/admin/pages/lokasi/add_lokasi_page.dart';
-import 'package:sibaba/applications/admin/pages/lokasi/detail_lokasi_page.dart';
 import 'package:sibaba/applications/info_lokasi/bloc/cubit/info_lokasi_cubit.dart';
 import 'package:sibaba/applications/info_lokasi/model/location.dart';
+import 'package:sibaba/applications/info_lokasi/ui/pages/location_detail_page.dart';
 import 'package:sibaba/infrastructures/refresh/cubit/refresh_cubit.dart';
 import 'package:sibaba/injection.dart';
 import 'package:sibaba/presentation/color_constant.dart';
-import 'package:sibaba/presentation/loading_indicator.dart';
 import 'package:sibaba/presentation/popup_messages.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
 import 'package:syncfusion_flutter_xlsio/xlsio.dart';
@@ -55,8 +53,11 @@ class LokasiUnitPage extends StatelessWidget {
               listener: (context, state) => state.maybeWhen(
                 locationAdded: () {
                   context.read<InfoLokasiCubit>().getLokasi();
+                  return null;
                 },
-                orElse: () {},
+                orElse: () {
+                  return null;
+                },
               ),
             ),
             BlocListener<InfoLokasiCubit, InfoLokasiState>(
@@ -66,16 +67,20 @@ class LokasiUnitPage extends StatelessWidget {
                     () => AddLokasiPage(
                       isEdit: true,
                       user: user,
-                      latLng: LatLng(0, 0),
+                      latLng: const LatLng(0, 0),
                       locationDetail: detailLocation,
                     ),
                   );
                   context.read<InfoLokasiCubit>().getLokasi();
+                  return null;
                 },
                 deleted: () {
                   context.read<InfoLokasiCubit>().getLokasi();
+                  return null;
                 },
-                orElse: () {},
+                orElse: () {
+                  return null;
+                },
               ),
             ),
           ],
@@ -148,6 +153,7 @@ class _LokasiLayout extends StatelessWidget {
                           if (value == null) {
                             return 'Pilih Kapanewon';
                           }
+                          return null;
                         },
                         onChanged: (e) {
                           cubit.filterInfoLokasi(e!);
@@ -175,7 +181,7 @@ class _LokasiLayout extends StatelessWidget {
             const SizedBox(height: 10),
             HStack([
               ElevatedButton(
-                style: ElevatedButton.styleFrom(primary: Colors.red),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                 onPressed: () {
                   _createPDF(locations);
                 },
@@ -183,7 +189,7 @@ class _LokasiLayout extends StatelessWidget {
               ).w(100).h(30),
               const SizedBox(width: 10),
               ElevatedButton(
-                style: ElevatedButton.styleFrom(primary: Colors.green),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
                 onPressed: () {
                   saveExcel(locations);
                 },
@@ -226,7 +232,9 @@ class _LokasiLayout extends StatelessWidget {
               latLng: LatLng(map.lat, map.long),
             ),
           ),
-          orElse: () {},
+          orElse: () {
+            return null;
+          },
         ),
         child: FloatingActionButton.extended(
           backgroundColor: primaryColor,
@@ -278,7 +286,7 @@ class _LokasiLayout extends StatelessWidget {
     grid.draw(
         page: document.pages.add(), bounds: const Rect.fromLTWH(0, 0, 0, 0));
 
-    List<int> bytes = document.save();
+    List<int> bytes = await document.save();
     document.dispose();
 
     saveAndLaunchFile(bytes, 'Output.pdf');
@@ -366,7 +374,7 @@ class LokasiData extends DataTableSource {
         onSelectChanged: (bool? selected) {
           if (selected!) {
             Get.to(
-              () => DetailLokasiPage(
+              () => LocationDetailPage(
                 slug: locations[index].locSlug!,
               ),
             );
@@ -376,6 +384,17 @@ class LokasiData extends DataTableSource {
           DataCell((index + 1).toString().text.isIntrinsic.make()),
           DataCell(
             HStack([
+              GestureDetector(
+                onTap: () {
+                  Get.to(
+                    () => LocationDetailPage(
+                      slug: locations[index].locSlug!,
+                    ),
+                  );
+                },
+                child: const Icon(Icons.search, color: Colors.blue),
+              ),
+              const SizedBox(width: 10),
               GestureDetector(
                 onTap: () {
                   cubit.getLocationDetail(locations[index].locSlug!);

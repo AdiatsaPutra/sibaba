@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sibaba/applications/login/exceptions/login_exceptions.dart';
 import 'package:sibaba/applications/admin/models/user.dart';

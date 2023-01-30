@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:logger/logger.dart';
 import 'package:sibaba/applications/admin/pages/dashboard_page.dart';
-import 'package:sibaba/applications/login/bloc/login/login_cubit.dart';
 import 'package:sibaba/applications/login/bloc/login_password/login_password_cubit.dart';
 import 'package:sibaba/applications/login/bloc/register/register_cubit.dart';
 import 'package:sibaba/presentation/color_constant.dart';
@@ -33,6 +31,7 @@ class RegisterForm extends StatelessWidget {
             if (value == "") {
               return 'Masukkan Nama';
             }
+            return null;
           },
         ),
         const SizedBox(height: 10),
@@ -45,6 +44,7 @@ class RegisterForm extends StatelessWidget {
             if (value == "") {
               return 'Masukkan Email';
             }
+            return null;
           },
         ),
         const SizedBox(height: 10),
@@ -71,6 +71,7 @@ class RegisterForm extends StatelessWidget {
                 if (value == "") {
                   return 'Masukkan Password';
                 }
+                return null;
               },
             );
           },
@@ -99,6 +100,7 @@ class RegisterForm extends StatelessWidget {
                 if (value != cubit.password.text) {
                   return 'Password dan Konfirmasi Password Tidak Sama';
                 }
+                return null;
               },
             );
           },
@@ -109,9 +111,12 @@ class RegisterForm extends StatelessWidget {
             loaded: (user) {
               cubit.clear();
               Get.to(() => DashboardPage(user: user));
+              return null;
             },
             error: (message) => PopupMessages.errorPopup('Periksa data anda'),
-            orElse: () {},
+            orElse: () {
+              return null;
+            },
           ),
           builder: (context, state) => state.maybeWhen(
             loading: () => ElevatedButton(

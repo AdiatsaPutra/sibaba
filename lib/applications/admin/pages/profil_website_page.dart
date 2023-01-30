@@ -74,7 +74,7 @@ class _ProfilWebsiteLayout extends StatelessWidget {
       ).p16().scrollVertical().expand(),
       HStack([
         ElevatedButton(
-          style: ElevatedButton.styleFrom(primary: Colors.red),
+          style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
           onPressed: () {
             Get.back();
           },
@@ -86,8 +86,11 @@ class _ProfilWebsiteLayout extends StatelessWidget {
             success: () {
               cubit.getTentangkami();
               PopupMessages.successPopup('Profile berhasil diubah');
+              return null;
             },
-            orElse: () {},
+            orElse: () {
+              return null;
+            },
           ),
           child: BlocBuilder<EditTentangKamiCubit, EditTentangKamiState>(
             builder: (context, state) => state.maybeWhen(

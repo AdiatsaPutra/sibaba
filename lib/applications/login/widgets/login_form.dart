@@ -31,6 +31,7 @@ class LoginForm extends StatelessWidget {
             if (value == "") {
               return 'Masukkan Email';
             }
+            return null;
           },
         ),
         const SizedBox(height: 10),
@@ -57,6 +58,7 @@ class LoginForm extends StatelessWidget {
                 if (value == "") {
                   return 'Masukkan Password';
                 }
+                return null;
               },
             );
           },
@@ -67,9 +69,12 @@ class LoginForm extends StatelessWidget {
             loaded: (user) {
               cubit.clear();
               Get.offAll(() => DashboardPage(user: user));
+              return null;
             },
             error: (message) => PopupMessages.errorPopup('Periksa data anda'),
-            orElse: () {},
+            orElse: () {
+              return null;
+            },
           ),
           builder: (context, state) => state.maybeWhen(
             loading: () => ElevatedButton(

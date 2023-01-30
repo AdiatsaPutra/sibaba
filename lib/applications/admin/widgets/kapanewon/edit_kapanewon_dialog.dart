@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sibaba/applications/admin/bloc/kapanewon/kapanewon_cubit.dart';
 import 'package:sibaba/applications/admin/models/kapanewon.dart';
-import 'package:sibaba/infrastructures/constant.dart';
 import 'package:sibaba/presentation/form_fields.dart';
 import 'package:velocity_x/velocity_x.dart';
 

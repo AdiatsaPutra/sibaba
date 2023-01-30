@@ -1,9 +1,7 @@
-import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:logger/logger.dart';
 
 part 'maps_state.dart';
 part 'maps_cubit.freezed.dart';

@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,7 +17,6 @@ import 'package:velocity_x/velocity_x.dart';
 
 import '../../../infrastructures/refresh/cubit/refresh_cubit.dart';
 import '../../../presentation/popup_messages.dart';
-import '../../info_lokasi/model/location.dart';
 import '../bloc/kapanewon/kapanewon_cubit.dart';
 import '../bloc/ustadz/ustadz_cubit.dart';
 
@@ -45,8 +43,11 @@ class DataUstadzPage extends StatelessWidget {
                 ustadzAdded: () {
                   context.read<UstadzCubit>().getUstadzs();
                   PopupMessages.successPopup('Berhasil menambahkan ustadz');
+                  return null;
                 },
-                orElse: () {},
+                orElse: () {
+                  return null;
+                },
               ),
             ),
             BlocListener<UstadzCubit, UstadzState>(
@@ -55,8 +56,11 @@ class DataUstadzPage extends StatelessWidget {
                   Navigator.pop(context);
                   context.read<UstadzCubit>().getUstadzs();
                   PopupMessages.successPopup('Berhasil menghapus ustadz');
+                  return null;
                 },
-                orElse: () {},
+                orElse: () {
+                  return null;
+                },
               ),
             ),
           ],
@@ -129,6 +133,7 @@ class _DataUstadzLayout extends StatelessWidget {
                       if (value == null) {
                         return 'Pilih Kapanewon';
                       }
+                      return null;
                     },
                     onChanged: (e) {
                       cubit.filterInfoLokasi(e!);
@@ -155,7 +160,7 @@ class _DataUstadzLayout extends StatelessWidget {
         const SizedBox(height: 10),
         HStack([
           ElevatedButton(
-            style: ElevatedButton.styleFrom(primary: Colors.red),
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
             onPressed: () {
               _createPDF(cubit.ustadz);
             },
@@ -163,7 +168,7 @@ class _DataUstadzLayout extends StatelessWidget {
           ).w(100).h(30),
           const SizedBox(width: 10),
           ElevatedButton(
-            style: ElevatedButton.styleFrom(primary: Colors.green),
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
             onPressed: () {
               saveExcel(cubit.ustadz);
             },
@@ -228,7 +233,7 @@ class _DataUstadzLayout extends StatelessWidget {
     grid.draw(
         page: document.pages.add(), bounds: const Rect.fromLTWH(0, 0, 0, 0));
 
-    List<int> bytes = document.save();
+    List<int> bytes = await document.save();
     document.dispose();
 
     saveAndLaunchFile(bytes, 'Output.pdf');

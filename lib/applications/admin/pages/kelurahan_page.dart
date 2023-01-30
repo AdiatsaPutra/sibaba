@@ -45,8 +45,11 @@ class KelurahanPage extends StatelessWidget {
                 deleted: () {
                   Get.back();
                   context.read<KelurahanCubit>().getKelurahan();
+                  return null;
                 },
-                orElse: () {},
+                orElse: () {
+                  return null;
+                },
               ),
               builder: (context, state) => state.maybeWhen(
                 loading: () => const CircularProgressIndicator().centered(),

@@ -4,7 +4,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:injectable/injectable.dart';
-import 'package:logger/logger.dart';
 import 'package:sibaba/applications/info_lokasi/model/location.dart';
 import 'package:sibaba/applications/info_lokasi/model/location_detail.dart';
 import 'package:sibaba/applications/info_lokasi/model/request/location_request.dart';
@@ -76,13 +75,13 @@ class InfoLokasiCubit extends Cubit<InfoLokasiState> {
   }
 
   void init({LocationDetail? l}) {
-    nspq.text = l!.detailLokasi.nspq;
+    nspq.text = l!.detailLokasi.nspq!;
     nama.text = l.detailLokasi.nama;
     alamat.text = l.detailLokasi.alamat;
-    telepon.text = l.detailLokasi.telpUnit;
-    sk.text = l.detailLokasi.skPendirian;
+    telepon.text = l.detailLokasi.telpUnit!;
+    sk.text = l.detailLokasi.skPendirian!;
     tempatBelajar.text = l.detailLokasi.tmpBelajar;
-    email.text = l.detailLokasi.email;
+    email.text = l.detailLokasi.email!;
     akreditasi = l.detailLokasi.akreditasi;
     tanggalAkreditasi.text = l.detailLokasi.tglAkreditasi.toString();
     direktur.text = l.detailLokasi.direktur;

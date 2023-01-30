@@ -8,10 +8,10 @@ ThemeData theme() {
     appBarTheme: const AppBarTheme(backgroundColor: primaryColor),
     textTheme: GoogleFonts.poppinsTextTheme(),
     primaryColor: primaryColor,
-    primaryIconTheme: IconThemeData(color: primaryColor),
+    primaryIconTheme: const IconThemeData(color: primaryColor),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        primary: primaryColor,
+        backgroundColor: primaryColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),

@@ -38,7 +38,7 @@ class PhotoPage extends StatelessWidget {
           .width(Get.width)
           .height(65)
           .p16
-          .color(Color.fromARGB(255, 68, 68, 68).withOpacity(0.5))
+          .color(const Color.fromARGB(255, 68, 68, 68).withOpacity(0.5))
           .make(),
     ]);
   }

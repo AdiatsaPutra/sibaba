@@ -88,24 +88,30 @@ class _GalleryLayout extends StatelessWidget {
                     .makeCentered(),
                 barrierDismissible: false,
               );
+              return null;
             },
             success: () {
               Navigator.pop(context);
               PopupMessages.successPopup('Berhasil mengupload foto');
               cubit.reset();
               profile.getTentangkami();
+              return null;
             },
             successDelete: () {
               Navigator.pop(context);
               PopupMessages.successPopup('Berhasil menghapus foto');
               cubit.reset();
               profile.getTentangkami();
+              return null;
             },
             error: (e) {
               Navigator.pop(context);
               PopupMessages.successPopup(e);
+              return null;
             },
-            orElse: () {},
+            orElse: () {
+              return null;
+            },
           ),
           child: BlocBuilder<ImageHandlerCubit, ImageHandlerState>(
             builder: (context, state) {

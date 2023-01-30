@@ -87,8 +87,11 @@ class _UserProfileLayout extends StatelessWidget {
             Navigator.pop(context);
             context.read<RefreshCubit>().updateProfile();
             PopupMessages.successPopup('Profil Berhasil Diubah');
+            return null;
           },
-          orElse: () {},
+          orElse: () {
+            return null;
+          },
         ),
         child: Form(
           key: cubit.formkey,
@@ -102,6 +105,7 @@ class _UserProfileLayout extends StatelessWidget {
                 if (value == "") {
                   return 'Masukkan Nama';
                 }
+                return null;
               },
             ),
             const SizedBox(height: 10),
@@ -114,6 +118,7 @@ class _UserProfileLayout extends StatelessWidget {
                 if (value == "") {
                   return 'Masukkan Email';
                 }
+                return null;
               },
             ),
             const SizedBox(height: 10),
@@ -133,6 +138,7 @@ class _UserProfileLayout extends StatelessWidget {
                 if (value != cubit.password.text) {
                   return 'Password dan Konfirmasi Password Tidak Sama';
                 }
+                return null;
               },
               obscureText: true,
             ),

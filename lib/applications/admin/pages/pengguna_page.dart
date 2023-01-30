@@ -30,16 +30,21 @@ class PenggunaPage extends StatelessWidget {
             added: () {
               context.read<UserCubit>().getUsers();
               PopupMessages.successPopup('Data Pengguna Berhasil Ditambahkan');
+              return null;
             },
             edited: () {
               context.read<UserCubit>().getUsers();
               PopupMessages.successPopup('Data Pengguna Berhasil Diubah');
+              return null;
             },
             deleted: () async {
               context.read<UserCubit>().getUsers();
               PopupMessages.successPopup('Data Pengguna Berhasil Dihapus');
+              return null;
             },
-            orElse: () {},
+            orElse: () {
+              return null;
+            },
           ),
           builder: (context, state) => state.maybeWhen(
             loading: () => const LoadingIndicator(isScrollable: true),

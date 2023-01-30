@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:logger/logger.dart';
 import 'package:sibaba/applications/admin/bloc/location/location_cubit.dart';
 import 'package:sibaba/applications/admin/bloc/maps/maps_cubit.dart';
 import 'package:sibaba/applications/admin/models/user.dart';
@@ -52,7 +51,9 @@ class DashboardPage extends StatelessWidget {
       child: BlocListener<RefreshCubit, RefreshState>(
         listener: (context, state) => state.maybeWhen(
           profileUpdated: () => context.read<UserCubit>().profile(user.id),
-          orElse: () {},
+          orElse: () {
+            return null;
+          },
         ),
         child: BlocBuilder<UserCubit, UserState>(
           builder: (context, state) => state.maybeWhen(
@@ -184,7 +185,6 @@ class _DashboardLayoutState extends State<_DashboardLayout> {
               ...widget.user.roles.map(
                 (e) => e.name == 'superadmin'
                     ? VStack([
-                        const SizedBox(height: 30),
                         HStack([
                           'Lokasi'.text.lg.bold.make().expand(),
                           GestureDetector(

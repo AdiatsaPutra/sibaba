@@ -30,16 +30,16 @@ class DetailLokasiData {
   DetailLokasiData({
     required this.locationId,
     required this.userId,
-    required this.nspq,
+    this.nspq,
     required this.areaUnit,
     required this.districtUnit,
     required this.nama,
     required this.locSlug,
     required this.alamat,
-    required this.telpUnit,
-    required this.skPendirian,
+    this.telpUnit,
+    this.skPendirian,
     required this.tmpBelajar,
-    required this.email,
+    this.email,
     required this.akreditasi,
     required this.tglBerdiri,
     required this.direktur,
@@ -52,16 +52,16 @@ class DetailLokasiData {
 
   final int locationId;
   final int userId;
-  final String nspq;
+  final String? nspq;
   final String areaUnit;
   final String districtUnit;
   final String nama;
   final String locSlug;
   final String alamat;
-  final String telpUnit;
-  final String skPendirian;
+  final String? telpUnit;
+  final String? skPendirian;
   final String tmpBelajar;
-  final String email;
+  final String? email;
   final String akreditasi;
   final DateTime? tglBerdiri;
   final String direktur;
@@ -174,8 +174,8 @@ class Ustadz {
     required this.tmpLahir,
     required this.tglLahir,
     required this.alamat,
-    required this.telpon,
-    required this.email,
+    this.telpon,
+    this.email,
     required this.mulaiUstadz,
     required this.createdAt,
     required this.updatedAt,
@@ -189,8 +189,8 @@ class Ustadz {
   final String tmpLahir;
   final DateTime tglLahir;
   final String alamat;
-  final String telpon;
-  final String email;
+  final String? telpon;
+  final String? email;
   final String mulaiUstadz;
   final DateTime createdAt;
   final DateTime updatedAt;

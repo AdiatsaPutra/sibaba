@@ -77,6 +77,7 @@ class AddKelurahanDialog extends StatelessWidget {
                   if (value == null) {
                     return 'Pilih Kapanewon';
                   }
+                  return null;
                 },
                 onChanged: (e) {
                   cubit.setKapanewon(int.parse(e!));
@@ -89,6 +90,7 @@ class AddKelurahanDialog extends StatelessWidget {
                   if (value == "") {
                     return 'Mohon isi kelurahan';
                   }
+                  return null;
                 },
                 hint: 'Masukkan Nama Kelurahan',
               ),
@@ -107,12 +109,16 @@ class AddKelurahanDialog extends StatelessWidget {
                 added: () {
                   cubit.name.clear();
                   context.read<KelurahanCubit>().getKelurahan();
+                  return null;
                 },
                 updated: () {
                   cubit.name.clear();
                   context.read<KelurahanCubit>().getKelurahan();
+                  return null;
                 },
-                orElse: () {},
+                orElse: () {
+                  return null;
+                },
               ),
               child: BlocBuilder<AddKelurahanCubit, AddKelurahanState>(
                 builder: (context, state) => state.maybeWhen(

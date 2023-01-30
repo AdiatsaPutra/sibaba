@@ -67,6 +67,7 @@ class KontakKamiPage extends StatelessWidget {
                               if (value == "") {
                                 return 'Masukkan Nama Lengkap';
                               }
+                              return null;
                             },
                           ),
                           const SizedBox(height: 10),
@@ -80,6 +81,7 @@ class KontakKamiPage extends StatelessWidget {
                               if (value == "") {
                                 return 'Masukkan Nomor Telepon';
                               }
+                              return null;
                             },
                           ),
                           const SizedBox(height: 10),
@@ -93,6 +95,7 @@ class KontakKamiPage extends StatelessWidget {
                               if (value == "") {
                                 return 'Masukkan Email';
                               }
+                              return null;
                             },
                           ),
                           const SizedBox(height: 10),
@@ -105,6 +108,7 @@ class KontakKamiPage extends StatelessWidget {
                               if (value == "") {
                                 return 'Masukkan Pesan';
                               }
+                              return null;
                             },
                             minLines: 2,
                             maxLines: 4,
@@ -120,8 +124,11 @@ class KontakKamiPage extends StatelessWidget {
                                     message: 'Pesan berhasil dikirim',
                                   ),
                                 );
+                                return null;
                               },
-                              orElse: () {},
+                              orElse: () {
+                                return null;
+                              },
                             ),
                             builder: (context, state) => state.maybeWhen(
                               loading: () => ElevatedButton(

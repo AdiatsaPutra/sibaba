@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:logger/logger.dart';
 import 'package:sibaba/applications/kontak_kami/bloc/cubit/kontak_kami_cubit.dart';
 import 'package:sibaba/infrastructures/constant.dart';
 import 'package:sibaba/injection.dart';
@@ -71,6 +70,7 @@ class _KontakLayout extends StatelessWidget {
                         if (value!.isEmpty) {
                           return 'Alamat tidak boleh kosong';
                         }
+                        return null;
                       },
                     ),
                     const SizedBox(height: 12),
@@ -84,6 +84,7 @@ class _KontakLayout extends StatelessWidget {
                         if (value!.isEmpty) {
                           return 'Link Maps tidak boleh kosong';
                         }
+                        return null;
                       },
                     ),
                     const SizedBox(height: 12),
@@ -94,6 +95,7 @@ class _KontakLayout extends StatelessWidget {
                         if (value!.isEmpty) {
                           return 'Telepon tidak boleh kosong';
                         }
+                        return null;
                       },
                       formatter: [
                         LengthLimitingTextInputFormatter(13),
@@ -111,6 +113,7 @@ class _KontakLayout extends StatelessWidget {
                         if (!value.contains('@')) {
                           return 'Email tidak valid';
                         }
+                        return null;
                       },
                     ),
                     const SizedBox(height: 12),
@@ -139,6 +142,7 @@ class _KontakLayout extends StatelessWidget {
                                 if (value!.isEmpty) {
                                   return 'Hari 1 tidak boleh kosong';
                                 }
+                                return null;
                               },
                             );
                           },
@@ -165,6 +169,7 @@ class _KontakLayout extends StatelessWidget {
                                 if (value!.isEmpty) {
                                   return 'Hari 2 tidak boleh kosong';
                                 }
+                                return null;
                               },
                             );
                           },
@@ -198,6 +203,7 @@ class _KontakLayout extends StatelessWidget {
                               if (kontakCubit.jamMasuk.text.isEmpty) {
                                 return 'Jam Masuk tidak boleh kosong';
                               }
+                              return null;
                             },
                           ).box.width(Get.width / 2.5).make().pOnly(bottom: 10),
                         ]),
@@ -225,6 +231,7 @@ class _KontakLayout extends StatelessWidget {
                               if (kontakCubit.jamKeluar.text.isEmpty) {
                                 return 'Jam Keluar tidak boleh kosong';
                               }
+                              return null;
                             },
                           ).box.width(Get.width / 2.5).make().pOnly(bottom: 10),
                         ]),
@@ -239,8 +246,11 @@ class _KontakLayout extends StatelessWidget {
                         PopupMessages.successPopup(
                           'Berhasil mengupdate data kontak',
                         );
+                        return null;
                       },
-                      orElse: () {},
+                      orElse: () {
+                        return null;
+                      },
                     ),
                     child: BlocBuilder<UpdateKontakCubit, UpdateKontakState>(
                       builder: (context, state) => state.maybeWhen(

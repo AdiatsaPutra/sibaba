@@ -21,4 +21,9 @@ class RefreshCubit extends Cubit<RefreshState> {
     emit(const RefreshState.loading());
     emit(const RefreshState.profileUpdated());
   }
+
+  void santriAdded() {
+    emit(const RefreshState.loading());
+    emit(const RefreshState.santriAdded());
+  }
 }

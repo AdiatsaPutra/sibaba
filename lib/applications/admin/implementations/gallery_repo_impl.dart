@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:logger/logger.dart';
 import 'package:sibaba/applications/admin/exception/admin_exception.dart';
 
 import '../../../infrastructures/api.dart';
@@ -23,7 +22,6 @@ class GalleryRepoImpl extends GalleryRepo {
         "file": await MultipartFile.fromFile(file.path, filename: fileName),
         "userId": userId,
       });
-      Logger().i(formData);
       await Api.createDio().post(
         baseUrl + 'gallery',
         data: formData,
@@ -37,7 +35,7 @@ class GalleryRepoImpl extends GalleryRepo {
   @override
   Future<Either<AdminException, void>> deleteGallery(int galleryId) async {
     try {
-      final response = await Api.createDio().delete(
+      await Api.createDio().delete(
         baseUrl + 'gallery/$galleryId',
       );
       return right(null);

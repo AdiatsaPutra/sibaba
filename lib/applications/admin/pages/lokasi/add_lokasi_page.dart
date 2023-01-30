@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:html_editor_enhanced/html_editor.dart';
 import 'package:intl/intl.dart';
-import 'package:logger/logger.dart';
 import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:sibaba/applications/admin/bloc/kelurahan/kelurahan_cubit.dart';
 import 'package:sibaba/applications/admin/bloc/location/location_cubit.dart';
@@ -17,7 +16,6 @@ import 'package:velocity_x/velocity_x.dart';
 import '../../../../infrastructures/constant.dart';
 import '../../../../infrastructures/refresh/cubit/refresh_cubit.dart';
 import '../../../../injection.dart';
-import '../../../../presentation/color_constant.dart';
 import '../../../../presentation/form_fields.dart';
 import '../../../../presentation/popup_messages.dart';
 import '../../../../presentation/widgets/custom_appbar.dart';
@@ -150,8 +148,11 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
                               context
                                   .read<RefreshCubit>()
                                   .refreshAdminLocation();
+                              return null;
                             },
-                            orElse: () {},
+                            orElse: () {
+                              return null;
+                            },
                           ),
                           builder: (context, state) => state.maybeWhen(
                             loading: () => ElevatedButton(
@@ -256,6 +257,7 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
                           if (value == null) {
                             return 'Pilih Kapanewon';
                           }
+                          return null;
                         },
                         onChanged: (e) {
                           cubit.setKapanewon(e as int);
@@ -293,6 +295,7 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
                         if (value == null) {
                           return 'Pilih Kapanewon';
                         }
+                        return null;
                       },
                       onChanged: (e) {
                         cubit.setKelurahan(e as int);
@@ -314,6 +317,7 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
                   if (value == "") {
                     return 'Wajib diisi';
                   }
+                  return null;
                 },
               ),
               const SizedBox(height: 10),
@@ -325,6 +329,7 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
                   if (value == "") {
                     return 'Wajib diisi';
                   }
+                  return null;
                 },
               ),
               const SizedBox(height: 10),
@@ -336,6 +341,7 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
                   if (value == "") {
                     return 'Wajib diisi';
                   }
+                  return null;
                 },
               ),
               const SizedBox(height: 10),
@@ -347,6 +353,7 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
                   if (value == "") {
                     return 'Wajib diisi';
                   }
+                  return null;
                 },
                 keyboardType: TextInputType.number,
                 formatter: [
@@ -362,6 +369,7 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
                   if (value == "") {
                     return 'Wajib diisi';
                   }
+                  return null;
                 },
               ),
               const SizedBox(height: 10),
@@ -373,6 +381,7 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
                   if (value == "") {
                     return 'Wajib diisi';
                   }
+                  return null;
                 },
               ),
             ]),
@@ -394,6 +403,7 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
                   if (value == "") {
                     return 'Wajib diisi';
                   }
+                  return null;
                 },
                 keyboardType: TextInputType.emailAddress,
               ),
@@ -406,6 +416,7 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
                   if (value == "") {
                     return 'Wajib diisi';
                   }
+                  return null;
                 },
                 items: [
                   ...akreditasi.map(
@@ -438,6 +449,7 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
                       if (value == null) {
                         return 'Wajib diisi';
                       }
+                      return null;
                     },
                     onChanged: (value) {
                       cubit.setTanggalBerdiri(value!);
@@ -463,6 +475,7 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
                   if (value == "") {
                     return 'Wajib diisi';
                   }
+                  return null;
                 },
               ),
               const SizedBox(height: 10),
@@ -484,6 +497,7 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
                       if (value == null) {
                         return 'Wajib diisi';
                       }
+                      return null;
                     },
                     onChanged: (value) {
                       cubit.setTanggalAkreditasi(value!);
@@ -509,6 +523,7 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
                   if (value == "") {
                     return 'Wajib diisi';
                   }
+                  return null;
                 },
                 items: [
                   ...status.map(
@@ -545,9 +560,8 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
               BlocBuilder<InfoLokasiCubit, InfoLokasiState>(
                 builder: (context, state) {
                   return MultiSelectDialogField<String>(
-                    initialValue: cubit.hariMasuk == ''
-                        ? null
-                        : cubit.hariMasuk.split(','),
+                    initialValue:
+                        cubit.hariMasuk == '' ? [] : cubit.hariMasuk.split(','),
                     items: listHari.map((e) => MultiSelectItem(e, e)).toList(),
                     listType: MultiSelectListType.CHIP,
                     onConfirm: (values) {
@@ -580,6 +594,7 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
                         if (value == null) {
                           return 'Wajib diisi';
                         }
+                        return null;
                       },
                       onChanged: (value) {
                         cubit.setJamMasuk(value!);
@@ -612,6 +627,7 @@ class __AddLokasiLayoutState extends State<_AddLokasiLayout> {
                         if (value == null) {
                           return 'Wajib diisi';
                         }
+                        return null;
                       },
                       onChanged: (value) {
                         cubit.setJamKeluar(value!);

@@ -6,7 +6,6 @@ import 'package:logger/logger.dart';
 import 'package:sibaba/applications/admin/models/ustadz_detail.dart';
 import 'package:sibaba/applications/admin/widgets/ustadz/ustadz_pelatihan_form.dart';
 import 'package:sibaba/applications/admin/widgets/ustadz/ustadz_pendidikan_formal_form.dart';
-import 'package:sibaba/applications/info_lokasi/model/location_detail.dart';
 import 'package:sibaba/applications/login/bloc/login/login_cubit.dart';
 import 'package:sibaba/infrastructures/constant.dart';
 import 'package:sibaba/infrastructures/refresh/cubit/refresh_cubit.dart';
@@ -117,8 +116,11 @@ class _AddUstadzLayoutState extends State<_AddUstadzLayout> {
                               success: () {
                                 Navigator.pop(context);
                                 context.read<RefreshCubit>().refreshUstadz();
+                                return null;
                               },
-                              orElse: () {},
+                              orElse: () {
+                                return null;
+                              },
                             ),
                             builder: (context, state) => state.maybeWhen(
                               loading: () => ElevatedButton(
@@ -191,6 +193,7 @@ class _AddUstadzLayoutState extends State<_AddUstadzLayout> {
                     if (value == "") {
                       return 'Wajib diisi';
                     }
+                    return null;
                   },
                   onTap: () async {
                     final res = await Navigator.push(
@@ -231,6 +234,7 @@ class _AddUstadzLayoutState extends State<_AddUstadzLayout> {
                 if (value == "") {
                   return 'Wajib diisi';
                 }
+                return null;
               },
             ),
             const SizedBox(height: 10),
@@ -245,6 +249,7 @@ class _AddUstadzLayoutState extends State<_AddUstadzLayout> {
                     if (value == "") {
                       return 'Wajib diisi';
                     }
+                    return null;
                   },
                   items: [
                     ...jenisKelamin.map(
@@ -269,6 +274,7 @@ class _AddUstadzLayoutState extends State<_AddUstadzLayout> {
                 if (value == "") {
                   return 'Wajib diisi';
                 }
+                return null;
               },
             ),
             const SizedBox(height: 10),
@@ -290,6 +296,7 @@ class _AddUstadzLayoutState extends State<_AddUstadzLayout> {
                     if (value == null) {
                       return 'Wajib diisi';
                     }
+                    return null;
                   },
                   onChanged: (value) {
                     cubit.setTanggalLahir(value!);
@@ -315,6 +322,7 @@ class _AddUstadzLayoutState extends State<_AddUstadzLayout> {
                 if (value == "") {
                   return 'Wajib diisi';
                 }
+                return null;
               },
             ),
             const SizedBox(height: 10),
@@ -326,6 +334,7 @@ class _AddUstadzLayoutState extends State<_AddUstadzLayout> {
                   if (value == "") {
                     return 'Wajib diisi';
                   }
+                  return null;
                 },
                 keyboardType: TextInputType.number),
             const SizedBox(height: 10),
@@ -337,6 +346,7 @@ class _AddUstadzLayoutState extends State<_AddUstadzLayout> {
                 if (value == "") {
                   return 'Wajib diisi';
                 }
+                return null;
               },
             ),
             const SizedBox(height: 10),
@@ -348,6 +358,7 @@ class _AddUstadzLayoutState extends State<_AddUstadzLayout> {
                 if (value == "") {
                   return 'Wajib diisi';
                 }
+                return null;
               },
               keyboardType: TextInputType.number,
             ),
@@ -360,6 +371,7 @@ class _AddUstadzLayoutState extends State<_AddUstadzLayout> {
                 if (value == "") {
                   return 'Wajib diisi';
                 }
+                return null;
               },
               items: [
                 ...status.map(

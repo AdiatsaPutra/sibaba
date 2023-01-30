@@ -26,6 +26,7 @@ class UstadzPendidikanFormalForm extends StatelessWidget {
             if (value == "") {
               return 'Wajib diisi';
             }
+            return null;
           },
         ),
       ]).expand(),
@@ -39,6 +40,7 @@ class UstadzPendidikanFormalForm extends StatelessWidget {
               if (value == "") {
                 return 'Wajib diisi';
               }
+              return null;
             },
             keyboardType: TextInputType.number),
       ]).w(100)
